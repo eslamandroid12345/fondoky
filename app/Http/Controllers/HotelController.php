@@ -507,8 +507,6 @@ class HotelController extends Controller
 
 
     //start year of invoices
-
-
     public function yearOfInvoices(){
 
 

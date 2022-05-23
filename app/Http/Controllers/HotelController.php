@@ -501,7 +501,7 @@ class HotelController extends Controller
             ->get();
 
 
-        return view('hotels.invoices',compact('bookers','commissions','totals','hotel'));
+           return view('hotels.invoices',compact('bookers','commissions','totals','hotel'));
 
     }
 
@@ -521,6 +521,19 @@ class HotelController extends Controller
 
         return view('hotels.year_invoices',compact('commissions','hotel'));
 
+
+    }
+
+
+
+    //arrivals today
+    public function arrivals(){
+
+        $bookers = Booker::query()->whereDay('date_arrive',Carbon::now()->format('d'))
+            ->with(['hotel:id,name_ar,name_en,pound','user:id,name'])->where('hotel_id','=',hotel()->id)
+            ->orderBy('id','DESC')->simplePaginate(Max);
+
+        return view('hotels.arrivals',compact('bookers'));
 
     }
 

@@ -42,7 +42,7 @@ class CommissionController extends Controller
 
 
 
-    //total and commission for admin
+    //total and commission of month for admin
     public function commissionOfMonth($id){
 
 

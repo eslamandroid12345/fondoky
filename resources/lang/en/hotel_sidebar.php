@@ -17,6 +17,7 @@ return [
     "languages" => "Languages",
     "welcome" => "Welcome",
     "profile" => "profile",
+    "booking_day" => "arrivals"
 
 
 

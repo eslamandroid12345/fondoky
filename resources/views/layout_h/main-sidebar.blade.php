@@ -21,8 +21,7 @@
                         class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
-{{--                    <h4 class="font-weight-semibold mt-3 mb-0">{{ Auth::user()->name }}</h4>--}}
-{{--                    <span class="mb-0 text-muted">{{ Auth::user()->email }}</span>--}}
+
                 </div>
             </div>
         </div>
@@ -55,6 +54,7 @@
 
 
                             <li><a class="slide-item" href="{{route('hotels.reservations')}}">{{__('hotel_sidebar.booking_all')}}</a></li>
+                            <li><a class="slide-item" href="{{route('hotels.arrivals')}}">{{__('hotel_sidebar.booking_day')}}</a></li>
                             <li><a class="slide-item" href="{{route('hotels.room.type.create')}}">{{__('hotel_sidebar.room_type_add')}}</a></li>
                             <li><a class="slide-item" href="{{route('rooms.create')}}">{{__('hotel_sidebar.room_add')}}</a></li>
                             <li><a class="slide-item" href="{{route('hotels.room.type.index')}}">{{__('hotel_sidebar.room_type_show')}}</a></li>

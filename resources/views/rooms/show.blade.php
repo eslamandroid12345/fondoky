@@ -1,108 +1,87 @@
-@extends('hotel_includes.layout')
+@extends('layout_h.master')
+@section('css')
 
+@endsection
+@section('title')
+  عرض سجل الغرفه
+@stop
+@section('page-header')
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">قسم الغرف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                  سجل الغرفه</span>
+            </div>
+        </div>
+
+    </div>
+    <!-- breadcrumb -->
+@endsection
 @section('content')
+    <!-- row -->
+    <div class="row row-sm">
+        <div class="col-md-12 col-xl-12">
+            <div class=" main-content-body-invoice" id="print">
+                <div class="card card-invoice">
+                    <div class="card-body">
+                        <div class="invoice-header">
+                            <h1 class="invoice-title">سجل الغرفه</h1>
+                            
+                        </div><!-- invoice-header -->
+                        <div class="row mg-t-20">
+                            <div class="col-md">
+                                <div class="billed-to">
+                                    <h6>{{__('room_add.room_description')}}</h6>
+                                    <p>{{$room->room_description}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <label class="tx-gray-600">معاينه بيانات الغرفه</label>
 
-    <div class="app-content content">
-        <div class="content-wrapper">
-            <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">غرفه الفندق </a>
-                                </li>
-                                <li class="breadcrumb-item"><a href=""> بيانات اغرفتي</a>
-                                </li>
-                                <li class="breadcrumb-item active">عرض الغرفه
-                                </li>
-                            </ol>
+                                <p class="invoice-info-row"><span>{{__('room_add.room_type')}}</span>
+                                    <span>{{$room->room_type->room_type}}</span></p>
+                                <p class="invoice-info-row"><span>{{__('room_add.adults_max')}}</span>
+                                    <span>{{$room->adults_max}}</span></p>
+                                <p class="invoice-info-row"><span>{{__('room_add.child_max')}}</span>
+                                    <span>{{$room->child_max}}</span></p>
+
+                            </div>
                         </div>
+                        <div class="table-responsive mg-t-40">
+
+                            {{--body--}}
+
+                            @foreach(json_decode($room->images) as $image)
+
+                                <div style="height: 400px;float: left;margin-bottom: 10px" class="col-md-4 col-sm-12 col-xs-12 col-12">
+                                    <img style="width: 100%;height: 100%" src="{{URL::to('/rooms/'.$image)}}">
+                                </div>
+
+
+
+                            @endforeach
+                        </div>
+                        <hr class="mg-b-40">
+
+
+
+                        <button class="btn btn-danger  float-left mt-3 mr-2"><a class="text-white" href="{{route('rooms.index')}}">رجوع</a> </button>
+
+
                     </div>
                 </div>
             </div>
-            <div class="content-body">
-                <!-- Basic form layout section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <a class="heading-elements-toggle"><i
-                                            class="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-                                            <div class="form-body">
-
-                                                <h4 class="form-section"><i class="ft-home"></i> عرض بيانات الغرفه </h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-
-                                                            @foreach(json_decode($room->images) as $image)
-
-                                                                <div style="height: 300px;float: left;margin-bottom: 10px" class="col-md-4 col-sm-12 col-xs-12 col-12">
-                                                                    <img style="width: 100%;height: 100%" src="{{URL::to('/rooms/'.$image)}}">
-                                                                </div>
-
-
-
-                                                            @endforeach
-
-
-                                                            <label style="padding-top: 20px" for="projectinput1"> {{__('room_add.room_type')}} - </label>
-                                                            <input type="text" id="name" class="form-control" value="{{$room->room_type->room_type}}">
-                                                            {{-- validation --}}
-                                                          <br><br>
-
-
-
-
-                                                            <label for="projectinput1"> {{__('room_add.room_description')}} - </label>
-                                                            <input type="text" id="name" class="form-control" value="{{$room->room_description}}">
-                                                            {{-- validation --}}
-                                                            <br><br>
-
-
-
-
-                                                            <label for="projectinput1"> {{__('room_add.adults_max')}} - </label>
-                                                            <input type="number" id="name" class="form-control" value="{{$room->adults_max}}">
-                                                            {{-- validation --}}
-                                                            <br><br>
-
-
-                                                            <label for="projectinput1"> {{__('room_add.child_max')}} - </label>
-                                                            <input type="number" id="name" class="form-control" value="{{$room->child_max}}"><br><br>
-                                                            {{-- validation --}}
-
-
-
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- // Basic form layout section end -->
-            </div>
-        </div>
+        </div><!-- COL-END -->
     </div>
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+    <!-- main-content closed -->
+@endsection
+@section('js')
+    <!--Internal  Chart.bundle js -->
+    <script src="{{ URL::asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
 
 @endsection

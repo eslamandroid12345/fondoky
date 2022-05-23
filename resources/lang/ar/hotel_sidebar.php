@@ -17,6 +17,7 @@ return [
     "languages" => "اللغات",
     "welcome" => "مرحبا",
     "profile" => "الملف الشخصي",
+    "booking_day" => "حجوزات اليوم",
 
 
 

@@ -105,7 +105,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                                 <h5 class="card-title">{{__('room_add.images')}}</h5>
 
-                                <input type="file" name="images[]" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+                                <input type="file" name="images[]" class="dropify"
                                        data-height="70" multiple />
 
                                 <span class="text-danger"> @error('images') {{$message}} @enderror</span>

@@ -395,12 +395,12 @@ class HotelController extends Controller
          }
 
          //check current password with hotel of old password
-//        $password = $hotel->password;
-//
-//        if (!Hash::check($request->current_password, $password)) {
-//
-//            return redirect()->back()->with('current_password', __('hotels.current_password'));
-//        }
+        $password = $hotel->password;
+
+        if (!Hash::check($request->current_password, $password)) {
+
+            return redirect()->back()->with('current_password', __('hotels.current_password'));
+        }
 
 
 

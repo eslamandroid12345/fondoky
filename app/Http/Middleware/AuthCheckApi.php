@@ -18,7 +18,7 @@ class AuthCheckApi
 
             try {
 
-                $user= auth()->authenticate();
+                 auth()->authenticate();
 
             }catch (\Exception $exception){
 

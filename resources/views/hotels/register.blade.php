@@ -9,6 +9,18 @@
           margin-top: -50px;
       }
 
+        .img{
+
+            background: none;
+            width: 0%;
+        }
+
+      .login-wrap {
+          width: 100%;
+      }
+
+
+
     </style>
 @endsection
 @section('content')
@@ -30,6 +42,15 @@
                 <label class="label" for="name">{{ __('register.country') }}</label>
                 <input type="text" name="country" autocomplete="off" class="form-control" value="{{old('country')}}" placeholder="{{ __('register.country') }}">
                 @error('country')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.country_en') }}</label>
+                <input type="text" name="country_en" autocomplete="off" class="form-control" value="{{old('country_en')}}" placeholder="{{ __('register.country') }}">
+                @error('country_en')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

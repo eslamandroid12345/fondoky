@@ -18,6 +18,7 @@ class Hotel extends Authenticatable implements JWTSubject
     protected $fillable = [
 
         'country',
+        'country_en',
         'manger',
         'name_ar',
         'name_en',

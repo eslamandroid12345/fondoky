@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class HotelController extends Controller
 {
@@ -32,7 +33,8 @@ class HotelController extends Controller
     public function reservations(){
 
 
-        $bookers = Booker::with(['hotel:id,name_ar,name_en,pound','user:id,name'])->where('hotel_id','=',hotel()->id)
+        $bookers = Booker::with(['hotel:id,name_ar,name_en,pound','user:id,name'])
+            ->where('hotel_id','=',hotel()->id)
             ->orderBy('id','DESC')->simplePaginate(Max);
 
         return view('hotels.reservations',compact('bookers'));
@@ -219,6 +221,7 @@ class HotelController extends Controller
         $rules =
             [
             'country' => 'required',
+            'country_en' => 'required',
             'manger' => 'required',
             'name_ar' => 'required',
             'name_en' => 'required',
@@ -236,6 +239,7 @@ class HotelController extends Controller
             $messages = [
 
                 'country.required'  => __('hotels.country'),
+                'country_en.required'  => __('hotels.country_en'),
                 'manger.required'  => __('hotels.manger'),
                 'name_ar.required' => __('hotels.name_ar'),
                 'name_en.required' => __('hotels.name_en'),
@@ -285,6 +289,7 @@ class HotelController extends Controller
 
 
             'country' => $request['country'],
+            'country_en' => $request['country_en'],
             'manger' => $request['manger'],
             'name_ar' => $request['name_ar'],
             'name_en' => $request['name_en'],
@@ -336,10 +341,11 @@ class HotelController extends Controller
         $rules = [
 
             'country' => 'required',
+            'country_en' => 'required',
             'manger' => 'required',
             'name_ar' => 'required',
             'name_en' => 'required',
-            'email' => 'required|email|unique:hotels',
+            'email' => ['required',Rule::unique('hotels')->ignore($hotel)],
             'current_password' => 'required',
             'password' => 'required|same:confirm_password|min:6',
             'confirm_password' => 'required',
@@ -356,6 +362,7 @@ class HotelController extends Controller
         $messages = [
 
             'country.required'  => __('hotels.country'),
+            'country_en.required'  => __('hotels.country_en'),
             'manger.required'  => __('hotels.manger'),
             'name_ar.required' => __('hotels.name_ar'),
             'name_en.required' => __('hotels.name_en'),
@@ -388,12 +395,12 @@ class HotelController extends Controller
          }
 
          //check current password with hotel of old password
-        $password = $hotel->password;
-
-        if (!Hash::check($request->current_password, $password)) {
-
-            return redirect()->back()->with('current_password', __('hotels.current_password'));
-        }
+//        $password = $hotel->password;
+//
+//        if (!Hash::check($request->current_password, $password)) {
+//
+//            return redirect()->back()->with('current_password', __('hotels.current_password'));
+//        }
 
 
 
@@ -404,7 +411,7 @@ class HotelController extends Controller
 
             foreach($request->file('hotel_photos') as $image)
             {
-                $name= time() . rand(1,2000) . uniqid() . '.' . $image->getClientOriginalName();
+                $name= time() . rand(1,5000) . uniqid() . '.' . $image->getClientOriginalName();
                 $image->move(public_path().'/hotels/', $name);
                 $data[] = $name;
 
@@ -426,6 +433,7 @@ class HotelController extends Controller
             $hotel->update([
 
             'country' => $request['country'],
+            'country_en' => $request['country_en'],
             'manger' => $request['manger'],
             'name_ar' => $request['name_ar'],
             'name_en' => $request['name_en'],
@@ -440,6 +448,8 @@ class HotelController extends Controller
 
 
         ]);
+
+
 
 
         return redirect()->route('hotels.all')->with('update',__('hotels.update'));

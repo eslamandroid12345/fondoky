@@ -1,8 +1,8 @@
 <?php
 return [
 
-    "country"  => "Choose your destination",
-
+    "country"  => "Enter your destination by arabic language",
+    "country_en"  => "Enter your destination by english language",
     "name_ar" => "please write name of hotel by arabic language",
     "name_en" => "please write name of hotel by english language",
     "email" => "The email field is required",

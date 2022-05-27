@@ -1,7 +1,8 @@
 <?php
 return [
 
-    "country"  => "Choose your destination",
+    "country"  => "Enter your destination by arabic language",
+    "country_en"  => "Enter your destination by english language",
     'name_ar' => "Hotel name with arabic language",
     'name_en' => "Hotel name by english language",
     'email' => "email of hotel",

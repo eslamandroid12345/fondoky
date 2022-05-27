@@ -61,6 +61,14 @@
 
                             </div>
 
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">{{ __('register.country_en') }}</label>
+                                <input type="text" class="form-control" id="inputName" name="country_en" value="{{$hotel->country_en}}">
+                                <span class="text-danger"> @error('country_en') {{$message}} @enderror</span>
+
+                            </div>
+
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{ __('register.manger') }}</label>
                                 <input type="text" class="form-control" id="inputName" name="manger" value="{{$hotel->manger}}">
@@ -137,7 +145,7 @@
 
 
 
-                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3">
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{ __('register.pound') }}</label>
                                 @php
                                     $currencies_ar = ["ريال السعودي ","دولار الامريكي","يورو","درهم الاماراتي","دينار البحريني","جنيه المصري","جنيه البريطاني","دينار الكويتي","ريال العماني","ريال القطري"];
@@ -166,7 +174,7 @@
 
 
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{ __('register.phone_hotel') }}</label>
                                 <input type="number" class="form-control" id="inputName" name="phone_hotel" value="{{$hotel->phone_hotel}}">
                                 <span class="text-danger"> @error('phone_hotel') {{$message}} @enderror</span>

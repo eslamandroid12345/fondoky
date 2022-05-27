@@ -1,109 +1,174 @@
-@extends('hotel_includes.layout')
+@extends('layouts_login.layout')
+@section('title','تسجيل فندق جديد')
+@section('styles')
+    <style>
+        .ftco-section{
 
+
+            height: auto;
+            margin-top: -50px;
+        }
+
+    </style>
+@endsection
 @section('content')
 
-    <div class="app-content content">
-        <div class="content-wrapper">
-            <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">الرئيسية </a>
-                                </li>
-                                <li class="breadcrumb-item"><a href=""> اضافه خدمات الفندق</a>
-                                </li>
-                                <li class="breadcrumb-item active">اضافه خدمات عامه لفندقي
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
+    <div class="login-wrap p-4 p-md-5 mt-5">
+
+        <div class="d-flex">
+            <div class="w-100">
+                <h3 class="mb-4">{{__('room_add.hot')}}</h3>
+
             </div>
-            <div class="content-body">
-                <!-- Basic form layout section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> خدمات فندقي </h4>
-                                    <a class="heading-elements-toggle"><i
-                                                class="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
 
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-
-                                        <form class="form" action="{{route('services.update',$service->id)}}" method="POST">
-
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="form-body">
-
-                                                <h4 class="form-section"><i class="ft-home"></i> تحديث بيانات الخدمه </h4>
-
-                                                <div class="row">
-
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> اسم الخدمه - </label>
-                                                            <input type="text" value="{{$service->name}}" id="name" class="form-control" name="name">
-                                                            {{-- validation --}}
-                                                            <span class="text-danger"> @error('name') {{$message}} @enderror</span><br><br>
-
-
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <div class="col-md-12">
-
-
-                                                        @foreach(config('hotel.services') as $name=>$value)
-                                                            <div class="form-group">
-
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" name="services[]" value="{{$name}}" id="defaultCheck1" {{ in_array($name,json_decode($service->services))? 'checked' : ''}}>
-                                                                    <label class="form-check-label" for="defaultCheck1">{{$value}}</label>
-                                                                </div>
-
-                                                            </div>
-                                                        @endforeach
-
-                                                        <span class="text-danger"> @error('services') {{$message}} @enderror</span><br><br>
-
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- // Basic form layout section end -->
-            </div>
         </div>
+        <form  action="{{ route('hotels.register') }}" enctype="multipart/form-data" method="post" class="signin-form">
+
+            @csrf
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.country') }}</label>
+                <input type="text" name="country" autocomplete="off" class="form-control" value="{{old('country')}}" placeholder="{{ __('register.country') }}">
+                @error('country')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.country_en') }}</label>
+                <input type="text" name="country_en" autocomplete="off" class="form-control" value="{{old('country_en')}}" placeholder="{{ __('register.country') }}">
+                @error('country_en')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.manger') }}</label>
+                <input type="text" name="manger" autocomplete="off" class="form-control" value="{{old('manger')}}" placeholder="{{ __('register.manger') }}">
+                @error('manger')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.name_ar') }}</label>
+                <input type="text" name="name_ar" autocomplete="off" class="form-control" value="{{old('name_ar')}}" placeholder="{{ __('register.name_ar') }}">
+                @error('name_ar')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.name_en') }}</label>
+                <input type="text" name="name_en" autocomplete="off" class="form-control" value="{{old('name_en')}}" placeholder="{{ __('register.name_en') }}">
+                @error('name_en')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{__('register.email')}}</label>
+                <input type="email" name="email" autocomplete="off" class="form-control" value="{{old('email')}}" placeholder="{{__('register.email')}}" >
+                @error('email')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="label" for="password">{{__('register.password')}}</label>
+                <input type="password" autocomplete="off" name="password" class="form-control" placeholder="{{__('register.password')}}" >
+                @error('password')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.location_ar') }}</label>
+                <input id="pac-input" type="text" name="location_ar" class="form-control" value="{{old('location_ar')}}" placeholder="{{ __('register.location_ar') }}">
+
+                <div id="map" style="height: 300px;width: 100%"></div>
+                @error('location_ar')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.location_en') }}</label>
+                <input type="text" name="location_en" class="form-control" value="{{old('location_en')}}" placeholder="{{ __('register.location_en') }}">
+
+                @error('location_en')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+            <div class="form-group mb-3">
+                @php
+                    $currencies_ar = ["ريال السعودي ","دولار الامريكي","يورو","درهم الاماراتي","دينار البحريني","جنيه المصري","جنيه البريطاني","دينار الكويتي","ريال العماني","ريال القطري"];
+                @endphp
+
+                <select class="form-control" name="pound" class="form-control form-control-lg input-lg">
+
+                    @foreach($currencies_ar as $currency)
+                        <option value="{{$currency}}">{{$currency}}</option>
+                    @endforeach
+                </select>
+
+
+                @error('pound')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.description') }}</label>
+
+                <textarea autocomplete="off" class="form-control" name="description"></textarea>
+                @error('description')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.phone_hotel') }}</label>
+                <input type="number" autocomplete="off" name="phone_hotel" class="form-control" value="{{old('phone_hotel')}}" placeholder="{{ __('register.phone_hotel') }}">
+                @error('phone_hotel')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <label class="label" for="name">{{ __('register.images') }}</label>
+                <input type="file" multiple name="hotel_photos[]" class="form-control">
+                @error('hotel_photos')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary rounded submit px-3"> {{ __('register.button') }}</button>
+            </div>
+
+        </form>
     </div>
 
 @endsection
+
+

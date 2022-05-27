@@ -20,7 +20,7 @@ class HotelResource extends JsonResource
             'location' => lang() == 'ar' ? $this->location_ar : $this->location_en,
             'pound' => $this->pound,
             'description' => $this->description,
-            'hotel_photos' => $this->hotel_photos,
+            'hotel_photos' => asset('hotels/' . $this->hotel_photos),
             'phone_hotel' => $this->phone_hotel,
             'blocked' => $this->active(),
             'token' => $this->token,

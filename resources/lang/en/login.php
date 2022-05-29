@@ -8,6 +8,6 @@ return [
     "forget"  => "forget your password",
     "button"  => "Login",
     "admin" => "Login admin",
-    "hotel" => "Hotel Register"
+    "hotel" => "HotelRepositoryRepository Register"
 
 ];

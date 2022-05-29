@@ -10,7 +10,7 @@ return [
     "num_of_nights" => "Nights",
     "date_arrive" => "Check in",
     "date_leave" => "Check out",
-    "hotel" => "Hotel",
+    "hotel" => "HotelRepositoryRepository",
     "total" => "Total price including VAT",
     "reserve" => "Booking activation",
     "cancel" => "Booking blocked",

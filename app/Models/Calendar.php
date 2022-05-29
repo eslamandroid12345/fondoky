@@ -37,7 +37,7 @@ class Calendar extends Model
 //->where('check_out','<=',$end)
 //    public function hotel()
 //    {
-//        return $this->hasOneThrough(Hotel::class, Room::class, 'id', 'id');
+//        return $this->hasOneThrough(HotelRepositoryRepository::class, Room::class, 'id', 'id');
 //    }
 
 

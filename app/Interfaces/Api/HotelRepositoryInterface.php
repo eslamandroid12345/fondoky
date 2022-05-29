@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Interfaces\Api;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreHotelRequest;

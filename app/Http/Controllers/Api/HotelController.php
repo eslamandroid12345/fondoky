@@ -22,7 +22,7 @@ class HotelController extends Controller
     public function login(HotelLoginRequest $request){
 
 
-       return $this->hotelInterface->hotelLogin($request);
+        return $this->hotelInterface->hotelLogin($request);
 
     }
 

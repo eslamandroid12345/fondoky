@@ -152,7 +152,7 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 
 
     //find hotel booking in this month -------------------------------------------------------------------------
-//    $booking = \App\Models\Hotel::find($id)->booker()->whereMonth('created_at', date('m'))->sum('commission');
+//    $booking = \App\Models\HotelRepositoryRepository::find($id)->booker()->whereMonth('created_at', date('m'))->sum('commission');
 //    $booking2 = \App\Models\Booker::where('hotel_id', $id)->whereYear('created_at', date('Y'))
 //        ->select(DB::raw('sum(commission) as `commission`'))
 //        ->get()->groupBy(function($val) {
@@ -276,7 +276,7 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 
 //Route::get('test/{month}', function ($month){
 //
-//   $hotel = \App\Models\Hotel::query()->whereMonth('created_at',$month)->get();
+//   $hotel = \App\Models\HotelRepositoryRepository::query()->whereMonth('created_at',$month)->get();
 //
 //   return $hotel;
 //

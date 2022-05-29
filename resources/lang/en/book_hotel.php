@@ -14,7 +14,7 @@ return [
     'num_of_nights' => 'Num of nights',
     'date_arrive' => 'Check in',
     'date_leave' => 'Check out',
-    'hotel' => 'Hotel',
+    'hotel' => 'HotelRepositoryRepository',
     'total_all' => 'Total price including tax',
     'vat_tax' => 'Vat tax',
     'municipal_tax' => 'Municipal_tax',

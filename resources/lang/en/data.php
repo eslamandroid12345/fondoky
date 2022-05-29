@@ -2,8 +2,8 @@
 
 return [
 
-    "name" => "Hotel name",
-    "location" => "Hotel location",
+    "name" => "HotelRepositoryRepository name",
+    "location" => "HotelRepositoryRepository location",
     "pound_one" => "Currency",
     "phone_hotel" => "Phone",
     "action" => "Action",

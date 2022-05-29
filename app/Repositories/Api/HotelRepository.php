@@ -73,7 +73,7 @@ class HotelRepository implements HotelRepositoryInterface
 
 
 
-            $hotel = new HotelResource(new Hotel());
+            $hotel = new Hotel();
             $hotel->country = $request->country;
             $hotel->manger = $request->manger;
             $hotel->name_ar = $request->name_ar;
@@ -101,7 +101,7 @@ class HotelRepository implements HotelRepositoryInterface
             if($hotel){
 
 
-                return returnDataSuccess(trans('hotels.hotel'),"201","hotel",$hotel);
+                return returnDataSuccess(trans('hotels.hotel'),"201","hotel",new HotelResource($hotel));
             }
 
 

@@ -5,23 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreHotelRequest;
-use App\Repositories\Api\HotelRepository;
+use App\Interfaces\Api\HotelRepositoryInterface;
 
 class HotelController extends Controller
 {
 
-    public $hotelRepository;
+    public $hotelInterface;
 
-    public function __construct(HotelRepository $hotelRepository)
+    public function __construct(HotelRepositoryInterface $hotelInterface)
     {
-        $this->hotelRepository = $hotelRepository;
+        $this->hotelInterface = $hotelInterface;
+
     }
 
     //method login of hotel-api
     public function login(HotelLoginRequest $request){
 
 
-       return $this->hotelRepository->hotelLogin($request);
+       return $this->hotelInterface->hotelLogin($request);
 
     }
 
@@ -29,7 +30,7 @@ class HotelController extends Controller
     public function register(StoreHotelRequest $request){
 
 
-        return $this->hotelRepository->hotelRegister($request);
+        return $this->hotelInterface->hotelRegister($request);
 
 
     }
@@ -38,7 +39,7 @@ class HotelController extends Controller
     //user logout in api
     public function logout(){
 
-        return $this->hotelRepository->hotelLogout();
+        return $this->hotelInterface->hotelLogout();
 
     }
 

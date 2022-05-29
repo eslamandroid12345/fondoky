@@ -8,13 +8,13 @@ use App\Events\NewHotelNotification;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreHotelRequest;
 use App\Http\Resources\HotelResource;
-use App\Interfaces\Api\HotelInterface;
+use App\Interfaces\Api\HotelRepositoryInterface;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
-class HotelRepository implements HotelInterface
+class HotelRepository implements HotelRepositoryInterface
 {
 
     public function hotelLogin(HotelLoginRequest $request)

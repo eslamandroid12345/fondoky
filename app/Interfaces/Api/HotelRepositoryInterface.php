@@ -6,7 +6,7 @@ use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreHotelRequest;
 use Illuminate\Http\Request;
 
-interface HotelInterface
+interface HotelRepositoryInterface
 {
 
     public function hotelLogin(HotelLoginRequest $request);

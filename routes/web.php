@@ -282,3 +282,4 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 //
 //});
 
+Route::view('drop','welcome_2');

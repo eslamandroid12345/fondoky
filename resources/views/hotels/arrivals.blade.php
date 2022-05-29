@@ -47,9 +47,6 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    <a href="{{url('/')}}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-                                class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
-
 
                     <a class="modal-effect btn btn-sm btn-primary" href="#"
                        style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>

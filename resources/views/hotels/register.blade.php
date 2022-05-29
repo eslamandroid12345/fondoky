@@ -19,6 +19,12 @@
           width: 100%;
       }
 
+      @media (max-width: 767.98px){
+
+          .wrap .img {
+              height: 0px;
+          }
+          }
 
 
     </style>

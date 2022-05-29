@@ -19,7 +19,7 @@ class AdminFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make('admin123@gmail.com'), // admin123@gmail.com
-            'image' => $this->faker->image(public_path("admins"),50,50,null,false),
+            'image' => $this->faker->image(public_path("admins/"),50,50,null,false),
             'phone' => $this->faker->numberBetween(3000,10000),
             'role_id' => rand(1,10000)
         ];

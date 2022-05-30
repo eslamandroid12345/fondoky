@@ -21,6 +21,7 @@ class RepositoryServiceProvider extends ServiceProvider
 
         //web repositories
         $this->app->bind(CalendarRepositoryInterface::class,CalendarRepository::class);
+        $this->app->bind(\App\Interfaces\Web\HotelRepositoryInterface::class,\App\Repositories\Web\HotelRepository::class);
     }
 
 

@@ -33,7 +33,9 @@ class UserController extends Controller
 
             $rooms = Room::query()->whereHas('calendars', function ($query) use($start,$end){
 
-                $query->whereDate('start','<=',$start)->whereDate('end','>=',$end)->whereDate('start','!=',$end);
+                $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                    ->orWhereBetween('check_in',[$start,$end])
+                    ->whereDate('check_in','!=',$end);
 
 
                 })->whereHas('hotel', function ($query) use ($country) {
@@ -44,11 +46,15 @@ class UserController extends Controller
 
                 ->with(['calendars' => function ($query) use ($start, $end) {
 
-                    $query->whereDate('start','<=',$start)->whereDate('end','>=',$end)->whereDate('start','!=',$end)->select('id','room_id','start','end', DB::raw('SUM(room_price)  as total_room_price'), DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
+                    $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                        ->orWhereBetween('check_in',[$start,$end])
+                        ->whereDate('check_in','!=',$end)->select('id','room_id','check_in','check_out', DB::raw('SUM(room_price)  as total_room_price'), DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
 
                 }])->withSum(['calendars' => function($query) use($start,$end){
 
-                $query->whereDate('start','<=',$start)->whereDate('end','>=',$end)->whereDate('start','!=',$end);
+                $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                    ->orWhereBetween('check_in',[$start,$end])
+                    ->whereDate('check_in','!=',$end);
 
                }],'days')->simplePaginate(Search);
 

@@ -17,6 +17,7 @@ class StoreHotelRequest extends FormRequest
         return [
 
             'country' => 'required',
+            'country_en' => 'required',
             'manger' => 'required',
             'name_ar' => 'required',
             'name_en' => 'required',
@@ -38,6 +39,7 @@ class StoreHotelRequest extends FormRequest
         return [
 
             'country.required'  => __('hotels.country'),
+            'country_en.required'  => __('hotels.country_en'),
             'manger.required'  => __('hotels.manger'),
             'name_ar.required' => __('hotels.name_ar'),
             'name_en.required' => __('hotels.name_en'),

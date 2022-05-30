@@ -44,6 +44,7 @@ return [
     "current" => "old password field is required",
     "confirm_password" => "please confirm password",
     "same" => "The confirmed password is not the same as the new password",
+    "unique_type" => "this room type has already been taken"
 
 
 

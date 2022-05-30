@@ -37,8 +37,8 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
 
-                    <a class="modal-effect btn btn-sm btn-primary" href="#"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
+                    <a class="modal-effect btn btn-sm btn-primary" href="{{route('hotels.year.invoices')}}"
+                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;الفواتير السنويه</a>
 
 
                 </div>
@@ -77,8 +77,6 @@
                                                 <a class="dropdown-item"
                                                    href="{{route('hotels.invoices')}}">الفاتوره الشهريه</a>
 
-                                                <a class="dropdown-item"
-                                                   href="{{route('hotels.year.invoices')}}">الفاتوره السنويه</a>
 
 
 

@@ -54,8 +54,6 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
         Route::put('update/{id}',[RoomController::class,'update'])->name('rooms.update');
         Route::delete('delete/{id}',[RoomController::class,'delete'])->name('rooms.delete');
         Route::get('calendars/show/{id}', [RoomController::class,'calendarsShow'])->name('rooms.calendars.show');
-//        Route::resource('/room', RoomController::class)->names('rooms');
-        //show all calendars of rooms
 
 
     });
@@ -78,7 +76,7 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
     //start calendars for room hotels
     Route::group(['prefix'=>'calendars','middleware'=>'auth:hotel'], function (){
 
-        Route::get('create',[CalendarController::class,'create'])->name('calendars.create');
+        Route::get('create/{id}',[CalendarController::class,'create'])->name('calendars.create');
         Route::post('store',[CalendarController::class,'store'])->name('calendars.store');
         Route::get('edit/{id}',[CalendarController::class,'edit'])->name('calendars.edit');
         Route::put('update/{id}',[CalendarController::class,'update'])->name('calendars.update');

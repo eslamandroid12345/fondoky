@@ -1,174 +1,103 @@
-@extends('layouts_login.layout')
-@section('title','تسجيل فندق جديد')
-@section('styles')
-    <style>
-        .ftco-section{
+@extends('hotel_includes.layout')
 
-
-            height: auto;
-            margin-top: -50px;
-        }
-
-    </style>
-@endsection
 @section('content')
-
-    <div class="login-wrap p-4 p-md-5 mt-5">
-
-        <div class="d-flex">
-            <div class="w-100">
-                <h3 class="mb-4">{{__('room_add.hot')}}</h3>
-
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-6 col-12 mb-2">
+                    <h3 class="content-header-title"> عرض الفنادق </h3>
+                    <div class="row breadcrumbs-top">
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">الرئيسية</a>
+                                </li>
+                                <li class="breadcrumb-item active"> الاقسام الرئيسية
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="content-body">
+                <!-- DOM - jQuery events table -->
+                <section id="dom">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">جميع الفنادق الرئيسية </h4>
+                                    <a class="heading-elements-toggle"><i
+                                                class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
 
+
+                                <div class="card-content collapse show">
+
+                                    <div class="card-body card-dashboard">
+
+
+                                        <table style="width: 100%"
+                                               class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                            <thead class="">
+                                            <tr>
+
+                                                <th>room</th>
+                                                <th>room_number</th>
+                                                <th>room_price</th>
+                                                <th>check_in</th>
+                                                <th>check_out</th>
+                                                <th>{{__('data.action')}}</th>
+
+
+                                            </tr>
+                                            </thead>
+
+
+                                            @foreach($calendars as $calendar)
+
+                                                <tbody>
+                                                <tr>
+
+
+                                                    <td>{{$calendar->room->room_type->room_type}}</td>
+                                                    <td>{{$calendar->room_number}}</td>
+                                                    <td>{{number_format($calendar->room_price,2) . '-'. $calendar->room->hotel->pound}}</td>
+                                                    <td>{{$calendar->check_in}}</td>
+                                                    <td>{{$calendar->check_out}}</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"  href="{{route('calendars.delete',$calendar->id)}}">{{__('room_add.delete')}}</a>
+                                                        <a class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1"  href="{{route('calendars.edit',$calendar->id)}}">{{__('room_add.update')}}</a>
+
+                                                    </td>
+
+
+                                                </tr>
+
+                                                </tbody>
+                                            @endforeach
+
+                                        </table>
+                                        <div class="justify-content-center d-flex">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
-        <form  action="{{ route('hotels.register') }}" enctype="multipart/form-data" method="post" class="signin-form">
-
-            @csrf
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.country') }}</label>
-                <input type="text" name="country" autocomplete="off" class="form-control" value="{{old('country')}}" placeholder="{{ __('register.country') }}">
-                @error('country')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.country_en') }}</label>
-                <input type="text" name="country_en" autocomplete="off" class="form-control" value="{{old('country_en')}}" placeholder="{{ __('register.country') }}">
-                @error('country_en')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.manger') }}</label>
-                <input type="text" name="manger" autocomplete="off" class="form-control" value="{{old('manger')}}" placeholder="{{ __('register.manger') }}">
-                @error('manger')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.name_ar') }}</label>
-                <input type="text" name="name_ar" autocomplete="off" class="form-control" value="{{old('name_ar')}}" placeholder="{{ __('register.name_ar') }}">
-                @error('name_ar')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.name_en') }}</label>
-                <input type="text" name="name_en" autocomplete="off" class="form-control" value="{{old('name_en')}}" placeholder="{{ __('register.name_en') }}">
-                @error('name_en')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{__('register.email')}}</label>
-                <input type="email" name="email" autocomplete="off" class="form-control" value="{{old('email')}}" placeholder="{{__('register.email')}}" >
-                @error('email')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="label" for="password">{{__('register.password')}}</label>
-                <input type="password" autocomplete="off" name="password" class="form-control" placeholder="{{__('register.password')}}" >
-                @error('password')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.location_ar') }}</label>
-                <input id="pac-input" type="text" name="location_ar" class="form-control" value="{{old('location_ar')}}" placeholder="{{ __('register.location_ar') }}">
-
-                <div id="map" style="height: 300px;width: 100%"></div>
-                @error('location_ar')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.location_en') }}</label>
-                <input type="text" name="location_en" class="form-control" value="{{old('location_en')}}" placeholder="{{ __('register.location_en') }}">
-
-                @error('location_en')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-            <div class="form-group mb-3">
-                @php
-                    $currencies_ar = ["ريال السعودي ","دولار الامريكي","يورو","درهم الاماراتي","دينار البحريني","جنيه المصري","جنيه البريطاني","دينار الكويتي","ريال العماني","ريال القطري"];
-                @endphp
-
-                <select class="form-control" name="pound" class="form-control form-control-lg input-lg">
-
-                    @foreach($currencies_ar as $currency)
-                        <option value="{{$currency}}">{{$currency}}</option>
-                    @endforeach
-                </select>
-
-
-                @error('pound')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.description') }}</label>
-
-                <textarea autocomplete="off" class="form-control" name="description"></textarea>
-                @error('description')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.phone_hotel') }}</label>
-                <input type="number" autocomplete="off" name="phone_hotel" class="form-control" value="{{old('phone_hotel')}}" placeholder="{{ __('register.phone_hotel') }}">
-                @error('phone_hotel')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-
-            <div class="form-group mb-3">
-                <label class="label" for="name">{{ __('register.images') }}</label>
-                <input type="file" multiple name="hotel_photos[]" class="form-control">
-                @error('hotel_photos')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
-
-
-            <div class="form-group">
-                <button type="submit" class="form-control btn btn-primary rounded submit px-3"> {{ __('register.button') }}</button>
-            </div>
-
-        </form>
     </div>
 
+
+
 @endsection
-
-

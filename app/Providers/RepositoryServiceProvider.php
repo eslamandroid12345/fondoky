@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Interfaces\Api\HotelRepositoryInterface;
+use App\Interfaces\Web\CalendarRepositoryInterface;
 use App\Repositories\Api\HotelRepository;
+use App\Repositories\Web\CalendarRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -15,6 +17,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
         //Api repositories
         $this->app->bind(HotelRepositoryInterface::class,HotelRepository::class);
+
+
+        //web repositories
+        $this->app->bind(CalendarRepositoryInterface::class,CalendarRepository::class);
     }
 
 

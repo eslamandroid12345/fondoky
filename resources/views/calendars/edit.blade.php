@@ -1,128 +1,146 @@
-@extends('hotel_includes.layout')
+@extends('layout_h.master')
+@section('css')
+    <!--- Internal Select2 css-->
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!---Internal Fileupload css-->
+    <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
+    <!---Internal Fancy uploader css-->
+    <link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
+    <!--Internal Sumoselect css-->
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
+    <!--Internal  TelephoneInput css-->
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
+@endsection
+@section('title')
+    تعديل تقويم الغرفه
+@stop
 
-@section('content')
-
-    <div class="app-content content">
-        <div class="content-wrapper">
-            <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">اضافه غرف </a>
-                                </li>
-                                <li class="breadcrumb-item"><a href=""> قائمه التحكم باضافه الغرف</a>
-                                </li>
-                                <li class="breadcrumb-item active">اضافه غرفه جديده
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content-body">
-                <!-- Basic form layout section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> اضافه غرفه جديده </h4>
-                                    <a class="heading-elements-toggle"><i
-                                                class="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-
-                                        @if($message = Session::get('success_update'))
-                                            <div id="alert" class="row mr-2 ml-2">
-                                                <button type="text" class="btn btn-lg btn-block btn-outline-success mb-2"
-                                                        id="type-error">{{$message}}
-                                                </button>
-                                            </div>
-                                        @endif
-
-
-
-                                        <form class="form" action="{{route('calendars.update',$calendar->id)}}" method="POST">
-
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="form-body">
-
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات اضافه الغرف </h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-
-
-
-                                                            <label for="projectinput1"> {{__('calendars.room_number_add')}} - </label>
-                                                            <input type="number" id="name" class="form-control" name="room_number" value="{{old('room_number',$calendar->room_number)}}">
-                                                            {{-- validation --}}
-                                                            <span class="text-danger"> @error('room_number') {{$message}} @enderror</span><br><br>
-
-
-
-
-
-                                                            <label for="projectinput1"> {{__('calendars.check_in_add')}} - </label>
-                                                            <input type="date" id="name" class="form-control" name="check_in" value="{{old('check_in',$calendar->check_in)}}">
-                                                            {{-- validation --}}
-                                                            <span class="text-danger"> @error('check_in') {{$message}} @enderror</span><br><br>
-
-
-                                                            <label for="projectinput1"> {{__('calendars.check_out_add')}} - </label>
-                                                            <input type="date" id="name" class="form-control" name="check_out" value="{{old('check_out',$calendar->check_out)}}">
-                                                            {{-- validation --}}
-                                                            <span class="text-danger"> @error('check_out') {{$message}} @enderror</span><br><br>
-
-
-
-
-
-                                                            <label for="projectinput1"> {{__('calendars.room_price_add')}} - </label>
-                                                            <input type="text" id="name" class="form-control" name="room_price" value="{{old('room_price',$calendar->room_price)}}">
-                                                            {{-- validation --}}
-                                                            <span class="text-danger"> @error('room_price') {{$message}} @enderror</span>
-
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>{{__('calendars.save')}}
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- // Basic form layout section end -->
+@section('page-header')
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">قسم تقويمات الغرف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                 تعديل تقويم الغرفه</span>
             </div>
         </div>
     </div>
+    <!-- breadcrumb -->
+@endsection
+@section('content')
+
+    @if (session()->has('success_update'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('success_update') }}</strong>
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+
+    <!-- row -->
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <form class="form" action="{{route('calendars.update',$calendar->id)}}" method="POST" autocomplete="off">
+
+                        @csrf
+                        @method('PUT')
+
+                        <div class="row">
+
+
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">{{__('calendars.room_number_add')}}</label>
+                                <input type="number" class="form-control" id="inputName" name="room_number"  value="{{old('room-number',$calendar->room_number)}}">
+                                <span class="text-danger"> @error('room_number') {{$message}} @enderror</span>
+
+                            </div>
+
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">{{__('calendars.room_price_add')}}</label>
+                                <input type="number" class="form-control" id="inputName" name="room_price"  value="{{old('room_price',$calendar->room_price)}}">
+                                <span class="text-danger"> @error('room_price') {{$message}} @enderror</span>
+
+                            </div>
+
+
+
+
+                            <div  class="col-lg-6 col-md-6 col-sm-12 mt-3">
+                                <label>{{__('calendars.check_in_add')}}</label>
+                                <input class="form-control" name="check_in" type="date"  value="{{old('check_in',$calendar->check_in)}}">
+
+                                <span class="text-danger"> @error('check_in') {{$message}} @enderror</span>
+
+                            </div>
+
+
+                            <div  class="col-lg-6 col-md-6 col-sm-12 mt-3">
+                                <label>{{__('calendars.check_out_add')}}</label>
+                                <input class="form-control" name="check_out" type="date"  value="{{old('check_out',$calendar->check_out)}}">
+
+                                <span class="text-danger"> @error('check_out') {{$message}} @enderror</span>
+
+                            </div>
+
+
+                            <br>
+
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="submit" class="btn btn-primary">{{__('calendars.save')}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+    <!-- main-content closed -->
+@endsection
+@section('js')
+    <!-- Internal Select2 js-->
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+    <!--Internal Fileuploads js-->
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!--Internal Fancy uploader js-->
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+    <!--Internal  Form-elements js-->
+    <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/select2.js') }}"></script>
+    <!--Internal Sumoselect js-->
+    <script src="{{ URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
+    <!--Internal  Datepicker js -->
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+    <!--Internal  jquery.maskedinput js -->
+    <script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+    <!--Internal  spectrum-colorpicker js -->
+    <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
+    <!-- Internal form-elements js -->
+    <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
+
+
 
 @endsection
-
-
-
-

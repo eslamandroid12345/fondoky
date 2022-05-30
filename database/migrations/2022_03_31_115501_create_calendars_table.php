@@ -13,8 +13,8 @@ class CreateCalendarsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('room_id');
             $table->string('room_number');
-            $table->text('check_in');
-            $table->text('check_out');
+            $table->date('check_in');
+            $table->date('check_out');
             $table->double('room_price',15,2)->default(0);
             $table->string('days');
             $table->timestamps();

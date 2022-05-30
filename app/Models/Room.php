@@ -53,8 +53,6 @@ class Room extends Model
 
     //rooms has many events
 
-    public function event(){
 
-        return $this->hasMany(Event::class,'room_id');
-    }
+
 }

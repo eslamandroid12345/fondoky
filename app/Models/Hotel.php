@@ -141,5 +141,8 @@ class Hotel extends Authenticatable implements JWTSubject
 
 
 
+
+
+
 }
 

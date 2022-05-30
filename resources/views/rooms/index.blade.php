@@ -102,6 +102,18 @@
                                                    href="{{route('rooms.show',$room->id)}}">{{__('room_add.show')}}</a>
 
 
+                                                    <a class="dropdown-item"
+                                                   href="{{route('calendars.create',$room->id)}}">اضافه تقويم جديد</a>
+
+
+                                                 <a class="dropdown-item"
+                                                   href="{{route('rooms.calendars.show',$room->id)}}">تقويمات الغرفه</a>
+
+
+                                                  <a class="dropdown-item"
+                                                   href="{{route('calendars.today',$room->id)}}">التقويم اليومي</a>
+
+
                                             </div>
                                         </div>
 

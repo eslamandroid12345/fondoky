@@ -239,16 +239,17 @@
 
                 @endforelse
 
-{{--                $price = $room->calendars[0]->total_calendar == 1 ?  $room->calendars[0]->total_room_price  :  $room->calendars[0]->total_room_price / $diff_in_days;--}}
-
 
 
                 {{--rooms --}}
 
+
                 @if(!empty($rooms))
                 @forelse($rooms as $room)
 
+
                         @php
+
 
                             $to =     \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_start'));
                             $from =   \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_expire'));
@@ -265,7 +266,7 @@
 
 
                             @else
-                         <a href="{{route('room.reservation',[$room->id,'country' => request()->query('country'), 'date_start' => request()->query('date_start'), 'date_expire' => request()->query('date_expire'), 'adults_max' => request()->query('adults_max'),'child_max' => request()->query('child_max'),'key' => encrypt(number_format($price,2))])}}">
+                         <a href="{{route('room.reservation',[$room->id,'country' => request()->query('country'), 'date_start' => request()->query('date_start'), 'date_expire' => request()->query('date_expire'), 'adults_max' => request()->query('adults_max'),'child_max' => request()->query('child_max'),'key' => encrypt($price)])}}">
 
                             <div class="col">
                             <div class="card h-100">
@@ -310,6 +311,9 @@
                     </div>
                 @endforelse
                 @endif
+
+
+
 
 
                 {{--start pagination of rooms and hotels--}}

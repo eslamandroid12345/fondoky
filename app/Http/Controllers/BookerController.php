@@ -16,7 +16,8 @@ class BookerController extends Controller
 {
 
 
-    public function store(Request $request,$id){
+    public function store(Request $request,$id)
+    {
 
 
 
@@ -48,41 +49,49 @@ class BookerController extends Controller
         ];
 
 
-        $validator = Validator::make($request->all(),$rules,$message);
+        $validator = Validator::make($request->all(), $rules, $message);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
 
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
 
-               DB::transaction(function () use ($request,$id) {//transactions of
+
+//        $numbers = Room::findOrFail($id)->calendars;
+//
+//                foreach ($numbers as $number) {
+//
+//                    if($request->room_number < $number->room_number) {
+//
+
+                        DB::transaction(function () use ($request, $id) {//transactions of
 
 
-                   try {
+                    try {
 
-                       $booker = Booker::create([
+                        $booker = Booker::create([
 
-                           'city_to' => $request['city_to'],
-                           'children' => $request['child_max'],
-                           'adults' => $request['adults_max'],
-                           'room_type' => $request['room_type'],
-                           'room_number' => $request['room_number'],//room number
-                           'room_price' => $request['room_price'],//room price booking
-                           'num_of_nights' => $request['num_of_nights'], //number of nights
-                           'date_arrive' => $request['date_arrive'],
-                           'date_leave' => $request['date_leave'],
-                           'user_id' => auth()->id(),
-                           'hotel_id' => $request['hotel_id'],
-                           'vat_tax' => $request['vat_tax'],
-                           'municipal_tax' => $request['municipal_tax'],
-                           'tourism_tax' => $request['tourism_tax'],
-                           'total_all' => $request['total_all'],
-                           'total' => $request['total'],
-                           'commission' => $request['commission'],
+                            'city_to' => $request['city_to'],
+                            'children' => $request['child_max'],
+                            'adults' => $request['adults_max'],
+                            'room_type' => $request['room_type'],
+                            'room_number' => $request['room_number'],//room number
+                            'room_price' => $request['room_price'],//room price booking
+                            'num_of_nights' => $request['num_of_nights'], //number of nights
+                            'date_arrive' => $request['date_arrive'],
+                            'date_leave' => $request['date_leave'],
+                            'user_id' => auth()->id(),
+                            'hotel_id' => $request['hotel_id'],
+                            'vat_tax' => $request['vat_tax'],
+                            'municipal_tax' => $request['municipal_tax'],
+                            'tourism_tax' => $request['tourism_tax'],
+                            'total_all' => $request['total_all'],
+                            'total' => $request['total'],
+                            'commission' => $request['commission'],
 
 
-                       ]);
+                        ]);
 
 
                         Report::create([
@@ -96,39 +105,62 @@ class BookerController extends Controller
 
 
 
-
-                       //start update room number in calendars =============================
-
-                       $start = Carbon::parse($request->date_arrive)->format('Y-m-d');//date_start
-                       $end = Carbon::parse($request->date_leave)->format('Y-m-d');//date_expire
-
-                       $calendars = Room::findOrFail($id)->calendars()
-                           ->wherebetween('check_in', [$start,$end])->whereDate('check_in','!=',$end)->get();
+                        $start = Carbon::parse($request->date_arrive)->format('Y-m-d');
+                        $end = Carbon::parse($request->date_leave)->format('Y-m-d');
 
 
+                        $calendars = Calendar::query()
 
-                       foreach ($calendars as $calendar){
-
-                           $calendar->decrement('room_number', $request['room_number']);
-                           $calendar->update();
-
-                       }
-
-                       //end update room number in calendars =================================
-
-                       DB::commit();
-
-                       event(new NewReservation($booker->hotel_id, $booker));
+                           ->wherebetween('check_out', [$start, $end])
+                            ->whereDate('check_in', '!=', $end)
+                            ->whereDate('check_out', '!=', $start)
+                            ->orWhere('check_out','>=',$end)
+                            ->wherebetween('check_in', [$start, $end])
+                            ->whereDate('check_in', '!=', $end)
+                            ->where('room_id','=',$id)
+                            ->get();
 
 
-                   } catch (\Exception $exception) {
 
-                       DB::rollBack();
+//                        $calendars = Room::findOrFail($id)->calendars()
+//                            ->wherebetween('check_out', [$start, $end])
+//                            ->whereDate('check_in', '!=', $end)
+//                            ->whereDate('check_out', '!=', $start)
+//                            ->orWhere('check_out','>=',$end)
+//                            ->wherebetween('check_in', [$start, $end])
+//                            ->whereDate('check_in', '!=', $end)
+//                            ->get();
 
-                       return $exception->getMessage();
-                   }
 
-               });
+                        foreach ($calendars as $calendar) {
+
+                            $calendar->decrement('room_number', $request['room_number']);
+                            $calendar->update();
+
+                        }
+
+
+                        DB::commit();
+
+                        event(new NewReservation($booker->hotel_id, $booker));
+
+
+                    } catch (\Exception $exception) {
+
+                        DB::rollBack();
+
+                        return $exception->getMessage();
+                    }
+
+                });
+
+
+//            }else{
+//
+//
+//                return back()->with("errors","the room number is big");
+//            }
+//        }
 
 
         return redirect()->route('home')->with('success','تم اضافه حجزك بنجاح');
@@ -140,7 +172,7 @@ class BookerController extends Controller
 
 
         $booker = Booker::findOrFail($id);
-        $report = Report::where('booker_id',$id)->get();
+        $report = Report::where('booker_id',$id)->first();
 
 
 
@@ -164,14 +196,16 @@ class BookerController extends Controller
 
                 $report->update([
 
-                    'blocked' => 0,
+                    'total' => 0,
                     'commission'  => 0,
+                    'blocked' => 0,
                     'canceled' => 0,
 
                 ]);
 
 
                 DB::commit();
+
 
             }catch (\Exception $exception){
 
@@ -183,7 +217,9 @@ class BookerController extends Controller
         });
 
 
-        return redirect()->back()->with('update','Booking canceled successfully');
+        return redirect()->back()->with('update',__('bookers.remove'));
+
+
 
     }
 

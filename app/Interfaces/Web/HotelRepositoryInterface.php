@@ -3,8 +3,6 @@
 
 namespace App\Interfaces\Web;
 
-
-use App\Events\NewHotelNotification;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\RoomTypeRequest;
 use App\Http\Requests\StoreHotelRequest;

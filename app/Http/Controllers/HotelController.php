@@ -41,7 +41,6 @@ class HotelController extends Controller
     }
 
 
-    //start create room type
 
     public function room_type_index(){
 

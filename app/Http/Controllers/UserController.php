@@ -19,7 +19,6 @@ class UserController extends Controller
 
 
 
-        //start algorithm of search
 
         $country = $request->country;
         $child_max = $request->child_max;
@@ -28,12 +27,14 @@ class UserController extends Controller
         $end = Carbon::parse($request->date_expire)->format('Y-m-d');
 
 
+
         if($country != null && $start != null && $end != null && $child_max != null && $adults_max != null) {
 
 
             $rooms = Room::query()->whereHas('calendars', function ($query) use($start,$end){
 
-                $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                $query
+                     ->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
                     ->orWhereBetween('check_in',[$start,$end])
                     ->whereDate('check_in','!=',$end);
 
@@ -46,20 +47,22 @@ class UserController extends Controller
 
                 ->with(['calendars' => function ($query) use ($start, $end) {
 
-                    $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                    $query
+                        ->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
                         ->orWhereBetween('check_in',[$start,$end])
-                        ->whereDate('check_in','!=',$end)->select('id','room_id','check_in','check_out', DB::raw('SUM(room_price)  as total_room_price'), DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
+                        ->whereDate('check_in','!=',$end)->select('id','room_id','room_number','check_in','check_out', DB::raw('SUM(room_price)  as total_room_price'), DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
 
                 }])->withSum(['calendars' => function($query) use($start,$end){
 
-                $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                $query
+                    ->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
                     ->orWhereBetween('check_in',[$start,$end])
                     ->whereDate('check_in','!=',$end);
 
                }],'days')->simplePaginate(Search);
 
 
-            return $rooms;
+//            return $rooms;
             $hotels = [];
 
 

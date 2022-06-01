@@ -33,17 +33,8 @@
 
             <div class="col-lg-8 col-12 Reservation2">
 
-                @if($errors->any())
-                    @foreach($errors->all() as $error)
-                        <div id="alert" class="row mr-2 ml-2">
-                            <button type="text" class="btn btn-lg btn-block btn-outline-success mb-2"
-                                    id="type-error">{{$message}}
-                            </button>
-                        </div>
-                    @endforeach
-                @endif
 
-                    @if($message = Session::get('check'))
+                    @if($message = Session::get('errors'))
                         <div id="alert" class="row mr-2 ml-2">
                             <button type="text" class="btn btn-lg btn-block btn-outline-success mb-2"
                                     id="type-error">{{$message}}

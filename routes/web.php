@@ -274,12 +274,11 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 //});
 
 
-//Route::get('test/{month}', function ($month){
-//
-//   $hotel = \App\Models\HotelRepositoryRepository::query()->whereMonth('created_at',$month)->get();
-//
-//   return $hotel;
-//
-//});
+Route::get('gg/{id}', function ($id){
 
-Route::view('drop','welcome_2');
+    $calendars = Calendar::query()->where('room_id','=',$id)->get();
+
+    dd($calendars);
+});
+
+//Route::view('drop','welcome_2');

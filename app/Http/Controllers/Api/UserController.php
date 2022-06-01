@@ -3,136 +3,44 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-
+use App\Http\Requests\LoginUserRequest;
+use App\Http\Requests\StoreUserRequest;
+use App\Interfaces\Api\UserRepositoryInterface;
 
 
 class UserController extends Controller
 {
 
 
-    //get all users from database
+    public $userRepositoryInterface;
+
+    public function __construct(UserRepositoryInterface $userRepositoryInterface)
+    {
+
+        $this->userRepositoryInterface = $userRepositoryInterface;
+
+    }
+
+
     public function users(){
 
-        $users = UserResource::collection(User::query()->get());
 
-        return returnDataSuccess("users get all successfully","201","users",$users);
+        return $this->userRepositoryInterface->users();
 
     }
 
-    public function register(Request $request){
+    public function register(StoreUserRequest $request){
 
 
-        try {
-
-            $rules = [
-
-
-                'name' => 'required',
-                'email' => 'required|unique:users,email',
-                'password' => 'required|min:8',
-                'phone' => 'required|numeric'
-
-            ];
-
-            $messages = [
-
-
-                'name.required' => trans('api_user.name'),
-                'email.required'   => trans('api_user.email'),
-                'email.unique' => trans('api_user.email_unique'),
-                'password.required' => trans('api_user.password'),
-                'password.min' => trans('api_user.password_min'),
-                'phone.required' => trans('api_user.phone'),
-                'phone.numeric' => trans('api_user.phone_numeric'),
-
-
-            ];
-
-            $validator = Validator::make($request->all(),$rules,$messages);
-
-
-            if($validator->fails()){
-
-
-                return returnMessageError($validator->errors(),"500");
-            }
-
-        }catch (\Exception $exception){
-
-
-            return returnMessageError($exception->getMessage(),"500");
-        }
-
-
-
-        $user = new UserResource(User::create([
-
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-            'phone' => $request['phone'],
-
-        ]));
-
-
-        if($user){
-
-            return returnDataSuccess(trans('api_user.create'),"201","user",$user);
-        }
-
+        return $this->userRepositoryInterface->register($request);
 
     }
 
 
-    public function login(Request $request){
+    public function login(LoginUserRequest $request){
 
 
-      $rules = [
-
-            'email' => 'required',
-            'password' => 'required'
-
-
-      ];
-
-      $messages = [
-
-         'email.required'   => trans('api_user.email'),
-          'password.required' => trans('api_user.password'),
-
-      ];
-
-      $validator = Validator::make($request->all(),$rules,$messages);
-
-
-      if($validator->fails()){
-
-
-          return returnMessageError($validator->errors(),"500");
-      }
-
-
-      $token = auth()->guard('user-api')->attempt($request->only(['email','password']));
-
-
-      if(!$token){
-
-
-          return returnMessageError(trans('api_user.failed'),"404");
-      }
-
-
-      $user = new UserResource(auth()->guard('user-api')->user());
-      $user->token = $token;
-
-
-      return returnDataSuccess(trans('api_user.login'),"201","user",$user);
-
+      return $this->userRepositoryInterface->login($request);
 
     }
 
@@ -140,19 +48,7 @@ class UserController extends Controller
 
     public function logout(){
 
-
-        try {
-
-            auth()->guard('user-api')->logout();
-
-            return returnMessageSuccess(trans('api_user.logout'),"201");
-
-        }catch (\Exception $exception){
-
-
-            return returnMessageError($exception->getMessage(),"500");
-
-        }
+        return $this->userRepositoryInterface->logout();
 
     }
 }

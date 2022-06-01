@@ -2,60 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
+use App\Interfaces\Web\RoleRepositoryInterface;
 
 class RoleController extends Controller
 {
 
 
+    public $roleRepositoryInterface;
+
+    public function __construct(RoleRepositoryInterface $roleRepositoryInterface)
+    {
+
+        $this->roleRepositoryInterface = $roleRepositoryInterface;
+
+    }
+
+
     public function index(){
 
 
-        $roles = Role::latest()->simplePaginate(Max);
-        return view('roles.index',compact('roles'));
+        return $this->roleRepositoryInterface->index();
 
     }
 
     public function create(){
 
-        return view('roles.create');
+        return $this->roleRepositoryInterface->create();
+
     }
 
 
-    public function store(Request $request){
+    public function store(StoreRoleRequest $request){
 
-        $rules = [
-
-            'name'  => 'required|unique:roles,name',
-            'permissions' => 'required|array|min:1',
-        ];
-
-        $messages = [
-
-            'name.required' => __('admin_role.name_role'),
-            'name.unique' => __('admin_role.unique'),
-            'permissions.required' => __('admin_role.permissions'),
-
-        ];
-
-        $validator = Validator::make($request->all(),$rules,$messages);
-
-        if($validator->fails()){
-
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
-
-
-        $role = Role::create([
-
-            'name' => $request['name'],
-             'permissions' => json_encode($request['permissions']),
-
-        ]);
-
-        return redirect()->back()->with('role',__('admin_role.role'));
+        return $this->roleRepositoryInterface->store($request);
 
 
     }
@@ -63,50 +44,16 @@ class RoleController extends Controller
 
     public function edit($id){
 
-        $role = Role::find($id);
 
-        return view('roles.edit',compact('role'));
+        return $this->roleRepositoryInterface->edit($id);
 
     }
 
 
-    public function update(Request $request,$id){
+    public function update(UpdateRoleRequest $request,$id){
 
 
-        $role = Role::find($id);
-
-
-        $rules = [
-
-            'name'  => 'required',
-            'permissions' => 'required|array|min:1',
-        ];
-
-        $messages = [
-
-            'name.required' => __('admin_role.name'),
-            'permissions.required' => __('admin_role.permissions'),
-
-        ];
-
-        $validator = Validator::make($request->all(),$rules,$messages);
-
-        if($validator->fails()){
-
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
-
-
-        $role->update([
-
-            'name' => $request['name'],
-            'permissions' => json_encode($request['permissions']),
-
-        ]);
-
-        return redirect()->route('roles.index')->with('role_update',__('admin_role.role_update'));
-
-
+        return $this->roleRepositoryInterface->update($request,$id);
     }
 
 }

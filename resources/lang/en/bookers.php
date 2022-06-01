@@ -15,4 +15,5 @@ return [
     'message' => 'The booking created successfully',
      'integer' => 'room number must be an number',
     "check" => "The number of rooms is greater than the available rooms",
+    "remove" => "booking canceled successfully"
 ];

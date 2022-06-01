@@ -10,7 +10,6 @@ use App\Http\Requests\StoreHotelRequest;
 use App\Http\Resources\HotelResource;
 use App\Interfaces\Api\HotelRepositoryInterface;
 use App\Models\Hotel;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -21,9 +20,10 @@ class HotelRepository implements HotelRepositoryInterface
     {
 
 
-        $credentials = $request->only(['email','password']);
-
         try {
+
+
+            $credentials = $request->only(['email','password']);
 
             $token = auth()->guard('hotel-api')->attempt($credentials);
 
@@ -90,8 +90,8 @@ class HotelRepository implements HotelRepositoryInterface
 
             $data = [
 
-                "name_ar" =>  " لقد تم تسجيل فندق جديد " . $request['name_ar'],
-                'email' => $request['email'],
+                "name_ar" =>  " لقد تم تسجيل فندق جديد " . $request->name_ar,
+                'email' => $request->email,
 
             ];
 

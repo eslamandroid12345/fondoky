@@ -88,9 +88,10 @@ class HotelRepository implements HotelRepositoryInterface
 
 
         $booker = Booker::findOrFail($id);
-        $report = Report::where('booker_id',$id)->get();
+        $report = Report::where('booker_id',$id)->first();
 
-        DB::beginTransaction();
+        DB::transaction(function () use ($booker,$report){
+
             try {
 
                 $booker->update([
@@ -108,14 +109,14 @@ class HotelRepository implements HotelRepositoryInterface
 
                 $report->update([
 
-                    'blocked' => 0,
+                    'total' => 0,
                     'commission'  => 0,
+                    'blocked' => 0,
                     'canceled' => 0,
 
                 ]);
 
                 DB::commit();
-                return redirect()->back()->with('block',__('hotels.block'));
 
 
             }catch (\Exception $exception){
@@ -124,6 +125,10 @@ class HotelRepository implements HotelRepositoryInterface
 
                 return $exception->getMessage();
             }
+
+        });
+
+        return redirect()->back()->with('block',__('hotels.block'));
 
 
     }

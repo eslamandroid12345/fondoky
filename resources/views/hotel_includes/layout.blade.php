@@ -201,29 +201,12 @@
 
 </script>
 
+
 <script >
+
     window.App = {!! json_encode([
     'user' => auth()->check() ? hotel()->id : null,
     ]) !!};
-</script>
-
-<script >
-
-    function playAudio() {
-
-        var x = new Audio('http://127.0.0.1:8000/backend/assets/i-did-it-message-tone.mp3');
-        // Show loading animation.
-        var playPromise = x.play();
-
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                x.play();
-            })
-                .catch(error => {
-                });
-
-        }
-    }
 
     var channel = Echo.private(`new-reservations.` + window.App.user);
     channel.listen('.new-reservations-event', function(data) {
@@ -233,6 +216,10 @@
 
 
 </script>
+
+
+
+
 <script>
 
     $( document ).ready(function() {

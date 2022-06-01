@@ -198,13 +198,15 @@
 
 <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
 
+
+
 <script >
+
+
     window.App = {!! json_encode([
     'user' => auth()->check() ? auth()->user()->id : null,
     ]) !!};
-</script>
 
-<script >
 
     var channel = Echo.private(`new-reservations.` + window.App.user);
     channel.listen('.new-reservations-event', function(data) {

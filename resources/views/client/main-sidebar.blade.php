@@ -3,6 +3,8 @@
 <aside class="app-sidebar sidebar-scroll">
     <div class="main-sidebar-header active">
 
+        {{--header--}}
+
     </div>
     <div class="main-sidemenu">
         <div class="app-sidebar__user clearfix">

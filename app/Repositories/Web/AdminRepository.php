@@ -14,6 +14,7 @@ use App\Models\Role;
 use App\Models\Room;
 use Illuminate\Support\Facades\Hash;
 
+
 class AdminRepository implements AdminRepositoryInterface
 {
 
@@ -82,6 +83,7 @@ class AdminRepository implements AdminRepositoryInterface
 
         try {
 
+            //create image for admin
             if ($image = $request->file('image')) {
 
                 $destinationPath = 'admins/';

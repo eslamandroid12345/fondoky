@@ -58,14 +58,9 @@ class BookerController extends Controller
 
 
 
-//        $numbers = Room::findOrFail($id)->calendars;
-//
-//                foreach ($numbers as $number) {
-//
-//                    if($request->room_number < $number->room_number) {
-//
 
-                        DB::transaction(function () use ($request, $id) {//transactions of
+
+        DB::transaction(function () use ($request, $id) {//transactions of
 
 
                     try {
@@ -76,9 +71,9 @@ class BookerController extends Controller
                             'children' => $request['child_max'],
                             'adults' => $request['adults_max'],
                             'room_type' => $request['room_type'],
-                            'room_number' => $request['room_number'],//room number
-                            'room_price' => $request['room_price'],//room price booking
-                            'num_of_nights' => $request['num_of_nights'], //number of nights
+                            'room_number' => $request['room_number'],
+                            'room_price' => $request['room_price'],
+                            'num_of_nights' => $request['num_of_nights'],
                             'date_arrive' => $request['date_arrive'],
                             'date_leave' => $request['date_leave'],
                             'user_id' => auth()->id(),
@@ -109,27 +104,12 @@ class BookerController extends Controller
                         $end = Carbon::parse($request->date_leave)->format('Y-m-d');
 
 
-                        $calendars = Calendar::query()
-
-                           ->wherebetween('check_out', [$start, $end])
-                            ->whereDate('check_in', '!=', $end)
-                            ->whereDate('check_out', '!=', $start)
-                            ->orWhere('check_out','>=',$end)
-                            ->wherebetween('check_in', [$start, $end])
-                            ->whereDate('check_in', '!=', $end)
+                        $calendars = Room::findOrFail($id)->calendars()
+                            ->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                            ->orWhereBetween('check_in',[$start,$end])
+                            ->whereDate('check_in','!=',$end)
                             ->where('room_id','=',$id)
                             ->get();
-
-
-
-//                        $calendars = Room::findOrFail($id)->calendars()
-//                            ->wherebetween('check_out', [$start, $end])
-//                            ->whereDate('check_in', '!=', $end)
-//                            ->whereDate('check_out', '!=', $start)
-//                            ->orWhere('check_out','>=',$end)
-//                            ->wherebetween('check_in', [$start, $end])
-//                            ->whereDate('check_in', '!=', $end)
-//                            ->get();
 
 
                         foreach ($calendars as $calendar) {
@@ -154,13 +134,6 @@ class BookerController extends Controller
 
                 });
 
-
-//            }else{
-//
-//
-//                return back()->with("errors","the room number is big");
-//            }
-//        }
 
 
         return redirect()->route('home')->with('success','تم اضافه حجزك بنجاح');

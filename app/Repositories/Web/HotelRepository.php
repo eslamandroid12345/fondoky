@@ -328,10 +328,8 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function monthOfInvoices(){
 
-        $first_day_of_month = Carbon::now()->firstOfMonth()->translatedFormat('l j F Y');
-        $last_day_of_month = Carbon::now()->lastOfMonth()->translatedFormat('l j F Y');
 
-        return view('hotels.month_invoices',compact('first_day_of_month','last_day_of_month'));
+        return view('hotels.month_invoices');
 
 
     }
@@ -343,20 +341,16 @@ class HotelRepository implements HotelRepositoryInterface
 
         $hotel = Auth::guard('hotel')->user();
 
-        $bookers = Booker::query()->where('hotel_id', $hotel->id)->whereMonth('created_at', date('m'))
+        $bookers = Booker::where('hotel_id', $hotel->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
 
-        $commissions = Booker::query()
-            ->where('hotel_id', $hotel->id)
-            ->whereMonth('created_at', date('m'))
+        $commissions = Booker::where('hotel_id', $hotel->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(commission)) as commission"))
             ->get();
 
 
-        $totals = Booker::query()
-            ->where('hotel_id', $hotel->id)
-            ->whereMonth('created_at', date('m'))
+        $totals = Booker::where('hotel_id', $hotel->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(total)) as total"))
             ->get();
@@ -373,8 +367,7 @@ class HotelRepository implements HotelRepositoryInterface
 
         $hotel = Auth::guard('hotel')->user();
 
-        $commissions =  Report::query()->where('hotel_id', $hotel->id)
-            ->where('blocked','=',true)
+        $commissions =  Report::where('hotel_id', $hotel->id)->where('blocked','=',true)
             ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"), DB::raw("(DATE_FORMAT(created_at, '%m-%Y')) as month_year"))
             ->orderBy('created_at')
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m-%Y')"))
@@ -389,7 +382,7 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function arrivals(){
 
-        $bookers = Booker::query()->whereDay('date_arrive',Carbon::now()->format('d'))
+        $bookers = Booker::whereDay('date_arrive',Carbon::now()->format('d'))
             ->with(['hotel:id,name_ar,name_en,pound','user:id,name'])->where('hotel_id','=',hotel()->id)
             ->orderBy('id','DESC')->simplePaginate(Max);
 

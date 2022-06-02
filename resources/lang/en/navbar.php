@@ -9,6 +9,6 @@ return [
     "users" => "users",
     "hotels" => "hotels",
     "reservations" => "reservations",
-    "my" => "My HotelRepositoryRepository",
+    "my" => "My Hotel",
 
 ];

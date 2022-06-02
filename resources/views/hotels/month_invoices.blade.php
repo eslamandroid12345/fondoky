@@ -1,6 +1,6 @@
 @extends('layout_h.master')
 @section('title')
-   {{ $first_day_of_month}}
+    {{ Carbon\Carbon::now()->firstOfMonth()->translatedFormat('l j F Y')}}
 @stop
 @section('css')
     <!-- Internal Data table css -->
@@ -62,8 +62,8 @@
                                 <tbody>
                                 <tr>
 
-                                    <td>{{$first_day_of_month}}</td>
-                                    <td>{{$last_day_of_month}}</td>
+                                    <td>{{ Carbon\Carbon::now()->firstOfMonth()->translatedFormat('l j F Y')}}</td>
+                                    <td>{{ Carbon\Carbon::now()->lastOfMonth()->translatedFormat('l j F Y')}}</td>
 
 
 
@@ -76,6 +76,7 @@
 
                                                 <a class="dropdown-item"
                                                    href="{{route('hotels.invoices')}}">الفاتوره الشهريه</a>
+
 
 
 

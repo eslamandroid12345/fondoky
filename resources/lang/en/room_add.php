@@ -16,7 +16,7 @@ return [
     'room_edit' => 'room edit',
     'hotel_data' => 'hotel data',
     'home' => 'Home',
-    'hot' => 'HotelRepositoryRepository register',
+    'hot' => 'Hotel register',
     'room_show' => 'room show',
     'update' => 'update',
     'show' => 'show',

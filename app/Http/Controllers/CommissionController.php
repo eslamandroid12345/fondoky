@@ -6,7 +6,6 @@ use App\Models\Booker;
 use App\Models\Hotel;
 use App\Models\Report;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
@@ -16,7 +15,7 @@ class CommissionController extends Controller
     public function commissions(){
 
 
-        $hotels = Hotel::query()->select('id','name_ar','name_en','blocked')->simplePaginate(Max);
+        $hotels = Hotel::select('id','name_ar','name_en','blocked')->simplePaginate(Max);
         return view('admins.hotel_report',compact('hotels'));
     }
 
@@ -25,12 +24,9 @@ class CommissionController extends Controller
     public function index($id){
 
 
-         $hotel = Hotel::query()->select('id','name_ar','name_en','pound')->find($id);
+         $hotel = Hotel::select('id','name_ar','name_en','pound')->find($id);
 
-         $commissions =  Report::query()->where('hotel_id', $id)
-             ->where('blocked','=',true)
-             ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"), DB::raw("(DATE_FORMAT(created_at, '%m-%Y')) as month_year"))
-            ->orderBy('created_at')
+         $commissions =  Report::query()->where('hotel_id', $id)->where('blocked','=',true)->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"), DB::raw("(DATE_FORMAT(created_at, '%m-%Y')) as month_year"))->orderBy('created_at')
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m-%Y')"))
             ->get();
 
@@ -42,33 +38,26 @@ class CommissionController extends Controller
 
 
 
-    //total and commission of month for admin
     public function commissionOfMonth($id){
 
 
-        $hotel = Hotel::query()->findOrFail($id);
+        $hotel = Hotel::findOrFail($id);
 
-        $bookers = Booker::query()->where('hotel_id', $id)->whereMonth('created_at', date('m'))
+        $bookers = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
 
-        $commissions = Booker::query()
-            ->where('hotel_id', $id)
-            ->whereMonth('created_at', date('m'))
-            ->whereYear('created_at', date('Y'))
+        $commissions = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(commission)) as commission"))
             ->get();
 
 
-        $totals = Booker::query()
-            ->where('hotel_id', $id)
-            ->whereMonth('created_at', date('m'))
-            ->whereYear('created_at', date('Y'))
+        $totals = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(total)) as total"))
             ->get();
 
 
 
-        $now = Carbon::now()->translatedFormat('F Y');//now
+        $now = Carbon::now()->translatedFormat('F Y');
 
         return view('admins.month',compact('hotel','bookers','commissions','totals','now'));
 

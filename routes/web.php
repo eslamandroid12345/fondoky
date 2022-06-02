@@ -274,35 +274,4 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 //});
 
 
-Route::get('tel', function (){
 
-//    $rooms = Room::whereHas('calendars', function ($query){
-//
-//        $query->where('room_number','>',0);
-//
-//
-//   })   ->with(['calendars' => function ($query) {
-//
-//        $query->where('room_number','>',0);
-//
-//    }])->get();
-
-
-
-        $rooms = Room::
-
-        whereHas('calendars', function ($query) {
-
-            $query->where('room_number', '>', 0);
-
-        })->
-        with(['calendars' => function ($query) {
-
-       $query->where('room_number','>',0);
-
-       }])->get();
-
-                return $rooms;
-});
-
-//Route::view('drop','welcome_2');

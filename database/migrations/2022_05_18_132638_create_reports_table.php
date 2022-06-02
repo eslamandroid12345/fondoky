@@ -14,8 +14,8 @@ class CreateReportsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('booker_id');
             $table->unsignedBigInteger('hotel_id');
-            $table->double('total',15,2)->default(0);//
-            $table->double('commission',15,2)->default(0);//
+            $table->double('total',15,2)->default(0);
+            $table->double('commission',15,2)->default(0);
             $table->boolean('blocked')->default(1)->comment('0 is refuse 1 is accept');
             $table->boolean('canceled')->default(1)->comment('0 is cancel 1 is accept');
             $table->timestamps();

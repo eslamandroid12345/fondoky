@@ -134,7 +134,8 @@ class UserRepository implements UserRepositoryInterface
 
 
         $room = Room::with(['hotel','room_type'])->find($id);
-        return view('users.reservation_room',compact('room'));
+        $calendars = Room::findOrFail($id)->calendars()->whereDay('check_in','>=', date('d'))->get();
+        return view('users.reservation_room',compact('room','calendars'));
 
     }
 

@@ -74,7 +74,7 @@
 
             <div class="col-lg-4 col-12 Reservation3">
 
-                <form action="{{route('bookers.store',$room->id)}}" method="POST">
+                    <form action="{{route('bookers.store',$room->id)}}" method="POST">
 
                     @csrf
                     <label for="">الوجهة </label>

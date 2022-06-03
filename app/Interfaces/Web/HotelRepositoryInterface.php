@@ -28,7 +28,7 @@ interface  HotelRepositoryInterface{
     public function delete($id);
     public function monthOfInvoices();
     public function invoices();
-    public function yearOfInvoices();
+    public function paidYear();
     public function arrivals();
 
 

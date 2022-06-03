@@ -1,133 +1,241 @@
-@extends('site.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hotel</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Mulish:wght@200;300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-@section('content')
-    <div class="app-content content">
-        <div class="content-wrapper">
-            <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> {{__('site.book')}} </h3>
-                    <div class="row breadcrumbs-top">
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">{{__('site.up')}}</a>
-                                </li>
-                                <li class="breadcrumb-item active">{{__('site.my_booking')}}
-                                </li>
-                            </ol>
-                        </div>
+
+    <link rel="stylesheet" href="{{asset('web/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('web/Reservation.css')}}">
+    <link rel="stylesheet" href="{{asset('web/style.css')}}">
+
+
+
+</head>
+
+
+@include('web.header')
+
+<!--Start Reservation-->
+
+<div class="reservation">
+    <div class="container">
+        <div class="row">
+
+
+
+            <div class="col-lg-8 col-12 Reservation2">
+
+
+                @if($message = Session::get('errors'))
+                    <div id="alert" class="row mr-2 ml-2">
+                        <button type="text" class="btn btn-lg btn-block btn-outline-success mb-2"
+                                id="type-error">{{$message}}
+                        </button>
                     </div>
+                @endif
+
+                @foreach(json_decode($room->images) as $image)
+                    <img src="{{URL::to('/rooms/'.$image)}}" class="card-img-top" alt="...">
+                @endforeach
+
+
+                <h3>{{ $room->hotel->name_ar}} - {{$room->hotel->country}}</h3>
+                <p>{{$room->room_description}}</p>
+
+
+
+                <div class="services">
+                    <ol class="row">
+                        {{--check of services --}}
+                        <h4>خدمات الفندق</h4>
+
+                        @if($room->hotel->service()->exists())
+
+                            @foreach(json_decode($room->hotel->service->services) as $service)
+                                <li class="col-lg-4 col-12">{{$service}}</li>
+                            @endforeach
+
+                        @else
+                            <h3>لا يوجد خدمات بهذا الفندق متاحه الان</h3>
+
+                        @endif
+                    </ol>
                 </div>
             </div>
-            <div class="content-body">
-                <!-- DOM - jQuery events table -->
-                <section id="dom">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">{{__('site.all')}} </h4>
-                                    <a class="heading-elements-toggle"><i
-                                                class="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
 
 
-                                <div class="card-content collapse show">
-                                    <div class="card-body card-dashboard">
+            <div class="col-lg-4 col-12 Reservation3">
 
-                                        @if($message = Session::get('success'))
-                                            <div id="alert" class="row mr-2 ml-2">
-                                                <button type="text" class="btn btn-lg btn-block btn-outline-success mb-2"
-                                                        id="type-error">{{$message}}
-                                                </button>
-                                            </div>
-                                        @endif
-                                        <table style="width: 100%"
-                                               class="table display nowrap table-striped table-bordered scroll-horizontal">
-                                            <thead class="">
-                                            <tr>
+                <form action="{{route('bookers.store',$room->id)}}" method="POST">
 
+                    @csrf
+                    <label for="">الوجهة </label>
+                    <input type="text" name="city_to" value="{{$room->hotel->country}}" readonly>
 
-                                                <th>{{__('site.id')}}</th>
-                                                <th>{{__('site.city')}}</th>
-                                                <th>{{__('site.child')}}</th>
-                                                <th>{{__('site.adults')}}</th>
-                                                <th>{{__('site.room_type')}}</th>
-                                                <th>{{__('site.room_number')}}</th>
-                                                <th>{{__('site.num_of_nights')}}</th>
-                                                <th>{{__('site.date_arrive')}}</th>
-                                                <th>{{__('site.date_leave')}}</th>
-                                                <th>{{__('site.hotel')}}</th>
-                                                <th>{{__('site.total')}}</th>
-                                                <th>{{__('site.reserve')}}</th>
-                                                <th>{{__('site.cancel')}}</th>
-                                            </tr>
-                                            </thead>
+                    <label for="">نوع الغرفه </label>
+                    <input type="text" name="room_type" value="{{$room->room_type->room_type}}" readonly>
 
-                                            @forelse($bookers as $booker)
-                                                <tbody>
-
-                                                <tr>
-
-                                                    <td>{{$booker->id}}</td>
-                                                    <td>{{$booker->city_to}}</td>
-                                                    <td>{{$booker->children}}</td>
-                                                    <td>{{$booker->adults}}</td>
-                                                    <td>{{$booker->room_type}}</td>
-                                                    <td>{{$booker->room_number}}</td>
-                                                    <td>{{$booker->num_of_nights}}</td>
-                                                    <td>{{$booker->date_arrive}}</td>
-                                                    <td>{{$booker->date_leave}}</td>
-                                                    <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                                    <td>{{number_format($booker->total_all,2)}} - {{$booker->hotel->pound}}</td>
-                                                    <td>{{$booker->cancel()}}</td>
-
-                                                    <td>
-                                                        <div class="btn-group" role="group"
-                                                             aria-label="Basic example">
-
-                                                            @if($booker->canceled == 1)
-
-                                                                <a href="{{route('bookers.cancel',$booker->id)}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{__('site.cancel')}}</a>
-
-                                                            @else
-
-                                                                <a href=""
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{__('site.canceled')}}</a>
+                    <label for="">تاريخ الوصول</label>
+                    <input placeholder="تاريخ الوصول" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" name="date_arrive" value="{{ request()->query('date_start')}}" readonly>
+                    <label for="">تاريخ المغادرة</label>
+                    <input placeholder="تاريخ المغادره" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" name="date_leave" value="{{ request()->query('date_expire')}}" readonly>
+                    <label for="">الاشخاص البالغين</label>
+                    <input type="number" name="adults_max" value="{{$room->adults_max}}" readonly>
+                    <label for="">عدد الاطفال</label>
+                    <input type="number" name="child_max" value="{{$room->child_max}}" readonly>
 
 
-                                                            @endif
-                                                        </div>
-
-                                                    </td>
-                                                </tr>
+                    <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
 
 
-                                                </tbody>
-                                            @empty
-                                                <h6>No booking</h6>
-                                            @endforelse
-                                        </table>
-                                        <div class="justify-content-center d-flex">
-                                            {{$bookers->links()}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+
+
+                    {{-- start calculate num of nigts --}}
+                    @php
+                        $to =     \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_start'));
+                        $from =   \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_expire'));
+
+                        $diff_in_days = $to->diffInDays($from);
+
+                    @endphp
+
+                    {{-- end calculate num of nigts --}}
+
+
+                    {{--                    <label for="">عدد الليالي</label>--}}
+
+                    <input type="hidden" name="num_of_nights" id="nights" onkeyup="sum()" value="{{$diff_in_days}}" readonly>
+
+
+
+                    <label for="">سعر الغرفه</label>
+                    <input type="text" name="room_price" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
+
+
+
+
+
+
+
+                    <label for="">عدد الغرف</label>
+                    <input type="number" name="room_number" id="room" onkeyup="sum()">
+                    <input type="hidden" name="total" id="result" value="0.00">
+                    <input type="hidden" name="tourism_tax" id="tourism_tax" value="0.00">
+                    <input type="hidden" name="municipal_tax" id="municipal_tax" value="0.00">
+                    <input type="hidden" name="vat_tax" id="vat_tax" value="0.00">
+                    <label for="">االمجموع شاملاً ضريبة القيمة المضافة</label>
+                    <input type="text" name="total_all" id="total_all" value="0">
+                    <input type="hidden" name="commission" id="commission" value="0.00">
+                    <br><input type="submit" value="احجز الان">
+
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
 
-@endsection
+
+@include('web.footer')
+
+<script src="{{asset('js/jquery2.js')}}"></script>
+<script src="{{asset('js/jquery.js')}}"></script>
+<script src="{{asset('js/popper.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/show.js')}}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
+<script>
+    $( function() {
+        $( ".datepicker" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
+    } );
+</script>
+
+
+<script>
+    function sum() {
+
+        var nights = document.getElementById('nights').value;
+        var room = document.getElementById('room').value;
+        var price = document.getElementById('price').value;
+
+
+        var result = parseFloat(nights) * parseFloat(room) * parseFloat(price);
+
+        if (!isNaN(result)) {
+
+            document.getElementById('result').value = result;
+        }
+
+
+        var tourism_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 4) / 100);
+
+
+        if (!isNaN(tourism_tax)) {
+
+            document.getElementById('tourism_tax').value = tourism_tax;
+        }
+
+
+        var municipal_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
+
+
+        if (!isNaN(municipal_tax)) {
+
+            document.getElementById('municipal_tax').value = municipal_tax;
+        }
+
+
+
+        var vat_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
+
+
+        if (!isNaN(vat_tax)) {
+
+            document.getElementById('vat_tax').value = vat_tax;
+        }
+
+
+
+        var total_all = (parseFloat(nights) * parseFloat(room) * parseFloat(price) + vat_tax + municipal_tax + tourism_tax);
+
+
+        if (!isNaN(total_all)) {
+
+            document.getElementById('total_all').value = total_all;
+
+        }else{
+
+            document.getElementById('total_all').value = 0;
+
+        }
+
+
+
+        var commission = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
+
+
+        if (!isNaN(commission)) {
+
+            document.getElementById('commission').value = commission;
+        }
+
+    }
+
+</script>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+</body>
+</html>

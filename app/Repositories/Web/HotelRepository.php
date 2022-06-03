@@ -87,36 +87,35 @@ class HotelRepository implements HotelRepositoryInterface
     public function block($id){
 
 
-        $booker = Booker::findOrFail($id);
-        $report = Report::where('booker_id',$id)->first();
 
-        DB::transaction(function () use ($booker,$report){
+        DB::beginTransaction();
 
-            try {
 
-                $booker->update([
+        try {
 
-                    'blocked' => $booker->blocked == 1 ? 0 : 1,
-                    'vat_tax' => 0,
-                    'municipal_tax' => 0,
-                    'tourism_tax'  => 0,
-                    'total_all'  => 0,
-                    'total'  => 0,
-                    'commission'  => 0,
-                    'canceled' => 0,
 
-                ]);
+            $booker = Booker::findOrFail($id);
+            $report = Report::where('booker_id',$id)->first();
 
-                $report->update([
+            $booker->blocked = $booker->blocked == 1 ? 0 : 1;
+            $booker->vat_tax = 0;
+            $booker->municipal_tax = 0;
+            $booker->tourism_tax = 0;
+            $booker->total_all = 0;
+            $booker->total = 0;
+            $booker->commission = 0;
+            $booker->canceled = 0;
+            $booker->save();
 
-                    'total' => 0,
-                    'commission'  => 0,
-                    'blocked' => 0,
-                    'canceled' => 0,
 
-                ]);
+            $report->total = 0;
+            $report->commission = 0;
+            $report->blocked = 0;
+            $report->canceled = 0;
+            $report->save();
 
-                DB::commit();
+
+            DB::commit();
 
 
             }catch (\Exception $exception){
@@ -126,7 +125,6 @@ class HotelRepository implements HotelRepositoryInterface
                 return $exception->getMessage();
             }
 
-        });
 
         return redirect()->back()->with('block',__('hotels.block'));
 
@@ -361,8 +359,7 @@ class HotelRepository implements HotelRepositoryInterface
     }
 
 
-    //start year of invoices
-    public function yearOfInvoices(){
+    public function paidYear(){
 
 
         $hotel = Auth::guard('hotel')->user();

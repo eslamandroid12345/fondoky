@@ -62,7 +62,6 @@ class HotelController extends Controller
         return $this->hotelRepositoryInterface->room_type($request);
     }
 
-    //end create room type
 
     public function block($id){
 
@@ -143,10 +142,10 @@ class HotelController extends Controller
     }
 
 
-    public function yearOfInvoices(){
+    public function paidYear(){
 
 
-        return $this->yearOfInvoices();
+        return $this->paidYear();
 
     }
 

@@ -35,8 +35,8 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
 
     Route::get('invoices', [HotelController::class,'invoices'])->name('hotels.invoices');
     Route::get('month/invoices', [HotelController::class,'monthOfInvoices'])->name('hotels.month.invoices');
-    Route::get('year/invoices', [HotelController::class,'yearOfInvoices'])->name('hotels.year.invoices');
     Route::get('arrivals', [HotelController::class,'arrivals'])->name('hotels.arrivals');
+    Route::get('paid/year', [HotelController::class,'paidYear'])->name('hotels.paid.year');
 
 
 

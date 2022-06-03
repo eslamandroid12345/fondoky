@@ -13,7 +13,7 @@ class ChangeLanguageApi
 
         app()->setLocale('ar');
 
-        if($request -> header('Accept-Language') == 'en' ){
+        if($request->header('Accept-Language') == 'en' ){
 
             app()->setLocale('en');
 

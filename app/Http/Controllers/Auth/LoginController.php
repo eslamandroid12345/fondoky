@@ -62,15 +62,19 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
 
-        if(auth()->guard('admin')->check()){
+        $admin = 'admin';
+        $hotel = 'hotel';
 
-            auth()->guard('admin')->logout();//logout admin
-            $redirect = '/admins/show';
 
-        }elseif (auth()->guard('hotel')->check()){
+        if(auth()->guard($admin)->check()){
 
-            auth()->guard('hotel')->logout();//logout hotel
-            $redirect = '/hotels/show';
+            auth()->guard($admin)->logout();//logout admin
+            $redirect = 'admins/show';
+
+        }elseif (auth()->guard($hotel)->check()){
+
+            auth()->guard($hotel)->logout();//logout hotel
+            $redirect = 'hotels/show';
 
         } else{
 

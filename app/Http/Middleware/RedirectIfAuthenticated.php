@@ -25,9 +25,12 @@ class RedirectIfAuthenticated
 
                     return redirect(RouteServiceProvider::HOTEL);
 
+                }else{
+
+                    return redirect(RouteServiceProvider::HOME);
+
                 }
 
-                return redirect(RouteServiceProvider::HOME);
             }
 
 

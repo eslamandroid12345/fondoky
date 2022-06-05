@@ -1,406 +1,395 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+@extends('client.master')
+@section('title')
+
+    اداره الحجوزات
+@stop
+@section('css')
+    <!-- Internal Data table css -->
+    <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+@endsection
+@section('page-header')
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">قسم حجوزات العملاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
+                   اضافه حجز جديد</span>
+            </div>
+        </div>
+
+    </div>
+    <!-- breadcrumb -->
+@endsection
+@section('content')
 
 
 
-    <style>
-
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;500&display=swap');
-
-        body{
-
-            font-family: 'Cairo', sans-serif;
-
-        }
-
-        .form-group{
-
-            text-align: right;
-        }
-
-        .fall{
-
-            background: #f2f2f2;
-            border-radius: 7px;
-        }
-
-        label{
-
-            font-size: 14px;
-        }
-        table{
-
-            direction: rtl;
-        }
+    {{--start create booking for user--}}
 
 
-        .fall-4{
 
-
-            text-align: right;
-        }
-
-        .fall-4 ul li{
-
-            list-style-type: none;
-            line-height: 33px;
-        }
-
-        img{
-
-            height: 430px;
-        }
-
-        table thead tr th{
-
-            background: #17a2b8;
-            color: #fff;
-            border-collapse: collapse;
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-
-
-        }
-        table tbody tr td:nth-child(2n){
-            background: #f2f2f2;
-        }
-        table tbody tr td{
-            border-bottom: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-
-        }
-
-        input{
-
-            text-align: right;
-
-        }
-
-        .tap{
-
-            text-align: right;
-        }
-
-
-    </style>
-</head>
-<body>
-
-
-<div class="container-fluid">
+    <!-- row -->
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-12 col-12 mt-3">
-            <div class="py-5 fall">
 
-                <div class="container">
-
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
                     <form action="{{route('bookers.store',$room->id)}}" method="POST" autocomplete="off">
 
                         @csrf
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">الوجهه</label>
-                            <input type="text" name="city_to" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$room->hotel->country}}">
+
+                        <div class="row">
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">الوجهه</label>
+                                <input type="text" class="form-control" name="city_to" value="{{$room->hotel->country}}" readonly>
+
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">نوع الغرفه</label>
+                                <input type="text" class="form-control" name="room_type" value="{{$room->room_type->room_type}}" readonly>
+
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">تاريخ الوصول</label>
+                                <input type="text" class="form-control" onfocus="(this.type='date')" id="date" name="date_arrive" value="{{ request()->query('date_start')}}" readonly>
+
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">تاريخ المغادره</label>
+                                <input type="text" class="form-control" onfocus="(this.type='date')" id="date" name="date_leave" value="{{ request()->query('date_expire')}}" readonly>
+
+                            </div>
+
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">الاشخاص البالغين</label>
+                                <input type="number" class="form-control" name="adults_max" value="{{$room->adults_max}}" readonly>
+
+                            </div>
+
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">عدد الاطفال</label>
+                                <input type="number" class="form-control" name="child_max" value="{{$room->child_max}}" readonly>
+
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">عدد الاطفال</label>
+                                <input type="number" class="form-control" name="child_max" value="{{$room->child_max}}" readonly>
+                                <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
+
+                            </div>
+
+
+
+
+                            {{-- start calculate num of nigts --}}
+                            @php
+                                $to =     \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_start'));
+                                $from =   \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_expire'));
+
+                                $diff_in_days = $to->diffInDays($from);
+
+                            @endphp
+
+                            <input type="hidden" name="num_of_nights" id="nights" onkeyup="sum()" value="{{$diff_in_days}}" readonly>
+                            <input type="hidden" name="room_price" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
+
+                            {{-- end calculate num of nigts --}}
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">عدد الغرف</label>
+
+                                <input type="number" class="form-control" name="room_number" id="room" onkeyup="sum()">
+                                <input type="hidden" name="total" id="result" value="0.00">
+                                <input type="hidden" name="tourism_tax" id="tourism_tax" value="0.00">
+                                <input type="hidden" name="municipal_tax" id="municipal_tax" value="0.00">
+                                <input type="hidden" name="vat_tax" id="vat_tax" value="0.00">
+                                <input type="hidden" name="commission" id="commission" value="0.00">
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3 mb-5">
+                                <label for="inputName" class="control-label">الاجمالي بقيمه الضريبه ب </label>
+                                <input type="text" class="form-control" name="total_all" id="total_all" value="0" readonly>
+                            </div>
+
+
+
+                            <br>
+
+                            @if(count(json_decode($room->images)) == 1)
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+                            @elseif(count(json_decode($room->images)) == 2)
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+
+                            @elseif(count(json_decode($room->images)) == 3)
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+
+                            @else
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+                            @endif
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
+                            <ul>
+                                @if($room->hotel->service()->exists())
+
+                                    @foreach(json_decode($room->hotel->service->services) as $service)
+                                        <li>{{$service}}</li><hr>
+                                    @endforeach
+
+
+                                @endif
+                            </ul>
+                            </div>
+
                         </div>
 
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">نوع الغرفه</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="room_type" value="{{$room->room_type->room_type}}" readonly>
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="submit" class="btn btn-primary">تسجيل بيانات الحجز</button>
                         </div>
 
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">تاريخ الوصول</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" onfocus="(this.type='date')" id="date" name="date_arrive" value="{{ request()->query('date_start')}}" readonly>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">تاريخ المغادره</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" onfocus="(this.type='date')" id="date" name="date_leave" value="{{ request()->query('date_expire')}}" readonly>
-                        </div>
-
-                        <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="adults_max" value="{{$room->adults_max}}" readonly>
-
-                        <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="child_max" value="{{$room->child_max}}" readonly>
-                        <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
-
-
-                        {{-- start calculate num of nigts --}}
-                        @php
-                            $to =     \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_start'));
-                            $from =   \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_expire'));
-
-                            $diff_in_days = $to->diffInDays($from);
-
-                        @endphp
-
-                        {{-- end calculate num of nigts --}}
-
-                        <input type="hidden" name="num_of_nights" id="nights" onkeyup="sum()" value="{{$diff_in_days}}" readonly>
-                        <input type="hidden" name="room_price" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
-
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">عدد الغرف</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="room_number" id="room" onkeyup="sum()">
-
-                            @error('room_number')
-                            <small id="emailHelp" class="form-text text-muted text-danger">{{$message}}</small>
-
-                            @enderror
-                            <input type="hidden" name="total" id="result" value="0.00">
-                            <input type="hidden" name="tourism_tax" id="tourism_tax" value="0.00">
-                            <input type="hidden" name="municipal_tax" id="municipal_tax" value="0.00">
-                            <input type="hidden" name="vat_tax" id="vat_tax" value="0.00">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"> الاجمالي + القيمه المضافه ب {{$room->hotel->pound}}</label>
-                            <input type="number" class="form-control" aria-describedby="emailHelp" name="total_all" id="total_all" value="0" readonly>
-                            <input type="hidden" name="commission" id="commission" value="0.00">
-
-                        </div>
-
-
-
-                        <button type="submit" class="col-12 btn btn-info">استكمال عمليه الحجز</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-
-
-            <div class="py-5">
-
-                <a href="{{url('/')}}"><button type="button" class="btn btn-info">عوده</button></a>
-
-                {{--start table--}}
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">عدد الغرف</th>
-                        <th scope="col">سعر الغرفه</th>
-                        <th scope="col">تاريخ البدايه</th>
-                        <th scope="col">تاريخ النهايه</th>
-                    </tr>
-                    </thead>
-
-                    @foreach($calendars as $calendar)
-                    <tbody>
-                    <tr>
-                        <td>{{$calendar->room_number > 0 ? $calendar->room_number : 'Sold'}}</td>
-                        <td>{{$calendar->room_price}}</td>
-                        <td>{{$calendar->check_in}}</td>
-                        <td>{{$calendar->check_out}}</td>
-                    </tr>
-
-
-
-                    </tbody>
-                    @endforeach
-
-
-                </table>
-
-
-
-                <div class="tap">
-
-                    <h5 class="card-title">{{$room->room_type->room_type}}</h5>
-                    <p class="card-text">
-                       {{$room->room_description}}
-                    </p>
-                </div>
-
-
-                {{--end table--}}
-
-
-
-
-            </div>
-
-        </div>
-
 
     </div>
-</div>
+
+    <!-- row closed -->
+    <!-- Container closed -->
+
+    <!-- main-content closed -->
+    {{--end create booking for user--}}
 
 
 
-<div class="container-fluid">
+    <!-- row -->
     <div class="row">
+        <!--div-->
+        <div class="col-xl-12">
+            <div class="card mg-b-20">
+                <div class="card-header pb-0">
 
-         @if(count(json_decode($room->images)) == 1)
-        @foreach(json_decode($room->images) as $image)
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
 
-            <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
-            </div>
-        @endforeach
+                    <a class="modal-effect btn btn-sm btn-primary" href="{{url('/')}}"
+                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;الصفحه الرئيسيه</a>
 
-      @elseif(count(json_decode($room->images)) == 2)
 
-            @foreach(json_decode($room->images) as $image)
-                <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
-
-                    <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                 </div>
-            @endforeach
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
+                            <thead>
+                            <tr>
+                            <tr>
+                                <th>عدد الغرف</th>
+                                <th>سعر الغرفه</th>
+                                <th>تاريخ البدايه</th>
+                                <th>تاريخ النهايه</th>
+                            </tr>
+                            </tr>
+                            </thead>
+
+                            @foreach($calendars as $calendar)
+                                <tbody>
+                                <tr>
+                                    <td>{{$calendar->room_number > 0 ? $calendar->room_number : 'Sold'}}</td>
+                                    <td>{{$calendar->room_price}}</td>
+                                    <td>{{$calendar->check_in}}</td>
+                                    <td>{{$calendar->check_out}}</td>
+                                </tr>
 
 
-        @elseif(count(json_decode($room->images)) == 3)
 
-            @foreach(json_decode($room->images) as $image)
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
-
-                    <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                </tbody>
+                            @endforeach
+                        </table>
+                    </div>
                 </div>
-            @endforeach
-
-
-        @else
-
-            @foreach(json_decode($room->images) as $image)
-                <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
-
-                    <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
-                </div>
-            @endforeach
-
-        @endif
-
-
-
-    </div>
-</div>
-
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-3">
-            <div class="fall-4 py-5">
-
-
-                <ul>
-                    @if($room->hotel->service()->exists())
-
-                        @foreach(json_decode($room->hotel->service->services) as $service)
-                            <li>{{$service}}</li><hr>
-                        @endforeach
-
-
-                    @endif
-                </ul>
-
             </div>
         </div>
-
-
+        <!--/div-->
     </div>
-</div>
 
 
 
+    <!-- row closed -->
 
-<script>
-    $( function() {
-        $( ".datepicker" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
-    } );
-</script>
+    <!-- Container closed -->
+    
+    <!-- main-content closed -->
+@endsection
+@section('js')
+    <!-- Internal Data tables -->
+
+    <!-- Internal Select2 js-->
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+    <!--Internal Fileuploads js-->
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!--Internal Fancy uploader js-->
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+    <!--Internal  Form-elements js-->
+    <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/select2.js') }}"></script>
+    <!--Internal Sumoselect js-->
+    <script src="{{ URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
+    <!--Internal  Datepicker js -->
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+    <!--Internal  jquery.maskedinput js -->
+    <script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+    <!--Internal  spectrum-colorpicker js -->
+    <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
+    <!-- Internal form-elements js -->
+    <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 
 
-<script>
-    function sum() {
 
-        var nights = document.getElementById('nights').value;
-        var room = document.getElementById('room').value;
-        var price = document.getElementById('price').value;
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+    <!--Internal  Datatable js -->
+    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+
+    <script>
+        function sum() {
+
+            var nights = document.getElementById('nights').value;
+            var room = document.getElementById('room').value;
+            var price = document.getElementById('price').value;
 
 
-        var result = parseFloat(nights) * parseFloat(room) * parseFloat(price);
+            var result = parseFloat(nights) * parseFloat(room) * parseFloat(price);
 
-        if (!isNaN(result)) {
+            if (!isNaN(result)) {
 
-            document.getElementById('result').value = result;
+                document.getElementById('result').value = result;
+            }
+
+
+            var tourism_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 4) / 100);
+
+
+            if (!isNaN(tourism_tax)) {
+
+                document.getElementById('tourism_tax').value = tourism_tax;
+            }
+
+
+            var municipal_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
+
+
+            if (!isNaN(municipal_tax)) {
+
+                document.getElementById('municipal_tax').value = municipal_tax;
+            }
+
+
+
+            var vat_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
+
+
+            if (!isNaN(vat_tax)) {
+
+                document.getElementById('vat_tax').value = vat_tax;
+            }
+
+
+
+            var total_all = (parseFloat(nights) * parseFloat(room) * parseFloat(price) + vat_tax + municipal_tax + tourism_tax);
+
+
+            if (!isNaN(total_all)) {
+
+                document.getElementById('total_all').value = total_all;
+
+            }else{
+
+                document.getElementById('total_all').value = 0;
+
+            }
+
+
+
+            var commission = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
+
+
+            if (!isNaN(commission)) {
+
+                document.getElementById('commission').value = commission;
+            }
+
         }
 
+    </script>
 
-        var tourism_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 4) / 100);
+{{--    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>--}}
 
-
-        if (!isNaN(tourism_tax)) {
-
-            document.getElementById('tourism_tax').value = tourism_tax;
-        }
-
-
-        var municipal_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
-
-
-        if (!isNaN(municipal_tax)) {
-
-            document.getElementById('municipal_tax').value = municipal_tax;
-        }
-
-
-
-        var vat_tax = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
-
-
-        if (!isNaN(vat_tax)) {
-
-            document.getElementById('vat_tax').value = vat_tax;
-        }
-
-
-
-        var total_all = (parseFloat(nights) * parseFloat(room) * parseFloat(price) + vat_tax + municipal_tax + tourism_tax);
-
-
-        if (!isNaN(total_all)) {
-
-            document.getElementById('total_all').value = total_all;
-
-        }else{
-
-            document.getElementById('total_all').value = 0;
-
-        }
-
-
-
-        var commission = ((parseFloat(nights) * parseFloat(room) * parseFloat(price) * 5) / 100);
-
-
-        if (!isNaN(commission)) {
-
-            document.getElementById('commission').value = commission;
-        }
-
-    }
-
-</script>
-
-<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-
-</body>
-</html>
+@endsection

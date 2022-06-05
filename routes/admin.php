@@ -30,7 +30,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
     Route::group(['prefix'=>'admins','middleware' => 'auth:admin'], function (){
 
         Route::get('rooms',[AdminController::class,'rooms'])->name('admins.rooms')->middleware('can:rooms');//return view admins/rooms
-        Route::get('hotel',[AdminController::class,'hotel'])->name('admins.hotel')->middleware('can:hotels');//return view hotels all
+        Route::get('hotel/all',[AdminController::class,'hotel'])->name('admins.hotel.all')->middleware('can:hotels');//return view hotels all
 
 
 

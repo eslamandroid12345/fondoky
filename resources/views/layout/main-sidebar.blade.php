@@ -46,7 +46,7 @@
 
 
                              @can('hotels')
-                            <li><a class="slide-item" href="{{route('admins.hotel')}}">{{__('sidebar_admin.hotels_all')}}</a></li>
+                            <li><a class="slide-item" href="{{route('admins.hotel.all')}}">{{__('sidebar_admin.hotels_all')}}</a></li>
                               @endcan
 
                                  @can('rooms')

@@ -22,6 +22,8 @@ class AdminRepository implements AdminRepositoryInterface
 
         $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','country','pound','blocked'])->latest()->simplePaginate(Max);
         return view('admins.hotel',compact('hotels'));
+
+
     }
 
 

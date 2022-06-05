@@ -23,7 +23,7 @@ class AdminController extends Controller
 
     public function hotel(){
 
-     return $this->adminRepositoryInterface->index();
+     return $this->adminRepositoryInterface->hotel();
 
     }
 

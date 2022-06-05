@@ -13,6 +13,14 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+
+    <style>
+
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+    </style>
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -63,14 +71,14 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">تاريخ الوصول</label>
-                                <input type="text" class="form-control" onfocus="(this.type='date')" id="date" name="date_arrive" value="{{ request()->query('date_start')}}" readonly>
+                                <input type="date" class="form-control" name="date_arrive" value="{{ request()->query('date_start')}}" readonly>
 
                             </div>
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">تاريخ المغادره</label>
-                                <input type="text" class="form-control" onfocus="(this.type='date')" id="date" name="date_leave" value="{{ request()->query('date_expire')}}" readonly>
+                                <input type="date" class="form-control" name="date_leave" value="{{ request()->query('date_expire')}}" readonly>
 
                             </div>
 
@@ -120,6 +128,7 @@
                                 <label for="inputName" class="control-label">عدد الغرف</label>
 
                                 <input type="number" class="form-control" name="room_number" id="room" onkeyup="sum()">
+                                <span class="text-danger"> @error('room_number') {{$message}} @enderror</span>
                                 <input type="hidden" name="total" id="result" value="0.00">
                                 <input type="hidden" name="tourism_tax" id="tourism_tax" value="0.00">
                                 <input type="hidden" name="municipal_tax" id="municipal_tax" value="0.00">
@@ -129,7 +138,7 @@
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3 mb-5">
-                                <label for="inputName" class="control-label">الاجمالي بقيمه الضريبه ب </label>
+                                <label for="inputName" class="control-label">الاجمالي بقيمه الضريبه ب  {{$room->hotel->pound}}</label>
                                 <input type="text" class="form-control" name="total_all" id="total_all" value="0" readonly>
                             </div>
 

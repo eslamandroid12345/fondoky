@@ -209,7 +209,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
 {{--                // hotels--}}
                 @forelse($hotels as $hotel)
-                <a href="{{route('hotel.show',$hotel->id)}}">
+{{--                <a href="{{route('hotel.show',$hotel->id)}}">--}}
                 <div class="col">
                     <div class="card h-100">
                         @foreach(json_decode($hotel->hotel_photos) as $images)

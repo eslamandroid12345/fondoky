@@ -97,28 +97,7 @@ class UserRepository implements UserRepositoryInterface
 
     }
 
-    public function hotel_show($id){
 
-
-
-        $start = Carbon::createFromDate()->format('Y-m-d');
-        $end = Carbon::createFromDate()->format('Y-m-d');
-
-
-        $hotel = Hotel::findOrFail($id);
-
-        $rooms = Room::select(['id','room_type_id','hotel_id','adults_max','child_max','room_description'])
-            ->with(['room_type:id,room_type,hotel_id','calendars' => function($query) use($start,$end){
-
-            $query->select('id','room_id','room_number','check_in','check_out','room_price')->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end);
-
-        }])->whereBelongsTo($hotel)->get();
-
-        return $rooms;
-
-//     return view('users.calendars_show',compact('hotels'));
-
-    }
 
     public function rooms($id){
 

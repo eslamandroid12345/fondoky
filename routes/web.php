@@ -47,7 +47,6 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 });
 
 
-    Route::get('hotel/show/{id}', [UserController::class,'hotel_show'])->name('hotel.show');
     Route::get('hotel/room/{id}', [UserController::class,'rooms'])->name('hotel.room');
     Route::get('room/reservation/{id}', [UserController::class,'reservation'])->name('room.reservation')->middleware('auth');
 

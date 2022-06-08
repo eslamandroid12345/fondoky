@@ -44,12 +44,6 @@ class UserController extends Controller
 
     }
 
-    public function hotel_show($id){
-
-
-         return $this->userRepositoryInterface->hotel_show($id);
-
-    }
 
     public function rooms($id){
 

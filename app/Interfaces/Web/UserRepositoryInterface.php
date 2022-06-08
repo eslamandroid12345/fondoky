@@ -10,7 +10,6 @@ interface UserRepositoryInterface
     public function welcome(Request $request);
     public function index();
     public function update($id);
-    public function hotel_show($id);
     public function rooms($id);
     public function reservation($id);
     public function delete($id);

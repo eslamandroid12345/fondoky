@@ -49,7 +49,7 @@ class CalendarRepository implements CalendarRepositoryInterface
 
         }catch (\Exception $e){
 
-            return $e->getMessage();
+            return  redirect()->back()->withErrors(["error" => $e->getMessage()]);
         }
 
 
@@ -93,7 +93,7 @@ class CalendarRepository implements CalendarRepositoryInterface
 
         }catch (\Exception $e){
 
-            return $e->getMessage();
+            return  redirect()->back()->withErrors(["error" => $e->getMessage()]);
         }
 
 

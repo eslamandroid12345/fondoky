@@ -299,7 +299,7 @@ class HotelRepository implements HotelRepositoryInterface
 
         }catch (\Exception $exception){
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
         }
 
 

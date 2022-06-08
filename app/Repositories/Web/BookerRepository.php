@@ -87,7 +87,7 @@ class BookerRepository implements  BookerRepositoryInterface
 
                 DB::rollBack();
 
-                return $exception->getMessage();
+                return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
             }
 
 
@@ -136,7 +136,7 @@ class BookerRepository implements  BookerRepositoryInterface
 
                 DB::rollBack();
 
-                return $exception->getMessage();
+                return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
             }
 
 

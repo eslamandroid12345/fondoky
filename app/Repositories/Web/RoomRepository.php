@@ -96,7 +96,7 @@ class RoomRepository implements RoomRepositoryInterface
 
         }catch (\Exception $exception){
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
 
         }
 
@@ -120,7 +120,7 @@ class RoomRepository implements RoomRepositoryInterface
                 foreach($request->file('images') as $image)
                 {
                     $name= time() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path().'/rooms/', $name);
+                    $image->move(public_path().'/rooms/',$name);
                     $data[] = $name;
                 }
             }
@@ -150,7 +150,7 @@ class RoomRepository implements RoomRepositoryInterface
 
         }catch (\Exception $exception){
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
 
         }
 

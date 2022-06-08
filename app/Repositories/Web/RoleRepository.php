@@ -43,7 +43,7 @@ class RoleRepository implements RoleRepositoryInterface
         }catch (\Exception $exception){
 
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
 
         }
        
@@ -77,7 +77,7 @@ class RoleRepository implements RoleRepositoryInterface
         }catch (\Exception $exception){
 
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
 
         }
 

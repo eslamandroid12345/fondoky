@@ -64,7 +64,7 @@ class AdminRepository implements AdminRepositoryInterface
 
         }catch (\Exception $exception){
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
 
         }
 
@@ -109,7 +109,7 @@ class AdminRepository implements AdminRepositoryInterface
 
         }catch (\Exception $exception){
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
         }
 
 

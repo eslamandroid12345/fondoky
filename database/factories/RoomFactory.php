@@ -21,7 +21,7 @@ class RoomFactory extends Factory
             'adults_max' => rand(1,3),
             'child_max' => rand(1,3),
             'images' => json_encode(["app.jpg","call.jpg"]),
-            'hotel_id' => rand(1,100)
+            'hotel_id' => rand(1,3)
 
         ];
     }

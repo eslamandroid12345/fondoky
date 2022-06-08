@@ -11,6 +11,6 @@ class BookerSeeder extends Seeder
     public function run()
     {
 
-        Booker::factory(10000)->create();
+        Booker::factory(100)->create();
     }
 }

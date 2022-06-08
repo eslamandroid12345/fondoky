@@ -15,7 +15,7 @@ class RoomTypeFactory extends Factory
         return [
 
             'room_type' => $this->faker->randomElement(["غرفه الملكه","غرفه سنجل","غرفه دوبل","غرفه الملك"]),
-            'hotel_id' => rand(1,2),
+            'hotel_id' => rand(1,3),
         ];
     }
 }

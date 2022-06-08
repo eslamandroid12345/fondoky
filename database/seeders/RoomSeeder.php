@@ -11,6 +11,6 @@ class RoomSeeder extends Seeder
     public function run()
     {
 
-        Room::factory(10000)->create();
+        Room::factory(100)->create();
     }
 }

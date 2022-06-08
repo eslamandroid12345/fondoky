@@ -14,7 +14,7 @@ class RoleFactory extends Factory
     {
         return [
 
-            'name' => $this->faker->name(3),
+            'name' => $this->faker->randomElement(["employee","manger","supervisor","tester"]),
             'permissions' => json_encode(["users","hotels","reservations","roles","rooms","admins","reports"]),
         ];
     }

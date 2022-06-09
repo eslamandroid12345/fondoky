@@ -37,9 +37,6 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
 
-                    <a class="modal-effect btn btn-sm btn-primary" href="{{route('hotels.paid.year')}}"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;الفواتير السنويه</a>
-
 
                 </div>
                 <div class="card-body">

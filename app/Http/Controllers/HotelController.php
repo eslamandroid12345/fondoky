@@ -142,14 +142,6 @@ class HotelController extends Controller
     }
 
 
-    public function paidYear(){
-
-
-        return $this->paidYear();
-
-    }
-
-
 
     public function arrivals(){
 

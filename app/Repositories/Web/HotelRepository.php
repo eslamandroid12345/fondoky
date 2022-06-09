@@ -337,43 +337,28 @@ class HotelRepository implements HotelRepositoryInterface
     public function invoices(){
 
 
-        $hotel = Auth::guard('hotel')->user();
 
-        $bookers = Booker::where('hotel_id', $hotel->id)->whereMonth('created_at', date('m'))
+        $bookers = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
 
-        $commissions = Booker::where('hotel_id', $hotel->id)->whereMonth('created_at', date('m'))
+        $commissions = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(commission)) as commission"))
             ->get();
 
 
-        $totals = Booker::where('hotel_id', $hotel->id)->whereMonth('created_at', date('m'))
+        $totals = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(total)) as total"))
             ->get();
 
 
-        return view('hotels.invoices',compact('bookers','commissions','totals','hotel'));
+        return view('hotels.invoices',compact('bookers','commissions','totals'));
 
     }
 
 
-    public function paidYear(){
 
-
-        $hotel = Auth::guard('hotel')->user();
-
-        $commissions =  Report::where('hotel_id', $hotel->id)->where('blocked','=',true)
-            ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"), DB::raw("(DATE_FORMAT(created_at, '%m-%Y')) as month_year"))
-            ->orderBy('created_at')
-            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m-%Y')"))
-            ->get();
-
-        return view('hotels.year_invoices',compact('commissions','hotel'));
-
-
-    }
 
 
 

@@ -59,21 +59,26 @@ if(!function_exists('returnDataSuccess')){
 
 }
 
-//return guard admin
+if(!function_exists('admin')){
 
-function admin(){
+    function admin()
+    {
 
+        return auth()->guard('admin')->user();
 
-    return auth()->guard('admin')->user();
+    }
 }
 
-//return guard hotel
-function hotel(){
+
+if(!function_exists('hotel')){
+
+    function hotel()
+    {
 
 
-    return auth()->guard('hotel')->user();
+        return auth()->guard('hotel')->user();
+    }
 }
-
 
 
 

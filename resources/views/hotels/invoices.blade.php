@@ -43,10 +43,10 @@
                             <div class="col-md">
                                 <label class="tx-gray-600">معلومات الفندق</label>
                                 <div class="billed-to">
-                                    <h6>رقم هاتف الفندق {{$hotel->phone_hotel}}</h6>
-                                    <p>{{lang() == 'ar' ? $hotel->location_ar : $hotel->location_en}}<br>
-                                        اسم مدير الفندق  {{$hotel->manger}}  <br>
-                                        {{$hotel->email}}</p>
+                                    <h6>رقم هاتف الفندق {{hotel()->phone_hotel}}</h6>
+                                    <p>{{lang() == 'ar' ? hotel()->location_ar : hotel()->location_en}}<br>
+                                        اسم مدير الفندق  {{hotel()->manger}}  <br>
+                                        {{hotel()->email}}</p>
                                 </div>
                             </div>
                             <div class="col-md">
@@ -107,12 +107,12 @@
                                 <tr>
 
                                     <td>اجمالي نسبه العموله</td>
-                                    <td class="tx-left" colspan="11">@foreach($commissions as $commission) {{$commission->commission ?? 0}} {{$hotel->pound}}@endforeach</td>
+                                    <td class="tx-left" colspan="11">@foreach($commissions as $commission) {{$commission->commission ? $commission->commission : 0}} {{hotel()->pound}}@endforeach</td>
                                 </tr>
                                 <tr>
 
                                     <td>اجمالي الربح</td>
-                                    <td class="tx-left" colspan="11"> @foreach($totals as $total) {{$total->total ?? 0}} {{$hotel->pound}}@endforeach</td>
+                                    <td class="tx-left" colspan="11"> @foreach($totals as $total) {{$total->total == true ? $total->total : 0}} {{hotel()->pound}}@endforeach</td>
                                 </tr>
 
 

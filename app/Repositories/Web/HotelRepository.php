@@ -76,7 +76,7 @@ class HotelRepository implements HotelRepositoryInterface
 
         }catch (\Exception $exception){
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
         }
 
 
@@ -120,9 +120,9 @@ class HotelRepository implements HotelRepositoryInterface
 
             }catch (\Exception $exception){
 
-                DB::rollBack();
+                 DB::rollBack();
+                 return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
 
-                return $exception->getMessage();
             }
 
 

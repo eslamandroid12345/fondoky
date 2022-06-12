@@ -58,6 +58,7 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
     });
 
 
+    Route::view('test','test');
 
 });
 
@@ -277,3 +278,5 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 //if (!Gate::allows('create_users')) {
 //    abort(403);
 //}
+
+

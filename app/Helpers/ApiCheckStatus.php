@@ -4,6 +4,7 @@
   //start method handle error and success message and data in controllers api
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 if(!function_exists('returnMessageError')){
 
@@ -93,3 +94,56 @@ if(!function_exists('lang')){
 }
 
 
+
+
+//count data of models in dashboard admin ---------------------------------------------------------
+
+if(!function_exists('countAdmins')) {
+
+
+    function countAdmins(){
+
+        return DB::table('admins')->count();
+    }
+}
+
+
+
+if(!function_exists('countHotels')) {
+
+
+    function countHotels(){
+
+        return DB::table('hotels')->count();
+    }
+}
+
+if(!function_exists('countUsers')) {
+
+
+    function countUsers(){
+
+        return DB::table('users')->count();
+    }
+}
+
+
+if(!function_exists('countRooms')) {
+
+
+    function countRooms(){
+
+        return DB::table('rooms')->count();
+    }
+}
+
+
+
+if(!function_exists('countBooking')) {
+
+
+    function countBooking(){
+
+        return DB::table('bookers')->count();
+    }
+}

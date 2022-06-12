@@ -20,8 +20,7 @@ class RedirectIfAuthenticated
 
                     return redirect(RouteServiceProvider::ADMIN);
 
-                }
-                elseif ($guard == 'hotel'){
+                } elseif ($guard == 'hotel'){
 
                     return redirect(RouteServiceProvider::HOTEL);
 

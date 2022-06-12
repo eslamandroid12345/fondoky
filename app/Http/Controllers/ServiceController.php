@@ -2,108 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Service;
+use App\Http\Requests\StoreServiceRequest;
+use App\Interfaces\Web\ServiceRepositoryInterface;
+
 
 class ServiceController extends Controller
 {
 
 
+    public $serviceRepositoryInterface;
 
-    public function create()
-    {
-        $service = Service::where('hotel_id','=',hotel()->id)->get();
-        return view('services.create',compact('service'));
+    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface){
+
+
+        $this->serviceRepositoryInterface = $serviceRepositoryInterface;
+
+
     }
 
+    public function create(){
 
-    public function store(Request $request)
-    {
-
-        $rules = [
-
-            'name' => 'required',
-            'services' => 'required|array|min:1',
-        ];
-
-        $messages = [
-
-            'name.required' => __('services.name'),
-            'services.required' => __('services.services'),
-            'services.min' => __('services.services_min'),
-
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
-
-
-        $service = Service::create([
-
-            'name' => $request['name'],
-            'services' => json_encode($request['services']),
-            'hotel_id' => hotel()->id,
-
-        ]);
-
-        return redirect()->back()->with('create', __('services.create'));
+        return $this->serviceRepositoryInterface->create();
 
 
     }
 
 
-    public function edit($id)
-    {
+    public function store(StoreServiceRequest $request){
 
-        $service = Service::findOrFail($id);
-
-        return view('services.edit', compact('service'));
+     return $this->serviceRepositoryInterface->store($request);
 
     }
 
 
-    public function update(Request $request, $id)
-    {
+    public function edit($id){
 
 
-        $service = Service::findOrFail($id);
+        return $this->serviceRepositoryInterface->edit($id);
+
+    }
 
 
-        $rules = [
-
-            'name' => 'required',
-            'services' => 'required|array|min:1',
-        ];
-
-        $messages = [
-
-            'name.required' => __('services.name'),
-            'services.required' => __('services.services'),
-            'services.min' => __('services.services_min'),
-
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
+    public function update(StoreServiceRequest $request, $id){
 
 
-        $service->update([
-
-            'name' => $request['name'],
-            'services' => json_encode($request['services']),
-
-        ]);
-
-        return redirect()->route('services.create')->with('update_service', __('services.update'));
+        return $this->serviceRepositoryInterface->update($request,$id);
 
     }
 

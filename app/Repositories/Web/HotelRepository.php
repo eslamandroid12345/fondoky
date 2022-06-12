@@ -223,7 +223,7 @@ class HotelRepository implements HotelRepositoryInterface
 
         }catch (\Exception $exception){
 
-            return $exception->getMessage();
+            return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
         }
 
 
@@ -233,7 +233,7 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function edit(){
 
-        $hotel = Auth::guard('hotel')->user();
+        $hotel = hotel();
 
         return view('hotels.edit',compact('hotel'));
     }
@@ -245,11 +245,9 @@ class HotelRepository implements HotelRepositoryInterface
 
         try {
 
-            $hotel = Auth::guard('hotel')->user();
-            $password = $hotel->password;
+            $hotel = hotel();
 
-
-            if (!Hash::check($request->current_password, $password)) {
+            if (!Hash::check($request->current_password, $hotel->password)) {
 
                 return redirect()->back()->with('current_password', __('hotels.current_password'));
             }

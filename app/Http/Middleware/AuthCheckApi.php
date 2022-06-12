@@ -20,6 +20,7 @@ class AuthCheckApi
 
                  auth()->authenticate();
 
+
             }catch (\Exception $exception){
 
 

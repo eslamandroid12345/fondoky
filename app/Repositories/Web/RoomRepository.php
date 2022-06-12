@@ -74,7 +74,7 @@ class RoomRepository implements RoomRepositoryInterface
 
                 foreach($request->file('images') as $image)
                 {
-                    $name= time() . '.' . $image->getClientOriginalName();
+                    $name= time() . rand(1,2000) . uniqid() . '.' . $image->getClientOriginalName();
                     $image->move(public_path().'/rooms/', $name);
                     $data[] = $name;
                 }
@@ -119,7 +119,7 @@ class RoomRepository implements RoomRepositoryInterface
 
                 foreach($request->file('images') as $image)
                 {
-                    $name= time() . '.' . $image->getClientOriginalName();
+                    $name= time() . rand(1,2000) . uniqid() . '.' . $image->getClientOriginalName();
                     $image->move(public_path().'/rooms/',$name);
                     $data[] = $name;
                 }

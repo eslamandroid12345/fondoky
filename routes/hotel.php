@@ -86,12 +86,7 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
 
 
 
-//    Route::get('call', function () {
-//
-//        $auth = hotel()->calendar;
-//
-//        return $auth;
-//    })->middleware('auth:hotel');
-//
+
+
 
     });

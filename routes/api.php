@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'lang'], function (){
 
+
     Route::group(['prefix' => 'user','namespace' => 'Api'], function (){
 
 

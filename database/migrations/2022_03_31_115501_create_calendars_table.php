@@ -10,6 +10,7 @@ class CreateCalendarsTable extends Migration
     public function up()
     {
         Schema::create('calendars', function (Blueprint $table) {
+
             $table->bigIncrements('id');
             $table->unsignedBigInteger('room_id');
             $table->string('room_number');

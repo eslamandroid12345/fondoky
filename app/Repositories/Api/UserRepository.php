@@ -17,7 +17,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function users(){
 
-        $users = UserResource::collection(User::query()->get());
+        $users = UserResource::collection(User::orderBy('id','DESC')->get());
         return returnDataSuccess("users get all successfully","201","users",$users);
 
     }
@@ -26,7 +26,6 @@ class UserRepository implements UserRepositoryInterface
 
 
         try {
-
 
 
             $user = new User();

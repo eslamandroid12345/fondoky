@@ -180,11 +180,10 @@ class HotelRepository implements HotelRepositoryInterface
 
             $data = [];
 
-            if($request->hasfile('hotel_photos'))
-            {
+            if($request->hasfile('hotel_photos')) {
 
-                foreach($request->file('hotel_photos') as $image)
-                {
+                foreach($request->file('hotel_photos') as $image) {
+
                     $name= time() . rand(1,2000) . uniqid() . '.' . $image->getClientOriginalName();
                     $image->move(public_path().'/hotels/', $name);
                     $data[] = $name;

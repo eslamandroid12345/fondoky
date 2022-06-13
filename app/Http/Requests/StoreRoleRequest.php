@@ -17,7 +17,7 @@ class StoreRoleRequest extends FormRequest
         return [
 
 
-            'name'  => 'required|unique:roles,name',
+            'name'  => 'required|unique:roles,name,'.$this->id,
             'permissions' => 'required|array|min:1',
 
         ];

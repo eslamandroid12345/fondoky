@@ -3,16 +3,21 @@
 
 return [
 
-   "name"  => "name of role is required",
-   "permissions" => "permissions must be at least one permissions",
     "role" => "role create successfully",
     "role_update" => "role updated successfully",
 
 
 
-    "name_role" => "role name",
+
+    "name_name"  => "name of role is required",
+    "permissions" => "roles field is required",
+    "min" => "permissions must be at least one permissions",
+
+
     "permissions_role" => "screen validity",
-    "unique" => "the name of role already exists"
+    "get" => "All permissions have been sent successfully",
 
 
 ];
+
+

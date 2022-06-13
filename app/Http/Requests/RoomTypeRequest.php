@@ -17,14 +17,13 @@ class RoomTypeRequest extends FormRequest
 
     public function rules()
     {
-        $hotel = Auth::guard('hotel')->user();
 
 
             return[
 
-                'room_type' => ['required', Rule::unique('room_types')->where(function ($query) use($hotel) {
+                'room_type' => ['required', Rule::unique('room_types')->where(function ($query) {
 
-                    return $query->where('hotel_id', $hotel->id);
+                    return $query->where('hotel_id', hotel()->id);
 
                 }),
                 ],

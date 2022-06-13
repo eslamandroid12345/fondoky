@@ -32,6 +32,7 @@ class RepositoryServiceProvider extends ServiceProvider
         //Api repositories
         $this->app->bind(HotelRepositoryInterface::class,HotelRepository::class);
         $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
+        $this->app->bind(\App\Interfaces\Api\RoleRepositoryInterface::class,\App\Repositories\Api\RoleRepository::class);
 
 
         //web repositories

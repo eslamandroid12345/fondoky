@@ -29,8 +29,10 @@ class UpdateRoleRequest extends FormRequest
 
         return [
 
-            'name.required' => __('admin_role.name'),
+            'name.required' => __('admin_role.name_role'),
+            'name.unique' => __('admin_role.unique'),
             'permissions.required' => __('admin_role.permissions'),
+            'permissions.min' => __('admin_role.min'),
 
         ];
 

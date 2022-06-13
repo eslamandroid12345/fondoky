@@ -18,7 +18,6 @@ class UpdateHotelRequest extends FormRequest
     {
 
 
-        $hotel = Auth::guard('hotel')->user();
 
 
         return [
@@ -28,7 +27,7 @@ class UpdateHotelRequest extends FormRequest
             'manger' => 'required',
             'name_ar' => 'required',
             'name_en' => 'required',
-            'email' => ['required',Rule::unique('hotels')->ignore($hotel)],
+            'email' => ['required',Rule::unique('hotels')->ignore(hotel())],
             'current_password' => 'required',
             'password' => 'required|same:confirm_password|min:6',
             'confirm_password' => 'required',

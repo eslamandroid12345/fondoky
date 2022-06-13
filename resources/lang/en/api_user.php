@@ -19,4 +19,6 @@ return [
     "failed" => "user failed to login",
      "logout" => "user logout successfully",
 
+    "allow" => "THIS ACTION IS UNAUTHORIZED",
+
     ];

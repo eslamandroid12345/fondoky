@@ -16,15 +16,15 @@ class RoleRepository implements RoleRepositoryInterface
 
         if(Gate::allows('roles',adminApi())){
 
-            return returnMessageError(trans("api_user.allow"),"403");
+            $roles = Role::orderBy('id','DESC')->get();
+
+            return returnDataSuccess(trans("admin_role.get"),"201","roles",$roles);
 
 
         }else{
 
+            return returnMessageError(trans("api_user.allow"),"403");
 
-            $roles = Role::orderBy('id','DESC')->get();
-
-            return returnDataSuccess(trans("admin_role.get"),"201","roles",$roles);
 
         }
 
@@ -77,13 +77,11 @@ class RoleRepository implements RoleRepositoryInterface
                try {
 
                     $role = Role::findOrFail($id);
+                    $role->name = $request->name;
+                    $role->permissions = json_encode($request->permissions);
+                    $role->save();
 
-                        $role->name = $request->name;
-                        $role->permissions = json_encode($request->permissions);
-                        $role->save();
-
-
-                        return returnDataSuccess(trans("admin_role.role_update"), "201", "roles", $role);
+                    return returnDataSuccess(trans("admin_role.role_update"), "201", "roles", $role);
 
 
 

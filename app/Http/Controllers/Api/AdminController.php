@@ -3,58 +3,41 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AdminResource;
-use App\Models\Admin;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\LoginAdminRequest;
+use App\Http\Requests\StoreAdminRequest;
+use App\Interfaces\Api\AdminRepositoryInterface;
 
 class AdminController extends Controller
 {
 
-    public function login(Request $request){
+
+    public $adminRepositoryInterface;
+
+    public function __construct(AdminRepositoryInterface $adminRepositoryInterface){
+
+        $this->adminRepositoryInterface = $adminRepositoryInterface;
+
+    }
+
+    public function login(LoginAdminRequest $request){
 
 
-        $rules = [
+        return $this->adminRepositoryInterface->login($request);
 
-            'email' => 'required',
-            'password' => 'required'
+    }
 
+    public function register(StoreAdminRequest $request){
 
-        ];
-
-        $messages = [
-
-            'email.required' => trans('admin.email'),
-            'password.required' => trans('admin.password')
-
-        ];
-
-        $validator = Validator::make($request->all(),$rules,$messages);
+        return $this->adminRepositoryInterface->register($request);
 
 
-        if($validator->fails()){
+    }
 
 
-            return returnMessageError($validator->errors(),"500");
-        }
+    public function logout(){
 
 
-        $token = auth()->guard('admin-api')->attempt($request->only(['email','password']));
-
-
-        if(!$token){
-
-
-            return returnMessageError(trans('api_user.failed'),"404");
-        }
-
-
-        $admin = new AdminResource(auth()->guard('admin-api')->user());
-        $admin->token = $token;
-
-
-        return returnDataSuccess(trans('api_user.login'),"201","admin",$admin);
-
+        return $this->adminRepositoryInterface->logout();
 
     }
 }

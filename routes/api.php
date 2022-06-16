@@ -50,6 +50,8 @@ Route::group(['middleware' => 'lang'], function (){
     Route::group(['prefix' => 'admin','namespace' => 'Api'], function (){
 
         Route::post('login',[AdminController::class,'login']);
+        Route::post('register',[AdminController::class,'register']);
+        Route::post('logout',[AdminController::class,'logout']);
 
 
 

@@ -18,6 +18,8 @@ return [
     "login" => "user login successfully",
     "failed" => "user failed to login",
      "logout" => "user logout successfully",
+    "logout_admin" => "Admin logout successfully",
+
 
     "allow" => "THIS ACTION IS UNAUTHORIZED",
 

@@ -119,6 +119,9 @@
                             @endphp
 
                             <input type="hidden" name="num_of_nights" id="nights" onkeyup="sum()" value="{{$diff_in_days}}" readonly>
+
+
+
                             <input type="hidden" name="room_price" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
 
                             {{-- end calculate num of nigts --}}

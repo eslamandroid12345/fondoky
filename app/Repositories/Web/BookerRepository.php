@@ -26,6 +26,7 @@ class BookerRepository implements  BookerRepositoryInterface
 
             try {
 
+                //step number 1
                 $booker = new Booker();
                 $booker->city_to = $request->city_to;
                 $booker->children = $request->child_max;
@@ -48,6 +49,7 @@ class BookerRepository implements  BookerRepositoryInterface
 
 
 
+                //step number 2
                 $report = new Report();
                 $report->hotel_id = $request->hotel_id;
                 $report->booker_id = $booker->id;
@@ -57,11 +59,12 @@ class BookerRepository implements  BookerRepositoryInterface
 
 
 
-
+                //step number 3
                 $start = Carbon::parse($request->date_arrive)->format('Y-m-d');
                 $end = Carbon::parse($request->date_leave)->format('Y-m-d');
 
 
+                //step number 4
                 $calendars = Room::findOrFail($id)->calendars()
                     ->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
                     ->orWhereBetween('check_in',[$start,$end])
@@ -70,6 +73,7 @@ class BookerRepository implements  BookerRepositoryInterface
                     ->get();
 
 
+                //step number 5
                 foreach ($calendars as $calendar) {
 
                     $calendar->decrement('room_number', $request->room_number);
@@ -93,7 +97,7 @@ class BookerRepository implements  BookerRepositoryInterface
 
 
 
-        return redirect()->route('home')->with('success','تم اضافه حجزك بنجاح');
+        return redirect()->route('home')->with('success',__('users.booking'));
 
     }
 

@@ -18,8 +18,6 @@ class UserRepository implements UserRepositoryInterface
     public function welcome(Request $request){
 
 
-
-
         $country = $request->country;
         $child_max = $request->child_max;
         $adults_max = $request->adults_max;
@@ -28,14 +26,10 @@ class UserRepository implements UserRepositoryInterface
 
 
 
-        if($country != null && $start != null && $end != null && $child_max != null && $adults_max != null) {
+        if(!is_null($country) && !is_null($start) && !is_null($end) && !is_null($child_max) && !is_null($adults_max)) {
 
 
-            $rooms = Room::whereHas('calendars', function ($query) {
-
-                $query->where('room_number', '>', 0);
-
-            })->whereHas('calendars', function ($query) use($start,$end){
+            $rooms = Room::whereHas('calendars', function ($query) use($start,$end){
 
                 $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)->orWhereBetween('check_in',[$start,$end])->whereDate('check_in','!=',$end);
 
@@ -44,20 +38,12 @@ class UserRepository implements UserRepositoryInterface
 
                 $query->where('country', '=', $country);
 
-            })->where('adults_max', '=', $adults_max)->where('child_max', '=', $child_max)
-
-
-                ->with(['calendars' => function ($query) use ($start, $end) {
+            })->where('adults_max', '=', $adults_max)->where('child_max', '=', $child_max)->with(['calendars' => function ($query) use ($start, $end) {
 
                     $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)->orWhereBetween('check_in',[$start,$end])->whereDate('check_in','!=',$end)->select('id','room_id','room_number','check_in','check_out', DB::raw('SUM(room_price)  as total_room_price'), DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
 
 
-                }])->withSum(['calendars' => function($query) use($start,$end){
-
-                    $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)->orWhereBetween('check_in',[$start,$end])->whereDate('check_in','!=',$end);
-
-
-                }],'days')->simplePaginate(Search);
+               }])->simplePaginate(Search);
 
 
             //return $rooms;

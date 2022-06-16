@@ -22,7 +22,8 @@ return [
     "unBlock" => "unBlock",
     "admin" => "Admin login",
     "messages" => "Messages",
-    "notification" => "All Notification"
+    "notification" => "All Notification",
+    "booking" => "booking created successfully",
 
 
 

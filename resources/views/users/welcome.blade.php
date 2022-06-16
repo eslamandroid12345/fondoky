@@ -262,10 +262,6 @@
                         @endphp
 
 
-                        @if($room->calendars_sum_days < $diff_in_days)
-
-
-                            @else
                          <a href="{{route('room.reservation',[$room->id,'country' => request()->query('country'), 'date_start' => request()->query('date_start'), 'date_expire' => request()->query('date_expire'), 'adults_max' => request()->query('adults_max'),'child_max' => request()->query('child_max'),'key' => encrypt($price)])}}">
 
                             <div class="col">
@@ -302,7 +298,6 @@
                         </div>
                     </a>
 
-                    @endif
                 @empty
                     <div class="alert alert-primary py-5 col-md-12 col-sm-12 col-xs-12 col-12">
 

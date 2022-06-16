@@ -28,7 +28,7 @@
         margin-left: 0;
     }
 </style>
-<body class="main-body app sidebar-mini">
+<body class="main-body app sidebar-mini" oncontextmenu="return false">
     <!-- Loader -->
     <div id="global-loader">
         <img src="{{ URL::asset('assets/img/loader.svg') }}" class="loader-img" alt="Loader">
@@ -60,6 +60,25 @@
                 channel.listen('.new-reservations-event', function(data) {
                     alert(JSON.stringify(data));
                 });
+
+
+                document.onkeydown = function(e) {
+                    if(event.keyCode == 123) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                        return false;
+                    }
+                }
             </script>
          </body>
 

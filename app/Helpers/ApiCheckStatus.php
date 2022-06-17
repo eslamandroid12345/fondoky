@@ -62,17 +62,6 @@ if(!function_exists('returnDataSuccess')){
 
 
 
-if(!function_exists('adminApi')){
-
-    function adminApi(){
-
-
-        return auth()->guard('admin-api')->user();
-
-    }
-
-}
-
 //end method of Api --------------------------------------------------------------------------------
 
 if(!function_exists('admin')){

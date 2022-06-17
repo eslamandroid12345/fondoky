@@ -18,7 +18,6 @@ class Role extends Model
 
 
 
-
     public function admin(){
 
         return $this->hasMany(Admin::class,'role_id','id');

@@ -12,6 +12,8 @@ class Admin extends Authenticatable implements JWTSubject
     use HasFactory;
     use SoftDeletes;
 
+
+    protected $table ="admins";
     protected $fillable = [
 
         'name',

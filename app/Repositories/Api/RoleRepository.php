@@ -6,7 +6,6 @@ use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Interfaces\Api\RoleRepositoryInterface;
 use App\Models\Role;
-use Illuminate\Support\Facades\Gate;
 
 class RoleRepository implements RoleRepositoryInterface
 {
@@ -14,19 +13,10 @@ class RoleRepository implements RoleRepositoryInterface
 
     public function index(){
 
-        if(Gate::allows('roles',adminApi())){
 
-            $roles = Role::orderBy('id','DESC')->get();
+        $roles = Role::orderBy('id','DESC')->get();
 
-            return returnDataSuccess(trans("admin_role.get"),"201","roles",$roles);
-
-
-        }else{
-
-            return returnMessageError(trans("api_user.allow"),"403");
-
-
-        }
+        return returnDataSuccess(trans("admin_role.get"),"201","roles",$roles);
 
 
     }
@@ -35,7 +25,6 @@ class RoleRepository implements RoleRepositoryInterface
 
     public function store(StoreRoleRequest $request){
 
-        if(Gate::allows('roles',adminApi())) {
 
 
             try {
@@ -55,33 +44,23 @@ class RoleRepository implements RoleRepositoryInterface
 
             }
 
-        }else{
-
-            return returnMessageError(trans("api_user.allow"),"403");
-
-
-        }
-
 
     }
-
 
 
 
     public function update(UpdateRoleRequest $request,$id){
 
 
-        if(Gate::allows('roles',adminApi())) {
 
+        try {
 
-               try {
+            $role = Role::findOrFail($id);
+            $role->name = $request->name;
+            $role->permissions = json_encode($request->permissions);
+            $role->save();
 
-                    $role = Role::findOrFail($id);
-                    $role->name = $request->name;
-                    $role->permissions = json_encode($request->permissions);
-                    $role->save();
-
-                    return returnDataSuccess(trans("admin_role.role_update"), "201", "roles", $role);
+            return returnDataSuccess(trans("admin_role.role_update"), "201", "roles", $role);
 
 
 
@@ -91,12 +70,6 @@ class RoleRepository implements RoleRepositoryInterface
                 return returnMessageError($exception->getMessage(), "500");
 
             }
-
-        }else{
-
-            return returnMessageError(trans("api_user.allow"),"403");
-
-        }
 
 
     }

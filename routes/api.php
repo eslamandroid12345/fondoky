@@ -27,7 +27,7 @@ Route::group(['middleware' => 'lang'], function (){
     Route::group(['prefix' => 'user','namespace' => 'Api'], function (){
 
 
-        Route::get('all',[UserController::class,'users'])->middleware(['check:admin-api']);
+        Route::get('all',[UserController::class,'users'])->middleware(['check:admin-api','can:users']);
         Route::post('login',[UserController::class,'login']);
         Route::post('register',[UserController::class,'register']);
         Route::post('logout',[UserController::class,'logout']);
@@ -50,15 +50,15 @@ Route::group(['middleware' => 'lang'], function (){
     Route::group(['prefix' => 'admin','namespace' => 'Api'], function (){
 
         Route::post('login',[AdminController::class,'login']);
-        Route::post('register',[AdminController::class,'register']);
-        Route::post('logout',[AdminController::class,'logout']);
+        Route::post('register',[AdminController::class,'register'])->middleware(['check:admin-api','can:admins']);
+        Route::post('logout',[AdminController::class,'logout'])->middleware(['check:admin-api']);
 
 
 
     });
 
 
-    Route::group(['prefix' => 'roles','namespace' => 'Api','middleware' => 'check:admin-api'], function (){
+    Route::group(['prefix' => 'roles','namespace' => 'Api','middleware' => ['check:admin-api','can:roles']], function (){
         
         
         Route::get('index',[RoleController::class,'index']);
@@ -73,6 +73,8 @@ Route::group(['middleware' => 'lang'], function (){
 
 });
 
-
+//Gate::define('edit-post', function ($user, $post) {
+//    return $user->id === $post->user_id;
+//});
 
 

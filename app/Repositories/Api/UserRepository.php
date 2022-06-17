@@ -10,7 +10,6 @@ use App\Http\Resources\UserResource;
 use App\Interfaces\Api\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Gate;
 
 
 class UserRepository implements UserRepositoryInterface
@@ -19,19 +18,13 @@ class UserRepository implements UserRepositoryInterface
 
     public function users(){
 
-        if(!Gate::allows('users',adminApi())){
 
 
-            return returnMessageError(trans("api_user.allow"),"403");
+        $users = UserResource::collection(User::orderBy('id','DESC')->simplePaginate(4));
+
+        return returnDataSuccess("users get all successfully","201","users",$users);
 
 
-        }else{
-
-            $users = UserResource::collection(User::orderBy('id','DESC')->simplePaginate(4));
-            return returnDataSuccess("users get all successfully","201","users",$users);
-
-
-        }
 
     }
 

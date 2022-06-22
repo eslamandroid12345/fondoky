@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Seeders\BookerSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,29 +34,20 @@ class Hotel extends Authenticatable implements JWTSubject
 
 
     ];
+
     protected $dates = ['deleted_at'];
 
 
 
     public function booker(){
 
-        return $this->hasMany(
-
-            Booker::class,
-            'hotel_id',
-            'id'
-        );
+        return $this->hasMany(Booker::class, 'hotel_id', 'id');
     }
 
 
     public function room(){
 
-        return $this->hasMany(
-
-            Room::class,
-            'hotel_id',
-            'id'
-        );
+        return $this->hasMany(Room::class, 'hotel_id', 'id');
     }
 
 
@@ -75,12 +65,7 @@ class Hotel extends Authenticatable implements JWTSubject
 
     public function service(){
 
-        return $this->hasOne(
-
-            Service::class,
-            'hotel_id',
-            'id'
-        );
+        return $this->hasOne(Service::class, 'hotel_id', 'id');
 
     }
 
@@ -93,28 +78,9 @@ class Hotel extends Authenticatable implements JWTSubject
 
 
 
-    //start employee relation
-
-    public function employee(){
-
-        return $this->hasMany(
-
-            Employee::class,
-            'hotel_id',
-            'id'
-        );
-    }
-
-
-
     public function room_type(){
 
-        return $this->hasMany(
-
-            RoomType::class,
-            'hotel_id',
-            'id'
-        );
+        return $this->hasMany(RoomType::class, 'hotel_id', 'id');
     }
 
 
@@ -122,12 +88,7 @@ class Hotel extends Authenticatable implements JWTSubject
 
     public  function calendar(){
 
-        return $this->hasManyThrough(Calendar::class,
-            Room::class,'hotel_id',
-            'room_id',
-            'id',
-            'id'
-            )->with(['room.hotel'])->orderBy('id','DESC');//get all calendars of hotel with hasManyThrough
+        return $this->hasManyThrough(Calendar::class, Room::class,'hotel_id', 'room_id', 'id', 'id')->orderBy('id','DESC');//get all calendars of hotel with hasManyThrough
     }
 
 

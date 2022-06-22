@@ -17,7 +17,7 @@ class NewReservation implements ShouldBroadcast
     public $hotel_id;
     public $data;
 
-    public function __construct( $hotel_id, $data )
+    public function __construct( $hotel_id, $data)
     {
 
         $this->hotel_id = $hotel_id;

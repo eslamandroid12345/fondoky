@@ -51,8 +51,11 @@
             <script>
 
 
+                //start private chanel
                 window.App = {!! json_encode([
+
                'user' => auth()->check() ? auth()->user()->id : null,
+
                  ]) !!};
 
 
@@ -60,6 +63,8 @@
                 channel.listen('.new-reservations-event', function(data) {
                     alert(JSON.stringify(data));
                 });
+
+                //end private chanel
 
 
                 document.onkeydown = function(e) {

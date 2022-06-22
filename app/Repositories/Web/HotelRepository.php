@@ -266,7 +266,7 @@ class HotelRepository implements HotelRepositoryInterface
             }
 
             //to remove all old images of hotels from public folder
-            $images = json_decode($hotel->hotel_photos);
+            $images = json_decode($hotel->hotel_photos,true);
             foreach ($images as $image){
 
                 unlink(public_path('hotels/') . $image);

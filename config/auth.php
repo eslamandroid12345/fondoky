@@ -43,6 +43,7 @@ return [
         ],
 
 
+        //start guard for Restful Api
         'user-api' => [
             'driver' => 'jwt',
             'provider' => 'users',
@@ -61,6 +62,8 @@ return [
         ],
 
 
+
+        //start guard for web
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',

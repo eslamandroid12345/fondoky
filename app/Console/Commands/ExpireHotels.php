@@ -25,12 +25,14 @@ class ExpireHotels extends Command
         $hotels = Hotel::where('blocked','=',1)->get();
 
         foreach ($hotels as $hotel){
-
-            $hotel->update([
-
-                'blocked' => 0
-
-            ]);
+//
+//            $hotel->update([
+//
+//                'blocked' => 0
+//
+//            ]);
+//
+            $hotel->blocked = $hotel->blocked == 1 ? 0 : 1;
 
         }
     }

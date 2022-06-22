@@ -34,13 +34,3 @@ window.Echo = new Echo({
 
 
 
-// import  Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-//
-// window.Echo = new Echo({
-//
-//     broadcaster: 'pusher',
-//     key: 'c015c0d70ff48c211999',
-//     cluster: 'mt1',
-//     encrypted: true
-// });

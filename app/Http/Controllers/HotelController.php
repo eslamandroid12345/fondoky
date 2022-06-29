@@ -150,5 +150,12 @@ class HotelController extends Controller
     }
 
 
+    public function home(){
+
+        return $this->hotelRepositoryInterface->home();
+
+    }
+
+
 
 }

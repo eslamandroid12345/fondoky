@@ -29,6 +29,7 @@ interface  HotelRepositoryInterface{
     public function monthOfInvoices();
     public function invoices();
     public function arrivals();
+    public function home();
 
 
 }

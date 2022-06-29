@@ -164,4 +164,47 @@ if(!function_exists('countBooking')) {
     }
 }
 
+//-------------------------------------------------------------------------------------------------------
+
+
+if(!function_exists('hotelBooking')) {
+
+
+    function hotelBooking(){
+
+        return DB::table('bookers')->where('hotel_id','=',hotel()->id)->count();
+    }
+}
+
+
+if(!function_exists('hotelRooms')) {
+
+
+    function hotelRooms(){
+
+        return DB::table('rooms')->where('hotel_id','=',hotel()->id)->count();
+    }
+}
+
+
+if(!function_exists('hotelCalendars')) {
+
+
+    function hotelCalendars(){
+
+        return hotel()->calendar()->count();
+    }
+}
+
+
+if(!function_exists('hotelRoomsTypes')) {
+
+
+    function hotelRoomsTypes(){
+
+        return DB::table('room_types')->where('hotel_id','=',hotel()->id)->count();
+
+    }
+}
+
 

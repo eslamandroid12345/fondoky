@@ -14,7 +14,7 @@ use App\Http\Controllers\UserController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of language
 
 
-//
+
  define('Max',2);
  define('Search',8);
 

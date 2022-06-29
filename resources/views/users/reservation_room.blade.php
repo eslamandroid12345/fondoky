@@ -188,6 +188,7 @@
 
                             @endif
 
+
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
                             <ul>
                                 @if($room->hotel->service()->exists())

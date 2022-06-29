@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
     <!--Internal  TelephoneInput css-->
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+
 @endsection
 @section('title')
     تعديل تقويم الغرفه
@@ -77,7 +79,7 @@
 
                             <div  class="col-lg-6 col-md-6 col-sm-12 mt-3">
                                 <label>{{__('calendars.check_in_add')}}</label>
-                                <input class="form-control" name="check_in" type="date"  value="{{old('check_in',$calendar->check_in)}}">
+                                <input type="text" class="form-control" id="start" name="check_in" value="{{$calendar->check_in}}" readonly="readonly" />
 
                                 <span class="text-danger"> @error('check_in') {{$message}} @enderror</span>
 
@@ -86,8 +88,7 @@
 
                             <div  class="col-lg-6 col-md-6 col-sm-12 mt-3">
                                 <label>{{__('calendars.check_out_add')}}</label>
-                                <input class="form-control" name="check_out" type="date"  value="{{old('check_out',$calendar->check_out)}}">
-
+                                <input type="text" class="form-control" id="end" name="check_out" value="{{$calendar->check_out}}" readonly="readonly" />
                                 <span class="text-danger"> @error('check_out') {{$message}} @enderror</span>
 
                             </div>
@@ -141,6 +142,23 @@
     <!-- Internal form-elements js -->
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#start").datepicker({
+
+                dateFormat: 'yy-mm-dd'
+            });
+
+            $("#end").datepicker({
+
+
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+    </script>
 
 
 @endsection

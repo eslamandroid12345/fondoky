@@ -155,7 +155,7 @@ class HotelRepository implements HotelRepositoryInterface
         if(auth()->guard('hotel')->attempt(['email' => $request->email, 'password' => $request->password,'blocked' => 1])){
 
 
-            return redirect()->to('hotels/reservations')->with('welcome', __('hotels.message'));
+            return redirect()->to('hotels/home');
 
         }else{
 
@@ -367,6 +367,14 @@ class HotelRepository implements HotelRepositoryInterface
 
         return view('hotels.arrivals',compact('bookers'));
 
+    }
+
+
+    public function home()
+    {
+        // TODO: Implement home() method.
+
+        return view('hotels.home');
     }
 
 }

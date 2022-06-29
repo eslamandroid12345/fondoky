@@ -93,12 +93,52 @@
 
 
 
-                            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                            <div class="col-lg-12 col-md-12 col-sm-12 mt-3 mb-4">
                                 <label for="inputName" class="control-label">{{__('room_add.child_max')}}</label>
                                 <input type="number" class="form-control" id="inputName" name="child_max" value="{{$room->child_max}}">
                                 <span class="text-danger"> @error('child_max') {{$message}} @enderror</span>
 
                             </div>
+
+                            @if(count(json_decode($room->images)) == 1)
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+                            @elseif(count(json_decode($room->images)) == 2)
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+
+                            @elseif(count(json_decode($room->images)) == 3)
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+
+                            @else
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+                            @endif
+
 
 
 

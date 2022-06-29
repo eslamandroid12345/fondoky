@@ -152,7 +152,7 @@ class HotelRepository implements HotelRepositoryInterface
     public function login(HotelLoginRequest $request){
 
 
-        if(auth()->guard('hotel')->attempt(['email' => $request['email'], 'password' => $request['password'],'blocked' => 1])){
+        if(auth()->guard('hotel')->attempt(['email' => $request->email, 'password' => $request->password,'blocked' => 1])){
 
 
             return redirect()->to('hotels/reservations')->with('welcome', __('hotels.message'));
@@ -196,7 +196,7 @@ class HotelRepository implements HotelRepositoryInterface
             $hotel->name_ar =  $request->name_ar;
             $hotel->name_en =  $request->name_en;
             $hotel->email = $request->email;
-            $hotel->password = Hash::make($request['password']);
+            $hotel->password = Hash::make($request->password);
             $hotel->location_ar = $request->location_ar;
             $hotel->location_en = $request->location_en;
             $hotel->pound = $request->pound;
@@ -243,55 +243,59 @@ class HotelRepository implements HotelRepositoryInterface
 
         try {
 
-            $hotel = hotel();
-
-            if (!Hash::check($request->current_password, $hotel->password)) {
-
-                return redirect()->back()->with('current_password', __('hotels.current_password'));
-            }
+            $hotel = auth()->guard('hotel')->user();
 
 
-            $data = [];
-            if($request->hasfile('hotel_photos'))
-            {
+            if (Hash::check($request->current_password, $hotel->password)) {
 
-                foreach($request->file('hotel_photos') as $image)
-                {
-                    $name= time() . rand(1,5000) . uniqid() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path().'/hotels/', $name);
-                    $data[] = $name;
+
+                $data = [];
+                if ($request->hasfile('hotel_photos')) {
+
+                    foreach ($request->file('hotel_photos') as $image) {
+                        $name = time() . rand(1, 5000) . uniqid() . '.' . $image->getClientOriginalName();
+                        $image->move(public_path() . '/hotels/', $name);
+                        $data[] = $name;
+
+
+                    }
 
                 }
 
+
+                //to remove all old images of hotels from public folder
+                $images = json_decode($hotel->hotel_photos, true);
+                foreach ($images as $image) {
+
+                    unlink(public_path('hotels/') . $image);
+
+                }
+
+                $hotel->country = $request->country;
+                $hotel->country_en = $request->country_en;
+                $hotel->manger = $request->manger;
+                $hotel->name_ar = $request->name_ar;
+                $hotel->name_en = $request->name_en;
+                $hotel->email = $request->email;
+                $hotel->password = Hash::make($request->password);
+                $hotel->location_ar = $request->location_ar;
+                $hotel->location_en = $request->location_en;
+                $hotel->pound = $request->pound;
+                $hotel->description = $request->description;
+                $hotel->hotel_photos = json_encode($data);
+                $hotel->phone_hotel = $request->phone_hotel;
+                $hotel->save();
+
+                auth()->guard('hotel')->logout();
+
+                return redirect()->route('hotels.show');
+
+
+            }else{
+
+                return redirect()->back()->with('current_password', __('hotels.current_password'));
+
             }
-
-            //to remove all old images of hotels from public folder
-            $images = json_decode($hotel->hotel_photos,true);
-            foreach ($images as $image){
-
-                unlink(public_path('hotels/') . $image);
-
-            }
-
-
-            $hotel->country = $request->country;
-            $hotel->country_en = $request->country_en;
-            $hotel->manger = $request->manger;
-            $hotel->name_ar =  $request->name_ar;
-            $hotel->name_en =  $request->name_en;
-            $hotel->email = $request->email;
-            $hotel->password = Hash::make($request['password']);
-            $hotel->location_ar = $request->location_ar;
-            $hotel->location_en = $request->location_en;
-            $hotel->pound = $request->pound;
-            $hotel->description = $request->description;
-            $hotel->hotel_photos = json_encode($data);
-            $hotel->phone_hotel = $request->phone_hotel;
-            $hotel->save();
-
-            return redirect()->route('hotels.all')->with('update',__('hotels.update'));
-
-
 
         }catch (\Exception $exception){
 

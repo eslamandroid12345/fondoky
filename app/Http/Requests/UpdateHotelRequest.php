@@ -3,8 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+
 
 class UpdateHotelRequest extends FormRequest
 {
@@ -18,8 +17,6 @@ class UpdateHotelRequest extends FormRequest
     {
 
 
-
-
         return [
 
             'country' => 'required',
@@ -27,7 +24,7 @@ class UpdateHotelRequest extends FormRequest
             'manger' => 'required',
             'name_ar' => 'required',
             'name_en' => 'required',
-            'email' => ['required',Rule::unique('hotels')->ignore(hotel())],
+            'email' => 'required|unique:hotels,email,' . hotel()->id,
             'current_password' => 'required',
             'password' => 'required|same:confirm_password|min:6',
             'confirm_password' => 'required',

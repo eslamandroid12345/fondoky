@@ -20,7 +20,7 @@
             </div>
         </div>
         <ul class="side-menu">
-            <li class="side-item side-item-category"> اهلا بك {{admin()->name}}</li>
+            <li class="side-item side-item-category"> {{__('admin.welcome')}} {{admin()->name}}</li>
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'home')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@
             </li>
 
 
-                <li class="side-item side-item-category">الفواتير</li>
+                <li class="side-item side-item-category">{{__('admin.hotel_reservations_list')}}</li>
 
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg

@@ -86,7 +86,4 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
 
 
 
-
-
-
     });

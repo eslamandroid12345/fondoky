@@ -56,8 +56,6 @@ class ServiceRepository implements ServiceRepositoryInterface
     {
 
 
-
-
         try {
 
             $service = Service::findOrFail($id);

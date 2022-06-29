@@ -84,12 +84,13 @@
                             </div>
 
 
+
                             <div class="col-lg-8 col-md-8 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">حدد الصلاحيه</label>
+                                <label for="inputName" class="control-label">{{__('admin.select_role')}}</label>
                                 <select name="role_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                         onchange="console.log('change is firing')">
 
-                                    <option selected disabled>حدد الصلاحيه</option>
+                                    <option selected disabled>{{__('admin.select_role')}}</option>
                                 @foreach($roles as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>
                                 @endforeach

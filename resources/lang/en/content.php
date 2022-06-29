@@ -7,5 +7,7 @@ return [
     "update"  => "update",
      "operations" => "operations",
 
+    "yearly" => "report yearly"
+
 
 ];

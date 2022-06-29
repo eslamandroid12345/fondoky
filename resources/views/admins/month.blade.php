@@ -1,3 +1,7 @@
+
+
+
+
 @extends('layout.master')
 @section('css')
     <style>
@@ -17,8 +21,10 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    معاينة طباعة الفاتورة</span>
+
+
+                <h4 class="content-title mb-0 my-auto">{{__('admin.invoices')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                   {{__('admin.invoices_month')}}</span>
             </div>
         </div>
 
@@ -33,34 +39,36 @@
                 <div class="card card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">فاتورة تحصيل</h1>
+
+
+
+
+                            <h1 class="invoice-title">{{__('admin.invoices_pay')}}</h1>
                             <div class="billed-from">
-                                <h6>موقع فندقي يرحب بكم</h6>
-                                <p>فاتوره تحصيل مبلغ العموله الشهريه من موقع فندقي<br>
-                                   رقم هاتف الادمن {{admin()->phone}}<br>
-                                    admin name : {{admin()->name}}</p>
+                                <h6>{{__('admin.hotel_welcome')}}</h6>
+                                <p>{{__('admin.invoices_details')}}<br>
+                                    {{__('admin.phone_admin')}}    {{admin()->phone}}<br>
+                                    {{__('admin.admin_name')}} {{admin()->name}}</p>
                             </div><!-- billed-from -->
                         </div><!-- invoice-header -->
                         <div class="row mg-t-20">
                             <div class="col-md">
-                                <label class="tx-gray-600">معلومات الفندق</label>
-                                <div class="billed-to">
-                                    <h6>رقم هاتف الفندق {{$hotel->phone_hotel}}</h6>
-                                    <p>{{lang() == 'ar' ? $hotel->location_ar : $hotel->location_en}}<br>
-                                            اسم مدير الفندق  {{$hotel->manger}}  <br>
-                                        {{$hotel->email}}</p>
-                                </div>
+                                <label class="tx-gray-600">{{__('admin.hotel_detail')}}</label>
+
                             </div>
                             <div class="col-md">
-                                <label class="tx-gray-600">معلومات الفاتورة</label>
-                                <p class="invoice-info-row"><span>رقم الفاتورة</span>
+                                <label class="tx-gray-600">{{__('admin.invoices_information')}}</label>
+                                <p class="invoice-info-row"><span>{{__('admin.invoices_number')}}</span>
                                     <span>{{rand(1,20000000)}}</span></p>
 
-                                <p class="invoice-info-row"><span>فاتوره شهر </span>
-                                    <span>{{$now}}</span></p>
+                                <p class="invoice-info-row"><span> {{__('admin.invoices_year')}} </span>
+                                    <span>{{\Carbon\Carbon::now()->format('Y')}}</span></p>
                             </div>
                         </div>
                         <div class="table-responsive mg-t-40">
+
+
+
                             <table class="table table-invoice border text-md-nowrap mb-0">
                                 <thead>
                                 <tr>
@@ -73,32 +81,32 @@
                                     <th>{{__('book_hotel.num_of_nights')}}</th>
                                     <th>{{__('book_hotel.date_arrive')}}</th>
                                     <th>{{__('book_hotel.date_leave')}}</th>
-                                    <th>الاجمالي</th>
+                                    <th>{{__('book_hotel.total')}}</th>
                                     <th>{{__('book_hotel.blocked')}}</th>
                                 </tr>
                                 </thead>
 
                                 @foreach($bookers as $booker)
-                                <tbody>
-                                <tr>
-                                    <td>{{$booker->id}}</td>
-                                    <td>{{$booker->room_price}}</td>
-                                    <td>{{$booker->rate}}</td>
-                                    <td>{{$booker->commission}} {{$booker->hotel->pound}}</td>
-                                    <td>{{$booker->room_type}}</td>
-                                    <td>{{$booker->room_number}}</td>
-                                    <td>{{$booker->num_of_nights}}</td>
-                                    <td>{{$booker->date_arrive}}</td>
-                                    <td>{{$booker->date_leave}}</td>
-                                    <td>{{$booker->total}} {{$booker->hotel->pound}}</td>
-                                    <td>{{$booker->block()}}</td>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{$booker->id}}</td>
+                                        <td>{{$booker->room_price}}</td>
+                                        <td>{{$booker->rate}}</td>
+                                        <td>{{$booker->commission}} {{$booker->hotel->pound}}</td>
+                                        <td>{{$booker->room_type}}</td>
+                                        <td>{{$booker->room_number}}</td>
+                                        <td>{{$booker->num_of_nights}}</td>
+                                        <td>{{$booker->date_arrive}}</td>
+                                        <td>{{$booker->date_leave}}</td>
+                                        <td>{{$booker->total}} {{$booker->hotel->pound}}</td>
+                                        <td>{{$booker->block()}}</td>
 
-                                </tr>
+                                    </tr>
 
 
-                                </tbody>
+                                    </tbody>
 
-                                    @endforeach
+                                @endforeach
 
 
                                 <tr>
@@ -113,13 +121,16 @@
                                 </tr>
 
                             </table>
+
+
+
                         </div>
                         <hr class="mg-b-40">
 
 
 
                         <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()"> <i
-                                    class="mdi mdi-printer ml-1"></i>طباعة</button>
+                                    class="mdi mdi-printer ml-1"></i>{{__('admin.print_invoice')}}</button>
                     </div>
                 </div>
             </div>

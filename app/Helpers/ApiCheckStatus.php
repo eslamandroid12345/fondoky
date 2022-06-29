@@ -5,6 +5,8 @@
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of language
+
 
 if(!function_exists('returnMessageError')){
 
@@ -98,6 +100,16 @@ if(!function_exists('lang')){
 }
 
 
+if(!function_exists('langConfig')){
+
+    function langConfig(){
+
+
+        return  LaravelLocalization::getCurrentLocale();
+    }
+}
+
+
 
 
 //count data of models in dashboard admin ---------------------------------------------------------
@@ -151,3 +163,5 @@ if(!function_exists('countBooking')) {
         return DB::table('bookers')->count();
     }
 }
+
+

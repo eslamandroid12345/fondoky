@@ -9,6 +9,8 @@ return [
     "update" => "تعديل",
     "operations" => "العمليات",
 
+    "yearly" => "التقرير السنوي",
+
 
 
 ];

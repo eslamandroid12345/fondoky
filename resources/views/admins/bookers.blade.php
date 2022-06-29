@@ -18,8 +18,12 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">اقسام الحجوزات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
-                    حجوزات الفنادق</span>
+
+
+
+
+                <h4 class="content-title mb-0 my-auto">{{__('admin.hotel_reservations_list')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                   {{__('admin.reservations_departments')}}</span>
             </div>
         </div>
 
@@ -46,30 +50,31 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
 
-                    <a class="modal-effect btn btn-sm btn-primary" href="#"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
                             <thead>
                             <tr>
-                                <th>رقم الحجز</th>
-                            <th>اسم العميل</th>
-                            <th>الوجهه</th>
-                            <th>الاطفال</th>
-                            <th>البالغين</th>
-                            <th>نوع الغرفه</th>
-                            <th>عدد الغرف</th>
-                            <th>عدد الليالي</th>
-                            <th>تاريخ الوصول</th>
-                            <th>تاريخ المغادره</th>
-                            <th>الفندق</th>
-                            <th>سعر الحجز </th>
-                            <th>نسبه الموقع</th>
-                            <th>حاله الحجز</th>
+
+
+                                <th>{{__('book_hotel.id')}}</th>
+                                <th>{{__('book_hotel.user')}}</th>
+                                <th>{{__('book_hotel.city_to')}}</th>
+                                <th>{{__('book_hotel.children')}}</th>
+                                <th>{{__('book_hotel.adults')}}</th>
+                                <th>{{__('book_hotel.room_type')}}</th>
+                                <th>{{__('book_hotel.room_number')}}</th>
+                                <th>{{__('book_hotel.num_of_nights')}}</th>
+                                <th>{{__('book_hotel.date_arrive')}}</th>
+                                <th>{{__('book_hotel.date_leave')}}</th>
+                                <th>{{__('book_hotel.hotel')}}</th>
+                                <th>{{__('book_hotel.total')}}</th>
+                                <th>{{__('book_hotel.commission')}}</th>
+                                <th>{{__('book_hotel.blocked')}}</th>
+
+
+
                             </tr>
                             </thead>
 
@@ -77,7 +82,6 @@
                                 <tbody>
 
                                 <tr>
-
                                     <td>{{$booker->id}}</td>
                                     <td>{{$booker->user->name}}</td>
                                     <td>{{$booker->city_to}}</td>

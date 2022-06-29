@@ -12,7 +12,7 @@ class CreateRoomServicesTable extends Migration
 
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('hotel-id');
+            $table->unsignedBigInteger('hotel_id');
             $table->timestamps();
 
             $table->foreign('hotel_id')->references('id')->on('hotels')->onUpdate('cascade')->onDelete('cascade');

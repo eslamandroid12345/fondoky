@@ -6,27 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 class AddCurrencyEnToHotelsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::table('hotels', function (Blueprint $table) {
-            //
+
+            $table->string('currency_en')->after('pound')->default('AUR');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::table('hotels', function (Blueprint $table) {
-            //
+
+            $table->dropColumn('currency_en');
         });
     }
 }

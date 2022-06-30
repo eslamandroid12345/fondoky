@@ -47,6 +47,18 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
 });
 
 
+Route::group(['prefix'=>'users','middleware' => ['auth']], function (){
+
+    Route::post('rates', [UserController::class,'rates'])->name('users.rates');
+    Route::get('rates/create/{id}', [UserController::class,'ratesCreate'])->name('users.rates.create');
+
+
+});
+
+
+
+
+
     Route::get('hotel/room/{id}', [UserController::class,'rooms'])->name('hotel.room');
     Route::get('room/reservation/{id}', [UserController::class,'reservation'])->name('room.reservation')->middleware('auth');
 
@@ -58,7 +70,7 @@ Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], fun
     });
 
 
-    Route::view('test','test');
+//    Route::view('test','test');
 
 });
 

@@ -62,9 +62,16 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
+    public function rate(){
+
+        return $this->hasOne(Rate::class,'user_id','id');
+    }
 
 
+    public function comment(){
 
+        return $this->hasMany(Comment::class,'user_id','id');
+    }
 
 
 }

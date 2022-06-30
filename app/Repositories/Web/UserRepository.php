@@ -6,6 +6,7 @@ namespace App\Repositories\Web;
 
 use App\Interfaces\Web\UserRepositoryInterface;
 use App\Models\Hotel;
+use App\Models\Rate;
 use App\Models\Room;
 use App\Models\User;
 use Carbon\Carbon;
@@ -110,6 +111,44 @@ class UserRepository implements UserRepositoryInterface
         return redirect()->back()->with('success',__('users.message'));
     }
 
+    
+
+    public function ratesCreate($id)
+    {
+
+        $hotel = Hotel::find(decrypt($id));
+        $rates = Rate::with(['user','hotel'])->where('user_id','=',auth()->id())->get();
+        $rates_count = Rate::with(['hotel'])->where('hotel_id','=',$hotel->id)->sum('rates_number');
+
+
+        return view('rates.create',compact('hotel','rates','rates_count'));
+    }
+
+    public function rates(Request $request)
+    {
+
+        try {
+
+
+            $rate = new Rate();
+            $rate->rates_number = $request->rates_number;
+            $rate->hotel_id = $request->hotel_id;
+            $rate->user_id = auth()->id();
+            $rate->save();
+
+            return redirect()->back()->with('success','rates created successfully');
+
+
+
+        }catch (\Exception $exception){
+
+
+            return redirect()->back()->withErrors(['errors' => $exception->getMessage()]);
+        }
+
+
+
+    }
 
 
 }

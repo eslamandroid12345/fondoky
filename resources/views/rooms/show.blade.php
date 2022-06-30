@@ -52,15 +52,46 @@
 
                             {{--body--}}
 
-                            @foreach(json_decode($room->images) as $image)
+                            @if(count(json_decode($room->images)) == 1)
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
 
-                                <div style="height: 400px;float: left;margin-bottom: 10px" class="col-md-4 col-sm-12 col-xs-12 col-12">
-                                    <img style="width: 100%;height: 100%" src="{{URL::to('/rooms/'.$image)}}">
-                                </div>
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+                            @elseif(count(json_decode($room->images)) == 2)
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
 
 
+                            @elseif(count(json_decode($room->images)) == 3)
 
-                            @endforeach
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+
+                            @else
+
+                                @foreach(json_decode($room->images) as $image)
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
+
+                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
+                            @endif
+
+
                         </div>
                         <hr class="mg-b-40">
 

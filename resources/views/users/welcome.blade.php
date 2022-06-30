@@ -207,10 +207,10 @@
             <h4>{{__('welcome.search_hotels')}} </h4>
 
             <div class="row row-cols-1 row-cols-md-3 g-4">
-{{--                // hotels--}}
                 @forelse($hotels as $hotel)
-{{--                <a href="{{route('hotel.show',$hotel->id)}}">--}}
-                <div class="col">
+                    <a href="{{route('users.rates.create',encrypt($hotel->id))}}">
+
+                    <div class="col">
                     <div class="card h-100">
                         @foreach(json_decode($hotel->hotel_photos) as $images)
                                 <img src="{{URL::to('/hotels/'.$images)}}" class="card-img-top" alt="...">

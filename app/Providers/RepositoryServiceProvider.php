@@ -7,6 +7,7 @@ use App\Interfaces\Api\UserRepositoryInterface;
 use App\Interfaces\Web\AdminRepositoryInterface;
 use App\Interfaces\Web\BookerRepositoryInterface;
 use App\Interfaces\Web\CalendarRepositoryInterface;
+use App\Interfaces\Web\CommentRepositoryInterface;
 use App\Interfaces\Web\CommissionRepositoryInterface;
 use App\Interfaces\Web\RoleRepositoryInterface;
 use App\Interfaces\Web\RoomRepositoryInterface;
@@ -16,6 +17,7 @@ use App\Repositories\Api\UserRepository;
 use App\Repositories\Web\AdminRepository;
 use App\Repositories\Web\BookerRepository;
 use App\Repositories\Web\CalendarRepository;
+use App\Repositories\Web\CommentRepository;
 use App\Repositories\Web\CommissionRepository;
 use App\Repositories\Web\RoleRepository;
 use App\Repositories\Web\RoomRepository;
@@ -46,6 +48,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Interfaces\Web\UserRepositoryInterface::class,\App\Repositories\Web\UserRepository::class);
         $this->app->bind(ServiceRepositoryInterface::class,ServiceRepository::class);
         $this->app->bind(CommissionRepositoryInterface::class,CommissionRepository::class);
+        $this->app->bind(CommentRepositoryInterface::class,CommentRepository::class);
     }
 
 

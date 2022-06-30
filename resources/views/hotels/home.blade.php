@@ -23,17 +23,10 @@
                 <div class="main-star">
                     <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
                             class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
-                            class="typcn typcn-star"></i> <span>(14,873)</span>
+                            class="typcn typcn-star"></i> <span>( {{number_format($rates_count,2)}} )</span>
                 </div>
             </div>
-            <div>
-                <label class="tx-13">Online Sales</label>
-                <h5>563,275</h5>
-            </div>
-            <div>
-                <label class="tx-13">Offline Sales</label>
-                <h5>783,675</h5>
-            </div>
+
         </div>
     </div>
     <!-- /breadcrumb -->

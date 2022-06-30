@@ -29,6 +29,7 @@ class ServiceRepository implements ServiceRepositoryInterface
             $service->hotel_id = hotel()->id;
             $service->save();
 
+
             return redirect()->back()->with('create', __('services.create'));
 
 

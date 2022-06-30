@@ -24,6 +24,7 @@ class HotelResource extends JsonResource
             'phone_hotel' => $this->phone_hotel,
             'blocked' => $this->active(),
             'token' => $this->token,
+            
 
         ];
     }

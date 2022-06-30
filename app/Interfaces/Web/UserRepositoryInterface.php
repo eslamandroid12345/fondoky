@@ -13,6 +13,9 @@ interface UserRepositoryInterface
     public function rooms($id);
     public function reservation($id);
     public function delete($id);
+    public function ratesCreate($id);
+    public function rates(Request $request);
+
 
 
 

@@ -12,9 +12,11 @@ use App\Http\Requests\UpdateHotelRequest;
 use App\Interfaces\Web\HotelRepositoryInterface;
 use App\Models\Booker;
 use App\Models\Hotel;
+use App\Models\Rate;
 use App\Models\Report;
 use App\Models\RoomType;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -372,9 +374,12 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function home()
     {
-        // TODO: Implement home() method.
 
-        return view('hotels.home');
+        $rates_count = Rate::with(['hotel'])->where('hotel_id','=',hotel()->id)->sum('rates_number');
+
+        return view('hotels.home',compact('rates_count'));
     }
+
+
 
 }

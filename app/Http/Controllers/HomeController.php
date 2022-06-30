@@ -20,4 +20,7 @@ class HomeController extends Controller
         $bookers = Booker::with(['hotel','user'])->where('user_id','=',auth()->id())->latest()->simplePaginate(Max);
         return view('users.home',compact('bookers'));
     }
+
+
+
 }

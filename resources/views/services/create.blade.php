@@ -67,6 +67,7 @@
                         <div class="row">
 
 
+
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">اسم الخدمه</label>
                                 <input type="text" class="form-control" id="inputName" name="name" value="{{old('name')}}">

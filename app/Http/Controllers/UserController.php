@@ -68,5 +68,20 @@ class UserController extends Controller
     }
 
 
+    public function rates(Request $request){
+
+
+        return $this->userRepositoryInterface->rates($request);
+    }
+
+
+    public function ratesCreate($id){
+
+
+        return $this->userRepositoryInterface->ratesCreate($id);
+    }
+
+
+
 
 }

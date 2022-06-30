@@ -18,7 +18,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
     Route::post('hotels/register',[HotelController::class,'register'])->name('hotels.register');
 
 
-Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
+Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], function (){
 
 
     Route::post('room/type',[HotelController::class,'room_type'])->name('hotels.room.type');//return room type save
@@ -44,7 +44,7 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
 });
 
 
-    Route::group(['prefix'=>'rooms','middleware'=>'auth:hotel'], function (){
+    Route::group(['prefix'=>'rooms','middleware'=> ['auth:hotel','status']], function (){
 
         Route::get('index',[RoomController::class,'index'])->name('rooms.index');
         Route::get('create',[RoomController::class,'create'])->name('rooms.create');
@@ -59,7 +59,7 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
     });
 
 
-    Route::group(['prefix'=>'services','middleware'=>'auth:hotel'], function (){
+    Route::group(['prefix'=>'services','middleware'=> ['auth:hotel','status']], function (){
 
         Route::get('create',[ServiceController::class,'create'])->name('services.create');
         Route::post('store',[ServiceController::class,'store'])->name('services.store');
@@ -74,7 +74,7 @@ Route::group(['prefix'=>'hotels','middleware' => 'auth:hotel'], function (){
 
 
     //start calendars for room hotels
-    Route::group(['prefix'=>'calendars','middleware'=>'auth:hotel'], function (){
+    Route::group(['prefix'=>'calendars','middleware'=> ['auth:hotel','status']], function (){
 
         Route::get('create/{id}',[CalendarController::class,'create'])->name('calendars.create');
         Route::post('store',[CalendarController::class,'store'])->name('calendars.store');

@@ -25,7 +25,7 @@ class ServiceRepository implements ServiceRepositoryInterface
 
             $service = new Service();
             $service->name = $request->name;
-            $service->services = $request->services;
+            $service->services = json_encode($request->services);
             $service->hotel_id = hotel()->id;
             $service->save();
 
@@ -61,7 +61,7 @@ class ServiceRepository implements ServiceRepositoryInterface
 
             $service = Service::findOrFail($id);
             $service->name = $request->name;
-            $service->services = $request->services;
+            $service->services = json_encode($request->services);
             $service->save();
 
             return redirect()->route('services.create')->with('update_service', __('services.update'));

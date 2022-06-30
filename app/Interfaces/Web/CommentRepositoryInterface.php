@@ -4,7 +4,7 @@
 namespace App\Interfaces\Web;
 
 
-class CommentRepositoryInterface
+interface CommentRepositoryInterface
 {
 
 }

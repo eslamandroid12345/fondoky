@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckHotelStatus;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,6 +68,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'status' => \App\Http\Middleware\CheckHotelStatus::class,
         'check' => \App\Http\Middleware\AuthCheckApi::class, // check token authenticated
         'lang' => \App\Http\Middleware\ChangeLanguageApi::class, //check language in api
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

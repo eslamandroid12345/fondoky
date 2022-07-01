@@ -19,8 +19,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">اقسام الحجوزات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
-                    حجوزات اليوم</span>
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.booking_department')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                    {{__('hotels.arrivals')}}
+                    </span>
             </div>
         </div>
 
@@ -47,11 +48,7 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-
-                    <a class="modal-effect btn btn-sm btn-primary" href="#"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
-
-
+                    
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -102,12 +99,12 @@
                                     <td>{{$booker->date_arrive}}</td>
                                     <td>{{$booker->date_leave}}</td>
                                     <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                    <td>{{number_format($booker->total_all,2)}} - {{$booker->hotel->pound}}</td>
+                                    <td>{{lang() == 'ar' ? number_format($booker->total_all,2) . '-' . hotel()->pound : number_format($booker->total_all,2) . '-' . hotel()->currency_en}}</td>
 
-                                    <td>{{$booker->vat_tax}} - {{$booker->hotel->pound}}</td>
-                                    <td>{{$booker->municipal_tax}} - {{$booker->hotel->pound}}</td>
-                                    <td>{{$booker->tourism_tax}} - {{$booker->hotel->pound}}</td>
-                                    <td>{{$booker->total}} - {{$booker->hotel->pound}}</td>
+                                    <td>{{ lang() == 'ar' ? $booker->vat_tax . '-' . hotel()->pound : $booker->vat_tax . '-' . hotel()->currency_en }}</td>
+                                    <td>{{ lang() == 'ar' ? $booker->municipal_tax . '-' . hotel()->pound : $booker->municipal_tax . '-' . hotel()->currency_en }}</td>
+                                    <td>{{ lang() == 'ar' ? $booker->tourism_tax . '-' . hotel()->pound : $booker->tourism_tax . '-' . hotel()->currency_en }}</td>
+                                    <td>{{ lang() == 'ar' ? $booker->total . '-' . hotel()->pound : $booker->total . '-' . hotel()->currency_en }}</td>
 
 
                                     <td>{{$booker->block()}}</td>

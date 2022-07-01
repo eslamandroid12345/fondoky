@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
     <!--Internal  TelephoneInput css-->
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 @endsection
 @section('title')
     اضافه تقويم جديد
@@ -21,8 +20,12 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قسم تقويمات الغرف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                 اضافه تقويم جديد</span>
+
+
+
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.calendars_departments')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                    {{__('hotels.calendars_new_create')}}
+                </span>
             </div>
         </div>
     </div>
@@ -69,10 +72,17 @@
                             </div>
 
 
-                           <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
+                           <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('calendars.room_price_add')}}</label>
                                 <input type="number" class="form-control" id="inputName" name="room_price">
                                 <span class="text-danger"> @error('room_price') {{$message}} @enderror</span>
+
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">{{__('hotels.currency')}}</label>
+                                <input type="text" class="form-control" value="{{ lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}" readonly>
 
                             </div>
 
@@ -146,8 +156,7 @@
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+
     <script type="text/javascript">
 
         $(function () {

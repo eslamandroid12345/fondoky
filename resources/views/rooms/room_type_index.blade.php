@@ -18,8 +18,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{__('admin_create.employees')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
-                   {{__('admin_create.employees')}}</span>
+
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.room_type_show')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                   {{__('hotels.rooms_control')}}</span>
             </div>
         </div>
 
@@ -38,19 +39,15 @@
                 <div class="card-header pb-0">
 
 
-                    <a class="modal-effect btn btn-sm btn-primary" href="#"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
                             <thead>
                             <tr>
-                                <th>رقم الغرفه</th>
+                                <th>{{__('hotels.room_number')}}</th>
                                 <th>{{__('room_add.room_type')}}</th>
-                                <th>تاريخ الاضافه</th>
+                                <th>{{__('hotels.date_create')}}</th>
 
                             </tr>
                             </thead>

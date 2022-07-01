@@ -11,7 +11,7 @@ class AddCurrencyEnToHotelsTable extends Migration
     {
         Schema::table('hotels', function (Blueprint $table) {
 
-            $table->string('currency_en')->after('pound')->default('AUR');
+            $table->string('currency_en')->after('pound');
         });
     }
 

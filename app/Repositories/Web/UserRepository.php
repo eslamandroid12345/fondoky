@@ -20,14 +20,14 @@ class UserRepository implements UserRepositoryInterface
 
 
         $country = $request->country;
+        $country_en = $request->country_en;
         $child_max = $request->child_max;
         $adults_max = $request->adults_max;
-        $start = Carbon::parse($request->date_start)->format('Y-m-d');
-        $end = Carbon::parse($request->date_expire)->format('Y-m-d');
+        $start = $request->date_start;
+        $end = $request->date_expire;
 
 
-
-        if(!is_null($country) && !is_null($start) && !is_null($end) && !is_null($child_max) && !is_null($adults_max)) {
+        if(!is_null($country) OR !is_null($country_en) AND !is_null($start) AND !is_null($end) AND !is_null($child_max) AND !is_null($adults_max)) {
 
 
             $rooms = Room::whereHas('calendars', function ($query) use($start,$end){
@@ -35,14 +35,19 @@ class UserRepository implements UserRepositoryInterface
                 $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)->orWhereBetween('check_in',[$start,$end])->whereDate('check_in','!=',$end);
 
 
-            })->whereHas('hotel', function ($query) use ($country) {
+            })->whereHas('hotel', function ($query) use ($country,$country_en) {
 
-                $query->where('country', '=', $country);
+                $query->where('country', '=', $country)->orWhere('country_en','=',$country_en)->orderBy('country');
 
-            })->where('adults_max', '=', $adults_max)->where('child_max', '=', $child_max)->with(['calendars' => function ($query) use ($start, $end) {
+            })->where('adults_max', '=', $adults_max)->where('child_max', '=', $child_max)
 
-                    $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)->orWhereBetween('check_in',[$start,$end])->whereDate('check_in','!=',$end)->select('id','room_id','room_number','check_in','check_out', DB::raw('SUM(room_price)  as total_room_price'), DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
+                ->with(['calendars' => function ($query) use ($start, $end) {
 
+                $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
+                    ->orWhereBetween('check_in',[$start,$end])
+                    ->whereDate('check_in','!=',$end)->select('id','room_id','room_number','check_in','check_out',
+                        DB::raw('SUM(room_price)  as total_room_price'),
+                        DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
 
                }])->simplePaginate(Search);
 

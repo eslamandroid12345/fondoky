@@ -37,6 +37,53 @@
 @endsection
 @section('content')
 
+    <!-- row -->
+    <div class="row">
+        <!--div-->
+        <div class="col-xl-12">
+            <div class="card mg-b-20">
+                <div class="card-header pb-0">
+
+
+                    <a class="modal-effect btn btn-sm btn-primary" href="{{url('/')}}"
+                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;الصفحه الرئيسيه</a>
+
+
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
+                            <thead>
+
+                            <tr>
+                                <th>عدد الغرف</th>
+                                <th>سعر الغرفه</th>
+                                <th>تاريخ البدايه</th>
+                                <th>تاريخ النهايه</th>
+                            </tr>
+
+                            </thead>
+
+                            @foreach($calendars as $calendar)
+                                <tbody>
+                                <tr>
+                                    <td>{{$calendar->room_number > 0 ? $calendar->room_number : 'Sold'}}</td>
+                                    <td>{{ lang() == 'ar' ? number_format($calendar->room_price,2) . $calendar->room->hotel->pound : number_format($calendar->room_price,2) . $calendar->room->hotel->currency_en}}</td>
+                                    <td>{{$calendar->check_in}}</td>
+                                    <td>{{$calendar->check_out}}</td>
+                                </tr>
+
+
+
+                                </tbody>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/div-->
+    </div>
 
 
     {{--start create booking for user--}}
@@ -99,12 +146,8 @@
                             </div>
 
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">عدد الاطفال</label>
-                                <input type="number" class="form-control" name="child_max" value="{{$room->child_max}}" readonly>
-                                <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
 
-                            </div>
+                                <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
 
 
 
@@ -140,7 +183,9 @@
                             </div>
 
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3 mb-5">
+
+
+                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3 mb-5">
                                 <label for="inputName" class="control-label">الاجمالي بقيمه الضريبه ب  {{$room->hotel->pound}}</label>
                                 <input type="text" class="form-control" name="total_all" id="total_all" value="0" readonly>
                             </div>
@@ -153,7 +198,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -162,7 +207,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -172,7 +217,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -182,7 +227,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -223,53 +268,6 @@
 
 
 
-    <!-- row -->
-    <div class="row">
-        <!--div-->
-        <div class="col-xl-12">
-            <div class="card mg-b-20">
-                <div class="card-header pb-0">
-
-
-                    <a class="modal-effect btn btn-sm btn-primary" href="{{url('/')}}"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;الصفحه الرئيسيه</a>
-
-
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
-                            <thead>
-                            <tr>
-                            <tr>
-                                <th>عدد الغرف</th>
-                                <th>سعر الغرفه</th>
-                                <th>تاريخ البدايه</th>
-                                <th>تاريخ النهايه</th>
-                            </tr>
-                            </tr>
-                            </thead>
-
-                            @foreach($calendars as $calendar)
-                                <tbody>
-                                <tr>
-                                    <td>{{$calendar->room_number > 0 ? $calendar->room_number : 'Sold'}}</td>
-                                    <td>{{$calendar->room_price}}</td>
-                                    <td>{{$calendar->check_in}}</td>
-                                    <td>{{$calendar->check_out}}</td>
-                                </tr>
-
-
-
-                                </tbody>
-                            @endforeach
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/div-->
-    </div>
 
 
 
@@ -403,6 +401,5 @@
 
     </script>
 
-{{--    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>--}}
 
 @endsection

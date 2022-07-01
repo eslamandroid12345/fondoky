@@ -61,13 +61,13 @@
                         <div class="dropdown-menu">
                             <div class="menu-header-content bg-primary text-right">
                                 <div class="d-flex">
-                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الاشعارات</h6>
+                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">{{__('admin.notifications')}}</h6>
 
                                 </div>
                                 <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">
                                 <h6 style="color: yellow" id="notifications_count">
 
-                                    جميع الاشعارات
+                                    {{__('admin.messages')}}
                                 </h6>
 
                                 </p>
@@ -130,7 +130,7 @@
 
                       <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                    class="bx bx-log-out"></i>تسجيل خروج</a>
+                                    class="bx bx-log-out"></i>{{__('hotels.logout_now')}}</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

@@ -46,6 +46,9 @@ return [
     "month_pay" => "الشهر",
     "print_invoice" => "طباعه",
 
+    "notifications" => "الاشعارات",
+    "messages" => "جميع الرسائل",
+
 
 
     ];

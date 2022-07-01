@@ -65,6 +65,7 @@
                                     <span>{{\Carbon\Carbon::now()->format('Y')}}</span></p>
                             </div>
                         </div>
+
                         <div class="table-responsive mg-t-40">
 
 
@@ -92,13 +93,13 @@
                                         <td>{{$booker->id}}</td>
                                         <td>{{$booker->room_price}}</td>
                                         <td>{{$booker->rate}}</td>
-                                        <td>{{$booker->commission}} {{$booker->hotel->pound}}</td>
+                                        <td>{{number_format($booker->commission,2)}} {{lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}</td>
                                         <td>{{$booker->room_type}}</td>
                                         <td>{{$booker->room_number}}</td>
                                         <td>{{$booker->num_of_nights}}</td>
                                         <td>{{$booker->date_arrive}}</td>
                                         <td>{{$booker->date_leave}}</td>
-                                        <td>{{$booker->total}} {{$booker->hotel->pound}}</td>
+                                        <td>{{number_format($booker->total,2)}} {{lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}</td>
                                         <td>{{$booker->block()}}</td>
 
                                     </tr>
@@ -111,13 +112,13 @@
 
                                 <tr>
 
-                                    <td>اجمالي نسبه العموله</td>
-                                    <td class="tx-left" colspan="11">@foreach($commissions as $commission) {{$commission->commission ?? 0}} {{$hotel->pound}}@endforeach</td>
+                                    <td>{{__('hotels.commission')}}</td>
+                                    <td class="tx-left" colspan="11">@foreach($commissions as $commission) {{number_format($commission->commission,2)}} {{ lang() == 'ar' ? $hotel->pound : $hotel->currency_en }}@endforeach</td>
                                 </tr>
                                 <tr>
 
-                                    <td>اجمالي الربح</td>
-                                    <td class="tx-left" colspan="11"> @foreach($totals as $total) {{$total->total ?? 0}} {{$hotel->pound}}@endforeach</td>
+                                    <td>{{__('hotels.total')}}</td>
+                                    <td class="tx-left" colspan="11"> @foreach($totals as $total) {{number_format($total->total,2)}} {{lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}@endforeach</td>
                                 </tr>
 
                             </table>

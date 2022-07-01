@@ -26,6 +26,7 @@ class Hotel extends Authenticatable implements JWTSubject
         'location_ar',
         'location_en',
         'pound',
+        'currency_en',
         'description',
         'hotel_photos',
         'phone_hotel',

@@ -13,13 +13,13 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-                <p class="mg-b-0">Sales monitoring dashboard template.</p>
+                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{__('hotels.welcome_message')}}</h2>
+                <p class="mg-b-0">{{__('hotels.message_text')}}</p>
             </div>
         </div>
         <div class="main-dashboard-header-right">
             <div>
-                <label class="tx-13">Customer Ratings</label>
+                <label class="tx-13">{{__('hotels.rates')}}</label>
                 <div class="main-star">
                     <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
                             class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
@@ -32,13 +32,16 @@
     <!-- /breadcrumb -->
 @endsection
 @section('content')
+
+
+
     <!-- row -->
     <div class="row row-sm">
         <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">اجمالي الحجوزات</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{__('hotels.booking_all')}}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
@@ -63,7 +66,7 @@
             <div class="card overflow-hidden sales-card bg-danger-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">عدد الغرف</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{__('hotels.room_all')}}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
@@ -93,7 +96,7 @@
             <div class="card overflow-hidden sales-card bg-success-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">عدد تقويمات الغرف</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{__('hotels.calendars_all')}}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
@@ -122,7 +125,7 @@
             <div class="card overflow-hidden sales-card bg-warning-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">انواع الغرف</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{__('hotels.room_types')}}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">

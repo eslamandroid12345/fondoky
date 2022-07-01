@@ -133,6 +133,7 @@
             <div class="form-group mb-3">
                 @php
                     $currencies_ar = ["ريال السعودي ","دولار الامريكي","يورو","درهم الاماراتي","دينار البحريني","جنيه المصري","جنيه البريطاني","دينار الكويتي","ريال العماني","ريال القطري"];
+
                 @endphp
 
                 <select class="form-control" name="pound" class="form-control form-control-lg input-lg">
@@ -147,6 +148,29 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
+
+
+            <div class="form-group mb-3">
+                @php
+
+                    $currencies_en = ["SAR","USD","EUR","AED","BHD","EGP","GPP","KWD","OMR","QAR"];
+
+
+                @endphp
+
+                <select class="form-control" name="currency_en" class="form-control form-control-lg input-lg">
+
+                    @foreach($currencies_en as $currency_en)
+                        <option value="{{$currency_en}}">{{$currency_en}}</option>
+                    @endforeach
+                </select>
+
+
+                @error('currency_en')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+
 
 
 

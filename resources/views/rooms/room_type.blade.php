@@ -21,8 +21,11 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{__('roles_content.new_role')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                   {{__('roles_content.role_add')}}</span>
+
+
+
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.room_type_add')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                   {{__('hotels.rooms_control')}}</span>
             </div>
         </div>
     </div>

@@ -18,8 +18,11 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">اقسام الغرف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
-                   قسم التحكم بالغرف</span>
+
+
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.rooms_departments')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                 {{__('hotels.rooms_control')}}</span>
+
             </div>
         </div>
 
@@ -55,10 +58,6 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-
-
-                    <a class="modal-effect btn btn-sm btn-primary" href="#"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
 
 
                 </div>
@@ -103,15 +102,15 @@
 
 
                                                     <a class="dropdown-item"
-                                                   href="{{route('calendars.create',$room->id)}}">اضافه تقويم جديد</a>
+                                                   href="{{route('calendars.create',$room->id)}}">{{__('hotels.calendar_create')}}</a>
 
 
                                                  <a class="dropdown-item"
-                                                   href="{{route('rooms.calendars.show',$room->id)}}">تقويمات الغرفه</a>
+                                                   href="{{route('rooms.calendars.show',$room->id)}}">{{__('hotels.calendars')}}</a>
 
 
                                                   <a class="dropdown-item"
-                                                   href="{{route('calendars.today',$room->id)}}">التقويم اليومي</a>
+                                                   href="{{route('calendars.today',$room->id)}}">{{__('hotels.calendar_daily')}}</a>
 
 
                                             </div>

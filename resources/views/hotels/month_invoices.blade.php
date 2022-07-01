@@ -18,8 +18,10 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قسم الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
-                   تقرير الفاتوره الشهريه</span>
+
+
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.invoices_department')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{__('hotels.report')}}</span>
             </div>
         </div>
 
@@ -46,9 +48,9 @@
                             <tr>
 
 
-                                <th>بدايه الشهر </th>
-                                <th>نهايه الشهر</th>
-                                <th>الفاتوره</th>
+                                <th>{{__('hotels.start')}} </th>
+                                <th>{{__('hotels.end')}}</th>
+                                <th>{{__('hotels.invoice')}}</th>
 
 
                             </tr>
@@ -72,7 +74,7 @@
                                             <div class="dropdown-menu tx-13">
 
                                                 <a class="dropdown-item"
-                                                   href="{{route('hotels.invoices')}}">الفاتوره الشهريه</a>
+                                                   href="{{route('hotels.invoices')}}">{{__('hotels.invoice_monthly')}}</a>
 
 
 

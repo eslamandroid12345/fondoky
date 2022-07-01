@@ -16,7 +16,6 @@ use App\Models\Rate;
 use App\Models\Report;
 use App\Models\RoomType;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -36,8 +35,7 @@ class HotelRepository implements HotelRepositoryInterface
     public function reservations(){
 
 
-        $bookers = Booker::with(['hotel:id,name_ar,name_en,pound','user:id,name'])
-            ->where('hotel_id','=',hotel()->id)
+        $bookers = Booker::with(['hotel:id,name_ar,name_en,pound','user:id,name'])->where('hotel_id','=',hotel()->id)
             ->orderBy('id','DESC')->simplePaginate(Max);
 
         return view('hotels.reservations',compact('bookers'));
@@ -49,8 +47,7 @@ class HotelRepository implements HotelRepositoryInterface
     public function room_type_index(){
 
 
-        $room_types = RoomType::with('hotel')->where('hotel_id','=',hotel()->id)
-            ->orderBy('id','DESC')->simplePaginate(Max);
+        $room_types = RoomType::with('hotel')->where('hotel_id','=',hotel()->id)->orderBy('id','DESC')->simplePaginate(Max);
 
         return view('rooms.room_type_index',compact('room_types'));
     }
@@ -202,6 +199,7 @@ class HotelRepository implements HotelRepositoryInterface
             $hotel->location_ar = $request->location_ar;
             $hotel->location_en = $request->location_en;
             $hotel->pound = $request->pound;
+            $hotel->currency_en = $request->currency_en;
             $hotel->description = $request->description;
             $hotel->hotel_photos = json_encode($data);
             $hotel->phone_hotel = $request->phone_hotel;
@@ -283,6 +281,7 @@ class HotelRepository implements HotelRepositoryInterface
                 $hotel->location_ar = $request->location_ar;
                 $hotel->location_en = $request->location_en;
                 $hotel->pound = $request->pound;
+                $hotel->currency_en = $request->currency_en;
                 $hotel->description = $request->description;
                 $hotel->hotel_photos = json_encode($data);
                 $hotel->phone_hotel = $request->phone_hotel;
@@ -356,8 +355,6 @@ class HotelRepository implements HotelRepositoryInterface
         return view('hotels.invoices',compact('bookers','commissions','totals'));
 
     }
-
-
 
 
 

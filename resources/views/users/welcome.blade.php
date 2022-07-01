@@ -12,6 +12,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Mulish:wght@200;300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('web/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('web/style.css')}}">
+        <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 
 
         <style type="text/css">
@@ -116,18 +117,30 @@
             <div class="row">
 
                <form action="{{url('/')}}" class="form1" method="GET">
+
+                   @if(lang() == 'ar')
                     <div class="col-lg-2 col-12">
                         <input type="text" name="country" placeholder="{{__('welcome.country')}}" value="{{request()->query('country')}}">
                     </div>
 
+                       @else
+
+                       <div class="col-lg-2 col-12">
+                           <input type="text" name="country_en" placeholder="{{__('welcome.country')}}" value="{{request()->query('country_en')}}">
+                       </div>
+                   @endif
+
                     <div class="col-lg-2 col-12">
-                        <input placeholder="{{\Carbon\Carbon::now()->format('Y-m-d')}}" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" name="date_start" value="{{request()->query('date_start')}}">
+                        <input  type="text" placeholder="{{\Carbon\Carbon::now()->format('Y-m-d')}}" class="textbox-n" id="start" name="date_start" value="{{request()->query('date_start')}}" readonly="readonly" />
+
                     </div>
 
 
 
                     <div class="col-lg-2 col-12">
-                        <input placeholder="{{\Carbon\Carbon::now()->addDays(1)->format('Y-m-d')}}" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" name="date_expire" value="{{request()->query('date_expire')}}">
+
+                        <input  type="text" placeholder="{{\Carbon\Carbon::now()->addDays(1)->format('Y-m-d')}}" class="textbox-n" id="end" name="date_expire" value="{{request()->query('date_expire')}}" readonly="readonly" />
+
                     </div>
 
                     <div class="col-lg-5 col-12 child">
@@ -339,12 +352,24 @@
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/show.js')}}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script>
-        $( function() {
-            $( ".datepicker" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
-        } );
+
+    {{--start script of date--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#start").datepicker({
+
+                dateFormat: 'yy-mm-dd'
+            });
+
+            $("#end").datepicker({
+
+
+                dateFormat: 'yy-mm-dd'
+            });
+        });
     </script>
     </body>
     </html>

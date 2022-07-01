@@ -9,7 +9,7 @@ return [
     'password' => "password of hotel",
     'location_ar' => "location of hotel with arabic language",
     'location_en' => "location of hotel with english language",
-    'pound' => "chose currency",
+    'pound' => "currency by arabic language",
     'description' => "write description for hotel and room",
     'room_photos' => "chose photos of hotel and room",
     'phone_hotel' => "write te phone of hotel",
@@ -22,6 +22,7 @@ return [
     "current_password" => "old password",
     "confirm_password" => "confirm password",
     "new_password" => "new password",
+    "currency_en" => "currency by english language"
 
 
 ];

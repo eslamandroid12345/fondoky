@@ -20,7 +20,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">تحديث الملف الشخصي</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.profile')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                    {{__('register.update')}} </span>
             </div>
         </div>
@@ -164,6 +164,29 @@
 
 
 
+                               <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <label for="inputName" class="control-label">{{ __('register.currency_en') }}</label>
+                                @php
+
+                                    $currencies_en = ["SAR","USD","EUR","AED","BHD","EGP","GPP","KWD","OMR","QAR"];
+
+                                @endphp
+                                <select name="currency_en" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                        onchange="console.log('change is firing')">
+
+                                    @foreach($currencies_en as $currency_en)
+                                        <option value="{{$currency_en}}" {{$hotel->currency_en == $currency_en ? 'selected' : ''}}>{{$currency_en}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger"> @error('pound') {{$message}} @enderror</span>
+
+                            </div>
+
+
+
+
+
+
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{ __('register.description') }}</label>
@@ -174,7 +197,7 @@
 
 
 
-                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3">
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{ __('register.phone_hotel') }}</label>
                                 <input type="number" class="form-control" id="inputName" name="phone_hotel" value="{{$hotel->phone_hotel}}">
                                 <span class="text-danger"> @error('phone_hotel') {{$message}} @enderror</span>
@@ -185,7 +208,7 @@
 
 
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                                <h5 class="card-title">صور الفندق</h5>
+                                <h5 class="card-title">{{__('hotels.images')}}</h5>
 
                                 <input type="file" name="hotel_photos[]" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
                                        data-height="70" multiple />

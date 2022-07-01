@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
     <!--Internal  TelephoneInput css-->
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 
 @endsection
 @section('title')
@@ -22,8 +21,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قسم تقويمات الغرف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                 تعديل تقويم الغرفه</span>
+                <h4 class="content-title mb-0 my-auto">{{__('rooms_calendars.calendars')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+               {{__('hotels.calendars_edit')}}</span>
             </div>
         </div>
     </div>
@@ -142,8 +141,6 @@
     <!-- Internal form-elements js -->
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         $(function () {

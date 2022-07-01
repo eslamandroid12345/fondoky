@@ -10,8 +10,11 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قسم الغرف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                  سجل الغرفه</span>
+
+
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.rooms_departments')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                 {{__('hotels.rooms_control')}}</span>
+
             </div>
         </div>
 
@@ -26,7 +29,7 @@
                 <div class="card card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">سجل الغرفه</h1>
+                            <h1 class="invoice-title">{{__('hotels.room_record')}}</h1>
                             
                         </div><!-- invoice-header -->
                         <div class="row mg-t-20">
@@ -37,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="col-md">
-                                <label class="tx-gray-600">معاينه بيانات الغرفه</label>
+                                <label class="tx-gray-600">{{__('hotels.room_information')}}</label>
 
                                 <p class="invoice-info-row"><span>{{__('room_add.room_type')}}</span>
                                     <span>{{$room->room_type->room_type}}</span></p>
@@ -48,15 +51,14 @@
 
                             </div>
                         </div>
-                        <div class="table-responsive mg-t-40">
+                        <hr class="mg-b-40">
 
-                            {{--body--}}
-
+                        <div class="row">
                             @if(count(json_decode($room->images)) == 1)
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -65,7 +67,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -75,7 +77,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -85,19 +87,16 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
                             @endif
 
-
                         </div>
-                        <hr class="mg-b-40">
 
 
-
-                        <button class="btn btn-danger  float-left mt-3 mr-2"><a class="text-white" href="{{route('rooms.index')}}">رجوع</a> </button>
+                        <button class="btn btn-danger  float-left mt-3 mr-2"><a class="text-white" href="{{route('rooms.index')}}">{{__('hotels.room_back')}}</a> </button>
 
 
                     </div>
@@ -109,6 +108,7 @@
     </div>
     <!-- Container closed -->
     </div>
+
     <!-- main-content closed -->
 @endsection
 @section('js')

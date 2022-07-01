@@ -7,7 +7,6 @@ use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\RoomTypeRequest;
 use App\Http\Requests\StoreHotelRequest;
 use App\Http\Requests\UpdateHotelRequest;
-use Illuminate\Http\Request;
 
 
 interface  HotelRepositoryInterface{

@@ -12,7 +12,7 @@ return [
     "password_min" => "The password ust be at least 8 character",
     "location_ar" => "please write location of hotel by arabic language",
     "location_en" => "please write location of hotel by english language",
-    "pound" => "The currency field is required",
+    "pound" => "The currency with arabic language field is required",
     "description" => "The description field is required",
     "hotel_photos" => "The hotel photos is required",
     "phone_hotel" => "The mobile of hotel is required",
@@ -44,8 +44,64 @@ return [
     "current" => "old password field is required",
     "confirm_password" => "please confirm password",
     "same" => "The confirmed password is not the same as the new password",
-    "unique_type" => "this room type has already been taken"
+    "unique_type" => "this room type has already been taken",
+    "currency_en" => "The hotel currency of english language is required",
 
+
+    //start of home in hotel
+    "booking_all" => "Number of booking",
+    "room_all" => "Number of rooms",
+    "calendars_all" => "Calendars of rooms",
+    "room_types" => "Room types",
+    "rates" => "Customer rates",
+    "welcome" => "welcome",
+    "welcome_message" => "Hi, welcome back!",
+    "message_text" => "Dashboard of hotel booking system",
+    "logout_now" => "Logout",
+    "profile" => "Profile edit",
+
+    "arrivals" => "Today's booking list",
+    "booking_department" => "Reservations Departments",
+
+    "room_type_add" => "Room type add",
+    "room_type_show" => "Room types show",
+    "rooms_control" => "Rooms control department",
+
+
+    "room_number" => "Room number",
+    "date_create" => "Date of create",
+    "rooms_departments" => "Room departments",
+    "calendar_create" => "Calendar create",
+    "calendar_daily" => "Calendar daily",
+    "calendars" => "Calendars room",
+    "images" => "Hotel images",
+    "service_create" => "Services create and show",
+    "services_departments" => "Services departmeny",
+    "service_name" => "Service_name",
+
+
+    "invoices" => "Invoices",
+    "invoice_monthly" => "Month Invoices",
+    "start" => "Availability start date",
+    "end" => "Availability end date",
+    "invoice" => "Invoice",
+    "report" => "Monthly bill report list",
+    "invoices_department" => "Invoices Department",
+
+
+    "total" => "Total profit money",
+    "commission" => "Total commission money",
+
+
+
+    "currency" => "currency",
+    "calendars_departments" => "Calendars department",
+    "calendars_new_create" => "Create new calendar",
+    "calendars_edit" => "View and edit room calendar list",
+
+    "room_record" => "Room record",
+    "room_information" => "View room information",
+    "room_back" => "Back",
 
 
 

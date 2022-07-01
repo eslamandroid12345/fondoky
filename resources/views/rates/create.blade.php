@@ -93,7 +93,7 @@
                          @foreach(json_decode($hotel->hotel_photos) as $image)
                              <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
 
-                                 <img src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
+                                 <img style="height: 280px" src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
                              </div>
                          @endforeach
 
@@ -102,7 +102,7 @@
                          @foreach(json_decode($hotel->hotel_photos) as $image)
                              <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
 
-                                 <img src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
+                                 <img style="height: 280px" src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
                              </div>
                          @endforeach
 
@@ -112,7 +112,7 @@
                          @foreach(json_decode($hotel->hotel_photos) as $image)
                              <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
 
-                                 <img src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
+                                 <img style="height: 280px" src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
                              </div>
                          @endforeach
 
@@ -122,7 +122,7 @@
                          @foreach(json_decode($hotel->hotel_photos) as $image)
                              <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
 
-                                 <img src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
+                                 <img style="height: 280px" src="{{URL::to('/hotels/'.$image)}}" class="d-block w-100" alt="...">
                              </div>
                          @endforeach
 
@@ -130,9 +130,11 @@
 
                  </div>
 
+                    <div class="mt-2">  @for($i = 1 ; $i <= 5 ; $i++) <i class="fa fa-star checked"></i> @endfor Customer Ratings {{number_format($rates_count,2)}}</div>
+
                 @if($rates->count() > 0)
 
-                        <div class="mt-4">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
 
                             @for($i = 1 ; $i <= $rates->sum('rates_number') ; $i++)
                                 <i class="fa fa-star checked"></i>
@@ -145,7 +147,6 @@
                             @endfor
                             Rates
 
-                            <div class="mt-2">  @for($i = 1 ; $i <= 5 ; $i++) <i class="fa fa-star checked"></i> @endfor Customer Ratings {{number_format($rates_count,2)}}</div>
                         </div>
 
 
@@ -190,11 +191,29 @@
                     </form>
 
                     @endif
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
+                        <ul>
+                            @if($hotel->service()->exists())
+
+                                @foreach(json_decode($hotel->service->services) as $service)
+                                    <li>{{$service}}</li><hr>
+                                @endforeach
+
+
+                            @endif
+                        </ul>
+                    </div>
                 </div>
             </div>
+
         </div>
 
+
     </div>
+
+
+
 
     <!-- row closed -->
     </div>

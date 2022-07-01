@@ -20,7 +20,7 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function hotel(){
 
-        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','country','pound','blocked'])->latest()->simplePaginate(Max);
+        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','country','pound','currency_en','blocked'])->latest()->simplePaginate(Max);
         return view('admins.hotel',compact('hotels'));
 
 

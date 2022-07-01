@@ -20,8 +20,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">اقسام الغرف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                 اضافه غرفه جديديه </span>
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.rooms_departments')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                 {{__('hotels.rooms_control')}}</span>
+
             </div>
         </div>
     </div>
@@ -104,7 +105,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -113,7 +114,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -123,7 +124,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -133,7 +134,7 @@
                                 @foreach(json_decode($room->images) as $image)
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
 
-                                        <img src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                        <img style="height: 280px"  src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
 
@@ -158,7 +159,7 @@
 
 
                         <div class="d-flex justify-content-center mt-3">
-                            <button type="submit" class="btn btn-primary">تحديث</button>
+                            <button type="submit" class="btn btn-primary">{{__('admin_create.save')}}</button>
                         </div>
                     </form>
                 </div>

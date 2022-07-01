@@ -83,6 +83,7 @@ class HotelRepository implements HotelRepositoryInterface
             $hotel->location_ar = $request->location_ar;
             $hotel->location_en = $request->location_en;
             $hotel->pound = $request->pound;
+            $hotel->currency_en = $request->currency_en;
             $hotel->description = $request->description;
             $hotel->hotel_photos = json_encode($data);
             $hotel->phone_hotel = $request->phone_hotel;

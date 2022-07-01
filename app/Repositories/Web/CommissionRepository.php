@@ -17,7 +17,7 @@ class CommissionRepository implements CommissionRepositoryInterface
 
     public function commissions(){
 
-        $hotels = Hotel::select('id','name_ar','name_en','blocked')->simplePaginate(Max);
+        $hotels = Hotel::select('id','name_ar','name_en','blocked','currency_en')->simplePaginate(Max);
         return view('admins.hotel_report',compact('hotels'));
 
     }
@@ -26,7 +26,7 @@ class CommissionRepository implements CommissionRepositoryInterface
     public function index($id){
 
 
-        $hotel = Hotel::select('id','name_ar','name_en','pound')->find($id);
+        $hotel = Hotel::select('id','name_ar','name_en','pound','currency_en')->find($id);
 
         $commissions =  Report::query()->where('hotel_id', $id)
             ->where('blocked','=',true)
@@ -49,21 +49,16 @@ class CommissionRepository implements CommissionRepositoryInterface
 
         $hotel = Hotel::findOrFail($id);
 
-        $bookers = Booker::where('hotel_id', $id)
-            ->whereMonth('created_at', date('m'))
+        $bookers = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
 
 
-        $commissions = Booker::where('hotel_id', $id)
-            ->whereMonth('created_at', date('m'))
-            ->whereYear('created_at', date('Y'))
+        $commissions = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(commission)) as commission"))
             ->get();
 
 
-        $totals = Booker::where('hotel_id', $id)
-            ->whereMonth('created_at', date('m'))
-            ->whereYear('created_at', date('Y'))
+        $totals = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(total)) as total"))
             ->get();
 

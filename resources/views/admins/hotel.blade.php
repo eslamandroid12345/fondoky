@@ -75,7 +75,7 @@
 
                                     <td>{{lang() == 'ar' ? $hotel->name_ar : $hotel->name_en}}</td>
                                     <td>{{lang() == 'ar' ? $hotel->location_ar : $hotel->location_en}}</td>
-                                    <td>{{$hotel->pound}}</td>
+                                    <td>{{ lang() == 'ar' ? $hotel->pound : $hotel->currency_en }}</td>
                                     <td>{{$hotel->active()}}</td>
 
                                     <td>
@@ -87,8 +87,6 @@
 
                                                 <a class="dropdown-item"
                                                    href="{{route('admins.hotels/active',$hotel->id)}}">{{__('content.active')}}</a>
-                                                <a class="dropdown-item"
-                                                   href="#">{{__('content.show')}}</a>
 
                                             </div>
                                         </div>

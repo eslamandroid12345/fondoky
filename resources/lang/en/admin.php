@@ -48,4 +48,8 @@ return [
     "print_invoice" => "print",
 
 
+    "notifications" => "Notifications",
+    "messages" => "All messages",
+
+
 ];

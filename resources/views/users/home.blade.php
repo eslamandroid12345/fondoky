@@ -59,10 +59,6 @@
                 <div class="card-header pb-0">
 
 
-                    <a class="modal-effect btn btn-sm btn-primary" href="{{url('/')}}"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;الصفحه الرئيسيه</a>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -100,7 +96,7 @@
                                     <td>{{$booker->date_arrive}}</td>
                                     <td>{{$booker->date_leave}}</td>
                                     <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                    <td>{{number_format($booker->total_all,2)}} - {{$booker->hotel->pound}}</td>
+                                    <td>{{number_format($booker->total_all,2)}} - {{ lang() == 'ar' ? $booker->hotel->pound : $booker->hotel->currency_en}}</td>
                                     <td>{{$booker->cancel()}}</td>
 
 

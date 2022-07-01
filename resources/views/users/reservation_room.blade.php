@@ -25,10 +25,12 @@
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
+
+
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قسم حجوزات العملاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
-                   اضافه حجز جديد</span>
+                <h4 class="content-title mb-0 my-auto">{{__('users.booking_department')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                  {{__('users.booking_all')}}</span>
             </div>
         </div>
 
@@ -44,11 +46,6 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
 
-
-                    <a class="modal-effect btn btn-sm btn-primary" href="{{url('/')}}"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;الصفحه الرئيسيه</a>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -56,10 +53,10 @@
                             <thead>
 
                             <tr>
-                                <th>عدد الغرف</th>
-                                <th>سعر الغرفه</th>
-                                <th>تاريخ البدايه</th>
-                                <th>تاريخ النهايه</th>
+                                <th>{{__('users.room_number')}}</th>
+                                <th>{{__('users.room_price')}}</th>
+                                <th>{{__('users.start')}}</th>
+                                <th>{{__('users.end')}}</th>
                             </tr>
 
                             </thead>
@@ -104,27 +101,27 @@
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">الوجهه</label>
+                                <label for="inputName" class="control-label">{{__('users.city')}}</label>
                                 <input type="text" class="form-control" name="city_to" value="{{$room->hotel->country}}" readonly>
 
                             </div>
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">نوع الغرفه</label>
+                                <label for="inputName" class="control-label">{{__('users.room_type')}}</label>
                                 <input type="text" class="form-control" name="room_type" value="{{$room->room_type->room_type}}" readonly>
 
                             </div>
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">تاريخ الوصول</label>
+                                <label for="inputName" class="control-label">{{__('users.date_arrive')}}</label>
                                 <input type="date" class="form-control" name="date_arrive" value="{{ request()->query('date_start')}}" readonly>
 
                             </div>
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">تاريخ المغادره</label>
+                                <label for="inputName" class="control-label">{{__('users.date_leave')}}</label>
                                 <input type="date" class="form-control" name="date_leave" value="{{ request()->query('date_expire')}}" readonly>
 
                             </div>
@@ -132,7 +129,7 @@
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">الاشخاص البالغين</label>
+                                <label for="inputName" class="control-label">{{__('users.adults')}}</label>
                                 <input type="number" class="form-control" name="adults_max" value="{{$room->adults_max}}" readonly>
 
                             </div>
@@ -140,7 +137,7 @@
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">عدد الاطفال</label>
+                                <label for="inputName" class="control-label">{{__('users.children')}}</label>
                                 <input type="number" class="form-control" name="child_max" value="{{$room->child_max}}" readonly>
 
                             </div>
@@ -171,7 +168,7 @@
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">عدد الغرف</label>
+                                <label for="inputName" class="control-label">{{__('users.room_number')}}</label>
 
                                 <input type="number" class="form-control" name="room_number" id="room" onkeyup="sum()">
                                 <span class="text-danger"> @error('room_number') {{$message}} @enderror</span>
@@ -185,9 +182,14 @@
 
 
 
-                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3 mb-5">
-                                <label for="inputName" class="control-label">الاجمالي بقيمه الضريبه ب  {{$room->hotel->pound}}</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3 mb-2">
+                                <label for="inputName" class="control-label"> {{__('users.total')}} {{lang() == 'ar' ? $room->hotel->pound : $room->hotel->currency_en}}</label>
                                 <input type="text" class="form-control" name="total_all" id="total_all" value="0" readonly>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 mt-3 mb-2">
+                                <button type="submit" class="btn btn-primary">{{__('admin_create.save')}}</button>
                             </div>
 
 
@@ -249,9 +251,6 @@
 
                         </div>
 
-                        <div class="d-flex justify-content-center mt-3">
-                            <button type="submit" class="btn btn-primary">تسجيل بيانات الحجز</button>
-                        </div>
 
                     </form>
                 </div>

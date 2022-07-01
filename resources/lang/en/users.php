@@ -24,7 +24,30 @@ return [
     "messages" => "Messages",
     "notification" => "All Notification",
     "booking" => "booking created successfully",
+    "website" => "Official Website",
 
+
+    //start user dashboard
+    "booking_all" => "List Add New Reservation",
+    "booking_department" => "Customer Reservations Department",
+    "room_number" => "Room number",
+    "room_price" => "Room price",
+    "start" => "Availability start date",
+    "end" => "Availability end date",
+
+
+
+    "city" => "Your destination",
+    "room_type" => "Room type",
+    "date_arrive" => "Date arrive",
+    "date_leave" => "Date leave",
+    "adults" => "Adults",
+    "children" => "Children",
+    "total" => "The total value of the tax by ",
+
+
+    "rates" => "Hotel rate",
+    "rates_department" => "Hotel rates department",
 
 
 ];

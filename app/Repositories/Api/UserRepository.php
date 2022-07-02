@@ -19,11 +19,9 @@ class UserRepository implements UserRepositoryInterface
     public function users(){
 
 
-
         $users = UserResource::collection(User::orderBy('id','DESC')->simplePaginate(4));
 
         return returnDataSuccess("users get all successfully","201","users",$users);
-
 
 
     }

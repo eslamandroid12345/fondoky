@@ -89,7 +89,7 @@
                                     <tr>
 
                                         <td>{{$booker->id}}</td>
-                                        <td>{{$booker->room_price}}</td>
+                                        <td>{{ lang() == 'ar' ? number_format($booker->room_price,2) . '-' .  hotel()->pound : number_format($booker->room_price,2) . '-' .  hotel()->currency_en}}</td>
                                         <td>{{$booker->rate}}</td>
                                         <td>{{ lang() == 'ar' ? number_format($booker->commission,2) . '-' . hotel()->pound : number_format($booker->commission,2) . '-' . hotel()->currency_en }}</td>
                                         <td>{{$booker->room_type}}</td>

@@ -23,7 +23,7 @@ class HotelRepository implements HotelRepositoryInterface
         try {
 
 
-            $credentials = $request->only(['email','password']);
+             $credentials = $request->only(['email','password']);
 
             $token = auth()->guard('hotel-api')->attempt($credentials);
 

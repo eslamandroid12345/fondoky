@@ -78,7 +78,7 @@
                             </tr>
                             </thead>
 
-                            @forelse($bookers as $booker)
+                            @foreach($bookers as $booker)
                                 <tbody>
 
                                 <tr>
@@ -93,9 +93,9 @@
                                     <td>{{$booker->date_arrive}}</td>
                                     <td>{{$booker->date_leave}}</td>
                                     <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                    <td>{{number_format($booker->total,2)}} - {{$booker->hotel->pound}}</td>
+                                    <td>{{number_format($booker->total,2)}} - {{ lang() == 'ar' ? $booker->hotel->pound : $booker->hotel->currency_en}}</td>
 
-                                    <td>{{$booker->blocked == true ? number_format($booker->commission,2) . $booker->hotel->pound : '0'}}</td>
+                                    <td>{{  lang() == 'ar' ? number_format($booker->commission,2) . '-' . $booker->hotel->pound : number_format($booker->commission,2) . '-' . $booker->hotel->currency_en}}</td>
                                     <td>{{$booker->block()}}</td>
 
 
@@ -103,10 +103,8 @@
 
 
                                 </tbody>
-                            @empty
-                                <h6>No booking</h6>
-                            @endforelse
 
+                                @endforeach
                         </table>
                     </div>
                 </div>
@@ -148,38 +146,10 @@
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
 
-    <script>
-        $('#delete_invoice').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var invoice_id = button.data('invoice_id')
-            var modal = $(this)
-            modal.find('.modal-body #invoice_id').val(invoice_id);
-        })
 
-    </script>
-
-    <script>
-        $('#Transfer_invoice').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var invoice_id = button.data('invoice_id')
-            var modal = $(this)
-            modal.find('.modal-body #invoice_id').val(invoice_id);
-        })
-
-    </script>
 
     <script src="{{asset('js/NewNotificationHotel.js')}}"></script>
-    <script>
 
-        $( document ).ready(function() {
-
-            setTimeout(function() {
-                $('#alert').fadeOut('slow');
-            }, 1000);
-
-        });
-
-    </script>
 
 
 @endsection

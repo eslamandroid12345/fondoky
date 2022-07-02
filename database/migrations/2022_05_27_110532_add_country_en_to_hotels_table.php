@@ -11,7 +11,7 @@ class AddCountryEnToHotelsTable extends Migration
     {
         Schema::table('hotels', function (Blueprint $table) {
 
-            $table->string('country_en')->after('country')->default('Egypt-Cairo');
+            $table->string('country_en')->after('country');
         });
     }
 

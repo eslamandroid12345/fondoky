@@ -24,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
             Gate::define($ability,function ($auth) use ($ability){
 
                 return $auth->hasAbility($ability);
+
             });
 
         }

@@ -58,10 +58,6 @@
                 <div class="card-header pb-0">
 
 
-                    <a class="modal-effect btn btn-sm btn-primary" href="#"
-                       style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

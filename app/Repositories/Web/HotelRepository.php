@@ -257,7 +257,6 @@ class HotelRepository implements HotelRepositoryInterface
                         $image->move(public_path() . '/hotels/', $name);
                         $data[] = $name;
 
-
                     }
 
                 }
@@ -361,7 +360,7 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function arrivals(){
 
-        $bookers = Booker::whereDay('date_arrive',Carbon::now()->format('d'))->with(['hotel:id,name_ar,name_en,pound','user:id,name'])->where('hotel_id','=',hotel()->id)
+        $bookers = Booker::whereDay('date_arrive',Carbon::now()->format('d'))->with(['hotel:id,name_ar,name_en,pound,currency_en','user:id,name'])->where('hotel_id','=',hotel()->id)
             ->orderBy('id','DESC')->simplePaginate(Max);
 
         return view('hotels.arrivals',compact('bookers'));

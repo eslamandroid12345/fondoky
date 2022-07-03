@@ -42,7 +42,7 @@ class RoomRepository implements RoomRepositoryInterface
 
         }else{
 
-            abort('403','غير مصرح لك بالدخول لتك الصفحه');
+            return view('404');
         }
 
 
@@ -56,7 +56,7 @@ class RoomRepository implements RoomRepositoryInterface
 
         }else{
 
-            abort('403','غير مصرح لك بالدخول لتك الصفحه');
+            return view('404');
 
         }
     }

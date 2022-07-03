@@ -18,8 +18,16 @@ class CalendarRepository implements CalendarRepositoryInterface
     public function create($id){
 
 
-        $room = Room::where('hotel_id','=',hotel()->id)->findOrFail($id);
-        return view('calendars.create',compact('room'));
+        $room = Room::findOrFail($id);
+
+        if($room->room_type->hotel_id == hotel()->id){
+
+            return view('calendars.create',compact('room'));
+
+        }else{
+
+            return view('404');
+        }
 
 
     }

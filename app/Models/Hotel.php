@@ -114,8 +114,30 @@ class Hotel extends Authenticatable implements JWTSubject
 
 
 
+    public function payment(){
+
+        return $this->hasMany(Payment::class,'hotel_id','id');
+    }
 
 
+    public function department(){
+
+        return $this->hasMany(Department::class,'hotel_id','id');
+    }
+
+
+    public function employee(){
+
+        return $this->hasMany(Employee::class,'hotel_id','id');
+    }
+
+
+
+
+    public function roomService(){
+
+        return $this->hasMany(RoomService::class,'hotel_id','id');
+    }
 
 
 }

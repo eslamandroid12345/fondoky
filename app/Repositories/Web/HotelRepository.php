@@ -216,7 +216,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             event(new NewHotelNotification($data));
 
-            return redirect()->back()->with('hotel',__('hotels.hotel'));
+            return redirect()->route('hotels.show')->with('hotel',__('hotels.hotel'));
 
 
         }catch (\Exception $exception){
@@ -341,12 +341,14 @@ class HotelRepository implements HotelRepositoryInterface
         $bookers = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
 
-        $commissions = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
+        $commissions = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(commission)) as commission"))
             ->get();
 
 
-        $totals = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
+        $totals = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
             ->select(DB::raw("(sum(total)) as total"))
             ->get();
 
@@ -360,7 +362,8 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function arrivals(){
 
-        $bookers = Booker::whereDay('date_arrive',Carbon::now()->format('d'))->with(['hotel:id,name_ar,name_en,pound,currency_en','user:id,name'])->where('hotel_id','=',hotel()->id)
+        $bookers = Booker::whereDay('date_arrive',Carbon::now()->format('d'))->with(['hotel:id,name_ar,name_en,pound,currency_en','user:id,name'])
+            ->where('hotel_id','=',hotel()->id)
             ->orderBy('id','DESC')->simplePaginate(Max);
 
         return view('hotels.arrivals',compact('bookers'));

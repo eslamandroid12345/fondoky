@@ -69,4 +69,10 @@ class Admin extends Authenticatable implements JWTSubject
             return false;
         }
     }
+
+
+    public function payment(){
+
+        return $this->hasMany(Payment::class,'admin_id','id');
+    }
 }

@@ -106,6 +106,8 @@ return [
     "room_record" => "سجل الغرفه",
     "room_information" => "معاينه بيانات الغرفه",
     "room_back" => "رجوع",
+    "log" => "دخول الفندق",
+    "register_now" => "تسجيل فندق",
 ];
 
 

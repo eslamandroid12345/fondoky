@@ -17,15 +17,15 @@ return [
     "hotel_photos" => "The hotel photos is required",
     "phone_hotel" => "The mobile of hotel is required",
     "type_partake" => "The subtype field is required",
-    "hotel" => "HotelRepositoryRepository created successfully",//start data created and update and delete
-    "update" => "HotelRepositoryRepository updated successfully",
-    "delete" => "HotelRepositoryRepository deleted successfully",
+    "hotel" => "Hotel created successfully",//start data created and update and delete
+    "update" => "Hotel updated successfully",
+    "delete" => "Hotel deleted successfully",
 
     "hotel_email" => "The email of hotel field is required",
     "hotel_email_ok" => "The email of hotel must be an email",
     "hotel_password" => "The password field is required",
     "message" => "Welcome hotel owner in dashboard",
-    "login" => "HotelRepositoryRepository login",
+    "login" => "Login",
     "register" => "Hotels register data",
 
     "add" => "Add",
@@ -102,6 +102,9 @@ return [
     "room_record" => "Room record",
     "room_information" => "View room information",
     "room_back" => "Back",
+    "log" => "Login Hotel",
+    "register_now" => "Hotel Register",
+
 
 
 

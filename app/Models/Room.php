@@ -50,8 +50,13 @@ class Room extends Model
     }
 
 
+    //many to many relationship
+    public function roomService(){
 
-    //rooms has many events
+
+        return $this->belongsToMany(RoomService::class,'hotel_service_rooms','room_id',  'room_service_id','id','id');
+
+    }
 
 
 

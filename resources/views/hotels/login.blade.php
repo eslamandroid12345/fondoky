@@ -12,9 +12,17 @@
             </div>
         @endif
 
+            @if($message = Session::get('hotel'))
+                <div id="alert" class="row mr-2 ml-2">
+                    <button type="text" class="btn btn-lg btn-block btn-outline-success mb-2"
+                            id="type-error">{{$message}}
+                    </button>
+                </div>
+            @endif
+
         <div class="d-flex">
             <div class="w-100">
-                <h3 class="mb-4">تسجيل الدخول للفندق</h3>
+                <h3 class="mb-4">{{__('hotels.log')}}</h3>
             </div>
 
         </div>
@@ -42,6 +50,9 @@
                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">{{ __('hotels.login')}}</button>
             </div>
 
+            <div class="form-group">
+                <a href="{{route('hotels.show.register')}}" class="form-control btn bg-secondary text-white">{{ __('hotels.register_now')}}</a>
+            </div>
         </form>
     </div>
 

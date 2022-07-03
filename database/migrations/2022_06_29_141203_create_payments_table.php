@@ -14,13 +14,14 @@ class CreatePaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->boolean('payment_transaction')->default(0);
             $table->integer('month')->comment('month of pay');
-            $table->string('year')->comment('year of pay');
+            $table->year('year')->comment('year of pay');
             $table->string('description')->default('No notes');
-            $table->string('created_by');
             $table->unsignedBigInteger('hotel_id');
+            $table->unsignedBigInteger('admin_id');
             $table->timestamps();
 
             $table->foreign('hotel_id')->references('id')->on('hotels')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admins')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }

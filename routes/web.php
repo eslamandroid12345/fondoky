@@ -277,14 +277,6 @@ Route::group(['prefix'=>'users','middleware' => ['auth']], function (){
 
 
 
-//Route::get('vv/{id}', function ($id){
-//
-//    $report = Report::where('booker_id',$id)->get();
-//
-//    return $report;
-//
-//});
-
 
 
 //if (!Gate::allows('create_users')) {

@@ -68,7 +68,7 @@ class RoomRepository implements RoomRepositoryInterface
 
         try {
 
-            $data = [];//empty array
+            $data = [];
             if($request->hasfile('images'))
             {
 

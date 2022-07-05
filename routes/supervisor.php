@@ -22,8 +22,8 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
 
     Route::group(['prefix'=>'supervisors','middleware' => 'auth:admin'], function (){
 
-        Route::get('register',[SupervisorController::class,'create'])->name('supervisors.register')->middleware('supervisor');//return view register
-        Route::get('all',[SupervisorController::class,'supervisors'])->name('supervisors.all')->middleware('supervisors');//return all supervisors
+        Route::get('register',[SupervisorController::class,'create'])->name('supervisors.register')->middleware('can:supervisor');//return view register
+        Route::get('all',[SupervisorController::class,'supervisors'])->name('supervisors.all')->middleware('can:supervisors');//return all supervisors
         Route::post('store',[SupervisorController::class,'store'])->name('supervisors.store');//store supervisor
 
 

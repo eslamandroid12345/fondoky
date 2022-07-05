@@ -126,7 +126,6 @@ class RoomRepository implements RoomRepositoryInterface
             }
 
 
-
             //to remove all old rooms images from public folder
             $images = json_decode($room->images);
             foreach ($images as $image){

@@ -23,7 +23,7 @@
             <div class="d-flex">
 
 
-                <h4 class="content-title mb-0 my-auto">{{__('hotels.services_department')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                <h4 class="content-title mb-0 my-auto">{{__('hotels.services_departments')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                   {{__('hotels.service_create')}}</span>
             </div>
         </div>

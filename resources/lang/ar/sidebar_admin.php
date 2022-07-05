@@ -19,6 +19,7 @@ return [
     "bookers" => "حجوزات الفنادق",
     "report" => "التقارير",
     "report_hotels" => "تقارير الفنادق",
+    "supervisors" => "اضافه مشرف جديد",
 
 
 

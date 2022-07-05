@@ -12,6 +12,7 @@ use App\Interfaces\Web\CommissionRepositoryInterface;
 use App\Interfaces\Web\RoleRepositoryInterface;
 use App\Interfaces\Web\RoomRepositoryInterface;
 use App\Interfaces\Web\ServiceRepositoryInterface;
+use App\Interfaces\Web\SupervisorRepositoryInterface;
 use App\Repositories\Api\HotelRepository;
 use App\Repositories\Api\UserRepository;
 use App\Repositories\Web\AdminRepository;
@@ -22,6 +23,7 @@ use App\Repositories\Web\CommissionRepository;
 use App\Repositories\Web\RoleRepository;
 use App\Repositories\Web\RoomRepository;
 use App\Repositories\Web\ServiceRepository;
+use App\Repositories\Web\SupervisorRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -49,6 +51,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ServiceRepositoryInterface::class,ServiceRepository::class);
         $this->app->bind(CommissionRepositoryInterface::class,CommissionRepository::class);
         $this->app->bind(CommentRepositoryInterface::class,CommentRepository::class);
+        $this->app->bind(SupervisorRepositoryInterface::class,SupervisorRepository::class);
     }
 
 

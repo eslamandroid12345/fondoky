@@ -21,7 +21,11 @@ class Authenticate extends Middleware
 
                 return route('hotels.show');
 
-            }else{
+            }elseif (in_array('auth:supervisor', $request->route()->middleware())){ // if supervisor not auth redirect login hotel
+
+                return route('supervisors.show');
+
+            } else{
 
                 return route('login'); // user not authenticated
 

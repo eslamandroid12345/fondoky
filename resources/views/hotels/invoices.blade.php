@@ -76,7 +76,7 @@
                                     <th>{{__('book_hotel.num_of_nights')}}</th>
                                     <th>{{__('book_hotel.date_arrive')}}</th>
                                     <th>{{__('book_hotel.date_leave')}}</th>
-                                    <th>الاجمالي</th>
+                                    <th>{{__('hotels.total')}}</th>
                                     <th>{{__('book_hotel.blocked')}}</th>
 
                                 </tr>

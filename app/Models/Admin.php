@@ -75,4 +75,11 @@ class Admin extends Authenticatable implements JWTSubject
 
         return $this->hasMany(Payment::class,'admin_id','id');
     }
+
+
+
+    public function supervisor(){
+
+        return $this->hasMany(Supervisor::class,'admin_id','id');
+    }
 }

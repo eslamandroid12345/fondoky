@@ -63,6 +63,7 @@ class LoginController extends Controller
 
         $admin = 'admin';
         $hotel = 'hotel';
+        $supervisor = 'supervisor';
 
 
         if(auth()->guard($admin)->check()){
@@ -74,6 +75,11 @@ class LoginController extends Controller
 
             auth()->guard($hotel)->logout();//logout hotel
             $redirect = 'hotels/show';
+
+        } elseif (auth()->guard($supervisor)->check()){
+
+            auth()->guard($supervisor)->logout();//logout hotel
+            $redirect = 'supervisors/show';
 
         } else{
 

@@ -61,6 +61,11 @@ return [
             'provider' => 'hotels',
         ],
 
+        'supervisor-api' => [
+            'driver' => 'jwt',
+            'provider' => 'supervisors',
+        ],
+
 
 
         //start guard for web
@@ -73,6 +78,11 @@ return [
         'hotel' => [
             'driver' => 'session',
             'provider' => 'hotels',
+        ],
+
+        'supervisor' => [
+            'driver' => 'session',
+            'provider' => 'supervisors',
         ],
     ],
 
@@ -109,6 +119,12 @@ return [
         'hotels' => [
             'driver' => 'eloquent',
             'model' => App\Models\Hotel::class,
+        ],
+
+
+        'supervisors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Supervisor::class,
         ],
 
         // 'users' => [

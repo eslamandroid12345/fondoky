@@ -53,13 +53,13 @@ class Hotel extends Authenticatable implements JWTSubject
 
 
 
-    public function getJWTIdentifier()
-    {
+    public function getJWTIdentifier(){
+
         return $this->getKey();
     }
 
-    public function getJWTCustomClaims()
-    {
+    public function getJWTCustomClaims(){
+
         return [];
     }
 

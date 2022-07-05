@@ -11,7 +11,7 @@
             <div class="dropdown user-pro-body">
                 <div class="">
                     <img alt="user-img" class="avatar avatar-xl brround"
-                         src="{{ URL::asset('assets/img/faces/6.jpg') }}"><span
+                         src="{{ URL::to('/admins/' . admin()->image) }}"><span
                         class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
@@ -56,6 +56,10 @@
 
                                  @can('reservations')
                                      <li><a class="slide-item" href="{{route('booking.all')}}">{{__('sidebar_admin.bookers')}}</a></li>
+                                 @endcan
+
+                                 @can('supervisor')
+                                     <li><a class="slide-item" href="{{route('supervisors.register')}}">{{__('sidebar_admin.supervisors')}}</a></li>
                                  @endcan
 
 

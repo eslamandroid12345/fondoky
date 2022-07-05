@@ -20,15 +20,17 @@ return [
     'municipal_tax' => 'Municipal_tax',
     'tourism_tax' => 'Tourism_tax',
     'total' => 'Total price',
-    'blocked' => 'show',
-    'stayed' => 'Stayed',
+    'blocked' => 'booking status',
+    'stayed' => 'customer\'s condition',
     'room_price' => 'Room price',
     'commission' => 'Commission',
     'rate' => 'Rate',
     'not_stayed' => 'Not stayed',
     'block' => 'Booking blocked',
     'block_now' => 'booking off',
-    'leave' => 'leave'
+    'leave' => 'leave',
+    'control' => 'control',
+
 
 
 ];

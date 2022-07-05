@@ -76,7 +76,7 @@
                                 <th>{{__('book_hotel.total')}}</th>
                                 <th>{{__('book_hotel.blocked')}}</th>
                                 <th>{{__('book_hotel.stayed')}}</th>
-                                <th>control</th>
+                                <th>{{__('book_hotel.control')}}</th>
                             </tr>
                             </thead>
 
@@ -99,12 +99,12 @@
                                     <td>{{$booker->date_arrive}}</td>
                                     <td>{{$booker->date_leave}}</td>
                                     <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                    <td>{{lang() == 'ar' ? number_format($booker->total_all,2) . '-' . hotel()->pound : number_format($booker->total_all,2) . '-' . hotel()->currency_en}}</td>
+                                    <td>{{number_format($booker->total_all,2)}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
 
-                                    <td>{{ lang() == 'ar' ? $booker->vat_tax . '-' . hotel()->pound : $booker->vat_tax . '-' . hotel()->currency_en }}</td>
-                                    <td>{{ lang() == 'ar' ? $booker->municipal_tax . '-' . hotel()->pound : $booker->municipal_tax . '-' . hotel()->currency_en }}</td>
-                                    <td>{{ lang() == 'ar' ? $booker->tourism_tax . '-' . hotel()->pound : $booker->tourism_tax . '-' . hotel()->currency_en }}</td>
-                                    <td>{{ lang() == 'ar' ? $booker->total . '-' . hotel()->pound : $booker->total . '-' . hotel()->currency_en }}</td>
+                                    <td>{{$booker->vat_tax}} - {{ lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
+                                    <td>{{$booker->municipal_tax}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
+                                    <td>{{$booker->tourism_tax}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
+                                    <td>{{$booker->total}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
 
 
                                     <td>{{$booker->block()}}</td>

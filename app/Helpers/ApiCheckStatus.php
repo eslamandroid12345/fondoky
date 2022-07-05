@@ -88,6 +88,17 @@ if(!function_exists('hotel')){
 }
 
 
+if(!function_exists('supervisor')){
+
+    function supervisor()
+    {
+
+
+        return auth()->guard('supervisor')->user();
+    }
+}
+
+
 
 //check current language
 if(!function_exists('lang')){

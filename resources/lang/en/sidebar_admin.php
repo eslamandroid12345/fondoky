@@ -18,6 +18,8 @@ return [
     "bookers" => "Hotels booking",
     "report" => "Reports",
     "report_hotels" => "Hotels reports",
+    "supervisors" => "Create new supervisor",
+
 
 
 

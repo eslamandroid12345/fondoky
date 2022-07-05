@@ -35,7 +35,7 @@ class HotelRepository implements HotelRepositoryInterface
     public function reservations(){
 
 
-        $bookers = Booker::with(['hotel:id,name_ar,name_en,pound','user:id,name'])->where('hotel_id','=',hotel()->id)
+        $bookers = Booker::with(['hotel:id,name_ar,name_en,pound,currency_en','user:id,name'])->where('hotel_id','=',hotel()->id)
             ->orderBy('id','DESC')->simplePaginate(Max);
 
         return view('hotels.reservations',compact('bookers'));

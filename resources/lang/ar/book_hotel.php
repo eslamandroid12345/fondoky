@@ -21,8 +21,8 @@ return [
     'municipal_tax' => 'نسبه البلديه',
     'tourism_tax' => 'نسبه السياحه',
     'total' => 'سعر الحجز الاصلي',
-    'blocked' => 'show',
-    'stayed' => 'Stayed',
+    'blocked' => 'حاله الحجز',
+    'stayed' => 'حاله االزبون',
     'room_price' => 'سعر الغرفه',
     'commission' => 'نسبه الموقع',
     'rate' => 'قيمه النسبه',
@@ -30,6 +30,9 @@ return [
     'block' => 'الغاء الحجز',
     'block_now' => 'الحجز ملغي',
     'leave' => 'مغادر',
+
+    'control' => 'التحكم',
+
 
 
 ];

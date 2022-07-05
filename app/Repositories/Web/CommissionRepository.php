@@ -29,7 +29,6 @@ class CommissionRepository implements CommissionRepositoryInterface
         $hotel = Hotel::select('id','name_ar','name_en','pound','currency_en')->find($id);
 
         $commissions =  Report::query()->where('hotel_id', $id)
-            ->where('blocked','=',true)
             ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"),
                 DB::raw("(DATE_FORMAT(created_at, '%m-%Y')) as month_year"))
             ->orderBy('created_at')

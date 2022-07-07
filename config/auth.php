@@ -61,12 +61,6 @@ return [
             'provider' => 'hotels',
         ],
 
-        'supervisor-api' => [
-            'driver' => 'jwt',
-            'provider' => 'supervisors',
-        ],
-
-
 
         //start guard for web
         'admin' => [
@@ -80,10 +74,7 @@ return [
             'provider' => 'hotels',
         ],
 
-        'supervisor' => [
-            'driver' => 'session',
-            'provider' => 'supervisors',
-        ],
+
     ],
 
     /*

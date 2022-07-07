@@ -58,11 +58,6 @@
                                      <li><a class="slide-item" href="{{route('booking.all')}}">{{__('sidebar_admin.bookers')}}</a></li>
                                  @endcan
 
-                                 @can('supervisor')
-                                     <li><a class="slide-item" href="{{route('supervisors.register')}}">{{__('sidebar_admin.supervisors')}}</a></li>
-                                 @endcan
-
-
 
                     </ul>
                 </li>

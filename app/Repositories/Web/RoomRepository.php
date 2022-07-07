@@ -62,7 +62,6 @@ class RoomRepository implements RoomRepositoryInterface
     }
 
 
-
     public function store(StoreRoomRequest $request){
 
 

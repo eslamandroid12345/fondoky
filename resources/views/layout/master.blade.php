@@ -12,15 +12,15 @@
     @include('layout.head')
 </head>
 <style>
-    table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc {
+    /*table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc {*/
 
-         background: none;
+    /*     background: none;*/
 
-    }
+    /*}*/
 
-    table.dataTable tbody td.sorting_1 {
-         background: none;
-    }
+    /*table.dataTable tbody td.sorting_1 {*/
+    /*     background: none;*/
+    /*}*/
     .form-check-input {
 
         position: relative;

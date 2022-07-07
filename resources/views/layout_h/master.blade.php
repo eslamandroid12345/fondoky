@@ -12,21 +12,24 @@
     @include('layout_h.head')
 </head>
 <style>
-    table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc {
+    /*table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc {*/
 
-         background: none;
+    /*     background: none;*/
 
-    }
+    /*}*/
 
-    table.dataTable tbody td.sorting_1 {
-         background: none;
-    }
+    /*table.dataTable tbody td.sorting_1 {*/
+    /*     background: none;*/
+    /*}*/
+
     .form-check-input {
 
         position: relative;
          margin-top: 0;
         margin-left: 0;
     }
+
+
 </style>
 <body class="main-body app sidebar-mini">
     <!-- Loader -->

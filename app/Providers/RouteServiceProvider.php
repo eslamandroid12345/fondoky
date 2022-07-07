@@ -13,7 +13,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public const HOME = '/home';
     public const ADMIN = 'admins/hotel';
-    public const HOTEL = 'hotels/all';
+    public const HOTEL = 'hotels/home';
 
 
     protected $namespace = 'App\\Http\\Controllers';

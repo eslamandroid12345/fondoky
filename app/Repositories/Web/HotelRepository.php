@@ -15,6 +15,7 @@ use App\Models\Hotel;
 use App\Models\Rate;
 use App\Models\Report;
 use App\Models\RoomType;
+use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -154,7 +155,7 @@ class HotelRepository implements HotelRepositoryInterface
         if(auth()->guard('hotel')->attempt(['email' => $request->email, 'password' => $request->password,'blocked' => 1])){
 
 
-            return redirect()->to('hotels/home');
+            return redirect()->to(RouteServiceProvider::HOTEL);
 
         }else{
 

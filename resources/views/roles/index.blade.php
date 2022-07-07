@@ -55,7 +55,7 @@
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
                             <thead>
                             <tr>
-                                <th>{{__('admin_role.name_role')}}</th>
+                                <th>{{__('admin_role.role_one')}}</th>
                                 <th>{{__('admin_role.permissions_role')}}</th>
                                 <th>{{__('data.action')}}</th>
                             </tr>

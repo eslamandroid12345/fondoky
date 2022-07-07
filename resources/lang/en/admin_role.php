@@ -16,6 +16,7 @@ return [
 
     "permissions_role" => "screen validity",
     "get" => "All permissions have been sent successfully",
+    "role_one" => "Role name",
 
 
 ];

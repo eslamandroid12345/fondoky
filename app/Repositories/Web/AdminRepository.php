@@ -85,7 +85,6 @@ class AdminRepository implements AdminRepositoryInterface
 
         try {
 
-            //create image for admin
             if ($image = $request->file('image')) {
 
                 $destinationPath = 'admins/';

@@ -76,12 +76,7 @@ class LoginController extends Controller
             auth()->guard($hotel)->logout();//logout hotel
             $redirect = 'hotels/show';
 
-        } elseif (auth()->guard($supervisor)->check()){
-
-            auth()->guard($supervisor)->logout();//logout hotel
-            $redirect = 'supervisors/show';
-
-        } else{
+        }else{
 
             auth()->logout();//logout user
             $redirect = '/';

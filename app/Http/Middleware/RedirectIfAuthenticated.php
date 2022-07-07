@@ -24,11 +24,7 @@ class RedirectIfAuthenticated
 
                     return redirect(RouteServiceProvider::HOTEL);
 
-                }elseif ($guard == 'supervisor'){
-
-                return redirect(RouteServiceProvider::SUPERVISOR);
-
-               } else{
+                }else{
 
                     return redirect(RouteServiceProvider::HOME);
 

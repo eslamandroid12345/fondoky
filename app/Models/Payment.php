@@ -13,6 +13,7 @@ class Payment extends Model
     protected $table = 'payments';
     protected $fillable = [
 
+        'commission',
         'payment_transaction',
         'month',
         'year',

@@ -14,7 +14,6 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
     public const ADMIN = 'admins/hotel';
     public const HOTEL = 'hotels/all';
-    public const SUPERVISOR = 'supervisors/home';
 
 
     protected $namespace = 'App\\Http\\Controllers';
@@ -49,9 +48,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/admin.php'));
 
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/supervisor.php'));
+
 
         });
     }

@@ -12,6 +12,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
 
             $table->bigIncrements('id');
+            $table->double('commission',15,2)->default(0);
             $table->boolean('payment_transaction')->default(0);
             $table->integer('month')->comment('month of pay');
             $table->year('year')->comment('year of pay');

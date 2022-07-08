@@ -108,6 +108,60 @@ return [
     "room_back" => "رجوع",
     "log" => "دخول الفندق",
     "register_now" => "تسجيل فندق",
+
+
+    //room services
+     'room_service_name' => 'يرجي ادخال اسم الخدمه للغرفه',
+     'hotel_name_required' => 'رقم الفندق مطلوب',
+     'hotel_exists' => 'الفندق هذا غير موجود بالفعل',
+
+
+    //message of room service
+    'service_room_delete' => 'تم حذف الخدمه بنجاح',
+    'service_room_create' => 'تم اضافه الخدمه بنجاح',
+    'service_room_update' => 'تم تحديث بيانات الخدمه بنجاح',
+
+
+    //room service view
+
+    'room_service_add' => 'اضافه خدمه جديده',
+    'room_service_department' => 'قسم خدمات الغرف',
+    'room_service_name_add' => 'اسم الخدمه',
+
+
+    //tables show of services room
+    'room_service_show' => 'عرض الخدمات',
+    'room_service_id' => 'رقم الخدمه',
+    'room_service_name_show' => 'اسم الخدمه',
+    'room_service_hotel' => 'اسم الفندق',
+    'room_service_control' => 'التحكم',
+    'room_service_update_show' => 'تعديل',
+    'room_service_delete_show' => 'حذف',
+
+
+    //hotel room services validation
+
+    'room_id' => 'اسم الغرفه مطلوب',
+    'room_service_id_valid' => 'اسم الخدمه مطلوب',
+    'room_id_exists' => 'هذه الغرفه غير موجوده بالفعل',
+    'room_service_id_exists' => 'هذه الخدمه غير موجوده بالفعل',
+    'message_create' => 'تم اضافه الخدمات لتلك الغرفه بنجاح',
+
+
+
+
+     //form of hotel room services
+    'hotel_room_service_insert' => 'اضافه خدمات الغرف',
+    'hotel_room_service_department' => 'قسم خدمات الغرف',
+    'hotel_room_service_room' => 'اسم الغرفه',
+
+
+
+
+
+
+
+
 ];
 
 

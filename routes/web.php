@@ -15,7 +15,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 
 
- define('Max',2);
+ define('Max',3);
  define('Search',8);
 
 
@@ -299,3 +299,14 @@ Route::group(['prefix'=>'users','middleware' => ['auth']], function (){
  *
  *
  */
+
+
+
+   Route::get('room/{id}', function ($id){
+
+       $room = Room::find($id)->roomService;
+
+
+       return returnDataSuccess("service get successfully","200","service",$room);
+
+   });

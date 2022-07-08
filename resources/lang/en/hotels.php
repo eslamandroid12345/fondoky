@@ -106,6 +106,44 @@ return [
     "register_now" => "Hotel Register",
 
 
+     //room services
+    'room_service_add' => 'Add new service',
+    'room_service_name' => 'Please enter the name of service room',
+    'hotel_name_required' => 'The number of hotel field is required',
+    'hotel_exists' => 'This hotel not found',
+
+    'room_service_name_add' => 'Service name',
+
+    //message of room service
+    'service_room_delete' => 'Service deleted successfully',
+    'service_room_create' => 'Service create successfully',
+    'room_service_department' => 'Room service department',
+    'service_room_update' => 'Service updated successfully',
+
+
+    //tables show of services room
+    'room_service_show' => 'Services show',
+    'room_service_id' => 'Service number',
+    'room_service_name_show' => 'Service name',
+    'room_service_hotel' => 'Hotel name',
+    'room_service_control' => 'Control',
+    'room_service_update_show' => 'Update',
+    'room_service_delete_show' => 'Delete',
+
+
+
+    //hotel room services validation
+    'room_id' => 'The room field is required',
+    'room_service_id_valid' => 'The room service field is required',
+    'room_id_exists' => 'This room not already exists',
+    'room_service_id_exists' => 'This room service not already exists',
+    'message_create' => 'The room have all this services now',
+
+
+
+    'hotel_room_service_insert' => 'Add services for rooms',
+    'hotel_room_service_department' => 'Room services department',
+    'hotel_room_service_room' => 'Room name',
 
 
 ];

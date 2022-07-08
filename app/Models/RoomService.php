@@ -29,7 +29,7 @@ class RoomService extends Model
     public function room(){
 
 
-        return $this->belongsToMany(Room::class,'hotel_service_rooms','room_service_id','room_id','id','id');
+        return $this->belongsToMany(Room::class,'hotel_service_rooms','room_service_id','room_id','id','id')->withTimestamps();
 
     }
 }

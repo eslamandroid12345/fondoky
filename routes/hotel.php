@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\HotelServiceRoomController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomServiceController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of translation
@@ -87,4 +89,33 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
 
 
 
+    //create and store new room services
+
+    Route::group(['prefix'=>'room-services','middleware'=> ['auth:hotel','status']], function (){
+
+
+        Route::get('index',[RoomServiceController::class,'index'])->name('room-services.index');
+        Route::get('create',[RoomServiceController::class,'create'])->name('room-services.create');
+        Route::post('store',[RoomServiceController::class,'store'])->name('room-services.store');
+        Route::get('edit/{id}',[RoomServiceController::class,'edit'])->name('room-services.edit');
+        Route::put('update/{id}',[RoomServiceController::class,'update'])->name('room-services.update');
+        Route::get('delete/{id}',[RoomServiceController::class,'delete'])->name('room-services.delete');
+
+
     });
+
+
+
+    //many to many relation of room services with rooms
+    Route::group(['prefix'=>'hotel-room-services','middleware'=> ['auth:hotel','status']], function (){
+
+
+        Route::get('create',[HotelServiceRoomController::class,'create'])->name('hotel-room-services.create');
+        Route::post('store',[HotelServiceRoomController::class,'store'])->name('hotel-room-services.store');
+
+    });
+
+
+
+
+});

@@ -284,29 +284,12 @@ Route::group(['prefix'=>'users','middleware' => ['auth']], function (){
 //}
 
 
-/*
- *
- *
- *
- *  $file   = $request->file("select_file");
-
-    if($request->hasfile("select_file"))
-    {
-        $file->move("public/images/",$file->getClientOriginalName());
-        $Image                = $file->getClientOriginalName();
- *
- * }
- *
- *
- */
-
-
-
-   Route::get('room/{id}', function ($id){
-
-       $room = Room::find($id)->roomService;
-
-
-       return returnDataSuccess("service get successfully","200","service",$room);
-
-   });
+//
+//   Route::get('room/{id}', function ($id){
+//
+//       $room = Room::find($id)->roomService;
+//
+//
+//       return returnDataSuccess("service get successfully","200","service",$room);
+//
+//   });

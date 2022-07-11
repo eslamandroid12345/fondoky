@@ -2,8 +2,6 @@
 
 
 namespace App\Interfaces\Web;
-
-
 use App\Http\Requests\StoreRoomServiceRequest;
 
 interface RoomServiceRepositoryInterface{

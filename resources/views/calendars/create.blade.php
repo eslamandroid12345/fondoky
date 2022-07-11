@@ -167,7 +167,6 @@
 
             $("#end").datepicker({
 
-
                 dateFormat: 'yy-mm-dd'
             });
         });

@@ -156,6 +156,8 @@ return [
     'hotel_room_service_room' => 'اسم الغرفه',
 
 
+    'hotel_room_service_create' => 'اضافه خدمات للغرف',
+
 
 
 

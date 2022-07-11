@@ -83,6 +83,7 @@
 
                     <li><a class="slide-item" href="{{route('services.create')}}">{{__('hotel_sidebar.hotel_services')}}</a></li>
                     <li><a class="slide-item" href="{{route('room-services.index')}}"> {{__('hotels.room_service_department')}}</a></li>
+                    <li><a class="slide-item" href="{{route('hotel-room-services.create')}}"> {{__('hotels.hotel_room_service_create')}}</a></li>
 
 
                 </ul>

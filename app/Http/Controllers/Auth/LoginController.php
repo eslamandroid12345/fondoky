@@ -63,7 +63,6 @@ class LoginController extends Controller
 
         $admin = 'admin';
         $hotel = 'hotel';
-        $supervisor = 'supervisor';
 
 
         if(auth()->guard($admin)->check()){

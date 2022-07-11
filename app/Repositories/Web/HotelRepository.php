@@ -2,8 +2,6 @@
 
 
 namespace App\Repositories\Web;
-
-
 use App\Events\NewHotelNotification;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\RoomTypeRequest;
@@ -117,7 +115,6 @@ class HotelRepository implements HotelRepositoryInterface
 
             DB::commit();
 
-
             }catch (\Exception $exception){
 
                  DB::rollBack();
@@ -176,7 +173,6 @@ class HotelRepository implements HotelRepositoryInterface
 
         try {
 
-
             $data = [];
 
             if($request->hasfile('hotel_photos')) {
@@ -217,7 +213,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             event(new NewHotelNotification($data));
 
-            return redirect()->route('hotels.show')->with('hotel',__('hotels.hotel'));
+            return returnDataSuccess(__('hotels.hotel'),"200","data",$hotel);
 
 
         }catch (\Exception $exception){

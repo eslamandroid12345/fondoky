@@ -2,7 +2,6 @@
 
 
 namespace App\Interfaces\Web;
-
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\RoomTypeRequest;
 use App\Http\Requests\StoreHotelRequest;

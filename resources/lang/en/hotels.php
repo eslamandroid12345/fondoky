@@ -145,6 +145,8 @@ return [
     'hotel_room_service_department' => 'Room services department',
     'hotel_room_service_room' => 'Room name',
 
+    'hotel_room_service_create' => 'Add services rooms',
+
 
 ];
 

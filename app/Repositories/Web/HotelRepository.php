@@ -213,7 +213,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             event(new NewHotelNotification($data));
 
-            return returnDataSuccess(__('hotels.hotel'),"200","data",$hotel);
+            return redirect()->back()->with('hotel',__('hotels.hotel'));
 
 
         }catch (\Exception $exception){

@@ -15,7 +15,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 
 
- define('Max',3);
+ define('Max',4);
  define('Search',8);
 
 

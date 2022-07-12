@@ -57,6 +57,7 @@ class AdminRepository implements AdminRepositoryInterface
 
                 return redirect()->intended('booking/all')->with('login', __('admin.message'));
 
+
             }else{
 
                 return redirect()->back()->withInput($request->only('email'))->with('error',__('admin.error'));

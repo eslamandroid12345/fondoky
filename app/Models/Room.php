@@ -18,7 +18,9 @@ class Room extends Model
         'adults_max',
         'child_max',
         'images',
-        'hotel_id'
+        'hotel_id',
+        'room_unit',
+        'smoke'
 
     ];
 
@@ -55,6 +57,14 @@ class Room extends Model
 
 
         return $this->belongsToMany(RoomService::class,'hotel_service_rooms','room_id',  'room_service_id','id','id')->withTimestamps();
+
+    }
+
+
+
+    public function smokeStatus(){
+
+        return $this->smoke == true ? 'مسموح بالتدخين' : 'غير مسموح بالتدخين';
 
     }
 

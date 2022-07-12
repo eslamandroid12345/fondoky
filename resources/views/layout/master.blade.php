@@ -58,6 +58,8 @@
     var pusher = new Pusher('c015c0d70ff48c211999', {
         cluster: 'mt1'
     });
+
+
 </script>
 <script src="{{asset('js/pusherNotifications.js')}}"></script>
 

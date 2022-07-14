@@ -56,7 +56,6 @@
                             <thead>
                             <tr>
                                 <th>{{__('book_hotel.id')}}</th>
-                                <th>{{__('book_hotel.room_price')}}</th>
                                 <th>{{__('book_hotel.rate')}}</th>
                                 <th>{{__('book_hotel.commission')}}</th>
                                 <th>{{__('book_hotel.user')}}</th>
@@ -80,81 +79,59 @@
                             </tr>
                             </thead>
 
-                            @foreach($bookers as $booker)
+                            @foreach($invoices as $invoice)
                                 <tbody>
-
                                 <tr>
-
-                                    <td>{{$booker->id}}</td>
-                                    <td>{{$booker->room_price}}</td>
-                                    <td>{{$booker->rate}}</td>
-                                    <td>{{$booker->commission}}</td>
-                                    <td>{{$booker->user->name}}</td>
-                                    <td>{{$booker->city_to}}</td>
-                                    <td>{{$booker->children}}</td>
-                                    <td>{{$booker->adults}}</td>
-                                    <td>{{$booker->room_type}}</td>
-                                    <td>{{$booker->room_number}}</td>
-                                    <td>{{$booker->num_of_nights}}</td>
-                                    <td>{{$booker->date_arrive}}</td>
-                                    <td>{{$booker->date_leave}}</td>
-                                    <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                    <td>{{number_format($booker->total_all,2)}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
-
-                                    <td>{{$booker->vat_tax}} - {{ lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
-                                    <td>{{$booker->municipal_tax}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
-                                    <td>{{$booker->tourism_tax}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
-                                    <td>{{$booker->total}} - {{lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}</td>
-
-
-                                    <td>{{$booker->block()}}</td>
-                                    <td>{{$booker->stay()}}</td>
-
-
-                                    {{--start control--}}
-
+                                    <td>{{$invoice->reservation->id}}</td>
+                                    <td>{{$invoice->rate}}</td>
+                                    <td>{{$invoice->commission}}</td>
+                                    <td>{{$invoice->user->name}}</td>
+                                    <td>{{$invoice->reservation->destination}}</td>
+                                    <td>{{$invoice->reservation->children}}</td>
+                                    <td>{{$invoice->reservation->adults}}</td>
+                                    <td>{{$invoice->reserved_room->room->room_type->room_type}}</td>
+                                    <td>{{$invoice->reserved_room->room_number}}</td>
+                                    <td>{{$invoice->reservation->num_of_nights}}</td>
+                                    <td>{{$invoice->reservation->check_in}}</td>
+                                    <td>{{$invoice->reservation->check_out}}</td>
+                                    <td>{{ lang() == 'ar' ? $invoice->hotel->name_ar : $invoice->hotel->name_en}}</td>
+                                    <td>{{$invoice->total_all}}</td>
+                                    <td>{{$invoice->vat_tax}}</td>
+                                    <td>{{$invoice->municipal_tax}}</td>
+                                    <td>{{$invoice->tourism_tax}}</td>
+                                    <td>{{$invoice->total}}</td>
+                                    <td>{{$invoice->block()}}</td>
+                                    <td>{{$invoice->stay()}}</td>
                                     <td>
-                                        <div class="dropdown">
-                                            <button aria-expanded="false" aria-haspopup="true"
-                                                    class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
-                                                    type="button">{{__('content.operations')}}<i class="fas fa-caret-down ml-1"></i></button>
-                                            <div class="dropdown-menu tx-13">
+                                        @if($booker->blocked == 1)
+                                            <a class="dropdown-item" href="{{route('hotels.block',$invoice->id)}}">{{__('book_hotel.block')}}</a>
+
+                                        @else
+                                            <a class="dropdown-item" href="">{{__('book_hotel.block_now')}}</a>
 
 
-                                                @if($booker->blocked == 1)
-                                                    <a class="dropdown-item" href="{{route('hotels.block',$booker->id)}}">{{__('book_hotel.block')}}</a>
-
-                                                @else
-                                                    <a class="dropdown-item" href="">{{__('book_hotel.block_now')}}</a>
+                                        @endif
 
 
-                                                @endif
+                                        @if($booker->stayed == 1)
+                                            <a class="dropdown-item" href="{{route('hotels.stay',$invoice->id)}}">{{__('book_hotel.not_stayed')}}</a>
+
+                                        @else
+                                            <a class="dropdown-item" href="">{{__('book_hotel.leave')}}</a>
 
 
-                                                @if($booker->stayed == 1)
-                                                    <a class="dropdown-item" href="{{route('hotels.stay',$booker->id)}}">{{__('book_hotel.not_stayed')}}</a>
-
-                                                @else
-                                                    <a class="dropdown-item" href="">{{__('book_hotel.leave')}}</a>
-
-
-                                                @endif
-
-
-                                            </div>
-                                        </div>
-
+                                        @endif
                                     </td>
 
 
 
-                                    {{--end control--}}
-
                                 </tr>
-
-
                                 </tbody>
+
                             @endforeach
+
+
+
                         </table>
                     </div>
                 </div>

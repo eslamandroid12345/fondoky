@@ -9,6 +9,7 @@ use App\Http\Requests\StoreAdminRequest;
 use App\Interfaces\Web\AdminRepositoryInterface;
 use App\Models\Admin;
 use App\Models\Hotel;
+use App\Models\InvoiceGuest;
 use App\Models\Role;
 use App\Models\Room;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function hotel(){
 
-        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','country','pound','currency_en','blocked'])->latest()->simplePaginate(Max);
+        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','currency_ar','currency_en','blocked'])->latest()->simplePaginate(Max);
         return view('admins.hotel',compact('hotels'));
 
 
@@ -36,9 +37,12 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function booking(){
 
+//
+//        $bookers = Booker::with(['hotel','user'])->latest()->simplePaginate(Max);
+//        return view('admins.bookers',compact('bookers'));
 
-        $bookers = Booker::with(['hotel','user'])->latest()->simplePaginate(Max);
-        return view('admins.bookers',compact('bookers'));
+        $invoices = InvoiceGuest::with(['hotel','user','reservation','reserved_room.room.room_type'])->latest()->simplePaginate(Max);
+        return view('admins.bookers',compact('invoices'));
 
     }
 

@@ -77,8 +77,8 @@
                                     <tbody>
                                     <tr>
                                         <td>{{$hotel->id}}</td>
-                                        <td>{{ number_format($commission->commission,2)  }} : {{ lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}</td>
-                                        <td>{{ number_format($commission->total,2) }} : {{lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}</td>
+                                        <td>{{ number_format($commission->commission,2)  }} : {{ lang() == 'ar' ? $hotel->currency_ar : $hotel->currency_en}}</td>
+                                        <td>{{ number_format($commission->total,2) }} : {{lang() == 'ar' ? $hotel->currency_ar : $hotel->currency_en}}</td>
                                         <td>{{$commission->month_year}}</td>
 
                                     </tr>

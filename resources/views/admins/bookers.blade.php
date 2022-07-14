@@ -56,56 +56,104 @@
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
                             <thead>
                             <tr>
-
-
-                                <th>{{__('book_hotel.id')}}</th>
-                                <th>{{__('book_hotel.user')}}</th>
-                                <th>{{__('book_hotel.city_to')}}</th>
-                                <th>{{__('book_hotel.children')}}</th>
-                                <th>{{__('book_hotel.adults')}}</th>
-                                <th>{{__('book_hotel.room_type')}}</th>
-                                <th>{{__('book_hotel.room_number')}}</th>
-                                <th>{{__('book_hotel.num_of_nights')}}</th>
-                                <th>{{__('book_hotel.date_arrive')}}</th>
-                                <th>{{__('book_hotel.date_leave')}}</th>
-                                <th>{{__('book_hotel.hotel')}}</th>
-                                <th>{{__('book_hotel.total')}}</th>
-                                <th>{{__('book_hotel.commission')}}</th>
-                                <th>{{__('book_hotel.blocked')}}</th>
-
+                                <th>{{__('site.id')}}</th>
+                                <th>{{__('site.city')}}</th>
+                                <th>{{__('site.child')}}</th>
+                                <th>{{__('site.adults')}}</th>
+                                <th>{{__('site.room_type')}}</th>
+                                <th>{{__('site.room_number')}}</th>
+                                <th>{{__('site.num_of_nights')}}</th>
+                                <th>{{__('site.date_arrive')}}</th>
+                                <th>{{__('site.date_leave')}}</th>
+                                <th>{{__('site.hotel')}}</th>
+                                <th>{{__('site.total_money')}}</th>
+                                <th>{{__('site.name')}}</th>
+                                <th>{{__('site.reserve')}}</th>
 
 
                             </tr>
                             </thead>
 
-                            @foreach($bookers as $booker)
+
+                            @foreach($invoices as $invoice)
                                 <tbody>
 
                                 <tr>
-                                    <td>{{$booker->id}}</td>
-                                    <td>{{$booker->user->name}}</td>
-                                    <td>{{$booker->city_to}}</td>
-                                    <td>{{$booker->children}}</td>
-                                    <td>{{$booker->adults}}</td>
-                                    <td>{{$booker->room_type}}</td>
-                                    <td>{{$booker->room_number}}</td>
-                                    <td>{{$booker->num_of_nights}}</td>
-                                    <td>{{$booker->date_arrive}}</td>
-                                    <td>{{$booker->date_leave}}</td>
-                                    <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                    <td>{{number_format($booker->total,2)}} - {{ lang() == 'ar' ? $booker->hotel->pound : $booker->hotel->currency_en}}</td>
 
-                                    <td>{{  lang() == 'ar' ? number_format($booker->commission,2) . '-' . $booker->hotel->pound : number_format($booker->commission,2) . '-' . $booker->hotel->currency_en}}</td>
-                                    <td>{{$booker->block()}}</td>
+                                    <td>{{$invoice->reservation->id}}</td>
+                                    <td>{{$invoice->reservation->destination}}</td>
+                                    <td>{{$invoice->reservation->children}}</td>
+                                    <td>{{$invoice->reservation->adults}}</td>
+                                    <td>{{$invoice->reserved_room->room->room_type->room_type}}</td>
+                                    <td>{{$invoice->reserved_room->room_number}}</td>
+                                    <td>{{$invoice->reservation->num_of_nights}}</td>
+                                    <td>{{$invoice->reservation->check_in}}</td>
+                                    <td>{{$invoice->reservation->check_out}}</td>
+                                    <td>{{ lang() == 'ar' ? $invoice->hotel->name_ar : $invoice->hotel->name_en}}</td>
+                                    <td>{{ lang() == 'ar' ? number_format($invoice->total,2) . $invoice->hotel->currency_ar : number_format($invoice->total,2) . $invoice->hotel->currency_en}}</td>
+                                    <td>{{$invoice->user->name}}</td>
+                                    <td>{{$invoice->cancel()}}</td>
 
 
                                 </tr>
 
 
                                 </tbody>
-
-                                @endforeach
+                            @endforeach
                         </table>
+{{--                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">--}}
+{{--                            <thead>--}}
+{{--                            <tr>--}}
+
+
+{{--                                <th>{{__('book_hotel.id')}}</th>--}}
+{{--                                <th>{{__('book_hotel.user')}}</th>--}}
+{{--                                <th>{{__('book_hotel.city_to')}}</th>--}}
+{{--                                <th>{{__('book_hotel.children')}}</th>--}}
+{{--                                <th>{{__('book_hotel.adults')}}</th>--}}
+{{--                                <th>{{__('book_hotel.room_type')}}</th>--}}
+{{--                                <th>{{__('book_hotel.room_number')}}</th>--}}
+{{--                                <th>{{__('book_hotel.num_of_nights')}}</th>--}}
+{{--                                <th>{{__('book_hotel.date_arrive')}}</th>--}}
+{{--                                <th>{{__('book_hotel.date_leave')}}</th>--}}
+{{--                                <th>{{__('book_hotel.hotel')}}</th>--}}
+{{--                                <th>{{__('book_hotel.total')}}</th>--}}
+{{--                                <th>{{__('book_hotel.commission')}}</th>--}}
+{{--                                <th>{{__('book_hotel.blocked')}}</th>--}}
+
+
+
+{{--                            </tr>--}}
+{{--                            </thead>--}}
+
+{{--                            @foreach($bookers as $booker)--}}
+{{--                                <tbody>--}}
+
+{{--                                <tr>--}}
+{{--                                    <td>{{$booker->id}}</td>--}}
+{{--                                    <td>{{$booker->user->name}}</td>--}}
+{{--                                    <td>{{$booker->city_to}}</td>--}}
+{{--                                    <td>{{$booker->children}}</td>--}}
+{{--                                    <td>{{$booker->adults}}</td>--}}
+{{--                                    <td>{{$booker->room_type}}</td>--}}
+{{--                                    <td>{{$booker->room_number}}</td>--}}
+{{--                                    <td>{{$booker->num_of_nights}}</td>--}}
+{{--                                    <td>{{$booker->date_arrive}}</td>--}}
+{{--                                    <td>{{$booker->date_leave}}</td>--}}
+{{--                                    <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>--}}
+{{--                                    <td>{{number_format($booker->total,2)}} - {{ lang() == 'ar' ? $booker->hotel->pound : $booker->hotel->currency_en}}</td>--}}
+
+{{--                                    <td>{{  lang() == 'ar' ? number_format($booker->commission,2) . '-' . $booker->hotel->pound : number_format($booker->commission,2) . '-' . $booker->hotel->currency_en}}</td>--}}
+{{--                                    <td>{{$booker->block()}}</td>--}}
+
+
+{{--                                </tr>--}}
+
+
+{{--                                </tbody>--}}
+
+{{--                                @endforeach--}}
+{{--                        </table>--}}
                     </div>
                 </div>
             </div>

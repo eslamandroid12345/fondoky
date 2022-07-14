@@ -8,10 +8,9 @@ use App\Http\Requests\RoomTypeRequest;
 use App\Http\Requests\StoreHotelRequest;
 use App\Http\Requests\UpdateHotelRequest;
 use App\Interfaces\Web\HotelRepositoryInterface;
-use App\Models\Booker;
 use App\Models\Hotel;
+use App\Models\InvoiceGuest;
 use App\Models\Rate;
-use App\Models\Report;
 use App\Models\RoomType;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -34,10 +33,10 @@ class HotelRepository implements HotelRepositoryInterface
     public function reservations(){
 
 
-        $bookers = Booker::with(['hotel:id,name_ar,name_en,pound,currency_en','user:id,name'])->where('hotel_id','=',hotel()->id)
+        $invoices =  InvoiceGuest::with(['hotel','user','reservation','reserved_room.room.room_type'])->where('hotel_id','=',hotel()->id)
             ->orderBy('id','DESC')->simplePaginate(Max);
 
-        return view('hotels.reservations',compact('bookers'));
+        return view('hotels.reservations',compact('invoices'));
 
     }
 
@@ -85,39 +84,23 @@ class HotelRepository implements HotelRepositoryInterface
     public function block($id){
 
 
-
-        DB::beginTransaction();
-
-
         try {
 
 
-            $booker = Booker::findOrFail($id);
-            $report = Report::where('booker_id',$id)->first();
+            $invoice = InvoiceGuest::findOrFail($id);
+            $invoice->blocked = $invoice->blocked == 1 ? 0 : 1;
+            $invoice->vat_tax = 0;
+            $invoice->municipal_tax = 0;
+            $invoice->tourism_tax = 0;
+            $invoice->total_all = 0;
+            $invoice->total = 0;
+            $invoice->commission = 0;
+            $invoice->canceled = 0;
+            $invoice->save();
 
-            $booker->blocked = $booker->blocked == 1 ? 0 : 1;
-            $booker->vat_tax = 0;
-            $booker->municipal_tax = 0;
-            $booker->tourism_tax = 0;
-            $booker->total_all = 0;
-            $booker->total = 0;
-            $booker->commission = 0;
-            $booker->canceled = 0;
-            $booker->save();
-
-
-            $report->total = 0;
-            $report->commission = 0;
-            $report->blocked = 0;
-            $report->canceled = 0;
-            $report->save();
-
-
-            DB::commit();
 
             }catch (\Exception $exception){
 
-                 DB::rollBack();
                  return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
 
             }
@@ -132,8 +115,8 @@ class HotelRepository implements HotelRepositoryInterface
     public function stay($id){
 
 
-        $booker = Booker::findOrFail($id);
-        $booker->update(['stayed' => $booker->stayed == 0 ? 1 : 0]);
+        $invoice = InvoiceGuest::findOrFail($id);
+        $invoice->update(['stayed' => $invoice->stayed == 1 ? 0 : 1]);
 
         return redirect()->back()->with('block_stay',__('hotels.stay'));
 
@@ -323,47 +306,40 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function monthOfInvoices(){
 
-
         return view('hotels.month_invoices');
 
-
     }
-
 
 
     public function invoices(){
 
-
-
-        $bookers = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
+        $invoices =  InvoiceGuest::with(['hotel','user','reservation','reserved_room'])->where('hotel_id','=',hotel()->id)
+            ->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
 
-        $commissions = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
+
+        $commissions =  InvoiceGuest::where('hotel_id','=',hotel()->id)->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))
-            ->select(DB::raw("(sum(commission)) as commission"))
+            ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"))
             ->get();
 
-
-        $totals = Booker::where('hotel_id', hotel()->id)->whereMonth('created_at', date('m'))
-            ->whereYear('created_at', date('Y'))
-            ->select(DB::raw("(sum(total)) as total"))
-            ->get();
-
-
-        return view('hotels.invoices',compact('bookers','commissions','totals'));
+        return view('hotels.invoices',compact('invoices','commissions'));
 
     }
 
 
-
-
+   //arrivals today
     public function arrivals(){
 
-        $bookers = Booker::whereDay('date_arrive',Carbon::now()->format('d'))->with(['hotel:id,name_ar,name_en,pound,currency_en','user:id,name'])
-            ->where('hotel_id','=',hotel()->id)
-            ->orderBy('id','DESC')->simplePaginate(Max);
 
-        return view('hotels.arrivals',compact('bookers'));
+        $invoices =  InvoiceGuest::with(['hotel','user','reservation','reserved_room.room.room_type'])->whereHas('reservation', function ($query){
+
+            $query->whereDay('check_in',Carbon::now()->format('d'));
+
+        })->where('hotel_id','=',hotel()->id)->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))->orderBy('id','DESC')->simplePaginate(Max);
+
+        return view('hotels.arrivals',compact('invoices'));
 
     }
 

@@ -161,7 +161,7 @@ if(!function_exists('countBooking')) {
 
     function countBooking(){
 
-        return DB::table('bookers')->count();
+        return DB::table('reservations')->count();
     }
 }
 
@@ -173,7 +173,7 @@ if(!function_exists('hotelBooking')) {
 
     function hotelBooking(){
 
-        return DB::table('bookers')->where('hotel_id','=',hotel()->id)->count();
+        return DB::table('invoice_guests')->where('hotel_id','=',hotel()->id)->count();
     }
 }
 

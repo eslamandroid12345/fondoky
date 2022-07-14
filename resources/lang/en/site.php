@@ -35,6 +35,8 @@ return [
 
     "name" => "guest name",
     "control" => "control",
+    "total_money" => "booking total",
+
 
 
 ];

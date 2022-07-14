@@ -5,9 +5,8 @@ namespace App\Repositories\Web;
 
 
 use App\Interfaces\Web\CommissionRepositoryInterface;
-use App\Models\Booker;
 use App\Models\Hotel;
-use App\Models\Report;
+use App\Models\InvoiceGuest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +16,7 @@ class CommissionRepository implements CommissionRepositoryInterface
 
     public function commissions(){
 
-        $hotels = Hotel::select('id','name_ar','name_en','blocked','currency_en')->simplePaginate(Max);
+        $hotels = Hotel::select('id','name_ar','name_en','blocked','currency_ar','currency_en')->simplePaginate(Max);
         return view('admins.hotel_report',compact('hotels'));
 
     }
@@ -26,9 +25,9 @@ class CommissionRepository implements CommissionRepositoryInterface
     public function index($id){
 
 
-        $hotel = Hotel::select('id','name_ar','name_en','pound','currency_en')->find($id);
+        $hotel = Hotel::select('id','name_ar','name_en','currency_ar','currency_en')->find($id);
 
-        $commissions =  Report::query()->where('hotel_id', $id)
+        $commissions =   InvoiceGuest::with(['hotel','user','reservation','reserved_room'])->where('hotel_id', $id)
             ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"),
                 DB::raw("(DATE_FORMAT(created_at, '%m-%Y')) as month_year"))
             ->orderBy('created_at')
@@ -36,7 +35,6 @@ class CommissionRepository implements CommissionRepositoryInterface
             ->get();
 
         return view('admins.commission',compact('commissions','hotel'));
-
 
 
     }
@@ -48,24 +46,20 @@ class CommissionRepository implements CommissionRepositoryInterface
 
         $hotel = Hotel::findOrFail($id);
 
-        $bookers = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))
+        $invoices =  InvoiceGuest::with(['hotel','user','reservation','reserved_room.room.room_type'])->where('hotel_id','=',$hotel->id)
+            ->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
 
 
-        $commissions = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
-            ->select(DB::raw("(sum(commission)) as commission"))
+        $commissions =  InvoiceGuest::where('hotel_id','=',$hotel->id)->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
+            ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"))
             ->get();
-
-
-        $totals = Booker::where('hotel_id', $id)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
-            ->select(DB::raw("(sum(total)) as total"))
-            ->get();
-
 
 
         $now = Carbon::now()->translatedFormat('F Y');
 
-        return view('admins.month',compact('hotel','bookers','commissions','totals','now'));
+        return view('admins.month',compact('invoices','commissions','now','hotel'));
 
     }
 

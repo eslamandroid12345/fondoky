@@ -1,7 +1,3 @@
-
-
-
-
 @extends('layout.master')
 @section('css')
     <style>
@@ -38,6 +34,7 @@
             <div class=" main-content-body-invoice" id="print">
                 <div class="card card-invoice">
                     <div class="card-body">
+
                         <div class="invoice-header">
 
 
@@ -47,8 +44,8 @@
                             <div class="billed-from">
                                 <h6>{{__('admin.hotel_welcome')}}</h6>
                                 <p>{{__('admin.invoices_details')}}<br>
-                                    {{__('admin.phone_admin')}}    {{admin()->phone}}<br>
-                                    {{__('admin.admin_name')}} {{admin()->name}}</p>
+                                    {{__('admin.phone_admin')}}    {{ $hotel->phone_hotel}}<br>
+                                    {{__('admin.admin_name')}} {{lang() == 'ar' ?  $hotel->name_ar :  $hotel->name_en}}</p>
                             </div><!-- billed-from -->
                         </div><!-- invoice-header -->
                         <div class="row mg-t-20">
@@ -67,64 +64,69 @@
                         </div>
 
                         <div class="table-responsive mg-t-40">
-
-
-
                             <table class="table table-invoice border text-md-nowrap mb-0">
                                 <thead>
                                 <tr>
-                                    <th>{{__('book_hotel.id')}}</th>
-                                    <th>{{__('book_hotel.room_price')}}</th>
-                                    <th>{{__('book_hotel.rate')}}</th>
-                                    <th>{{__('book_hotel.commission')}}</th>
-                                    <th>{{__('book_hotel.room_type')}}</th>
-                                    <th>{{__('book_hotel.room_number')}}</th>
-                                    <th>{{__('book_hotel.num_of_nights')}}</th>
-                                    <th>{{__('book_hotel.date_arrive')}}</th>
-                                    <th>{{__('book_hotel.date_leave')}}</th>
-                                    <th>{{__('book_hotel.total')}}</th>
-                                    <th>{{__('book_hotel.blocked')}}</th>
+
+                                    <th>{{__('site.id')}}</th>
+                                    <th>{{__('site.city')}}</th>
+                                    <th>{{__('site.child')}}</th>
+                                    <th>{{__('site.adults')}}</th>
+                                    <th>{{__('site.room_type')}}</th>
+                                    <th>{{__('site.room_number')}}</th>
+                                    <th>{{__('site.num_of_nights')}}</th>
+                                    <th>{{__('site.date_arrive')}}</th>
+                                    <th>{{__('site.date_leave')}}</th>
+                                    <th>{{__('site.hotel')}}</th>
+                                    <th>{{__('site.total_money')}}</th>
+                                    <th>{{__('site.name')}}</th>
+                                    <th>{{__('site.reserve')}}</th>
+
+
                                 </tr>
                                 </thead>
 
-                                @foreach($bookers as $booker)
+                                @foreach($invoices as $invoice)
                                     <tbody>
+
                                     <tr>
-                                        <td>{{$booker->id}}</td>
-                                        <td>{{ lang() == 'ar' ? number_format($booker->room_price,2) . '-' .   $booker->hotel->pound : number_format($booker->room_price,2) . '-' .  $booker->hotel->currency_en}}</td>
-                                        <td>{{$booker->rate}}</td>
-                                        <td>{{number_format($booker->commission,2)}} {{lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}</td>
-                                        <td>{{$booker->room_type}}</td>
-                                        <td>{{$booker->room_number}}</td>
-                                        <td>{{$booker->num_of_nights}}</td>
-                                        <td>{{$booker->date_arrive}}</td>
-                                        <td>{{$booker->date_leave}}</td>
-                                        <td>{{number_format($booker->total,2)}} {{lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}</td>
-                                        <td>{{$booker->block()}}</td>
+
+                                        <td>{{$invoice->reservation->id}}</td>
+                                        <td>{{$invoice->reservation->destination}}</td>
+                                        <td>{{$invoice->reservation->children}}</td>
+                                        <td>{{$invoice->reservation->adults}}</td>
+                                        <td>{{$invoice->reserved_room->room->room_type->room_type}}</td>
+                                        <td>{{$invoice->reserved_room->room_number}}</td>
+                                        <td>{{$invoice->reservation->num_of_nights}}</td>
+                                        <td>{{$invoice->reservation->check_in}}</td>
+                                        <td>{{$invoice->reservation->check_out}}</td>
+                                        <td>{{ lang() == 'ar' ? $invoice->hotel->name_ar : $invoice->hotel->name_en}}</td>
+                                        <td>{{ lang() == 'ar' ? number_format($invoice->total,2) . $invoice->hotel->currency_ar : number_format($invoice->total,2) . $invoice->hotel->currency_en}}</td>
+                                        <td>{{$invoice->user->name}}</td>
+                                        <td>{{$invoice->cancel()}}</td>
+
 
                                     </tr>
 
 
                                     </tbody>
-
                                 @endforeach
 
 
                                 <tr>
 
+
                                     <td>{{__('hotels.commission')}}</td>
-                                    <td class="tx-left" colspan="11">@foreach($commissions as $commission) {{number_format($commission->commission,2)}} {{ lang() == 'ar' ? $hotel->pound : $hotel->currency_en }}@endforeach</td>
+                                    <td class="tx-left" colspan="11">@foreach($commissions as $commission) {{ lang() == 'ar' ? number_format($commission->commission,2) . '-' . $hotel->currency_ar : number_format($commission->commission,2) . '-' .  $hotel->currency_en}}   @endforeach</td>
                                 </tr>
                                 <tr>
 
                                     <td>{{__('hotels.total')}}</td>
-                                    <td class="tx-left" colspan="11"> @foreach($totals as $total) {{number_format($total->total,2)}} {{lang() == 'ar' ? $hotel->pound : $hotel->currency_en}}@endforeach</td>
+                                    <td class="tx-left" colspan="11"> @foreach($commissions as $commission)  {{ lang() == 'ar' ? number_format($commission->total,2) . '-' .  $hotel->currency_ar : number_format($commission->total,2) . '-' .  $hotel->currency_en}}   @endforeach</td>
                                 </tr>
 
+
                             </table>
-
-
-
                         </div>
                         <hr class="mg-b-40">
 

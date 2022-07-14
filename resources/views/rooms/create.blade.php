@@ -97,7 +97,7 @@
 
 
 
-                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3">
+                            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('room_add.child_max')}}</label>
                                 <input type="number" class="form-control" id="inputName" name="child_max">
                                 <span class="text-danger"> @error('child_max') {{$message}} @enderror</span>

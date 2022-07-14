@@ -75,7 +75,7 @@
 
                                     <td>{{lang() == 'ar' ? $hotel->name_ar : $hotel->name_en}}</td>
                                     <td>{{lang() == 'ar' ? $hotel->location_ar : $hotel->location_en}}</td>
-                                    <td>{{ lang() == 'ar' ? $hotel->pound : $hotel->currency_en }}</td>
+                                    <td>{{ lang() == 'ar' ? $hotel->currency_ar : $hotel->currency_en }}</td>
                                     <td>{{$hotel->active()}}</td>
 
                                     <td>

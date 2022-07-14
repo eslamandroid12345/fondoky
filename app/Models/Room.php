@@ -19,7 +19,7 @@ class Room extends Model
         'child_max',
         'images',
         'hotel_id',
-        'room_unit',
+        'room_unit_id',
         'smoke'
 
     ];
@@ -67,6 +67,16 @@ class Room extends Model
         return $this->smoke == true ? 'مسموح بالتدخين' : 'غير مسموح بالتدخين';
 
     }
+
+
+    //reserved relation
+
+    public function reserved_room(){
+
+        return $this->hasMany(ReservedRoom::class,'room_id','id');
+
+    }
+
 
 
 

@@ -48,8 +48,8 @@
 
             <div class="form-group mb-3">
                 <label class="label" for="name">{{ __('register.country') }}</label>
-                <input type="text" name="country" autocomplete="off" class="form-control" value="{{old('country')}}" placeholder="{{ __('register.country') }}">
-                @error('country')
+                <input type="text" name="country_ar" autocomplete="off" class="form-control" value="{{old('country_ar')}}" placeholder="{{ __('register.country') }}">
+                @error('country_ar')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
@@ -137,7 +137,7 @@
                     $currencies_ar = ["ريال السعودي ","دولار الامريكي","يورو","درهم الاماراتي","دينار البحريني","جنيه المصري","جنيه البريطاني","دينار الكويتي","ريال العماني","ريال القطري"];
                 @endphp
 
-                <select class="form-control" name="pound" class="form-control form-control-lg input-lg">
+                <select class="form-control" name="currency_ar" class="form-control form-control-lg input-lg">
 
                     @foreach($currencies_ar as $currency)
                         <option value="{{$currency}}">{{$currency}}</option>
@@ -145,7 +145,7 @@
                 </select>
 
 
-                @error('pound')
+                @error('currency_ar')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

@@ -27,6 +27,8 @@ return [
     "room_show_one" => "show room of hotel",
     "hotel_belong" => "hotel",
     "calendars" => "calendar daily",
+    'unit_name' => 'unit name',
+
 
 
 

@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReservationController;
 use App\Models\Booker;
 use App\Models\Calendar;
 use App\Models\Report;
@@ -15,7 +16,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 
 
- define('Max',4);
+ define('Max',2);
  define('Search',8);
 
 
@@ -63,12 +64,22 @@ Route::group(['prefix'=>'users','middleware' => ['auth']], function (){
     Route::get('room/reservation/{id}', [UserController::class,'reservation'])->name('room.reservation')->middleware('auth');
 
 
-    Route::get('print', function (){
+//    Route::get('print', function (){
+//
+//
+//        return view('print');
+//    });
 
 
-        return view('print');
+
+    //start reservations
+    Route::group(["prefix" => "reservations","middleware" => "auth"], function (){
+
+        Route::post('store/{id}', [ReservationController::class,'store'])->name('reservations.store');
+        Route::get('cancel/{id}', [ReservationController::class,'cancel'])->name('reservations.cancel');
+
+
     });
-
 
 //    Route::view('test','test');
 

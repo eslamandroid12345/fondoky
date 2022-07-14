@@ -16,7 +16,7 @@ class StoreHotelRequest extends FormRequest
     {
         return [
 
-            'country' => 'required',
+            'country_ar' => 'required',
             'country_en' => 'required',
             'manger' => 'required',
             'name_ar' => 'required',
@@ -25,7 +25,7 @@ class StoreHotelRequest extends FormRequest
             'password' => 'required|min:8',
             'location_ar' => 'required',
             'location_en' => 'required',
-            'pound' => 'required',
+            'currency_ar' => 'required',
             'currency_en' => 'required',
             'description' => 'required',
             'hotel_photos' => 'required|max:2048',
@@ -39,7 +39,7 @@ class StoreHotelRequest extends FormRequest
     {
         return [
 
-            'country.required'  => __('hotels.country'),
+            'country_ar.required'  => __('hotels.country'),
             'country_en.required'  => __('hotels.country_en'),
             'manger.required'  => __('hotels.manger'),
             'name_ar.required' => __('hotels.name_ar'),
@@ -51,7 +51,7 @@ class StoreHotelRequest extends FormRequest
             'password.min' => __('hotels.password_min'),
             'location_ar.required' => __('hotels.location_ar'),
             'location_en.required' => __('hotels.location_en'),
-            'pound.required' => __('hotels.pound'),
+            'currency_ar.required' => __('hotels.pound'),
             'currency_en.required' => __('hotels.currency_en'),
             'description.required' => __('hotels.description'),
             'hotel_photos.required' => __('hotels.photo'),

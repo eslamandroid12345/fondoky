@@ -56,10 +56,6 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function booker(){
-
-        return $this->hasMany(Booker::class,'user_id','id');
-    }
 
 
     public function rate(){
@@ -73,5 +69,21 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Comment::class,'user_id','id');
     }
 
+    //reservation relation
+
+    public function reservation(){
+
+        return $this->hasMany(Reservation::class,'user_id','id');
+    }
+
+
+    //invoice guest
+
+    public function invoice_guset(){
+
+        return $this->hasMany(InvoiceGuest::class,'user_id','id');
+
+
+    }
 
 }

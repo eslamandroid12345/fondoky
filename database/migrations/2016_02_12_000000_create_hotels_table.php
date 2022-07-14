@@ -12,7 +12,8 @@ class CreateHotelsTable extends Migration
         Schema::create('hotels', function (Blueprint $table) {
 
             $table->bigIncrements('id');
-            $table->string('country');
+            $table->string('country_ar');
+            $table->string('country_en');
             $table->string('manger');
             $table->string('name_ar');
             $table->string('name_en');
@@ -20,7 +21,8 @@ class CreateHotelsTable extends Migration
             $table->string('password');
             $table->text('location_ar');
             $table->text('location_en');
-            $table->text('pound');
+            $table->text('currency_ar');
+            $table->string('currency_en');
             $table->longText('description');
             $table->longText('hotel_photos');
             $table->text('phone_hotel');

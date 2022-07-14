@@ -14,12 +14,14 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
 
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('room_type_id');
             $table->text('room_description');
             $table->text('adults_max');
             $table->string('child_max')->default(0);
             $table->longText('images');
+            $table->boolean('smoke')->default(true)->comment('true is smoke and false is not smoke');
+
             $table->unsignedBigInteger('hotel_id');
+            $table->unsignedBigInteger('room_type_id');
             $table->timestamps();
             $table->softDeletes();
 

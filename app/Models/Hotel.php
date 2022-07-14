@@ -16,7 +16,7 @@ class Hotel extends Authenticatable implements JWTSubject
 
     protected $fillable = [
 
-        'country',
+        'country_ar',
         'country_en',
         'manger',
         'name_ar',
@@ -25,7 +25,7 @@ class Hotel extends Authenticatable implements JWTSubject
         'password',
         'location_ar',
         'location_en',
-        'pound',
+        'currency_ar',
         'currency_en',
         'description',
         'hotel_photos',
@@ -38,12 +38,6 @@ class Hotel extends Authenticatable implements JWTSubject
 
     protected $dates = ['deleted_at'];
 
-
-
-    public function booker(){
-
-        return $this->hasMany(Booker::class, 'hotel_id', 'id');
-    }
 
 
     public function room(){
@@ -93,12 +87,6 @@ class Hotel extends Authenticatable implements JWTSubject
     }
 
 
-    public function reports(){
-
-        return $this->hasMany(Report::class,'hotel_id','id');
-    }
-
-
 
 
     public function rate(){
@@ -138,6 +126,20 @@ class Hotel extends Authenticatable implements JWTSubject
 
         return $this->hasMany(RoomService::class,'hotel_id','id');
     }
+
+
+
+
+    //invoice guest
+
+    public function invoice_guset(){
+
+        return $this->hasMany(InvoiceGuest::class,'hotel_id','id');
+
+    }
+
+
+
 
 
 }

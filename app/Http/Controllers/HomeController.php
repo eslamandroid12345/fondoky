@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booker;
+use App\Models\InvoiceGuest;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,8 +17,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        $bookers = Booker::with(['hotel','user'])->where('user_id','=',auth()->id())->latest()->simplePaginate(Max);
-        return view('users.home',compact('bookers'));
+        $invoices = InvoiceGuest::with(['hotel','user','reservation','reserved_room'])->where('user_id','=',auth()->id())->latest()->simplePaginate(Max);
+        return view('users.home',compact('invoices'));
     }
 
 

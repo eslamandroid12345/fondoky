@@ -93,7 +93,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('bookers.store',$room->id)}}" method="POST" autocomplete="off">
+                    <form action="{{route('reservations.store',$room->id)}}" method="POST" autocomplete="off">
 
                         @csrf
 
@@ -102,27 +102,27 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('users.city')}}</label>
-                                <input type="text" class="form-control" name="city_to" value="{{$room->hotel->country}}" readonly>
+                                <input type="text" class="form-control" name="destination" value="{{lang() == 'ar' ? $room->hotel->country_ar : $room->hotel->country_en}}" readonly>
 
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">{{__('users.room_type')}}</label>
-                                <input type="text" class="form-control" name="room_type" value="{{$room->room_type->room_type}}" readonly>
+{{--                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">--}}
+{{--                                <label for="inputName" class="control-label">{{__('users.room_type')}}</label>--}}
+{{--                                <input type="text" class="form-control" name="room_type" value="{{$room->room_type->room_type}}" readonly>--}}
 
-                            </div>
+{{--                            </div>--}}
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('users.date_arrive')}}</label>
-                                <input type="date" class="form-control" name="date_arrive" value="{{ request()->query('date_start')}}" readonly>
+                                <input type="date" class="form-control" name="check_in" value="{{ request()->query('date_start')}}" readonly>
 
                             </div>
 
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('users.date_leave')}}</label>
-                                <input type="date" class="form-control" name="date_leave" value="{{ request()->query('date_expire')}}" readonly>
+                                <input type="date" class="form-control" name="check_out" value="{{ request()->query('date_expire')}}" readonly>
 
                             </div>
 
@@ -130,7 +130,7 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('users.adults')}}</label>
-                                <input type="number" class="form-control" name="adults_max" value="{{$room->adults_max}}" readonly>
+                                <input type="number" class="form-control" name="adults" value="{{$room->adults_max}}" readonly>
 
                             </div>
 
@@ -138,13 +138,14 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('users.children')}}</label>
-                                <input type="number" class="form-control" name="child_max" value="{{$room->child_max}}" readonly>
+                                <input type="number" class="form-control" name="children" value="{{$room->child_max}}" readonly>
 
                             </div>
 
 
 
                                 <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
+                                <input type="hidden" name="room_id" value="{{$room->id}}">
 
 
 
@@ -162,7 +163,7 @@
 
 
 
-                            <input type="hidden" name="room_price" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
+                            <input type="hidden" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
 
                             {{-- end calculate num of nigts --}}
 
@@ -172,18 +173,23 @@
 
                                 <input type="number" class="form-control" name="room_number" id="room" onkeyup="sum()">
                                 <span class="text-danger"> @error('room_number') {{$message}} @enderror</span>
-                                <input type="hidden" name="total" id="result" value="0.00">
-                                <input type="hidden" name="tourism_tax" id="tourism_tax" value="0.00">
-                                <input type="hidden" name="municipal_tax" id="municipal_tax" value="0.00">
-                                <input type="hidden" name="vat_tax" id="vat_tax" value="0.00">
-                                <input type="hidden" name="commission" id="commission" value="0.00">
+
+
+                                {{--start money--}}
+                                <input type="hidden" name="total" id="result">
+                                <input type="hidden" name="tourism_tax" id="tourism_tax">
+                                <input type="hidden" name="municipal_tax" id="municipal_tax">
+                                <input type="hidden" name="vat_tax" id="vat_tax">
+                                <input type="hidden" name="commission" id="commission">
+                                {{--end money--}}
+
                             </div>
 
 
 
 
                             <div class="col-lg-8 col-md-8 col-sm-12 mt-3 mb-2">
-                                <label for="inputName" class="control-label"> {{__('users.total')}} {{lang() == 'ar' ? $room->hotel->pound : $room->hotel->currency_en}}</label>
+                                <label for="inputName" class="control-label"> {{__('users.total')}} {{lang() == 'ar' ? $room->hotel->currency_ar : $room->hotel->currency_en}}</label>
                                 <input type="text" class="form-control" name="total_all" id="total_all" value="0" readonly>
                             </div>
 

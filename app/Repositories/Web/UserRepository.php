@@ -37,7 +37,7 @@ class UserRepository implements UserRepositoryInterface
 
             })->whereHas('hotel', function ($query) use ($country,$country_en) {
 
-                $query->where('country', '=', $country)->orWhere('country_en','=',$country_en)->orderBy('country');
+                $query->where('country_ar', '=', $country)->orWhere('country_en','=',$country_en);
 
             })->where('adults_max', '=', $adults_max)->where('child_max', '=', $child_max)
 
@@ -46,6 +46,7 @@ class UserRepository implements UserRepositoryInterface
                 $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
                     ->orWhereBetween('check_in',[$start,$end])
                     ->whereDate('check_in','!=',$end)->select('id','room_id','room_number','check_in','check_out',
+
                         DB::raw('SUM(room_price)  as total_room_price'),
                         DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
 

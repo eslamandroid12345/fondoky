@@ -57,6 +57,10 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
         Route::delete('delete/{id}',[RoomController::class,'delete'])->name('rooms.delete');
         Route::get('calendars/show/{id}', [RoomController::class,'calendarsShow'])->name('rooms.calendars.show');
 
+        //room units
+        Route::get('units/create', [RoomController::class,'unitCreate'])->name('rooms.units.create');
+        Route::post('units/store', [RoomController::class,'unitStore'])->name('rooms.units.store');
+
 
     });
 

@@ -56,8 +56,8 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{ __('register.country') }}</label>
-                                <input type="text" class="form-control" id="inputName" name="country" value="{{$hotel->country}}">
-                                <span class="text-danger"> @error('country') {{$message}} @enderror</span>
+                                <input type="text" class="form-control" id="inputName" name="country_ar" value="{{$hotel->country_ar}}">
+                                <span class="text-danger"> @error('country_ar') {{$message}} @enderror</span>
 
                             </div>
 
@@ -151,7 +151,7 @@
                                     $currencies_ar = ["ريال السعودي ","دولار الامريكي","يورو","درهم الاماراتي","دينار البحريني","جنيه المصري","جنيه البريطاني","دينار الكويتي","ريال العماني","ريال القطري"];
 
                                 @endphp
-                                <select name="pound" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select name="currency_ar" class="form-control SlectBox" onclick="console.log($(this).val())"
                                         onchange="console.log('change is firing')">
 
                                     @foreach($currencies_ar as $currency)

@@ -19,7 +19,7 @@ class UpdateHotelRequest extends FormRequest
 
         return [
 
-            'country' => 'required',
+            'country_ar' => 'required',
             'country_en' => 'required',
             'manger' => 'required',
             'name_ar' => 'required',
@@ -30,7 +30,6 @@ class UpdateHotelRequest extends FormRequest
             'confirm_password' => 'required',
             'location_ar' => 'required',
             'location_en' => 'required',
-            'pound' => 'required',
             'description' => 'required',
             'hotel_photos' => 'required|max:2048',
             'phone_hotel' => 'required|numeric',
@@ -46,7 +45,7 @@ class UpdateHotelRequest extends FormRequest
         return [
 
 
-            'country.required'  => __('hotels.country'),
+            'country_ar.required'  => __('hotels.country'),
             'country_en.required'  => __('hotels.country_en'),
             'manger.required'  => __('hotels.manger'),
             'name_ar.required' => __('hotels.name_ar'),
@@ -61,7 +60,6 @@ class UpdateHotelRequest extends FormRequest
             'password.same' => __('hotels.same'),
             'location_ar.required' => __('hotels.location_ar'),
             'location_en.required' => __('hotels.location_en'),
-            'pound.required' => __('hotels.pound'),
             'description.required' => __('hotels.description'),
             'hotel_photos.required' => __('hotels.photo'),
             'phone_hotel.required' => __('hotels.phone_hotel'),

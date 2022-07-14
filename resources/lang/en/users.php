@@ -49,5 +49,7 @@ return [
     "rates" => "Hotel rate",
     "rates_department" => "Hotel rates department",
 
+    "canceled" => "user cancel booking successfully",
+
 
 ];

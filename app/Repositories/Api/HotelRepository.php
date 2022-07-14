@@ -74,7 +74,8 @@ class HotelRepository implements HotelRepositoryInterface
 
 
             $hotel = new Hotel();
-            $hotel->country = $request->country;
+            $hotel->country_ar = $request->country_ar;
+            $hotel->country_en = $request->country_en;
             $hotel->manger = $request->manger;
             $hotel->name_ar = $request->name_ar;
             $hotel->name_en = $request->name_en;
@@ -82,7 +83,7 @@ class HotelRepository implements HotelRepositoryInterface
             $hotel->password = Hash::make($request->password);
             $hotel->location_ar = $request->location_ar;
             $hotel->location_en = $request->location_en;
-            $hotel->pound = $request->pound;
+            $hotel->currency_ar = $request->currency_ar;
             $hotel->currency_en = $request->currency_en;
             $hotel->description = $request->description;
             $hotel->hotel_photos = json_encode($data);

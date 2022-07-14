@@ -28,6 +28,7 @@ return [
     "room_show_one" => "عرض بيانات غرفه الفندق",
     "hotel_belong" => "الفندق",
     "calendars" => "التقويم اليومي",
+    'unit_name' => 'اسم الوحده',
 
 
 

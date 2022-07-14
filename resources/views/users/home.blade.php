@@ -30,9 +30,9 @@
 @section('content')
 
 
-    @if (session()->has('update'))
+    @if (session()->has('canceled'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('update') }}</strong>
+            <strong>{{ session()->get('canceled') }}</strong>
 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -76,31 +76,36 @@
                                 <th>{{__('site.date_leave')}}</th>
                                 <th>{{__('site.hotel')}}</th>
                                 <th>{{__('site.total')}}</th>
+
+                                <th>{{__('site.name')}}</th>
                                 <th>{{__('site.reserve')}}</th>
-                                <th>{{__('site.cancel')}}</th>
+                                <th>{{__('site.control')}}</th>
+
                             </tr>
                             </thead>
 
-                            @foreach($bookers as $booker)
+
+
+                            @foreach($invoices as $invoice)
                                 <tbody>
 
                                 <tr>
 
-                                    <td>{{$booker->id}}</td>
-                                    <td>{{$booker->city_to}}</td>
-                                    <td>{{$booker->children}}</td>
-                                    <td>{{$booker->adults}}</td>
-                                    <td>{{$booker->room_type}}</td>
-                                    <td>{{$booker->room_number}}</td>
-                                    <td>{{$booker->num_of_nights}}</td>
-                                    <td>{{$booker->date_arrive}}</td>
-                                    <td>{{$booker->date_leave}}</td>
-                                    <td>{{lang() == 'ar' ? $booker->hotel->name_ar : $booker->hotel->name_en}}</td>
-                                    <td>{{number_format($booker->total_all,2)}} - {{ lang() == 'ar' ? $booker->hotel->pound : $booker->hotel->currency_en}}</td>
-                                    <td>{{$booker->cancel()}}</td>
+                                    <td>{{$invoice->reservation->id}}</td>
+                                    <td>{{$invoice->reservation->destination}}</td>
+                                    <td>{{$invoice->reservation->children}}</td>
+                                    <td>{{$invoice->reservation->adults}}</td>
+                                    <td>{{$invoice->reserved_room->room->room_type->room_type}}</td>
+                                    <td>{{$invoice->reserved_room->room_number}}</td>
+                                    <td>{{$invoice->reservation->num_of_nights}}</td>
+                                    <td>{{$invoice->reservation->check_in}}</td>
+                                    <td>{{$invoice->reservation->check_out}}</td>
+                                    <td>{{ lang() == 'ar' ? $invoice->hotel->name_ar : $invoice->hotel->name_en}}</td>
+                                    <td>{{ lang() == 'ar' ? number_format($invoice->total_all,2) . $invoice->hotel->currency_ar : number_format($invoice->total_all,2) . $invoice->hotel->currency_en}}</td>
+                                    <td>{{$invoice->user->name}}</td>
+                                    <td>{{$invoice->cancel()}}</td>
 
 
-                                    {{--start control--}}
 
                                     <td>
                                         <div class="dropdown">
@@ -109,8 +114,8 @@
                                                     type="button">{{__('content.operations')}}<i class="fas fa-caret-down ml-1"></i></button>
                                             <div class="dropdown-menu tx-13">
 
-                                                @if($booker->canceled == 1)
-                                                    <a class="dropdown-item" href="{{route('bookers.cancel',$booker->id)}}">{{__('site.cancel')}}</a>
+                                                @if($invoice->canceled == 1)
+                                                    <a class="dropdown-item" href="{{route('reservations.cancel',$invoice->id)}}">{{__('site.cancel')}}</a>
 
                                                 @else
                                                     <a class="dropdown-item" href="">{{__('site.canceled')}}</a>
@@ -123,8 +128,6 @@
                                     </td>
 
 
-
-                                    {{--end control--}}
 
                                 </tr>
 

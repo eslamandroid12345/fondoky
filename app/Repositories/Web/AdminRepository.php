@@ -8,7 +8,6 @@ use App\Http\Requests\LoginAdminRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Interfaces\Web\AdminRepositoryInterface;
 use App\Models\Admin;
-use App\Models\Booker;
 use App\Models\Hotel;
 use App\Models\Role;
 use App\Models\Room;
@@ -40,6 +39,7 @@ class AdminRepository implements AdminRepositoryInterface
 
         $bookers = Booker::with(['hotel','user'])->latest()->simplePaginate(Max);
         return view('admins.bookers',compact('bookers'));
+
     }
 
 

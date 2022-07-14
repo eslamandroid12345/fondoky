@@ -15,6 +15,7 @@ return [
     'create' => 'Room created successfully',
     'room_update' => 'Room updated successfully',
     'delete' => 'Room deleted successfully',
+    'room_unit_id' => 'room unit name field is required',
 
 
 

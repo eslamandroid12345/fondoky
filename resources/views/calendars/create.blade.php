@@ -82,7 +82,7 @@
 
                             <div class="col-lg-2 col-md-2 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">{{__('hotels.currency')}}</label>
-                                <input type="text" class="form-control" value="{{ lang() == 'ar' ? hotel()->pound : hotel()->currency_en}}" readonly>
+                                <input type="text" class="form-control" value="{{ lang() == 'ar' ? hotel()->currency_ar : hotel()->currency_en}}" readonly>
 
                             </div>
 

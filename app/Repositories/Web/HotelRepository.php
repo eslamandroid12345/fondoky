@@ -76,8 +76,6 @@ class HotelRepository implements HotelRepositoryInterface
             return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
         }
 
-
-
     }
 
 
@@ -85,7 +83,6 @@ class HotelRepository implements HotelRepositoryInterface
 
 
         try {
-
 
             $invoice = InvoiceGuest::findOrFail($id);
             $invoice->blocked = $invoice->blocked == 1 ? 0 : 1;
@@ -105,9 +102,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             }
 
-
         return redirect()->back()->with('block',__('hotels.block'));
-
 
     }
 
@@ -132,7 +127,7 @@ class HotelRepository implements HotelRepositoryInterface
     public function login(HotelLoginRequest $request){
 
 
-        if(auth()->guard('hotel')->attempt(['email' => $request->email, 'password' => $request->password,'blocked' => 1])){
+        if(auth()->guard('hotel')->attempt(['email' => trim($request->email," "), 'password' => trim($request->password," "),'blocked' => 1])){
 
 
             return redirect()->to(RouteServiceProvider::HOTEL);
@@ -188,7 +183,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             $data = [
 
-                "name_ar" =>  " لقد تم تسجيل فندق جديد " . $request->name_ar,
+                "name_ar" =>   lang() == 'ar' ? __("hotels.message_register") . $request->name_ar : __("hotels.message_register") .  $request->name_en,
                 'email' => $request->email,
 
             ];
@@ -204,8 +199,6 @@ class HotelRepository implements HotelRepositoryInterface
             return  redirect()->back()->withErrors(["error" => $exception->getMessage()]);
         }
 
-
-
     }
 
 
@@ -219,7 +212,6 @@ class HotelRepository implements HotelRepositoryInterface
 
 
     public function update(UpdateHotelRequest $request){
-
 
         try {
 

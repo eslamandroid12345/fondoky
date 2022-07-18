@@ -63,7 +63,7 @@
 
                                     <td>{{$calendar->room->room_type->room_type}}</td>
                                     <td>{{$calendar->room_number}}</td>
-                                    <td>{{number_format($calendar->room_price,2) . '-'. $calendar->room->hotel->pound}}</td>
+                                    <td>{{ lang() == 'ar' ? number_format($calendar->room_price,2) . '-'. $calendar->room->hotel->currency_ar : number_format($calendar->room_price,2) . '-'. $calendar->room->hotel->currency_en }}</td>
                                     <td>{{$calendar->check_in}}</td>
                                     <td>{{$calendar->check_out}}</td>
 

@@ -295,7 +295,7 @@
                                         <div>
 
 
-                                            <h3 class="card-title">{{$room->hotel->country}} -- {{lang() == 'ar' ? $room->hotel->name_ar : $room->hotel->name_en}}</h3>.
+                                            <h3 class="card-title">{{ lang() == 'ar' ? $room->hotel->country_ar : $room->hotel->country_en }} - {{lang() == 'ar' ? $room->hotel->name_ar : $room->hotel->name_en}}</h3>.
                                             <br>
 
                                             <h6>{{$room->room_type->room_type}} </h6>

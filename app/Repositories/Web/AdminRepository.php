@@ -56,7 +56,7 @@ class AdminRepository implements AdminRepositoryInterface
 
         try {
 
-            if(auth()->guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])){
+            if(auth()->guard('admin')->attempt(['email' => trim($request->email," "), 'password' => trim($request->password," ")])){
 
 
                 return redirect()->intended('booking/all')->with('login', __('admin.message'));

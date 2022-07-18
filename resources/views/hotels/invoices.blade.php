@@ -108,7 +108,6 @@
 
                                     </tr>
 
-
                                     </tbody>
                                 @endforeach
 
@@ -117,12 +116,12 @@
 
 
                                     <td>{{__('hotels.commission')}}</td>
-                                    <td class="tx-left" colspan="11">@foreach($commissions as $commission) {{ lang() == 'ar' ? number_format($commission->commission,2) . '-' . hotel()->currency_ar : number_format($commission->commission,2) . '-' . hotel()->currency_en}}   @endforeach</td>
+                                    <td class="tx-left" colspan="13">@foreach($commissions as $commission) {{ lang() == 'ar' ? number_format($commission->commission,2)  . hotel()->currency_ar : number_format($commission->commission,2)  . hotel()->currency_en}}   @endforeach</td>
                                 </tr>
                                 <tr>
 
                                     <td>{{__('hotels.total')}}</td>
-                                    <td class="tx-left" colspan="11"> @foreach($commissions as $commission)  {{ lang() == 'ar' ? number_format($commission->total,2) . '-' . hotel()->currency_ar : number_format($commission->total,2) . '-' . hotel()->currency_en}}   @endforeach</td>
+                                    <td class="tx-left" colspan="13"> @foreach($commissions as $commission)  {{ lang() == 'ar' ? number_format($commission->total,2) . hotel()->currency_ar : number_format($commission->total,2) . hotel()->currency_en}}   @endforeach</td>
                                 </tr>
 
 

@@ -157,6 +157,11 @@ return [
 
 
     'hotel_room_service_create' => 'اضافه خدمات للغرف',
+    "message_register" => "تم تسجيل فندق جديد ",
+
+    "stayed" => "مقيم",
+    "leaved" => "مغادر",
+    "room_service_create_now" => "اضافه خدمه للغرفه",
 
 
 

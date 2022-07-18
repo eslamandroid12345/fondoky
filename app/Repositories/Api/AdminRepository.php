@@ -35,7 +35,7 @@ class AdminRepository implements AdminRepositoryInterface
             $admin = new AdminResource(auth()->guard('admin-api')->user());
             $admin->token = $token;
 
-            return returnDataSuccess(trans('api_user.login'),"201","admin",$admin);
+            return returnDataSuccess(trans('api_user.login'),"200","admin",$admin);
 
 
         }catch (\Exception $exception){
@@ -75,7 +75,7 @@ class AdminRepository implements AdminRepositoryInterface
                 $admin->save();
 
 
-                return returnDataSuccess(__('admin.create'), "201", "admin", new AdminResource($admin));
+                return returnDataSuccess(__('admin.create'), "200", "admin", new AdminResource($admin));
 
             } catch (\Exception $exception) {
 
@@ -93,7 +93,7 @@ class AdminRepository implements AdminRepositoryInterface
 
             auth()->guard('admin-api')->logout();
 
-            return returnMessageSuccess(trans('api_user.logout_admin'),"201");
+            return returnMessageSuccess(trans('api_user.logout_admin'),"200");
 
         }catch (\Exception $exception){
 

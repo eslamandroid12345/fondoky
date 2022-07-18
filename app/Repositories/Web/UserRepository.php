@@ -27,12 +27,14 @@ class UserRepository implements UserRepositoryInterface
         $end = $request->date_expire;
 
 
+
         if(!is_null($country) OR !is_null($country_en) AND !is_null($start) AND !is_null($end) AND !is_null($child_max) AND !is_null($adults_max)) {
 
 
             $rooms = Room::whereHas('calendars', function ($query) use($start,$end){
 
                 $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)->orWhereBetween('check_in',[$start,$end])->whereDate('check_in','!=',$end);
+
 
 
             })->whereHas('hotel', function ($query) use ($country,$country_en) {
@@ -46,9 +48,10 @@ class UserRepository implements UserRepositoryInterface
                 $query->whereDate('check_in','<=',$start)->whereDate('check_out','>=',$end)
                     ->orWhereBetween('check_in',[$start,$end])
                     ->whereDate('check_in','!=',$end)->select('id','room_id','room_number','check_in','check_out',
-
                         DB::raw('SUM(room_price)  as total_room_price'),
                         DB::raw('Count(id) as total_calendar'))->groupBy('room_id');
+
+                    ;
 
                }])->simplePaginate(Search);
 
@@ -106,7 +109,11 @@ class UserRepository implements UserRepositoryInterface
 
 
         $room = Room::with(['hotel','room_type'])->find($id);
-        $calendars = Room::findOrFail($id)->calendars;
+
+//
+        $calendars = Room::findOrFail($id)->calendars()->select('id','check_in','check_out','room_id','room_number','room_price','days')->simplePaginate(3);
+
+
         return view('users.reservation_room',compact('room','calendars'));
 
     }
@@ -142,7 +149,7 @@ class UserRepository implements UserRepositoryInterface
             $rate->user_id = auth()->id();
             $rate->save();
 
-            return redirect()->back()->with('success','rates created successfully');
+            return redirect()->back()->with('success',__('users.rate'));
 
 
 

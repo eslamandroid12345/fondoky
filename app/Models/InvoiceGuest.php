@@ -64,22 +64,22 @@ class InvoiceGuest extends Model
     }
 
 
-    public function stay(){
+    public function stay() : string{
 
-        return $this->stayed ==  true ? 'مقيم' : 'مغادر';
+        return $this->stayed ==  true ? __('hotels.stayed') : __('hotels.leaved');
 
     }
 
 
 
-    public function block(){
+    public function block() : string {
 
         return $this->blocked == true ? 'show' : 'notShow';
 
     }
 
 
-    public function cancel(){
+    public function cancel() : string {
 
 
         return $this->canceled == true ? 'show' : 'notShow';

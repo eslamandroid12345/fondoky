@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories\Web;
-
 use App\Events\NewReservation;
 use App\Interfaces\Web\ReservationRepositoryInterface;
 use App\Models\InvoiceGuest;

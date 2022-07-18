@@ -22,7 +22,6 @@ class HotelRepository implements HotelRepositoryInterface
 
         try {
 
-
              $credentials = $request->only(['email','password']);
 
             $token = auth()->guard('hotel-api')->attempt($credentials);
@@ -37,7 +36,6 @@ class HotelRepository implements HotelRepositoryInterface
             $hotel->token = $token;
 
             if($hotel){
-
 
                 return returnDataSuccess(trans('hotels.message'),"200","hotel",$hotel);
             }
@@ -72,7 +70,6 @@ class HotelRepository implements HotelRepositoryInterface
             }
 
 
-
             $hotel = new Hotel();
             $hotel->country_ar = $request->country_ar;
             $hotel->country_en = $request->country_en;
@@ -92,7 +89,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             $data = [
 
-                "name_ar" =>  " لقد تم تسجيل فندق جديد " . $request->name_ar,
+                "name_ar" =>   lang() == 'ar' ? __("hotels.message_register") . $request->name_ar : __("hotels.message_register") .  $request->name_en,
                 'email' => $request->email,
 
             ];
@@ -103,7 +100,7 @@ class HotelRepository implements HotelRepositoryInterface
             if($hotel){
 
 
-                return returnDataSuccess(trans('hotels.hotel'),"201","hotel",new HotelResource($hotel));
+                return returnDataSuccess(trans('hotels.hotel'),"200","hotel",new HotelResource($hotel));
             }
 
 

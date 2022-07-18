@@ -1,7 +1,7 @@
 @extends('layout_h.master')
 @section('title')
 
-    حجوزات اليوم
+    قائمه الحجوزات
 @stop
 @section('css')
     <!-- Internal Data table css -->
@@ -95,32 +95,43 @@
                                     <td>{{$invoice->reservation->check_in}}</td>
                                     <td>{{$invoice->reservation->check_out}}</td>
                                     <td>{{ lang() == 'ar' ? $invoice->hotel->name_ar : $invoice->hotel->name_en}}</td>
-                                    <td>{{$invoice->total_all}}</td>
-                                    <td>{{$invoice->vat_tax}}</td>
-                                    <td>{{$invoice->municipal_tax}}</td>
-                                    <td>{{$invoice->tourism_tax}}</td>
-                                    <td>{{$invoice->total}}</td>
+                                    <td>{{ lang() == 'ar' ? $invoice->total_all  . hotel()->currency_ar : $invoice->total_all . hotel()->currency_en}}</td>
+                                    <td>{{ lang() == 'ar' ? $invoice->vat_tax . hotel()->currency_ar : $invoice->vat_tax . hotel()->currency_en}}</td>
+                                    <td>{{ lang() == 'ar' ? $invoice->municipal_tax . hotel()->currency_ar : $invoice->municipal_tax . hotel()->currency_en }}</td>
+                                    <td>{{  lang() == 'ar' ? $invoice->tourism_tax . hotel()->currency_ar : $invoice->tourism_tax . hotel()->currency_en }}</td>
+                                    <td>{{ lang() == 'ar' ? $invoice->total . hotel()->currency_ar : $invoice->total . hotel()->currency_en}}</td>
                                     <td>{{$invoice->block()}}</td>
                                     <td>{{$invoice->stay()}}</td>
                                     <td>
-                                        @if($booker->blocked == 1)
-                                            <a class="dropdown-item" href="{{route('hotels.block',$invoice->id)}}">{{__('book_hotel.block')}}</a>
 
-                                        @else
-                                            <a class="dropdown-item" href="">{{__('book_hotel.block_now')}}</a>
+                                        <div class="dropdown">
+                                            <button aria-expanded="false" aria-haspopup="true"
+                                                    class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
+                                                    type="button">{{__('content.operations')}}<i class="fas fa-caret-down ml-1"></i></button>
+                                            <div class="dropdown-menu tx-13">
 
+                                                @if($invoice->blocked == 1)
+                                                    <a class="dropdown-item" href="{{route('hotels.block',$invoice->id)}}">{{__('book_hotel.block')}}</a>
 
-                                        @endif
-
-
-                                        @if($booker->stayed == 1)
-                                            <a class="dropdown-item" href="{{route('hotels.stay',$invoice->id)}}">{{__('book_hotel.not_stayed')}}</a>
-
-                                        @else
-                                            <a class="dropdown-item" href="">{{__('book_hotel.leave')}}</a>
+                                                @else
+                                                    <a class="dropdown-item" href="">{{__('book_hotel.block_now')}}</a>
 
 
-                                        @endif
+                                                @endif
+
+
+                                                @if($invoice->stayed == 1)
+                                                    <a class="dropdown-item" href="{{route('hotels.stay',$invoice->id)}}">{{__('book_hotel.not_stayed')}}</a>
+
+                                                @else
+                                                    <a class="dropdown-item" href="">{{__('book_hotel.leave')}}</a>
+
+
+                                                @endif
+                                            </div>
+                                        </div>
+
+
                                     </td>
 
                                 </tr>

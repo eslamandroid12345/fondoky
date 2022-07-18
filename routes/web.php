@@ -3,9 +3,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
-use App\Models\Booker;
 use App\Models\Calendar;
-use App\Models\Report;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;

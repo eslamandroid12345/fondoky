@@ -1,8 +1,6 @@
 <?php
 
-
   //start method handle error and success message and data in controllers api
-
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of language
@@ -61,7 +59,6 @@ if(!function_exists('returnDataSuccess')){
 
 
 }
-
 
 
 //end method of Api --------------------------------------------------------------------------------

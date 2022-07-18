@@ -146,6 +146,12 @@ return [
     'hotel_room_service_room' => 'Room name',
 
     'hotel_room_service_create' => 'Add services rooms',
+    "message_register" => "New hotel register ",
+    "stayed" => "stay",
+    "leaved" => "leave",
+
+    "room_service_create_now" => "Add room service",
+
 
 
 ];

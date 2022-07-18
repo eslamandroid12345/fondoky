@@ -48,6 +48,7 @@
 
                 </div>
                 <div class="card-body">
+
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
                             <thead>
@@ -62,17 +63,17 @@
                             </thead>
 
                             @foreach($calendars as $calendar)
-                                <tbody>
-                                <tr>
-                                    <td>{{$calendar->room_number > 0 ? $calendar->room_number : 'Sold'}}</td>
-                                    <td>{{ lang() == 'ar' ? number_format($calendar->room_price,2) . $calendar->room->hotel->pound : number_format($calendar->room_price,2) . $calendar->room->hotel->currency_en}}</td>
-                                    <td>{{$calendar->check_in}}</td>
-                                    <td>{{$calendar->check_out}}</td>
-                                </tr>
 
+                                    <tbody>
+                                    <tr>
+                                        <td>{{$calendar->room_number > 0 ? $calendar->room_number : 'Sold'}}</td>
+                                        <td>{{ lang() == 'ar' ? number_format($calendar->room_price,2) . $calendar->room->hotel->pound : number_format($calendar->room_price,2) . $calendar->room->hotel->currency_en}}</td>
+                                        <td>{{$calendar->check_in}}</td>
+                                        <td>{{$calendar->check_out}}</td>
+                                    </tr>
 
+                                    </tbody>
 
-                                </tbody>
                             @endforeach
                         </table>
                     </div>
@@ -89,180 +90,189 @@
 
     <!-- row -->
     <div class="row">
+        @php
+            $to =     \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_start'));
+            $from =   \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_expire'));
+
+            $diff_in_days = $to->diffInDays($from);
+
+        @endphp
+
 
         <div class="col-lg-12 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{route('reservations.store',$room->id)}}" method="POST" autocomplete="off">
 
-                        @csrf
+                    <div class="card">
 
-                        <div class="row">
+                        <div class="card-body">
 
+                            <form action="{{route('reservations.store',$room->id)}}" method="POST" autocomplete="off">
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">{{__('users.city')}}</label>
-                                <input type="text" class="form-control" name="destination" value="{{lang() == 'ar' ? $room->hotel->country_ar : $room->hotel->country_en}}" readonly>
+                                @csrf
 
-                            </div>
-
-{{--                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">--}}
-{{--                                <label for="inputName" class="control-label">{{__('users.room_type')}}</label>--}}
-{{--                                <input type="text" class="form-control" name="room_type" value="{{$room->room_type->room_type}}" readonly>--}}
-
-{{--                            </div>--}}
+                                <div class="row">
 
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">{{__('users.date_arrive')}}</label>
-                                <input type="date" class="form-control" name="check_in" value="{{ request()->query('date_start')}}" readonly>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                        <label for="inputName" class="control-label">{{__('users.city')}}</label>
+                                        <input type="text" class="form-control" name="destination" value="{{lang() == 'ar' ? $room->hotel->country_ar : $room->hotel->country_en}}" readonly>
 
-                            </div>
-
-
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">{{__('users.date_leave')}}</label>
-                                <input type="date" class="form-control" name="check_out" value="{{ request()->query('date_expire')}}" readonly>
-
-                            </div>
-
-
-
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">{{__('users.adults')}}</label>
-                                <input type="number" class="form-control" name="adults" value="{{$room->adults_max}}" readonly>
-
-                            </div>
-
-
-
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">{{__('users.children')}}</label>
-                                <input type="number" class="form-control" name="children" value="{{$room->child_max}}" readonly>
-
-                            </div>
-
-
-
-                                <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
-                                <input type="hidden" name="room_id" value="{{$room->id}}">
-
-
-
-
-                            {{-- start calculate num of nigts --}}
-                            @php
-                                $to =     \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_start'));
-                                $from =   \Carbon\Carbon::createFromFormat('Y-m-d', request()->query('date_expire'));
-
-                                $diff_in_days = $to->diffInDays($from);
-
-                            @endphp
-
-                            <input type="hidden" name="num_of_nights" id="nights" onkeyup="sum()" value="{{$diff_in_days}}" readonly>
-
-
-
-                            <input type="hidden" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
-
-                            {{-- end calculate num of nigts --}}
-
-
-                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
-                                <label for="inputName" class="control-label">{{__('users.room_number')}}</label>
-
-                                <input type="number" class="form-control" name="room_number" id="room" onkeyup="sum()">
-                                <span class="text-danger"> @error('room_number') {{$message}} @enderror</span>
-
-
-                                {{--start money--}}
-                                <input type="hidden" name="total" id="result">
-                                <input type="hidden" name="tourism_tax" id="tourism_tax">
-                                <input type="hidden" name="municipal_tax" id="municipal_tax">
-                                <input type="hidden" name="vat_tax" id="vat_tax">
-                                <input type="hidden" name="commission" id="commission">
-                                {{--end money--}}
-
-                            </div>
-
-
-
-
-                            <div class="col-lg-8 col-md-8 col-sm-12 mt-3 mb-2">
-                                <label for="inputName" class="control-label"> {{__('users.total')}} {{lang() == 'ar' ? $room->hotel->currency_ar : $room->hotel->currency_en}}</label>
-                                <input type="text" class="form-control" name="total_all" id="total_all" value="0" readonly>
-                            </div>
-
-
-                            <div class="col-lg-12 col-md-12 col-sm-12 mt-3 mb-2">
-                                <button type="submit" class="btn btn-primary">{{__('admin_create.save')}}</button>
-                            </div>
-
-
-
-                            <br>
-
-                            @if(count(json_decode($room->images)) == 1)
-                                @foreach(json_decode($room->images) as $image)
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
-
-                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
-                                @endforeach
 
-                            @elseif(count(json_decode($room->images)) == 2)
+                                    {{--                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">--}}
+                                    {{--                                <label for="inputName" class="control-label">{{__('users.room_type')}}</label>--}}
+                                    {{--                                <input type="text" class="form-control" name="room_type" value="{{$room->room_type->room_type}}" readonly>--}}
 
-                                @foreach(json_decode($room->images) as $image)
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
+                                    {{--                            </div>--}}
 
-                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                        <label for="inputName" class="control-label">{{__('users.date_arrive')}}</label>
+                                        <input type="date" class="form-control" name="check_in" value="{{ request()->query('date_start')}}" readonly>
+
                                     </div>
-                                @endforeach
 
 
-                            @elseif(count(json_decode($room->images)) == 3)
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                        <label for="inputName" class="control-label">{{__('users.date_leave')}}</label>
+                                        <input type="date" class="form-control" name="check_out" value="{{ request()->query('date_expire')}}" readonly>
 
-                                @foreach(json_decode($room->images) as $image)
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
-
-                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
-                                @endforeach
 
 
-                            @else
 
-                                @foreach(json_decode($room->images) as $image)
-                                    <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                        <label for="inputName" class="control-label">{{__('users.adults')}}</label>
+                                        <input type="number" class="form-control" name="adults" value="{{$room->adults_max}}" readonly>
 
-                                        <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
                                     </div>
-                                @endforeach
-
-                            @endif
 
 
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
-                            <ul>
-                                @if($room->hotel->service()->exists())
 
-                                    @foreach(json_decode($room->hotel->service->services) as $service)
-                                        <li>{{$service}}</li><hr>
-                                    @endforeach
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                        <label for="inputName" class="control-label">{{__('users.children')}}</label>
+                                        <input type="number" class="form-control" name="children" value="{{$room->child_max}}" readonly>
+
+                                    </div>
 
 
-                                @endif
-                            </ul>
-                            </div>
 
+                                    <input type="hidden" name="hotel_id" value="{{$room->hotel->id}}">
+                                    <input type="hidden" name="room_id" value="{{$room->id}}">
+
+
+
+
+                                    {{-- start calculate num of nigts --}}
+
+                                    <input type="hidden" name="num_of_nights" id="nights" onkeyup="sum()" value="{{$diff_in_days}}" readonly>
+
+
+
+                                    <input type="hidden" value="{{decrypt(request()->query('key'))}}" id="price" onkeyup="sum()" readonly>
+
+                                    {{-- end calculate num of nigts --}}
+
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+
+
+                                        <label for="inputName" class="control-label">{{__('users.room_number')}}</label>
+                                        <input type="number" class="form-control" name="room_number" id="room" onkeyup="sum()">
+
+
+                                        <span class="text-danger"> @error('room_number') {{$message}} @enderror</span>
+
+
+                                        {{--start money--}}
+                                        <input type="hidden" name="total" id="result">
+                                        <input type="hidden" name="tourism_tax" id="tourism_tax">
+                                        <input type="hidden" name="municipal_tax" id="municipal_tax">
+                                        <input type="hidden" name="vat_tax" id="vat_tax">
+                                        <input type="hidden" name="commission" id="commission">
+                                        {{--end money--}}
+
+                                    </div>
+
+
+
+
+                                    <div class="col-lg-8 col-md-8 col-sm-12 mt-3 mb-2">
+                                        <label for="inputName" class="control-label"> {{__('users.total')}} {{lang() == 'ar' ? $room->hotel->currency_ar : $room->hotel->currency_en}}</label>
+                                        <input type="text" class="form-control" name="total_all" id="total_all" value="0" readonly>
+                                    </div>
+
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 mt-3 mb-2">
+                                        <button type="submit" class="btn btn-primary">{{__('admin_create.save')}}</button>
+                                    </div>
+
+
+
+                                    <br>
+
+                                    @if(count(json_decode($room->images)) == 1)
+                                        @foreach(json_decode($room->images) as $image)
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-1">
+
+                                                <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                            </div>
+                                        @endforeach
+
+                                    @elseif(count(json_decode($room->images)) == 2)
+
+                                        @foreach(json_decode($room->images) as $image)
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 my-1">
+
+                                                <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                            </div>
+                                        @endforeach
+
+
+                                    @elseif(count(json_decode($room->images)) == 3)
+
+                                        @foreach(json_decode($room->images) as $image)
+                                            <div class="col-lg-4 col-md-4 col-sm-12 col-12 my-1">
+
+                                                <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                            </div>
+                                        @endforeach
+
+
+                                    @else
+
+                                        @foreach(json_decode($room->images) as $image)
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-12 my-1">
+
+                                                <img style="height: 280px" src="{{URL::to('/rooms/'.$image)}}" class="d-block w-100" alt="...">
+                                            </div>
+                                        @endforeach
+
+                                    @endif
+
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
+                                        <ul>
+                                            @if($room->hotel->service()->exists())
+
+                                                @foreach(json_decode($room->hotel->service->services) as $service)
+                                                    <li>{{$service}}</li><hr>
+                                                @endforeach
+
+
+                                            @endif
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+
+                            </form>
                         </div>
 
+                    </div>
 
-                    </form>
-                </div>
-            </div>
+
         </div>
-
     </div>
 
     <!-- row closed -->

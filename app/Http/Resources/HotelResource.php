@@ -12,7 +12,7 @@ class HotelResource extends JsonResource
         return [
 
             'id' => $this->id,
-            'country' => $this->country,
+            'country' => lang() == 'ar' ? $this->country_ar : $this->country,
             'manger' => $this->manger,
             'name' => lang() == 'ar' ? $this->name_ar : $this->name_en,
             'email' => $this->email,

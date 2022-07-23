@@ -299,7 +299,8 @@
                                             <br>
 
                                             <h6>{{$room->room_type->room_type}} </h6>
-                                            <span>{{$room->adults_max . "بالغ"}} / {{$room->child_max . "طفل"}}</span>
+                                            <span>{{$room->adults_max . "بالغ"}} / {{$room->child_max . "طفل"}}</span><br><br>
+                                            <span>{{number_format($price,2)}}  {{ lang() == 'ar' ? $room->hotel->currency_ar :  $room->hotel->currency_en}}</span>
 
                                         </div>
 

@@ -79,7 +79,6 @@ if(!function_exists('hotel')){
     function hotel()
     {
 
-
         return auth()->guard('hotel')->user();
     }
 }

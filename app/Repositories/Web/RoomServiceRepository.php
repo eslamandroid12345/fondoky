@@ -76,8 +76,8 @@ class RoomServiceRepository implements RoomServiceRepositoryInterface
 
               $room_service = RoomService::findOrFail($id);
               $room_service->name = $request->name;
-            $room_service->hotel_id = $request->hotel_id;
-            $room_service->save();
+             $room_service->hotel_id = $request->hotel_id;
+             $room_service->save();
 
               return redirect()->route('room-services.index')->with('update', __('hotels.service_room_update'));
 

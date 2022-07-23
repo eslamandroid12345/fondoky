@@ -9,7 +9,6 @@ use App\Http\Requests\StoreAdminRequest;
 use App\Http\Resources\AdminResource;
 use App\Interfaces\Api\AdminRepositoryInterface;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 

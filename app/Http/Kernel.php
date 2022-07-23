@@ -67,10 +67,14 @@ class Kernel extends HttpKernel
 
 
     protected $routeMiddleware = [
+
+        //start middleware create with me
         'auth' => \App\Http\Middleware\Authenticate::class,
         'status' => \App\Http\Middleware\CheckHotelStatus::class,
         'check' => \App\Http\Middleware\AuthCheckApi::class, // check token authenticated
         'lang' => \App\Http\Middleware\ChangeLanguageApi::class, //check language in api
+        //end middleware create with me
+
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

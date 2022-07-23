@@ -87,14 +87,11 @@ class UserRepository implements UserRepositoryInterface
 
         }
 
-
-
     }
 
 
 
     public function logout(){
-
 
         try {
 

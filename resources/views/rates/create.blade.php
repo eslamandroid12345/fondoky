@@ -912,7 +912,6 @@
 
                         <input type="hidden" value="{{$hotel->id}}" name="hotel_id">
 
-
                         <div class="rate">
                             <input type="radio" id="star5" name="rates_number" value="5" />
                             <label for="star5" title="5">5 stars</label>

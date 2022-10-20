@@ -37,11 +37,6 @@ return [
 
     'guards' => [
 
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
 
         //start guard for Restful Api
         'user-api' => [
@@ -62,7 +57,14 @@ return [
         ],
 
 
+
         //start guard for web
+
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',

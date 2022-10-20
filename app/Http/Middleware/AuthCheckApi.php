@@ -24,7 +24,7 @@ class AuthCheckApi
             }catch (\Exception $exception){
 
 
-                return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
+                return returnMessageError($exception->getMessage(),Response::HTTP_UNAUTHORIZED);
             }
 
             return $next($request);

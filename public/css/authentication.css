@@ -1,0 +1,533 @@
+/* start header of app and img */
+
+.clear{
+    clear: both;
+}
+
+
+
+.App-leader{
+
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+    box-sizing: border-box;
+    background: #2c3e50;
+    position: absolute;
+    top: 0;
+
+}
+.App-leader .container{
+    width: 90%;
+    margin: auto;
+
+}
+.App-leader .container .row .App-google{
+
+    margin-top: 10px;
+    float: left;
+
+}
+.App-leader .container .row .App-google a{
+
+    color: #fff;
+    text-decoration: none;
+    float: right;
+    padding: 10px;
+    transition: 2s;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.App-leader .container .row .App-google a:hover{
+    background: #fff;
+    border-radius: 3px;
+    color: #2c3e50;
+
+
+}
+.App-leader .container .row .App-google a i{
+    margin: 5px;
+}
+
+.operat h5
+{
+    float: right;
+    margin: 20px;
+    color: #fff;
+    word-spacing: 4px;
+    font-size: 1.2em;
+}
+
+.app-three
+{
+    background:#fff;
+    width: 650px;
+    height: auto;
+    margin-top: 100px;
+}
+.app-two
+{
+    height: 8vh;
+    background: #fff;
+    width: 100%;
+
+}
+.app-two button[type="button"]
+{
+    background: none;
+    border: none;
+    outline: none;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px ;
+    transition: 1s;
+}
+.app-two button[type="button"]:hover
+{
+    background: #23bcb9;
+    color: #fff;
+    border-right: none;
+    border-radius: 4px;
+
+}
+/*==================================================================================================*/
+.app-three  .app-seven
+{
+    height: auto;
+    width: 80%;
+    float: right;
+    background: #fff;
+    border-radius: 5px;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 15px;
+
+}
+.app-three  .app-seven .add-onex
+{
+    width: 85%;
+    margin-top: 15px;
+}
+.app-three  .app-seven .add-onex a
+{
+    color:#e0396d;
+    float: right;
+    text-decoration: none;
+}
+
+.app-three  .app-seven .add-onex a:hover
+{
+    color: #23bcb9;
+}
+.app-three  .app-seven .add-onex input[type="text"],
+.app-three  .app-seven .add-onex input[type="password"],
+.app-three  .app-seven .add-onex input[type="email"],
+.app-three  .app-seven .add-onex input[type="number"]
+{
+
+    border: none;
+    outline: none;
+    padding: 15px;
+    margin: 4px;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    font-size: 14px;
+    color: #1a202c;
+    background: #f2f2f2;
+    border-radius: 5px;
+}
+
+.app-three  .app-seven .add-onex input[type="text"]::placeholder,
+.app-three  .app-seven .add-onex input[type="password"]::placeholder
+{
+    color: #2c3e50;
+
+}
+.app-three  .app-seven .add-onex input[type="submit"]
+{
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #2c3e50;
+    padding: 12px;
+    margin: 4px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 15px;
+
+}
+.app-three  .app-seven .add-onex input[type="button"]
+{
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #3dc1d3;
+    padding: 12px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 15px;
+
+}
+
+
+.app-three  .app-seven .add-onex input[type="button"]:hover
+{
+    color: #fff;
+    background: #23bcb9;
+}
+.app-three  .app-seven .add-onex input[type="submit"]:hover
+{
+    color: #fff;
+    background: #e0396d;
+}
+.app-three  .app-nine
+{
+    width: 30%;
+    float: right;
+    justify-content: center;
+}
+
+.app-three  .app-nine .app-ten
+{
+    background: #2c3e50;
+    height: 110px;
+    box-sizing: border-box;
+    padding:40px ;
+}
+.app-three  .app-nine .app-ten a {
+    color: #fff;
+    cursor: pointer;
+    word-spacing: 2px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.order-alize
+{
+    display: none;
+}
+.begineer-one
+{
+    display: none;
+}
+/* start mobile application ----------*/
+@media only screen and (max-width:980px)
+{
+    .begineer-one
+    {
+        display: block;
+        width: 100%;
+        background:teal;
+        overflow: hidden;
+    }
+    .begineer-one label
+    {
+        color: #fff;
+        padding: 10px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        word-spacing: 2px;
+    }
+    .app-oner
+    {
+        display: none;
+    }
+
+    .app-three
+    {
+        display: none;
+    }
+    .app-three  .app-nine
+    {
+        display: none;
+    }
+    .order-alize
+
+    {
+        display: block;
+        border-radius: 8px;
+        height: auto;
+        margin-top: 50px;
+        width: 85%;
+        margin-bottom: 4%;
+        border: 1px solid #ccc;
+    }
+    .order-alize .add-ten
+    {
+        overflow: hidden;
+        width: 100%;
+        height: auto;
+    }
+    .order-alize .add-nine
+    {
+        float: right;
+        width: 33.3%;
+        height: 100px;
+        background: #00bbb2;
+        border-right: 1px solid #ccc;
+        justify-content: center;
+    }
+    .order-alize .add-nine p
+    {
+        color: #fff;
+        padding: 30px;
+        cursor: pointer;
+    }
+    .order-alize .add-onex
+    {
+        width: 85%;
+        margin-top: 15px;
+    }
+    .order-alize .add-onex a
+    {
+        color:#e0396d;
+        float: right;
+        padding-bottom: 6%;
+    }
+    .order-alize .add-onex input[type="text"],
+    .order-alize .add-onex input[type="password"],
+    .order-alize .add-onex input[type="email"],
+    .order-alize .add-onex input[type="number"]
+    {
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+        margin: 4px;
+        width: 100%;
+        text-align: right;
+        cursor: pointer;
+    }
+    .order-alize .add-onex input[type="submit"]
+    {
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #23bcb9;
+        padding: 10px;
+        margin: 4px;
+        width: 100%;
+        border-radius: 4px;
+    }
+    .order-alize .add-onex input[type="button"]
+    {
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #e0396d;
+        padding: 10px;
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    .app-two button[type="button"]
+    {
+        background: none;
+        border: none;
+        outline: none;
+        padding: 10px;
+        margin-top: 20px;
+        display: block;
+        text-align: right;
+        border-right: 1px solid #ccc;
+        width: 85%;
+
+    }
+    .App-leader{
+
+        display: none;
+    }
+
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.span-one{
+
+
+    font-size: 13px;color: darkred;
+    display: block;
+    padding-top: 10px;
+}
+
+
+.reg{
+
+    border: none;
+    outline: none;
+    color: #fff !important;
+    background: #3dc1d3;
+    padding: 12px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 15px;
+    margin-bottom: 30px;
+
+}
+
+
+/* hotel register */
+.hot-up{
+
+    height: auto;
+    margin-top: 22vh;
+    box-shadow: 0px 0px 7px #b2bec3,0px 0px 7px #b2bec3;
+    border-radius: 5px;
+    direction: rtl;
+    margin-bottom: 20px;
+
+}
+.hot{
+
+    height: auto;
+    text-align: right;
+    margin-top: 15px;
+
+}
+
+.hot label{
+
+   font-size: 14px;
+    padding: 13px;
+    text-align: right;
+    display: block;
+}
+
+.hot input,.hot select{
+
+    outline: none;
+    border: none;
+    background: #f2f2f2;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    font-size: 14px;
+
+
+}
+
+.hot select{
+
+    font-size: 14px;
+}
+
+.plus{
+    position: absolute;
+    margin-right: -66px;
+    padding: 10px
+}
+
+.hot-1{
+
+    background: #34495e;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.logo{
+
+    text-align: center;
+    padding: 10px;
+}
+
+/*.logo img{*/
+
+/*    width: 120px;*/
+/*    height: 120px;*/
+/*}*/
+
+
+
+/* room show */
+
+table{
+
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+
+}
+
+table th{
+
+
+    width: 17.5%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    font-size: 14px;
+
+}
+
+table tbody tr td{
+
+    width: 17.5%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    font-size: 14px;
+
+
+}
+
+.wi{
+
+    width: 30%;
+}
+
+.jan{
+
+    font-size: 14px;
+}
+.na{
+
+
+    background: #2c3e50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.jan{
+
+    padding: 10px;
+}
+@media only screen and (max-width:980px){
+
+    table th{
+
+
+        width: 17.5%;
+        border: 1px solid #ccc;
+        padding: 15px;
+        font-size: 12px;
+    }
+
+    table tbody tr td{
+
+        width: 17.5%;
+        border: 1px solid #ccc;
+        padding: 15px;
+        font-size: 12px;
+
+
+    }
+    .wi{
+
+        width: 30%;
+    }
+    .jan{
+
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+}

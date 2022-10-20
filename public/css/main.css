@@ -1,0 +1,38 @@
+table{
+    width: 100%;
+
+}
+
+table thead tr th{
+
+    background: #2d3748;
+    color: #fff;
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+}
+
+table tbody tr td:nth-child(2n){
+
+    background: #f2f2f2;
+}
+
+table tbody tr td{
+
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+
+
+}
+.pound{
+
+    background: #dc3545;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50%;
+    margin-left: 2%;
+}
+
+
+

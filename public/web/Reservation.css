@@ -1,0 +1,386 @@
+*{
+
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+a{
+
+    text-decoration: none;
+}
+
+body{
+
+    font-family: 'Tajawal', sans-serif;
+    direction: rtl;
+
+}
+
+
+.navbar-light .navbar-toggler{
+
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler{
+
+    font-size: 1.3rem;
+    display: none;
+
+}
+
+.navbar-toggler i{
+
+    color: #fff;
+}
+
+.navbar-toggler:focus{
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 0rem;
+}
+
+.navbar .navbar-brand{
+
+    font-size: 23px;
+    color: #282828bd;
+}
+
+.navbar{
+
+    direction: rtl;
+    padding-top: 0.4rem;
+    padding-bottom: 0.2rem;
+}
+
+
+.navbar .data{
+
+    margin: 0px;
+}
+
+.navbar .data li{
+
+    list-style-type: none;
+    float: left;
+    padding: 15px 10px;
+    margin: 0px;
+
+}
+
+.navbar .data li a i{
+
+    padding-left: 8px;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.navbar .data li a{
+
+    text-decoration: none;
+    color: #fff;
+    font-size: 14.5px;
+}
+
+.navbar img{
+
+    width: 70px;
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #1a789b!important;
+}
+
+.navbar-nav a i{
+
+    padding-left: 8px;
+    font-size: 14px;
+    color: #999;
+
+}
+
+.navbar-nav .nav-item{
+
+    padding: 6px 0px;
+}
+
+
+
+
+
+
+
+@media(max-width:768px){
+
+
+
+
+    .navbar-toggler{
+
+        font-size: 1rem;
+        display: block;
+
+    }
+
+
+    .navbar .data{
+
+        list-style-type: none;
+        float: left;
+        padding: 15px 10px;
+        margin: 0px;
+        display: none;
+
+    }
+
+    .navbar{
+
+        direction: rtl;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+    }
+
+}
+
+
+
+
+/**Start Reservation**/
+
+.reservation{
+
+    margin-top: 74px;
+    padding: 20px 0px;
+    margin-bottom: 10px;
+
+
+}
+
+.reservation .Reservation1{
+
+    padding: 10px 0px;
+
+}
+
+.reservation .Reservation1 img{
+
+    width: 80%;
+    margin-bottom: 7px;
+    height: 45px;
+
+}
+
+.reservation .Reservation2{
+
+    padding: 10px 0px;
+
+}
+
+.reservation .Reservation2 img{
+
+    width: 97%;
+    height: 450px;
+
+}
+
+.reservation .Reservation3{
+
+    background-color: #f2f2f2;
+    padding: 15px 20px;
+    border-radius: 3px;
+
+}
+
+.reservation .Reservation3 form input[type="submit"]{
+
+    background-color: #48667c;
+    color: #fff;
+    border: none;
+
+}
+
+.reservation .Reservation3 label{
+
+    font-size: 14px;
+}
+
+.reservation .Reservation3 input{
+
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 4px 3px;
+    border-radius: 3px;
+    border: 1px solid #666;
+}
+
+.reservation .Reservation4 p{
+
+    font-size: 14px;
+    text-align: justify;
+    line-height: 1.8em;
+
+}
+
+.reservation .Reservation1 img{
+
+    cursor: pointer;
+
+}
+
+.reservation .Reservation4{
+
+    padding: 30px 0px;
+
+}
+
+@media(max-width:768px){
+
+    .reservation .Reservation1 img{
+
+        width: 10%;
+        margin-bottom: 7px;
+        height: 45px;
+
+    }
+
+    .reservation .Reservation2 img{
+
+        width: 100%;
+        height: 350px;
+
+    }
+
+}
+
+/**End Reservation**/
+
+/**Start Footer**/
+
+.foot1{
+
+    display: flex;
+    align-items: flex-end;
+}
+.footer{
+
+    background-color: #1a789b!important;
+    direction: ltr;
+}
+
+.footer p{
+
+    padding: 0px;
+    margin: 0px;
+    color: #bbb;
+    font-size: 14px;
+}
+
+.footer p a i{
+
+    padding: 25px 10px;
+    color: #bbb;
+    font-size: 14px;
+}
+
+.footer .para2{
+
+    padding: 20px 0px;
+}
+
+@media(max-width:768px)
+{
+
+
+    .footer .para2{
+
+        padding: 10px 0px;
+    }
+
+    .footer p a i {
+        padding: 15px 10px;
+        color: #bbb;
+        font-size: 14px;
+    }
+
+}
+
+/**End Footer**/
+*::before, *::after {
+    box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    transition: .3s;
+}
+::-webkit-scrollbar-thumb {
+    background: #e1e6f1;
+}
+
+.container {
+    width: 98%;
+}
+
+
+/**Start download**/
+
+.down{
+
+    padding: 20px 0px;
+
+}
+
+.down img{
+
+    padding: 3px 0px;
+    width: 100px;
+    height: 50px;
+
+}
+
+.down p{
+
+
+    font-size: 13px;
+    padding: 10px 0px;
+    color: #777;
+
+}
+
+.down h3{
+
+    font-size: 16px;
+    color: #666;
+
+}
+
+
+.Reservation2 img{
+
+ display: none;
+
+}
+
+.Reservation2 img:nth-of-type(2){
+
+    display: block;
+
+}
+
+p{
+
+    max-width: 90%;
+    padding-top: 30px;
+    line-height: 33px;
+}
+
+h2,h3{
+
+    padding:10px;
+}

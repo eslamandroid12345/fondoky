@@ -135,4 +135,18 @@ class HotelController extends Controller
     }
 
 
+    public function rates(){
+
+
+        return $this->hotelRepositoryInterface->rates();
+    }
+
+
+    public function comments(){
+
+
+        return $this->hotelRepositoryInterface->comments();
+    }
+
+
 }

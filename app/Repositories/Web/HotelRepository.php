@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateHotelRequest;
 use App\Interfaces\Web\HotelRepositoryInterface;
 use App\Models\Comment;
 use App\Models\Hotel;
+use App\Models\Rate;
 use App\Models\Reservation;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -115,7 +116,8 @@ class HotelRepository implements HotelRepositoryInterface
 
         }else{
 
-            toastr()->error(__('admin.error'));return redirect()->back()->withInput($request->only('email'));
+            toastr()->error(__('admin.error'));
+            return redirect()->back()->withInput($request->only('email'));
         }
 
     }
@@ -255,7 +257,8 @@ class HotelRepository implements HotelRepositoryInterface
 
             ]);
 
-            auth()->guard('hotel')->logout();toastr()->error(__('hotels.logout_message'));
+            auth()->guard('hotel')->logout();
+            toastr()->error(__('hotels.logout_message'));
 
                 return redirect()->route('hotels.show');
 
@@ -289,7 +292,8 @@ class HotelRepository implements HotelRepositoryInterface
                 }
             }
 
-            $hotel->delete();toastr()->error(__('hotels.delete'));
+            $hotel->delete();
+             toastr()->error(__('hotels.delete'));
             return redirect()->route('hotels.all');
 
         }catch (\Exception $exception){
@@ -360,13 +364,34 @@ class HotelRepository implements HotelRepositoryInterface
 
             ]);
 
-            toastr()->success(__('welcome.comment'));return redirect()->back();
+            toastr()->success(__('welcome.comment'));
+            return redirect()->back();
 
         }catch (\Exception $exception){
 
             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
+    }
+
+
+    public function rates(){
+
+
+        $rates = Rate::with(['user:id,name','hotel:id'])
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(STAR);
+
+        return view('rates-hotel.index',compact('rates'));
+    }
+
+
+    public function comments(){
+
+        $comments = Comment::with(['user:id,name','hotel:id'])
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(COMMENT);
+
+        return view('comment-hotel.index',compact('comments'));
+
     }
 
 }

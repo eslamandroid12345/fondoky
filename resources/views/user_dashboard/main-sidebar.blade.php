@@ -51,35 +51,6 @@
                     {{--end--}}
 
 
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#rates">
-                            <div class="pull-left"><i class="fa fa-star"></i><span
-                                        class="right-nav-text">{{__('hotel_sidebar.rates_user')}}</span></div>
-                            <div class="pull-right"><i class="ti-plus"></i></div>
-                            <div class="clearfix"></div>
-                        </a>
-                        <ul id="rates" class="collapse" data-parent="#sidebarnav">
-                            <li><a  href="{{url('/')}}"> {{__('hotel_sidebar.rates_show_user')}}</a></li>
-
-                        </ul>
-                    </li>
-
-
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#comments">
-                            <div class="pull-left"><i class="fas fa-user-tie"></i><span
-                                        class="right-nav-text">{{__('hotel_sidebar.comments_user')}}</span></div>
-                            <div class="pull-right"><i class="ti-plus"></i></div>
-                            <div class="clearfix"></div>
-                        </a>
-                        <ul id="comments" class="collapse" data-parent="#sidebarnav">
-                            <li><a  href="{{url('/')}}"> {{__('hotel_sidebar.comments_show_user')}}</a></li>
-
-                        </ul>
-                    </li>
-
-
-
                 </ul>
             </div>
         </div>

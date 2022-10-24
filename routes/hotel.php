@@ -41,6 +41,8 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
     Route::get('invoices', [HotelController::class,'invoices'])->name('hotels.invoices');//invoices of hotel
     Route::get('month/invoices', [HotelController::class,'monthOfInvoices'])->name('hotels.month.invoices');//show view of hotel before come to invoices
     Route::get('arrivals', [HotelController::class,'arrivals'])->name('hotels.arrivals');//check arrivals daily of hotel
+    Route::get('rates', [HotelController::class,'rates'])->name('hotels.rates');
+    Route::get('comments', [HotelController::class,'comments'])->name('hotels.comments');
 
 
 

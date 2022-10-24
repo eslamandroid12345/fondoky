@@ -128,7 +128,8 @@ class UserRepository implements UserRepositoryInterface{
 
             ]);
 
-            toastr()->error(__('users.rate'));return redirect()->back();
+            toastr()->error(__('users.rate'));
+            return redirect()->back();
 
         }catch (\Exception $exception){
 

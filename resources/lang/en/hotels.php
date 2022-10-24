@@ -155,6 +155,11 @@ return [
     "hello" => "welcome your hotel in dashboard",
     "footer" => "All rights reserved to my hotel company ",
 
+    "user_rate" => "Client name",
+    "stars" => "rates",
+    "rates_department" => "Clients rates department",
+    "user_comment" => "Client comment",
+    "comment_department" => "Clients comments department",
 
 
 

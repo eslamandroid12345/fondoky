@@ -196,7 +196,7 @@
 
 
             <div class="form-group">
-                <button type="submit" class="form-control btn btn-primary rounded submit px-3"> {{ __('register.button') }}</button>
+                <button type="submit" class="form-control btn btn-primary rounded submit px-3 submitted"> {{ __('register.button') }}</button>
             </div>
 
         </form>
@@ -204,6 +204,18 @@
 
 @endsection
 @section('scripts')
+
+        <script>
+            $('form').submit(function (event) {
+                if ($(this).hasClass('submitted')) {
+                    event.preventDefault();
+                }
+                else {
+                    $(this).find(':submit').html('<i class="fa fa-spinner fa-spin"></i>');
+                    $(this).addClass('submitted');
+                }
+            });
+        </script>
     <script>
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {

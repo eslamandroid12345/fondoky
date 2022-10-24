@@ -91,7 +91,6 @@
 
 <script src="{{asset('js/jquery2.js')}}"></script>
 <script src="{{asset('js/map.js')}}"></script>
-<script src="{{asset('js/login.js')}}"></script>
 
 <!-- plugins-jquery -->
 <script src="{{ URL::asset('assets_2/js/plugins-jquery.js') }}"></script>

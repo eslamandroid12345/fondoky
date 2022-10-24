@@ -125,7 +125,7 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="rates" class="collapse" data-parent="#sidebarnav">
-                            <li><a  href="{{url('/')}}"> {{__('hotel_sidebar.rates_show')}}</a></li>
+                            <li><a  href="{{ route('hotels.rates') }}"> {{__('hotel_sidebar.rates_show')}}</a></li>
 
                         </ul>
                     </li>
@@ -139,7 +139,7 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="comments" class="collapse" data-parent="#sidebarnav">
-                            <li><a  href="{{url('/')}}"> {{__('hotel_sidebar.comments_show')}}</a></li>
+                            <li><a  href="{{route('hotels.comments')}}"> {{__('hotel_sidebar.comments_show')}}</a></li>
 
                         </ul>
                     </li>

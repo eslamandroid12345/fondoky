@@ -27,6 +27,6 @@ interface  HotelRepositoryInterface{
     public function invoices();
     public function arrivals();
     public function comment(StoreCommentRequest $request);
-
-
+    public function rates();
+    public function comments();
 }

@@ -47,7 +47,7 @@
 
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.manger') }} <span class="text-danger">*</span></label>
                                     <input  type="text"  class="form-control" name="manger" value="{{$hotel->manger}}">
@@ -56,7 +56,7 @@
 
 
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.name_ar') }} <span class="text-danger">*</span></label>
                                     <input  class="form-control"  type="text" name="name_ar" value="{{$hotel->name_ar}}">
@@ -66,7 +66,7 @@
 
                         <div class="row">
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.name_en') }} <span class="text-danger">*</span></label>
                                     <input  class="form-control"  type="text" name="name_en" value="{{$hotel->name_en}}">
@@ -74,21 +74,21 @@
                             </div>
 
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.location_ar') }}</label>
                                     <input  type="text"  class="form-control" name="location_ar" value="{{$hotel->location_ar}}">
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.location_en') }}</label>
                                     <input  type="text"  class="form-control" name="location_en" value="{{$hotel->location_en}}">
                                 </div>
                             </div>
 
-                             <div class="col-md-12">
+                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.email') }}</label>
                                     <input  type="email"  class="form-control" name="email" value="{{$hotel->email}}">
@@ -96,14 +96,14 @@
                             </div>
 
 
-                           <div class="col-md-12">
+                           <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.current_password') }}</label>
                                     <input  type="password"  class="form-control" name="current_password">
                                 </div>
                             </div>
 
-                           <div class="col-md-12">
+                           <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.new_password') }}</label>
                                     <input  type="password"  class="form-control" name="password">
@@ -111,7 +111,7 @@
                             </div>
 
 
-                           <div class="col-md-12">
+                           <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.confirm_password') }}</label>
                                     <input  type="password"  class="form-control" name="confirm_password">
@@ -121,7 +121,7 @@
 
 
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     @php
                                         $currencies_ar = ["ريال السعودي ","دولار الامريكي","يورو","درهم الاماراتي","دينار البحريني","جنيه المصري","جنيه البريطاني","دينار الكويتي","ريال العماني","ريال القطري"];
@@ -139,7 +139,7 @@
                             </div>
 
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     @php
                                         $currencies_en = ["SAR","USD","EUR","AED","BHD","EGP","GPP","KWD","OMR","QAR"];
@@ -156,6 +156,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{ __('register.phone_hotel') }}</label>
+                                    <input  type="number"  class="form-control" name="phone_hotel" value="{{$hotel->phone_hotel}}">
+                                </div>
+                            </div>
+
 
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -165,12 +172,6 @@
                             </div>
 
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>{{ __('register.phone_hotel') }}</label>
-                                    <input  type="number"  class="form-control" name="phone_hotel" value="{{$hotel->phone_hotel}}">
-                                </div>
-                            </div>
 
 
 

@@ -38,7 +38,8 @@ class RoomServiceRepository implements RoomServiceRepositoryInterface
                 $room_service->hotel_id = $request->hotel_id;
                 $room_service->save();
 
-                return redirect()->back()->with('create', __('hotels.service_room_create'));
+                toastSuccess(__('hotels.service_room_create'));
+                return redirect()->back();
 
             } catch (\Exception $exception){
 
@@ -56,12 +57,8 @@ class RoomServiceRepository implements RoomServiceRepositoryInterface
 
         $room_service = RoomService::findOrFail($id);
 
-
         Gate::authorize('edit-service',$room_service);
         return view('room_services.edit',compact('room_service'));
-
-
-
 
     }
 
@@ -73,10 +70,11 @@ class RoomServiceRepository implements RoomServiceRepositoryInterface
 
               $room_service = RoomService::findOrFail($id);
               $room_service->name = $request->name;
-             $room_service->hotel_id = $request->hotel_id;
-             $room_service->save();
+              $room_service->hotel_id = $request->hotel_id;
+              $room_service->save();
 
-              return redirect()->route('room-services.index')->with('update', __('hotels.service_room_update'));
+              toastSuccess(__('hotels.service_room_update'));
+              return redirect()->route('room-services.index');
 
 
         } catch (\Exception $exception){
@@ -97,7 +95,8 @@ class RoomServiceRepository implements RoomServiceRepositoryInterface
             $room_service = RoomService::findOrFail($id);
             $room_service->delete();
 
-            return redirect()->back()->with('delete', __('hotels.service_room_delete'));
+            toastError(__('hotels.service_room_delete'));
+            return redirect()->back();
 
         }catch (\Exception $exception){
 

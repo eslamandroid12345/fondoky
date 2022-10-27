@@ -27,10 +27,7 @@ class AdminRepository implements AdminRepositoryInterface
 
     }
 
-
-
     public function booking(){
-
 
         $invoices = Reservation::latest()->simplePaginate(Max);
         return view('admins.bookers',compact('invoices'));
@@ -67,7 +64,6 @@ class AdminRepository implements AdminRepositoryInterface
 
 
     }
-
 
 
     public function create(){

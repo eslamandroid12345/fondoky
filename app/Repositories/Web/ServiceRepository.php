@@ -31,7 +31,8 @@ class ServiceRepository implements ServiceRepositoryInterface
             $service->save();
 
 
-            return redirect()->back()->with('create', __('services.create'));
+            toastSuccess(__('services.create'));
+            return redirect()->back();
 
 
         }catch (\Exception $exception){
@@ -65,7 +66,8 @@ class ServiceRepository implements ServiceRepositoryInterface
             $service->services = json_encode($request->services);
             $service->save();
 
-            return redirect()->route('services.create')->with('update_service', __('services.update'));
+            toastSuccess(__('services.update'));
+            return redirect()->route('services.create');
 
 
         }catch (\Exception $exception){

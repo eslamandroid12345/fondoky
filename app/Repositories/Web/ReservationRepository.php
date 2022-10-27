@@ -40,7 +40,8 @@ class ReservationRepository implements ReservationRepositoryInterface{
             $reservation->save();
 
 
-            $calendars = Event::whereBetween('check_in',[$request->check_in,$request->check_out])->whereDate('check_in','!=',$request->check_out)->where('room_id','=',$id)->get();
+            $calendars = Event::whereBetween('check_in',[$request->check_in,$request->check_out])
+                ->whereDate('check_in','!=',$request->check_out)->where('room_id','=',$id)->get();
 
             foreach ($calendars as $calendar) {
 
@@ -63,7 +64,8 @@ class ReservationRepository implements ReservationRepositoryInterface{
 
         }
 
-        return redirect()->route('home')->with('success',__('users.booking'));
+        toastSuccess(__('users.booking'));
+        return redirect()->route('home');
 
 
     }
@@ -91,7 +93,8 @@ class ReservationRepository implements ReservationRepositoryInterface{
 
         }
 
-        return redirect()->back()->with('canceled',__('users.canceled'));
+        toastSuccess(__('users.canceled'));
+        return redirect()->back();
 
     }
 }

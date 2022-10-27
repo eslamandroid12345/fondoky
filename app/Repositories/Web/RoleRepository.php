@@ -33,20 +33,21 @@ class RoleRepository implements RoleRepositoryInterface
 
         try {
 
-            $role = new Role();
-            $role->name = $request->name;
-            $role->permissions = json_encode($request->permissions);
-            $role->save();
+            $role = Role::create([
+                'name' => $request->name,
+                'permissions' => json_encode($request->permissions),
 
+            ]);
 
-            return redirect()->back()->with('role',__('admin_role.role'));
+            toastSuccess(__('admin_role.role'));
+
+            return redirect()->back();
 
         }catch (\Exception $exception){
 
             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
-       
 
 
     }
@@ -67,12 +68,16 @@ class RoleRepository implements RoleRepositoryInterface
         try {
 
             $role = Role::find($id);
-            $role->name = $request->name;
-            $role->permissions = json_encode($request->permissions);
-            $role->save();
+            $role->update([
 
+            'name' => $request->name,
+           'permissions' => json_encode($request->permissions),
 
-            return redirect()->route('roles.index')->with('role_update',__('admin_role.role_update'));
+            ]);
+
+            toastSuccess(__('admin_role.role_update'));
+
+            return redirect()->route('roles.index');
 
         }catch (\Exception $exception){
 

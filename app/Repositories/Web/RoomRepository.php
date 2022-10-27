@@ -86,8 +86,9 @@ class RoomRepository implements RoomRepositoryInterface
             $room->smoke = $request->smoke;
             $room->save();
 
+            toastSuccess(__('room.create'));
 
-            return redirect()->back()->with('room',__('room.create'));
+            return redirect()->back();
 
 
         }catch (\Exception $exception){
@@ -142,8 +143,9 @@ class RoomRepository implements RoomRepositoryInterface
             $room->images = json_encode($data);
             $room->save();
 
+            toastSuccess(__('room.room_update'));
 
-            return redirect()->back()->with('room_update',__('room.room_update'));
+            return redirect()->back();
 
 
         }catch (\Exception $exception){
@@ -176,8 +178,8 @@ class RoomRepository implements RoomRepositoryInterface
             }
 
             $room->delete();
-
-            return redirect()->route('rooms.index')->with('delete', __('room.delete'));
+            toastError(__('room.delete'));
+            return redirect()->route('rooms.index');
 
         }catch (\Exception $exception){
 

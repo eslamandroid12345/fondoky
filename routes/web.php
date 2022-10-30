@@ -23,6 +23,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 |
 */
 
+//web routes
     define('Max',1);
     define('Search',8);
     define('EVENT',1);

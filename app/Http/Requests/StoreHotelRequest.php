@@ -35,6 +35,8 @@ class StoreHotelRequest extends FormRequest{
 
     public function messages()
     {
+
+        //start message for validation
         return [
 
             'manger.required'  => __('hotels.manger'),

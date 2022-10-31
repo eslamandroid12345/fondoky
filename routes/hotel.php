@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of translation
 
 /*
- * hotel routes of application and any data of hotel is  here ????????????
+ * hotel routes of application and any data of hotel is  here ???????????? ----
  */
 
 Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){

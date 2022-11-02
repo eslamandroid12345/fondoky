@@ -144,8 +144,8 @@ class HotelController extends Controller
 
     public function comments(){
 
-
         return $this->hotelRepositoryInterface->comments();
+
     }
 
 

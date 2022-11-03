@@ -46,17 +46,15 @@ trait HelperTrait{
 
             }])->select('id','adults_max','child_max','images','room_type','hotel_id')->get();
 
-            $hotels = [];
 
 
         }else{
 
-            $hotels = Hotel::query()->select('id','name_ar','name_en','location_ar','location_en','hotel_photos')->orderBy('id','DESC')->get();
             $rooms = [];
 
         }
 
-        return view('users.welcome',['rooms' => $rooms, 'hotels' => $hotels]);
+        return view('users.welcome',compact('rooms'));
     }
 
 }

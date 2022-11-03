@@ -62,7 +62,10 @@
                 direction: ltr;
             }
 
-
+            #map,#map2 {
+                width: 100%;
+                height: 200px;
+            }
         </style>
 
     @endif
@@ -112,41 +115,33 @@ height: 100%;padding: 0px ">
 
                 <form action="{{url('/')}}" class="form1" method="GET" autocomplete="off">
 
-                    @if(lang() == 'ar')
-                        <div class="col-lg-2 col-12">
-                            <input type="text" name="location_ar" placeholder="{{__('welcome.country')}}" value="{{request()->query('location_ar')}}">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <input style="width: 100%" id="search3" type="text" name="location_{{lang()}}" placeholder="{{__('welcome.country')}}" value="{{request()->query('location_ar')}}">
 
-
-                        </div>
-
-                    @else
-
-                        <div class="col-lg-2 col-12">
-                            <input type="text" name="location_en" placeholder="{{__('welcome.country')}}" value="{{request()->query('location_en')}}">
+                            <div style="display: none" id="map3"></div>
 
                         </div>
-                    @endif
 
-                    <div class="col-lg-2 col-12">
+                    <div class="col-lg-2 col-md-2 col-12">
                         <input  type="text" placeholder="{{\Carbon\Carbon::now()->format('Y-m-d')}}" class="textbox-n" id="start" name="date_start" value="{{request()->query('date_start')}}" readonly="readonly" />
 
                     </div>
 
 
 
-                    <div class="col-lg-2 col-12">
+                    <div class="col-lg-2 col-md-2 col-12">
 
                         <input  type="text" placeholder="{{\Carbon\Carbon::now()->addDays(1)->format('Y-m-d')}}" class="textbox-n" id="end" name="date_expire" value="{{request()->query('date_expire')}}" readonly="readonly" />
 
                     </div>
 
 
-                    <div class="col-lg-5 col-12 child">
+                    <div class="col-lg-2 col-md-2 col-12 child">
                         <input type="number" placeholder="{{__('welcome.adults_max')}}" name="adults_max" value="{{request()->query('adults_max')}}">
                         <input type="number"  name="child_max" value="{{request()->query('child_max')}}" placeholder="{{__('welcome.child_max')}}">
                     </div>
 
-                    <div class="col-lg-1 col-12 sub">
+                    <div class="col-lg-2 col-md-2 col-12 sub">
                         <input type="submit" value="{{__('welcome.search')}}">
                     </div>
 
@@ -339,5 +334,69 @@ height: 100%;padding: 0px ">
 
 
 @section('scripts')
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map3'), {
+                center: {lat: 22.3038945, lng: 70.80215989999999},
+                zoom: 13
+            });
+
+
+            var input = document.getElementById('search3');
+
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.bindTo('bounds', map);
+
+            var infowindow = new google.maps.InfoWindow();
+            var marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+
+                /* If the place has a geometry, then present it on a map. */
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+                marker.setIcon(({
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(35, 35)
+                }));
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+
+                /* Location details */
+                document.getElementById('location-snap').innerHTML = place.formatted_address;
+                document.getElementById('lat-span').innerHTML = place.geometry.location.lat();
+                document.getElementById('lon-span').innerHTML = place.geometry.location.lng();
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK34ZyoH4758BkVP05-GxKP0dSmBi4yTo&libraries=places&callback=initMap" async defer></script>
 
 @endsection

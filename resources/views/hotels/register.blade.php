@@ -22,21 +22,21 @@
             outline: none;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         }
-        #searchMapInput,#searchMapInput2 {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 15px;
-            font-weight: 300;
-            margin-left: 12px;
-            padding: 0 11px 0 13px;
-            text-overflow: ellipsis;
-            width: 50%;
-        }
-        #searchMapInput:focus {
-            border-color: #4d90fe;
-        } #searchMapInput2:focus {
-            border-color: #4d90fe;
-        }
+        /*#searchMapInput,#searchMapInput2 {*/
+        /*    background-color: #fff;*/
+        /*    font-family: Roboto;*/
+        /*    font-size: 15px;*/
+        /*    font-weight: 300;*/
+        /*    margin-left: 12px;*/
+        /*    padding: 0 11px 0 13px;*/
+        /*    text-overflow: ellipsis;*/
+        /*    width: 50%;*/
+        /*}*/
+        /*#searchMapInput:focus {*/
+        /*    border-color: #4d90fe;*/
+        /*} #searchMapInput2:focus {*/
+        /*    border-color: #4d90fe;*/
+        /*}*/
 
         .ftco-section{
             height: auto;
@@ -120,17 +120,17 @@
 
             <div class="form-group mb-3">
                 <label  for="gender">{{ __('register.location_ar') }} : <span class="text-danger">*</span></label>
-                <input id="searchMapInput" type="text" name="location_ar" class="form-control mapControls"  value="{{old('location_ar')}}" placeholder="{{ __('register.location_ar') }}">
+                <input id="searchMapInput" type="text" name="location_ar" class="form-control"  value="{{old('location_ar')}}" placeholder="{{ __('register.location_ar') }}">
 
-                <div id="map"></div>
+                <div style="display: none" id="map"></div>
 
             </div>
 
 
             <div class="form-group mb-3">
                 <label for="gender">{{ __('register.location_en') }} : <span class="text-danger">*</span></label>
-                <input id="searchMapInput2" type="text" name="location_en" class="form-control mapControls" value="{{old('location_en')}}" placeholder="{{ __('register.location_en') }}">
-                <div id="map2"></div>
+                <input id="searchMapInput2" type="text" name="location_en" class="form-control" value="{{old('location_en')}}" placeholder="{{ __('register.location_en') }}">
+                <div style="display: none" id="map2"></div>
 
             </div>
 

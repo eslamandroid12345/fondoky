@@ -213,42 +213,6 @@ height: 100%;padding: 0px ">
             <h4>{{__('welcome.search_hotels')}} </h4>
 
             <div class="row row-cols-1 row-cols-md-3 g-4 hotel">
-{{--                @forelse($hotels as $hotel)--}}
-{{--                    <a href="{{route('users.rates.create',$hotel->id)}}">--}}
-
-{{--                        <div class="col">--}}
-{{--                            <div class="card h-100">--}}
-{{--                                @foreach(json_decode($hotel->hotel_photos) as $images)--}}
-{{--                                    <img src="{{URL::to('/hotels/'.$images)}}" class="card-img-top" alt="...">--}}
-{{--                                @endforeach--}}
-
-{{--                                <div class="card-body">--}}
-
-{{--                                    <div class="row" style="align-items: flex-end;height: 100%">--}}
-
-{{--                                        <div>--}}
-
-{{--                                            <h5 class="card-title">{{lang() == 'ar' ? $hotel->location_ar : $hotel->location_en}}</h5>--}}
-{{--                                            <h6>{{lang() == 'ar' ? $hotel->name_ar : $hotel->name_en}}</h6>--}}
-
-
-{{--                                        </div>--}}
-
-{{--                                    </div>--}}
-
-{{--                                </div>--}}
-
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </a>--}}
-{{--                @empty--}}
-
-{{--                @endforelse--}}
-
-
-
-                {{--rooms --}}
-
 
                 @if(!empty($rooms))
                     @forelse($rooms as $room)

@@ -33,7 +33,7 @@ use App\Repositories\Web\HotelRepository as HotelRepositoryWeb;
 use App\Interfaces\Web\UserRepositoryInterface as UserRepositoryInterfaceWeb;
 use App\Repositories\Web\UserRepository as UserRepositoryWeb;
 
-
+//design pattern
 class RepositoryServiceProvider extends ServiceProvider{
 
 
@@ -61,6 +61,7 @@ class RepositoryServiceProvider extends ServiceProvider{
         $this->app->bind(RoomServiceRepositoryInterface::class,RoomServiceRepository::class);
         $this->app->bind(HotelServiceRoomRepositoryInterface::class,HotelServiceRoomRepository::class);
         $this->app->bind(ReservationRepositoryInterface::class,ReservationRepository::class);
+
 
     }
 

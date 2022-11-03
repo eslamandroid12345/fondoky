@@ -41,7 +41,6 @@ class HotelRepository implements HotelRepositoryInterface
             }
 
 
-
         }catch (\Exception $exception){
 
             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);

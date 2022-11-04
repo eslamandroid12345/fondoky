@@ -74,20 +74,6 @@
                             </div>
 
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>{{ __('register.location_ar') }}</label>
-                                    <input  type="text"  class="form-control" name="location_ar" value="{{$hotel->location_ar}}">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>{{ __('register.location_en') }}</label>
-                                    <input  type="text"  class="form-control" name="location_en" value="{{$hotel->location_en}}">
-                                </div>
-                            </div>
-
                              <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ __('register.email') }}</label>

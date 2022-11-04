@@ -98,7 +98,6 @@
     </script>
       @yield('script')
 
-
     @toastr_js
     @toastr_render
 </body>

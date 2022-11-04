@@ -254,8 +254,6 @@ class HotelRepository implements HotelRepositoryInterface
                 'name_en' =>  $request->name_en,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'location_ar' => $request->location_ar,
-                'location_en' => $request->location_en,
                 'currency_ar' => $request->currency_ar,
                 'currency_en' => $request->currency_en,
                 'description' => $request->description,

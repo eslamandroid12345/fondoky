@@ -40,6 +40,7 @@ class HotelController extends Controller
     }
 
 
+
     public function block($id){
 
         return $this->hotelRepositoryInterface->block($id);

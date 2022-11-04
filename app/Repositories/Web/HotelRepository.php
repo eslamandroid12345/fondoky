@@ -36,13 +36,19 @@ class HotelRepository implements HotelRepositoryInterface
     public function reservations(Request $request){
 
 
+
         if($request->has('check_in') && $request->has('check_out')){
 
-            $invoices =  Reservation::with(['hotel:id','user:id,name,phone','room:id,room_type'])->where('hotel_id','=',auth('hotel')->id())
+            $invoices =  Reservation::with(['hotel:id','user' => function($user) use($request){
+
+                $user->select('id','name','phone')->where('name','LIKE','%'. $request->name .'%')->where('phone','LIKE','%'. $request->phone);
+
+            },'room:id,room_type'])->where('hotel_id','=',auth('hotel')->id())
+
                 ->whereDate('check_in','=',$request->check_in)
             ->whereDate('check_out','=',$request->check_out)->orderBy('id','DESC')->get();
 
-        }else{
+        } else{
 
             $invoices =  Reservation::with(['hotel:id','user:id,name,phone','room:id,room_type'])
                 ->where('hotel_id','=',auth('hotel')->id())->orderBy('id','DESC')->simplePaginate(Max);
@@ -53,6 +59,7 @@ class HotelRepository implements HotelRepositoryInterface
         return view('hotels.reservations',compact('invoices'));
 
     }
+
 
 
     public function block($id){

@@ -51,13 +51,27 @@
                                             <div class="col-12">
                                                 <label for="Name" class="mr-sm-2">{{__('book_hotel.date_arrive')}}
                                                     :</label>
-                                                <input  type="text" class="form-control"  id="datepicker-action" name="check_in" data-date-format="yyyy-mm-dd" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
+                                                <input  type="text" class="form-control"  id="datepicker-action" name="check_in" data-date-format="yyyy-mm-dd" value="{{request('check_in')}}">
                                             </div>
                                             <div class="col-12">
                                                 <label for="Name_en" class="mr-sm-2">{{__('book_hotel.date_leave')}}
                                                     :</label>
-                                                <input type="text" class="form-control"  id="datepicker-action-2" name="check_out" data-date-format="yyyy-mm-dd" value="{{\Carbon\Carbon::now()->addDays(4)->format('Y-m-d')}}">
+                                                <input type="text" class="form-control"  id="datepicker-action-2" name="check_out" data-date-format="yyyy-mm-dd" value="{{request('check_out')}}">
                                             </div>
+
+                                            <div class="col-12">
+                                                <label for="Name_en" class="mr-sm-2">{{__('book_hotel.user')}}
+                                                    :</label>
+                                                <input type="text" class="form-control" name="name" value="{{request('name')}}">
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="Name_en" class="mr-sm-2">{{__('book_hotel.phone')}}
+                                                    :</label>
+                                                <input type="text" class="form-control" name="phone" value="{{request('phone')}}">
+                                            </div>
+
+
 
                                             <div class="col mt-3">
                                                 <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">{{__('book.search')}}</button>
@@ -92,6 +106,7 @@
                     <div class="col-xl-12 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
+
                                 <a href="{{route('hotels.arrivals')}}" class="btn btn-success btn-sm" role="button"
                                    aria-pressed="true">{{__('hotel_sidebar.booking_day')}}</a>
                                 <button class="sear btn btn-info btn-sm" role="button"

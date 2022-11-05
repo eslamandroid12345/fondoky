@@ -17,7 +17,7 @@ class RoleRepository implements RoleRepositoryInterface
 
     public function index(){
 
-        $roles = DB::table('roles')->select('*')->orderBy('id','DESC')->simplePaginate(Max);
+        $roles = Role::query()->orderByDesc('id')->get();
         return view('roles.index',compact('roles'));
 
     }

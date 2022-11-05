@@ -99,7 +99,8 @@ class AdminRepository implements AdminRepositoryInterface
             ]);
 
 
-            toastr()->success(__('admin.create'));return redirect()->back();
+            toastr()->success(__('admin.create'));
+            return redirect()->route('admins.index');
 
         }catch (\Exception $exception){
 
@@ -112,7 +113,7 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function index(){
 
-        $admins = Admin::where('id','<>',admin()->id)->latest()->simplePaginate(Max);
+        $admins = Admin::query()->where('id','<>',admin()->id)->latest()->simplePaginate(2);
         return view('admins.index',compact('admins'));
 
     }

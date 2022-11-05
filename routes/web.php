@@ -69,7 +69,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
     });
 
 
-
 });
 
 
@@ -333,3 +332,4 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //    'start_date' => [ Rule::unique('reservations')->where(function($query) use ($request) {
 //        $query->where('pitch_id', 'LIKE','%'.$request->pitch_id.'%');
 //      })],
+

@@ -63,4 +63,14 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
 
     });
 
+    Route::group(['prefix'=>'admins','middleware' => ['auth:admin']], function (){
+
+        Route::get('setting',function (){
+
+            return view('settings.index');
+        })->name('admins.setting');
+
+
+    });
+
 });

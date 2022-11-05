@@ -44,7 +44,7 @@
                             @can('users')
                                 <li>
                                     <a href="javascript:void(0);" data-toggle="collapse" data-target="#profile">
-                                        <div class="pull-left"><i class="fas fa-school"></i><span
+                                        <div class="pull-left"><i class="fas fa-users"></i><span
                                                 class="right-nav-t">{{__('sidebar_admin.users')}}</span></div>
                                         <div class="pull-right"><i class="ti-plus"></i></div>
                                         <div class="clearfix"></div>
@@ -62,10 +62,11 @@
 
 
                     {{--start--}}
+
                     @can('admins')
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#rooms">
-                            <div class="pull-left"><i class="fas fa-school"></i><span
+                            <div class="pull-left"><i class="fas fa-user"></i><span
                                     class="right-nav-t">{{__('sidebar_admin.admins')}}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
@@ -86,7 +87,7 @@
                     @can('roles')
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#services">
-                            <div class="pull-left"><i class="fa fa-building"></i><span
+                            <div class="pull-left"><i class="fas fa-chalkboard"></i><span
                                     class="right-nav-text">{{__('sidebar_admin.employees_roles')}}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
@@ -103,7 +104,7 @@
                     @can('reports')
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#services_room">
-                            <div class="pull-left"><i class="fa fa-building"></i><span
+                            <div class="pull-left"><i class="fas fa-money-bill-wave-alt"></i><span
                                     class="right-nav-text">{{__('sidebar_admin.report')}}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
@@ -115,6 +116,77 @@
                     </li>
                     @endcan
 
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#setting">
+                            <div class="pull-left"><i class="fas fa-cogs"></i><span
+                                        class="right-nav-text">{{__('sidebar_admin.settings')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="setting" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="{{route('admins.setting')}}"> {{__('sidebar_admin.settings_app')}}</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#notifications">
+                            <div class="pull-left"><i class="fa fa-bell"></i><span
+                                        class="right-nav-text">{{__('sidebar_admin.notifications')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="notifications" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="#">{{__('sidebar_admin.notifications_app')}}</a></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#currencies">
+                            <div class="pull-left"><i class="fas fa-coins"></i><span
+                                        class="right-nav-text">{{__('sidebar_admin.currencies')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="currencies" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="#">{{__('sidebar_admin.currencies_app')}}</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#problems">
+                            <div class="pull-left"><i class="fas fa-book"></i><span
+                                        class="right-nav-text">{{__('sidebar_admin.problems')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="problems" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="#">{{__('sidebar_admin.problems_app')}}</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#inbox">
+                            <div class="pull-left"><i class="fa fa-inbox"></i><span
+                                        class="right-nav-text">{{__('sidebar_admin.messages')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="inbox" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="#">{{__('sidebar_admin.messages_app')}}</a></li>
+
+                        </ul>
+                    </li>
 
                     <!-- sections-->
 

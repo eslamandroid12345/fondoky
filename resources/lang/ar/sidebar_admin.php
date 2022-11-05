@@ -22,5 +22,22 @@ return [
     "supervisors" => "اضافه مشرف جديد",
 
 
+    //arabic language
+    "settings" => "الاعدادات",
+    "notifications" => "الاشعارات",
+    "currencies" => "العملات",
+    "problems" => "الشكاوي",
+    "messages" => "الرسائل الوارده",
+
+
+    "settings_app" => "اعدادات التطبيق",
+    "notifications_app" => "اشعارات الفنادق",
+    "currencies_app" => "عملات التطبيق",
+    "problems_app" => "شكاوي العملاء",
+    "messages_app" => "جميع رسائل العملاء",
+
+
+
+
 
 ];

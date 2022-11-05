@@ -21,6 +21,20 @@ return [
     "supervisors" => "Create new supervisor",
 
 
+    //english language"
+    "settings" => "Setting",
+    "notifications" => "Notifications",
+    "currencies" => "Currencies",
+    "problems" => "Problems",
+    "messages" => "Messages",
+
+    "settings_app" => "Setting application",
+    "notifications_app" => "Notification Hotels",
+    "currencies_app" => "Currencies application",
+    "problems_app" => "Customer complaints",
+    "messages_app" => "All customer messages",
+
+
 
 
 

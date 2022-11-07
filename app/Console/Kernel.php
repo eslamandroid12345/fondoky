@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('hotels:expires')->monthly();
+        $schedule->command('hotels:expires')->everyMinute();
     }
 
 

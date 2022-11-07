@@ -8,8 +8,8 @@ use Illuminate\Support\ServiceProvider;
 class BroadcastServiceProvider extends ServiceProvider
 {
 
-    public function boot()
-    {
+    public function boot(){
+
         Broadcast::routes(["middleware" => ["web","auth:hotel"]]);
 
         require base_path('routes/channels.php');

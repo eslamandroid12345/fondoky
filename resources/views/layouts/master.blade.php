@@ -91,6 +91,7 @@
         var channel = Echo.private(`new-reservations.` + window.App.user);
         channel.listen('.new-reservations-event', function(data) {
             alert('  تم حجز غرفه جديده بفندقك  ');
+            // toastr.success('dd');
 
         });
 

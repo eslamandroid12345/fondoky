@@ -10,7 +10,6 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
 
 
 
-
     Route::get('admins/show',[AdminController::class,'show'])->name('admins.show')->middleware('guest:admin');//return view admin login
     Route::post('admins/login',[AdminController::class,'login'])->name('admins.login')->middleware('guest:admin');
 
@@ -68,6 +67,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
         Route::get('setting',function (){
 
             return view('settings.index');
+
         })->name('admins.setting');
 
 

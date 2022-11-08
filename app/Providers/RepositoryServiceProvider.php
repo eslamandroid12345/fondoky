@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use App\Interfaces\Web\SettingRepositoryInterface;
+use App\Repositories\Web\SettingRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\Api\HotelRepositoryInterface;
 use App\Interfaces\Api\UserRepositoryInterface;
@@ -56,6 +58,7 @@ class RepositoryServiceProvider extends ServiceProvider{
         $this->app->bind(ServiceRepositoryInterface::class,ServiceRepository::class);
         $this->app->bind(CommissionRepositoryInterface::class,CommissionRepository::class);
         $this->app->bind(EventRepositoryInterface::class,EventRepository::class);
+        $this->app->bind(SettingRepositoryInterface::class,SettingRepository::class);
 
         //Repository pattern of room service
         $this->app->bind(RoomServiceRepositoryInterface::class,RoomServiceRepository::class);

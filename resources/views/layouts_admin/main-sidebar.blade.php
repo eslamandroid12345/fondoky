@@ -125,7 +125,7 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="setting" class="collapse" data-parent="#sidebarnav">
-                            <li><a  href="{{route('admins.setting')}}"> {{__('sidebar_admin.settings_app')}}</a></li>
+                            <li><a  href="{{route('settings.index')}}"> {{__('sidebar_admin.settings_app')}}</a></li>
 
                         </ul>
                     </li>

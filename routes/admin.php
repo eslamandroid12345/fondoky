@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -62,14 +63,20 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
 
     });
 
-    Route::group(['prefix'=>'admins','middleware' => ['auth:admin']], function (){
+    Route::group(['prefix'=>'settings','middleware' => ['auth:admin']], function (){
 
-        Route::get('setting',function (){
+        Route::get('index',[SettingController::class,'getSetting'])->name('settings.index');
+        Route::post('store',[SettingController::class,'store'])->name('settings.store');
+        Route::put('update',[SettingController::class,'update'])->name('settings.update');
+        Route::delete('delete',[SettingController::class,'delete'])->name('settings.delete');
 
-            return view('settings.index');
 
-        })->name('admins.setting');
-
+//        Route::get('setting',function (){
+//
+//            return view('settings.index');
+//
+//        })->name('admins.setting');
+//
 
     });
 

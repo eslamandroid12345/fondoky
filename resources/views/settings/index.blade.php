@@ -31,8 +31,11 @@
                         </div>
                     @endif
 
+                        <button type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal">
+                            {{trans('setting.add_setting_modal')}}
+                        </button>
 
-                    <br>
+                    <br><br>
 
 
                     <div class="table-responsive">
@@ -40,38 +43,64 @@
                                style="text-align: center">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>{{ trans('My_Classes_trans.Name_class') }}</th>
-                                <th>{{ trans('My_Classes_trans.Name_Grade') }}</th>
-                                <th>{{ trans('My_Classes_trans.Processes') }}</th>
+                                <th>{{trans('setting.logo')}}</th>
+                                <th>{{trans('setting.name_ar')}}</th>
+                                <th>{{trans('setting.name_en')}}</th>
+                                <th>{{trans('setting.about_ar')}}</th>
+                                <th>{{trans('setting.about_en')}}</th>
+                                <th>{{trans('setting.privacy_ar')}}</th>
+                                <th>{{trans('setting.privacy_en')}}</th>
+                                <th>{{trans('setting.location_ar')}}</th>
+                                <th>{{trans('setting.location_en')}}</th>
+                                <th>{{trans('setting.vat_tax')}}</th>
+                                <th>{{trans('setting.municipal_tax')}}</th>
+                                <th>{{trans('setting.tourism_tax')}}</th>
+
                             </tr>
                             </thead>
                             <tbody>
 
 
 
-{{--                            @foreach ($List_Classes as $My_Class)--}}
+                            @foreach ($settings as $setting)
                                 <tr>
-                                    <td>1</td>
-                                    <td>jjs</td>
-                                    <td>dsdasd</td>
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit{{ 1 }}" title="{{ trans('Grades_trans.Edit') }}"><i class="fa fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{ 1 }}"
+                                    <td>
+                                        <img style="width: 80px;height: 80px;border-radius: 4px" src="{{URL::to('/setting/'.$setting->logo)}}">
+                                    </td>
+                                    </td>
+                                    <td>{{$settings->name_ar}}</td>
+                                    <td>{{$settings->name_en}}</td>
+                                    <td>{{$settings->about_ar}}</td>
+                                    <td>{{$settings->about_en}}</td>
+                                    <td>{{$settings->privacy_ar}}</td>
+                                    <td>{{$settings->privacy_en}}</td>
+                                    <td>{{$settings->location_ar}}</td>
+                                    <td>{{$settings->location_en}}</td>
+                                    <td>{{$settings->vat_tax}}</td>
+                                    <td>{{$settings->municipal_tax}}</td>
+                                    <td>{{$settings->tourism_tax}}</td>
+
+
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit{{ $setting->id }}" title="{{ trans('Grades_trans.Edit') }}"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{ $setting->id }}"
                                                 title="{{ trans('Grades_trans.Delete') }}"><i
                                                     class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
 
+
+
                                 <!-- edit_modal_Grade -->
-                                <div class="modal fade" id="edit{{ 1 }}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="edit{{ $setting->id }}" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
                                                     id="exampleModalLabel">
-                                                    {{ trans('My_Classes_trans.edit_class') }}
+                                                    {{ trans('setting.edit') }}
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -82,38 +111,110 @@
 
 
                                                 <!-- edit_form -->
-                                                <form action="#" method="post">
-                                                    {{ method_field('patch') }}
+                                                <form action="{{route('settings.update')}}" method="post">
+
                                                     @csrf
+                                                    @method('PUT')
                                                     <div class="row">
-                                                        <div class="col">
+
+
+
+                                                        {{--logo--}}
+                                                        <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{ trans('My_Classes_trans.Name_class') }}
+                                                                   class="mr-sm-2">{{trans('setting.logo')}}
                                                                 :</label>
-                                                            <input id="Name" type="text" name="Name"
-                                                                   class="form-control"
-                                                                   value="fkdkfod"
-                                                                   required>
-                                                            <input id="id" type="hidden" name="id" class="form-control"
-                                                                   value="{{ 1 }}">
+                                                            <input class="form-control" type="file" name="logo" />
                                                         </div>
-                                                        <div class="col">
-                                                            <label for="Name_en"
-                                                                   class="mr-sm-2">hfjdhdjf
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.name_ar')}}
                                                                 :</label>
-                                                            <input type="text" class="form-control"
-                                                                   value="nnvdfd"
-                                                                   name="Name_en" required>
+                                                            <input class="form-control" type="text" name="name_ar" value="{{$setting->name_ar}}" />
                                                         </div>
+
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.name_en')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="name_en" value="{{$setting->name_en}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.about_ar')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="about_ar" value="{{$setting->about_ar}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.about_en')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="about_en" value="{{$setting->about_en}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.privacy_ar')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="privacy_ar" value="{{$setting->privacy_ar}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.privacy_en')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="privacy_en" value="{{$setting->privacy_en}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.location_ar')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="location_ar" value="{{$setting->location_ar}}" />
+                                                        </div>
+
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.location_en')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="location_en" value="{{$setting->location_en}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.vat_tax')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="vat_tax" value="{{$setting->vat_tax}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.municipal_tax')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="municipal_tax" value="{{$setting->municipal_tax}}" />
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <label for="Name"
+                                                                   class="mr-sm-2">{{trans('setting.tourism_tax')}}
+                                                                :</label>
+                                                            <input class="form-control" type="text" name="tourism_tax" value="{{$setting->tourism_tax}}" />
+                                                        </div>
+
                                                     </div><br>
 
                                                     <br><br>
 
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">{{ trans('Grades_trans.Close') }}</button>
+                                                                data-dismiss="modal">{{ trans('setting.close') }}</button>
                                                         <button type="submit"
-                                                                class="btn btn-success">{{ trans('Grades_trans.submit') }}</button>
+                                                                class="btn btn-success">{{ trans('setting.edit') }}</button>
                                                     </div>
                                                 </form>
 
@@ -124,14 +225,14 @@
 
 
                                 <!-- delete_modal_Grade -->
-                                <div class="modal fade" id="delete{{ 1 }}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="delete{{ $setting->id }}" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
                                                     id="exampleModalLabel">
-                                                    {{ trans('My_Classes_trans.delete_class') }}
+                                                    {{ trans('setting.confirm_delete') }}
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -139,30 +240,34 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="#"
+                                                <form action="{{route('settings.delete')}}"
                                                       method="post">
-                                                    {{ method_field('Delete') }}
+
                                                     @csrf
-                                                    {{ trans('My_Classes_trans.Warning_Grade') }}
+                                                    @method('DELETE')
+
+                                                    {{ trans('setting.confirm_delete') }}
                                                     <input id="id" type="hidden" name="id" class="form-control"
-                                                           value="{{ 1 }}">
+                                                           value="{{ $setting->id }}">
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">{{ trans('My_Classes_trans.Close') }}</button>
+                                                                data-dismiss="modal">{{ trans('setting.close') }}</button>
                                                         <button type="submit"
-                                                                class="btn btn-danger">{{ trans('My_Classes_trans.submit') }}</button>
+                                                                class="btn btn-danger">{{ trans('setting.delete') }}</button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-{{--                            @endforeach--}}
+                            @endforeach
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+
+
 
 
         <!-- add_modal_class -->
@@ -172,7 +277,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                            {{ trans('My_Classes_trans.add_class') }}
+                            {{trans('setting.add_setting_modal')}}
+
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -180,7 +286,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form class=" row mb-30" action="#" method="POST">
+                        <form class=" row mb-30" action="{{route('settings.store')}}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="repeater">
@@ -188,59 +294,108 @@
                                         <div data-repeater-item>
                                             <div class="row">
 
-                                                <div class="col">
+
+                                                {{--logo--}}
+                                                <div class="col-lg-12 col-md-12 col-12">
                                                     <label for="Name"
-                                                           class="mr-sm-2">{{ trans('My_Classes_trans.Name_class') }}
+                                                           class="mr-sm-2">{{trans('setting.logo')}}
                                                         :</label>
-                                                    <input class="form-control" type="text" name="Name" />
+                                                    <input class="form-control" type="file" name="logo" />
                                                 </div>
 
-
-                                                <div class="col">
+                                                <div class="col-lg-12 col-md-12 col-12">
                                                     <label for="Name"
-                                                           class="mr-sm-2">{{ trans('My_Classes_trans.Name_class_en') }}
+                                                           class="mr-sm-2">{{trans('setting.name_ar')}}
                                                         :</label>
-                                                    <input class="form-control" type="text" name="Name_class_en" />
+                                                    <input class="form-control" type="text" name="name_ar" />
                                                 </div>
 
 
-                                                <div class="col">
-                                                    <label for="Name_en"
-                                                           class="mr-sm-2">{{ trans('My_Classes_trans.Name_Grade') }}
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.name_en')}}
                                                         :</label>
-
-{{--                                                    <div class="box">--}}
-{{--                                                        <select class="fancyselect" name="Grade_id">--}}
-{{--                                                            @foreach ($Grades as $Grade)--}}
-{{--                                                                <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>--}}
-{{--                                                            @endforeach--}}
-{{--                                                        </select>--}}
-{{--                                                    </div>--}}
-
+                                                    <input class="form-control" type="text" name="name_en" />
                                                 </div>
 
-                                                <div class="col">
-                                                    <label for="Name_en"
-                                                           class="mr-sm-2">{{ trans('My_Classes_trans.Processes') }}
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.about_ar')}}
                                                         :</label>
-                                                    <input class="btn btn-danger btn-block" data-repeater-delete
-                                                           type="button" value="{{ trans('My_Classes_trans.delete_row') }}" />
+                                                    <input class="form-control" type="text" name="about_ar" />
                                                 </div>
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.about_en')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="about_en" />
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.privacy_ar')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="privacy_ar" />
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.privacy_en')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="privacy_en" />
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.location_ar')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="location_ar" />
+                                                </div>
+
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.location_en')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="location_en" />
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.vat_tax')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="vat_tax" />
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.municipal_tax')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="municipal_tax" />
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <label for="Name"
+                                                           class="mr-sm-2">{{trans('setting.tourism_tax')}}
+                                                        :</label>
+                                                    <input class="form-control" type="text" name="tourism_tax" />
+                                                </div>
+
+
+
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-20">
-                                        <div class="col-12">
-                                            <input class="button" data-repeater-create type="button" value="{{ trans('My_Classes_trans.add_row') }}"/>
-                                        </div>
 
-                                    </div>
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">{{ trans('Grades_trans.Close') }}</button>
+                                                data-dismiss="modal">{{ trans('setting.close') }}</button>
+
                                         <button type="submit"
-                                                class="btn btn-success">{{ trans('Grades_trans.submit') }}</button>
+                                                class="btn btn-success">{{ trans('setting.save') }}</button>
                                     </div>
 
 
@@ -256,7 +411,6 @@
 
         </div>
     </div>
-
 
 
 

@@ -57,4 +57,5 @@ trait HelperTrait{
         return view('users.welcome',compact('rooms'));
     }
 
+
 }

@@ -7,7 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class SettingRequest extends FormRequest{
 
 
-
     public function authorize(){
 
 
@@ -21,9 +20,11 @@ class SettingRequest extends FormRequest{
 
             'name_ar' => 'required',
             'name_en' => 'required',
-            'logo' => 'nullable|image|max:2048',
+            'logo' => 'nullable',
+            'location_ar' => 'required',
+            'location_en' => 'required',
             'vat_tax' => 'required|numeric',
-            'tourism_tax' => ['required','numeric'],
+            'tourism_tax' => 'required|numeric',
             'municipal_tax' => 'required|numeric'
 
         ];
@@ -36,9 +37,9 @@ class SettingRequest extends FormRequest{
       return [
 
           'name_ar.required' => trans('setting.name_ar_val'),
+          'location_ar.required' => trans('setting.location_ar_val'),
+          'location_en.required' => trans('setting.location_en_val'),
           'name_en.required' => trans('setting.name_en_val'),
-          'logo.image' => trans('setting.logo_image_val'),
-          'logo.max' => trans('setting.logo_max'),
           'vat_tax.required' => trans('setting.vat_tax_val'),
           'vat_tax.numeric' => trans('setting.vat_tax_numeric'),
           'tourism_tax.required' => trans('setting.tourism_tax_val'),

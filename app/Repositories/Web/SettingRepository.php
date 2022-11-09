@@ -6,9 +6,10 @@ use App\Http\Requests\SettingRequest;
 use App\Interfaces\Web\SettingRepositoryInterface;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Symfony\Component\HttpFoundation\Response;
 
 class SettingRepository implements SettingRepositoryInterface{
-
 
 
     public function getSetting(){
@@ -26,10 +27,12 @@ class SettingRepository implements SettingRepositoryInterface{
             if ($image = $request->file('logo')) {
 
                 $destinationPath = 'setting/';
-                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-                $image->move($destinationPath, $profileImage);
-                $request['logo'] = "$profileImage";
+                $logo = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $logo);
+                $request['logo'] = "$logo";
+
             }
+
 
             $setting = Setting::create([
 
@@ -44,11 +47,14 @@ class SettingRepository implements SettingRepositoryInterface{
                 'vat_tax' => $request->vat_tax,
                 'tourism_tax' => $request->tourism_tax,
                 'municipal_tax' => $request->municipal_tax,
-                'logo' => $profileImage,
+                'logo' => $logo,
 
             ]);
 
-            toastr()->success(trans('settings.message_add'));
+
+            toastr()->success(trans('setting.message_add'));
+
+            return redirect()->back();
 
 
         }catch (\Exception $e){
@@ -65,7 +71,9 @@ class SettingRepository implements SettingRepositoryInterface{
             $setting = Setting::findOrFail($request->id);
             $setting->delete();
 
-            toastr()->error(trans('settings.message_delete'));
+            toastr()->error(trans('setting.message_delete'));
+            return redirect()->back();
+
 
         }catch (\Exception $e){
 
@@ -77,8 +85,9 @@ class SettingRepository implements SettingRepositoryInterface{
 
     public function update(Request $request){
 
-
         try {
+
+            $setting = Setting::find($request->id);
 
             if ($image = $request->file('logo')) {
 
@@ -86,9 +95,19 @@ class SettingRepository implements SettingRepositoryInterface{
                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
                 $image->move($destinationPath, $profileImage);
                 $request['logo'] = "$profileImage";
+
+                if(file_exists('setting/'.$setting->logo)){
+
+                    unlink('setting/'.$setting->logo);
+
+                }else{
+
+                    return returnMessageError("Error to remove old logo",Response::HTTP_INTERNAL_SERVER_ERROR);
+                }
+
             }
 
-            $setting = Setting::create([
+            $setting->update([
 
                 'name_ar' => $request->name_ar,
                 'name_en' => $request->name_en,
@@ -101,11 +120,13 @@ class SettingRepository implements SettingRepositoryInterface{
                 'vat_tax' => $request->vat_tax,
                 'tourism_tax' => $request->tourism_tax,
                 'municipal_tax' => $request->municipal_tax,
-                'logo' => $profileImage,
-
+                'logo' => $request->file('logo') == null ? $setting->logo : $profileImage
             ]);
 
-            toastr()->success(trans('settings.message_update'));
+
+            toastr()->success(trans('setting.message_update'));
+            return redirect()->back();
+
 
 
         }catch (\Exception $e){

@@ -10,7 +10,7 @@ return [
     "privacy_ar" => "Rights and privacy in Arabic",
     "privacy_en" => "Rights and privacy in English",
     "location_ar" => "The company's location is in Arabic",
-    "location_en" => "The company's location is in Arabic",
+    "location_en" => "The company's location is in English",
     "vat_tax" => "Vat tax",
     "tourism_tax" => "Tourism tax",
     "municipal_tax" => "Municipal tax",
@@ -38,6 +38,15 @@ return [
      "tourism_tax_numeric" => "The tourism must be an number",
      "municipal_tax_val" => "The municipal tax is required",
      "municipal_tax_numeric" => "The municipal tax must be an number",
+
+    "message_add" => "Setting data save successfully",
+    "message_update" => "Setting data updated successfully",
+    "message_delete" => "Setting data delete successfully",
+
+    "location_ar_val" => "The company's location is in Arabic is required",
+    "location_en_val" => "The company's location is in English is required",
+
+
 
 
 

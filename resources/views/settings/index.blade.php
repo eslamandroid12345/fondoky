@@ -128,11 +128,13 @@
                                                                    class="mr-sm-2">{{trans('setting.logo')}}
                                                                 :</label>
                                                             <input class="form-control" type="file" name="logo"  />
+                                                            <img style="width: 100px;height: 100px;border-radius: 4px" src="{{URL::to('setting/'.$setting->logo)}}">
+
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.name_ar')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.name_ar')}}
                                                                 :</label>
                                                             <input class="form-control" type="text" name="name_ar" value="{{$setting->name_ar}}" />
                                                         </div>
@@ -140,42 +142,42 @@
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.name_en')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.name_en')}}
                                                                 :</label>
                                                             <input class="form-control" type="text" name="name_en" value="{{$setting->name_en}}" />
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.about_ar')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.about_ar')}}
                                                                 :</label>
-                                                            <input class="form-control" type="text" name="about_ar" value="{{$setting->about_ar}}" />
+                                                            <textarea class="form-control" type="text" name="about_ar">{{$setting->about_ar}}</textarea>
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.about_en')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.about_en')}}
                                                                 :</label>
-                                                            <input class="form-control" type="text" name="about_en" value="{{$setting->about_en}}" />
+                                                            <textarea class="form-control" type="text" name="about_en">{{$setting->about_en}}</textarea>
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.privacy_ar')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.privacy_ar')}}
                                                                 :</label>
-                                                            <input class="form-control" type="text" name="privacy_ar" value="{{$setting->privacy_ar}}" />
+                                                            <textarea class="form-control" type="text" name="privacy_ar">{{$setting->privacy_ar}}</textarea>
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.privacy_en')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.privacy_en')}}
                                                                 :</label>
-                                                            <input class="form-control" type="text" name="privacy_en" value="{{$setting->privacy_en}}" />
+                                                            <textarea class="form-control" type="text" name="privacy_en">{{$setting->privacy_en}}</textarea>
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.location_ar')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.location_ar')}}
                                                                 :</label>
                                                             <input class="form-control" type="text" name="location_ar" value="{{$setting->location_ar}}" />
                                                         </div>
@@ -183,28 +185,28 @@
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.location_en')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.location_en')}}
                                                                 :</label>
                                                             <input class="form-control" type="text" name="location_en" value="{{$setting->location_en}}" />
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.vat_tax')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.vat_tax')}}
                                                                 :</label>
                                                             <input class="form-control" type="text" name="vat_tax" value="{{$setting->vat_tax}}" />
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.municipal_tax')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.municipal_tax')}}
                                                                 :</label>
                                                             <input class="form-control" type="text" name="municipal_tax" value="{{$setting->municipal_tax}}" />
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 col-12">
                                                             <label for="Name"
-                                                                   class="mr-sm-2">{{trans('setting.tourism_tax')}}
+                                                                   class="mr-sm-2 mt-4">{{trans('setting.tourism_tax')}}
                                                                 :</label>
                                                             <input class="form-control" type="text" name="tourism_tax" value="{{$setting->tourism_tax}}" />
                                                         </div>
@@ -305,7 +307,7 @@
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.name_ar')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.name_ar')}}
                                             :</label>
                                         <input class="form-control" type="text" name="name_ar" value="{{old('name_ar')}}">
                                     </div>
@@ -313,42 +315,42 @@
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.name_en')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.name_en')}}
                                             :</label>
                                         <input class="form-control" type="text" name="name_en"  value="{{old('name_en')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.about_ar')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.about_ar')}}
                                             :</label>
                                         <input class="form-control" type="text" name="about_ar"  value="{{old('about_ar')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.about_en')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.about_en')}}
                                             :</label>
                                         <input class="form-control" type="text" name="about_en"  value="{{old('about_en')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.privacy_ar')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.privacy_ar')}}
                                             :</label>
                                         <input class="form-control" type="text" name="privacy_ar"  value="{{old('privacy_ar')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.privacy_en')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.privacy_en')}}
                                             :</label>
                                         <input class="form-control" type="text" name="privacy_en"  value="{{old('privacy_en')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.location_ar')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.location_ar')}}
                                             :</label>
                                         <input class="form-control" type="text" name="location_ar"  value="{{old('location_ar')}}">
                                     </div>
@@ -356,28 +358,28 @@
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.location_en')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.location_en')}}
                                             :</label>
                                         <input class="form-control" type="text" name="location_en"  value="{{old('location_en')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.vat_tax')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.vat_tax')}}
                                             :</label>
                                         <input class="form-control" type="text" name="vat_tax"  value="{{old('vat_tax')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.municipal_tax')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.municipal_tax')}}
                                             :</label>
                                         <input class="form-control" type="text" name="municipal_tax"  value="{{old('municipal_tax')}}">
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label for="Name"
-                                               class="mr-sm-2">{{trans('setting.tourism_tax')}}
+                                               class="mr-sm-2 mt-3">{{trans('setting.tourism_tax')}}
                                             :</label>
                                         <input class="form-control" type="text" name="tourism_tax"  value="{{old('tourism_tax')}}" >
                                     </div>

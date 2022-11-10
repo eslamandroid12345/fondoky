@@ -144,6 +144,32 @@
                         </ul>
                     </li>
 
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#notifications">
+                            <div class="pull-left"><i class="fa fa-bell"></i><span
+                                        class="right-nav-text">{{__('sidebar_admin.notifications')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="notifications" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="#">{{__('sidebar_admin.notifications_app')}}</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#problems">
+                            <div class="pull-left"><i class="fas fa-book"></i><span
+                                        class="right-nav-text">{{__('sidebar_admin.problems')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="problems" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="#">{{__('sidebar_admin.problems_app')}}</a></li>
+
+                        </ul>
+                    </li>
+
 
 
 

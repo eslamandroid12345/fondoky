@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,24 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
         Route::post('store',[SettingController::class,'store'])->name('settings.store');
         Route::put('update',[SettingController::class,'update'])->name('settings.update');
         Route::delete('delete',[SettingController::class,'delete'])->name('settings.delete');
+
+
+//        Route::get('setting',function (){
+//
+//            return view('settings.index');
+//
+//        })->name('admins.setting');
+//
+
+    });
+
+
+    Route::group(['prefix'=>'currencies','middleware' => ['auth:admin']], function (){
+
+        Route::get('index',[CurrencyController::class,'getCurrencies'])->name('currencies.index');
+        Route::post('store',[CurrencyController::class,'store'])->name('currencies.store');
+        Route::put('update',[CurrencyController::class,'update'])->name('currencies.update');
+        Route::delete('delete',[CurrencyController::class,'delete'])->name('currencies.delete');
 
 
 //        Route::get('setting',function (){

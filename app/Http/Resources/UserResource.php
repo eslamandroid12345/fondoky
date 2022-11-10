@@ -19,8 +19,6 @@ class UserResource extends JsonResource
             'token' => $this->token,
             'created_at' => $this->created_at
 
-
-
         ];
     }
 }

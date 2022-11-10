@@ -19,6 +19,8 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
+
+
     <!-- row -->
     <div class="row">
         <div class="col-md-12 mb-30">
@@ -33,7 +35,9 @@
                                     </div>
                                 @endif
                                 <a href="{{route('booking.all')}}" class="btn btn-success btn-sm" role="button"
-                                   aria-pressed="true">{{__('sidebar_admin.bookers')}}</a><br><br>
+                                   aria-pressed="true">{{__('sidebar_admin.bookers')}}</a>
+
+                                    <br><br>
                                 <div class="table-responsive">
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                            data-page-length="50"

@@ -8,15 +8,27 @@ use App\Interfaces\Web\CommissionRepositoryInterface;
 use App\Models\Hotel;
 use App\Models\Reservation;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CommissionRepository implements CommissionRepositoryInterface
 {
 
 
-    public function commissions(){
+    public function commissions(Request $request){
 
-        $hotels = Hotel::query()->select('id','name_ar','name_en','blocked','currency_ar','currency_en')->simplePaginate(Max);
+        if($request->has("name_ar") ||$request->has("name_en")){
+
+            $hotels = Hotel::query()->select('id','name_ar','name_en','blocked','currency_ar','currency_en')
+                ->where('name_ar','=', $request->name_ar)
+                ->orWhere('name_en','=', $request->name_en)
+                ->get();
+
+        }else{
+
+            $hotels = Hotel::query()->select('id','name_ar','name_en','blocked','currency_ar','currency_en')->simplePaginate(2);
+
+        }
         return view('admins.hotel_report',compact('hotels'));
 
     }

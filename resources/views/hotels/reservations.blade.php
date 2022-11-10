@@ -98,6 +98,8 @@
         </div>
     </div>
     {{--end model body--}}
+
+
     <!-- row -->
     <div class="row">
         <div class="col-md-12 mb-30">

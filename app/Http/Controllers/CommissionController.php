@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers;
 use App\Interfaces\Web\CommissionRepositoryInterface;
-
+use Illuminate\Http\Request;
 
 
 class CommissionController extends Controller
@@ -17,10 +17,10 @@ class CommissionController extends Controller
 
     }
 
-    public function commissions(){
+    public function commissions(Request $request){
 
 
-        return $this->commissionRepositoryInterface->commissions();
+        return $this->commissionRepositoryInterface->commissions($request);
 
 
     }

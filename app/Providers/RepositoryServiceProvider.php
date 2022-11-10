@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Providers;
+use App\Interfaces\Web\Currencies\CurrencyRepositoryInterface;
 use App\Interfaces\Web\SettingRepositoryInterface;
+use App\Repositories\Web\Currencies\CurrencyRepository;
 use App\Repositories\Web\SettingRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\Api\HotelRepositoryInterface;
@@ -59,6 +61,7 @@ class RepositoryServiceProvider extends ServiceProvider{
         $this->app->bind(CommissionRepositoryInterface::class,CommissionRepository::class);
         $this->app->bind(EventRepositoryInterface::class,EventRepository::class);
         $this->app->bind(SettingRepositoryInterface::class,SettingRepository::class);
+        $this->app->bind(CurrencyRepositoryInterface::class,CurrencyRepository::class);
 
         //Repository pattern of room service
         $this->app->bind(RoomServiceRepositoryInterface::class,RoomServiceRepository::class);

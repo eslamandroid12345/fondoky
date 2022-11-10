@@ -154,7 +154,7 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="currencies" class="collapse" data-parent="#sidebarnav">
-                            <li><a  href="#">{{__('sidebar_admin.currencies_app')}}</a></li>
+                            <li><a  href="{{route('currencies.index')}}">{{__('sidebar_admin.currencies_app')}}</a></li>
 
                         </ul>
                     </li>

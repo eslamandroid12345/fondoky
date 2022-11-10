@@ -61,9 +61,19 @@ class CurrencyRepository implements CurrencyRepositoryInterface{
         try {
 
             $currency = Currency::findOrFail($request->id);
+
+            if(file_exists('currencies/'.$currency->logo) && $currency->logo != NULL){
+
+                unlink('currencies/'.$currency->logo);
+
+            }else{
+
+                return returnMessageError("Error to remove old logo of currency",Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
             $currency->delete();
 
             toastr()->error(trans('currency.message_delete'));
+
             return redirect()->back();
 
 
@@ -88,7 +98,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface{
                 $image->move($destinationPath, $profileImage);
                 $request['logo'] = "$profileImage";
 
-                if(file_exists('currencies/'.$currency->logo)){
+                if(file_exists('currencies/'.$currency->logo) && $currency->logo != NULL){
 
                     unlink('currencies/'.$currency->logo);
 

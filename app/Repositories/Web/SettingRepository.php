@@ -69,6 +69,16 @@ class SettingRepository implements SettingRepositoryInterface{
         try {
 
             $setting = Setting::findOrFail($request->id);
+
+            if(file_exists('setting/'.$setting->logo) && $setting->logo != NULL){
+
+                unlink('setting/'.$setting->logo);
+
+            }else{
+
+                return returnMessageError("Error to remove old logo",Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+
             $setting->delete();
 
             toastr()->error(trans('setting.message_delete'));
@@ -96,7 +106,7 @@ class SettingRepository implements SettingRepositoryInterface{
                 $image->move($destinationPath, $profileImage);
                 $request['logo'] = "$profileImage";
 
-                if(file_exists('setting/'.$setting->logo)){
+                if(file_exists('setting/'.$setting->logo) && $setting->logo != NULL){
 
                     unlink('setting/'.$setting->logo);
 

@@ -95,6 +95,7 @@ class SettingRepository implements SettingRepositoryInterface{
 
     public function update(Request $request){
 
+        //update setting
         try {
 
             $setting = Setting::find($request->id);

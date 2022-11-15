@@ -153,7 +153,6 @@ class HotelRepository implements HotelRepositoryInterface
                 }
             }
 
-
             $hotel = Hotel::create([
 
             'manger' => $request->manger,
@@ -297,7 +296,7 @@ class HotelRepository implements HotelRepositoryInterface
                 }
             }
 
-            $hotel->delete();
+             $hotel->delete();
              toastr()->error(__('hotels.delete'));
             return redirect()->route('hotels.all');
 

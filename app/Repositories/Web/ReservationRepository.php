@@ -40,8 +40,7 @@ class ReservationRepository implements ReservationRepositoryInterface{
             $reservation->save();
 
 
-            $calendars = Event::whereBetween('check_in',[$request->check_in,$request->check_out])
-                ->whereDate('check_in','!=',$request->check_out)->where('room_id','=',$id)->get();
+            $calendars = Event::whereBetween('check_in',[$request->check_in,$request->check_out])->whereDate('check_in','!=',$request->check_out)->where('room_id','=',$id)->get();
 
             foreach ($calendars as $calendar) {
 
@@ -52,7 +51,6 @@ class ReservationRepository implements ReservationRepositoryInterface{
 
 
             DB::commit();
-
             event(new NewReservation($request->hotel_id,$reservation));
 
 

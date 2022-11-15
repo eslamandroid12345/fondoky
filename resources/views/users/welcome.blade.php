@@ -228,7 +228,7 @@ height: 100%;padding: 0px ">
 
                             ?>
 
-                        <a href="{{route('room.reservation',[$room->id,'country' => lang() == 'ar' ? request()->query('location_ar') : request()->query('location_en'), 'date_start' => request()->query('date_start'), 'date_expire' => request()->query('date_expire'), 'adults_max' => request()->query('adults_max'),'child_max' => request()->query('child_max')])}}">
+                        <a href="{{route('room.reservation',[$room->id,'country' => lang() == 'ar' ? $room->hotel->location_ar : $room->hotel->location_en, 'date_start' => request()->query('date_start'), 'date_expire' => request()->query('date_expire'), 'adults_max' => request()->query('adults_max'),'child_max' => request()->query('child_max')])}}">
 
                             <div class="col">
                                 <div class="card h-100">

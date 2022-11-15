@@ -61,9 +61,9 @@
 
 
 <div id="pre-loader">
-    <img src="{{ URL::asset('img/load.gif') }}" alt="">
+{{--    <img src="{{ URL::asset('img/load.gif') }}" alt="">--}}
 
-    {{--    <img src="{{URL::asset('assets_2/images/pre-loader/loader-01.svg')}}" alt="">--}}
+        <img src="{{URL::asset('assets_2/images/pre-loader/loader-01.svg')}}" alt="">
 </div>
 </div>
 <section class="ftco-section">

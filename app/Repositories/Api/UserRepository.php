@@ -49,7 +49,6 @@ class UserRepository implements UserRepositoryInterface
             $user->save();
 
 
-
             if($user){
 
                 return returnDataSuccess(trans('api_user.create'),Response::HTTP_OK,"user",new UserResource($user));

@@ -35,6 +35,7 @@ return [
     "currencies_app" => "عملات التطبيق",
     "problems_app" => "شكاوي العملاء",
     "messages_app" => "جميع رسائل العملاء",
+    "contact_us" => "تواصل معنا",
 
 
 

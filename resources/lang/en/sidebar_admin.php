@@ -33,8 +33,7 @@ return [
     "currencies_app" => "Currencies application",
     "problems_app" => "Customer complaints",
     "messages_app" => "All customer messages",
-
-
+    "contact_us" => "Contact us",
 
 
 

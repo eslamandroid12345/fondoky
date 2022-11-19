@@ -29,4 +29,5 @@ interface  HotelRepositoryInterface{
     public function comment(StoreCommentRequest $request);
     public function rates();
     public function comments();
+    public function arrivalsPdf($id);
 }

@@ -109,6 +109,9 @@
 
                                                             @endif
 
+                                                                <a class="dropdown-item" href="{{route('hotels.arrivals.pdf',$invoice->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;Print</a>
+
+
                                                         </div>
                                                     </div>
 

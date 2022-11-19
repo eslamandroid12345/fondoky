@@ -5,6 +5,8 @@
     <title>A simple, clean, and responsive HTML invoice template</title>
 
     <style>
+
+
         .invoice-box {
             max-width: 800px;
             margin: auto;

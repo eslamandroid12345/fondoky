@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 class UserRepository implements UserRepositoryInterface{
 
      use HelperTrait;
+     public const MAX_PAGE_COMMENT = 6;
+
 
     public function welcome(Request $request){
 
@@ -67,9 +69,7 @@ class UserRepository implements UserRepositoryInterface{
         $room = Room::query()->with(['hotel:id'])->where('id','=',$id)->first();
 
         $room_price = Event::where('room_id','=',$room->id)
-            ->whereBetween('check_in',[request('date_start'),request('date_expire')])
-            ->whereDate('check_in','!=',request('date_expire'))->get();
-
+            ->whereBetween('check_in',[request('date_start'),request('date_expire')])->whereDate('check_in','!=',request('date_expire'))->get();
 
         $calendars = Event::query()->with(['room' => function($room){
 
@@ -80,8 +80,7 @@ class UserRepository implements UserRepositoryInterface{
             }]);
         }])->where('room_id','=',$room->id)
             ->select('id','check_in','check_out','room_id','room_number','room_price')
-                ->whereBetween('check_in',[request('date_start'),request('date_expire')])
-                ->whereDate('check_in','!=',request('date_expire'))
+                ->whereBetween('check_in',[request('date_start'),request('date_expire')])->whereDate('check_in','!=',request('date_expire'))
                 ->get();
 
 
@@ -93,7 +92,8 @@ class UserRepository implements UserRepositoryInterface{
 
         $user = User::findOrFail($id)->delete();
 
-        toastr()->error(__('users.message'));return redirect()->back();
+        toastr()->error(__('users.message'));
+        return redirect()->back();
     }
 
     
@@ -109,7 +109,7 @@ class UserRepository implements UserRepositoryInterface{
         $rates_count = Rate::with(['hotel:id'])->where('hotel_id','=',$hotel->id)->sum('rates_number');
 
         $comments = Comment::with(['user:id,name','hotel:id'])->where('hotel_id','=',$hotel->id)
-            ->latest()->simplePaginate(COMMENT);
+            ->latest()->simplePaginate(self::MAX_PAGE_COMMENT);
 
 
         return view('rates.create',compact('hotel','rates','rates_count','comments'));

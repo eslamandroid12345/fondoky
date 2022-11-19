@@ -14,7 +14,7 @@ class SettingRepository implements SettingRepositoryInterface{
 
     public function getSetting(){
 
-        $settings = Setting::query()->get();
+        $settings = Setting::query()->latest()->first();
 
         return view('settings.index', compact('settings'));
 

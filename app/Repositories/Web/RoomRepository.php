@@ -15,14 +15,16 @@ use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class RoomRepository implements RoomRepositoryInterface
-{
+class RoomRepository implements RoomRepositoryInterface{
+
+    public const MAX_PAGE_RESERVATION = 1;
+    public const EVENT_SHOW_LENGTH = 1;
 
     public function index(){
 
 
         $rooms = Room::with('hotel')->where('hotel_id','=',auth('hotel')->id())
-            ->latest()->simplePaginate(Max);
+            ->latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
 
         return view('rooms.index',compact('rooms'));
 
@@ -35,8 +37,6 @@ class RoomRepository implements RoomRepositoryInterface
         return view('rooms.create');
 
     }
-
-
 
     public function edit(Room $room){
 
@@ -199,7 +199,7 @@ class RoomRepository implements RoomRepositoryInterface
             Gate::authorize('show-room',$room);
 
 
-            if ($request->has('check_in') && is_null($request->check_out)){
+            if ($request->has('check_in') && $request->check_out == null){
 
            $calendars = Event::with(['room'])->select('id','room_id','room_number','room_price','check_in','check_out')
                ->whereDate('check_in','=',$request->check_in)
@@ -210,18 +210,18 @@ class RoomRepository implements RoomRepositoryInterface
 
                    $calendars = Event::with(['room'])->select('id','room_id','room_number','room_price','check_in','check_out')
                        ->whereBetween('check_in',[$request->check_in,$request->check_out])
-                       ->whereBetween('check_out',[$request->check_in,$request->check_out])
-                       ->where('room_id','=',$id)
-                       ->orderByDesc('id')->get();
+                        ->whereBetween('check_out',[$request->check_in,$request->check_out])
+                         ->where('room_id','=',$id)
+                           ->orderByDesc('id')->get();
 
                    } else{
 
-               $calendars = Event::with(['room'])->select('id','room_id','room_number','room_price','check_in','check_out')
+                $calendars = Event::with(['room'])->select('id','room_id','room_number','room_price','check_in','check_out')
                    ->where('room_id','=',$id)
-                   ->orderByDesc('id')->simplePaginate(EVENT);
+                   ->orderByDesc('id')->simplePaginate(self::EVENT_SHOW_LENGTH);
              }
 
-               return view('rooms.calendars',compact('calendars','id'));
+            return view('rooms.calendars',compact('calendars','id'));
 
     }
 

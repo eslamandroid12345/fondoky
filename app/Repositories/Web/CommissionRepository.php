@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 class CommissionRepository implements CommissionRepositoryInterface
 {
 
+    public const MAX_PAGE_HOTEL = 1;
 
     public function commissions(Request $request){
 
@@ -26,7 +27,7 @@ class CommissionRepository implements CommissionRepositoryInterface
 
         }else{
 
-            $hotels = Hotel::query()->select('id','name_ar','name_en','blocked','currency_ar','currency_en')->simplePaginate(2);
+            $hotels = Hotel::query()->select('id','name_ar','name_en','blocked','currency_ar','currency_en')->simplePaginate(self::MAX_PAGE_HOTEL);
 
         }
         return view('admins.hotel_report',compact('hotels'));
@@ -39,8 +40,7 @@ class CommissionRepository implements CommissionRepositoryInterface
 
         $hotel = Hotel::select('id','name_ar','name_en','currency_ar','currency_en')->find($id);
 
-        $commissions =   $hotel->reservations()
-            ->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"), DB::raw("(DATE_FORMAT(check_in, '%m-%Y')) as month_year"))
+        $commissions = $hotel->reservations()->select(DB::raw("(sum(commission)) as commission"),DB::raw("(sum(total)) as total"), DB::raw("(DATE_FORMAT(check_in, '%m-%Y')) as month_year"))
             ->orderBy('check_in')
             ->groupBy(DB::raw("DATE_FORMAT(check_in, '%m-%Y')"))
             ->get();

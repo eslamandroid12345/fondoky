@@ -24,8 +24,16 @@ use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use PDF;
 
-class HotelRepository implements HotelRepositoryInterface
-{
+class HotelRepository implements HotelRepositoryInterface{
+
+
+    public const MAX_PAGE_RESERVATION = 1;
+    public const MAX_PAGE_COMMENT = 6;
+    public const EVENT_SHOW_LENGTH = 1;
+    public const ROOM_SHOW_LENGTH = 10;
+    public const SEARCH_LENGTH = 8;
+    public const STAR_SHOW_RATE = 5;
+
 
     public function index(){
 
@@ -54,7 +62,7 @@ class HotelRepository implements HotelRepositoryInterface
         } else{
 
             $invoices =  Reservation::with(['hotel:id','user:id,name,phone','room:id,room_type'])
-                ->where('hotel_id','=',auth('hotel')->id())->orderBy('id','DESC')->simplePaginate(Max);
+                ->where('hotel_id','=',auth('hotel')->id())->orderBy('id','DESC')->simplePaginate(self::MAX_PAGE_RESERVATION);
 
         }
 
@@ -90,7 +98,8 @@ class HotelRepository implements HotelRepositoryInterface
 
             }
 
-        toastr()->error(__('hotels.block'));return redirect()->back();
+        toastr()->error(__('hotels.block'));
+        return redirect()->back();
 
     }
 
@@ -105,7 +114,8 @@ class HotelRepository implements HotelRepositoryInterface
 
         ]);
 
-        toastr()->success(__('hotels.stay'));return redirect()->back();
+        toastr()->success(__('hotels.stay'));
+        return redirect()->back();
 
     }
 
@@ -395,7 +405,7 @@ class HotelRepository implements HotelRepositoryInterface
     public function comments(){
 
         $comments = Comment::with(['user:id,name','hotel:id'])
-            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(COMMENT);
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(self::MAX_PAGE_COMMENT);
 
         return view('comment-hotel.index',compact('comments'));
 

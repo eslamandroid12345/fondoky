@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class AdminRepository implements AdminRepositoryInterface
-{
+class AdminRepository implements AdminRepositoryInterface{
+
+    public const MAX_PAGE_RESERVATION = 1;
 
     public function hotel(){
 
-        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','currency_ar','currency_en','blocked'])->latest()->simplePaginate(Max);
+        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','currency_ar','currency_en','blocked'])->latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
         return view('admins.hotel',compact('hotels'));
 
 
@@ -29,7 +30,7 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function booking(){
 
-        $invoices = Reservation::latest()->simplePaginate(Max);
+        $invoices = Reservation::latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
         return view('admins.bookers',compact('invoices'));
 
     }
@@ -113,7 +114,7 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function index(){
 
-        $admins = Admin::query()->where('id','<>',admin()->id)->latest()->simplePaginate(2);
+        $admins = Admin::query()->where('id','<>',admin()->id)->latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
         return view('admins.index',compact('admins'));
 
     }

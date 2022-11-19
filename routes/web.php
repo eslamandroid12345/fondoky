@@ -24,13 +24,13 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 */
 
 
-   //web application url
-    define('Max',1);
-    define('Search',8);
-    define('EVENT',1);
-    define('COMMENT',6);
-    define('STAR',5);
-   define('ROOM',10);
+//   //web application url
+//    define('Max',1);
+//    define('Search',8);
+//    define('EVENT',1);
+//    define('COMMENT',6);
+//    define('STAR',5);
+//   define('ROOM',10);
 
  Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function(){
 

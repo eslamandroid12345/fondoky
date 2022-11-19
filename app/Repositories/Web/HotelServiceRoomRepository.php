@@ -10,8 +10,9 @@ use App\Models\Room;
 use App\Models\RoomService;
 use Symfony\Component\HttpFoundation\Response;
 
-class HotelServiceRoomRepository implements HotelServiceRoomRepositoryInterface
-{
+class HotelServiceRoomRepository implements HotelServiceRoomRepositoryInterface{
+
+
 
     public function create()
     {

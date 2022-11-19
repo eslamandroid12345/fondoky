@@ -18,17 +18,17 @@ class ServiceRepository implements ServiceRepositoryInterface
     }
 
 
-    public function store(StoreServiceRequest $request)
-    {
+    public function store(StoreServiceRequest $request){
 
 
         try {
 
-            $service = new Service();
-            $service->name = $request->name;
-            $service->services = json_encode($request->services);
-            $service->hotel_id = hotel()->id;
-            $service->save();
+            $service = Service::create([
+
+                'name' => $request->name,
+                'services' => json_encode($request->services),
+                'hotel_id' => auth('hotel')->id()
+            ]);
 
 
             toastSuccess(__('services.create'));
@@ -39,8 +39,6 @@ class ServiceRepository implements ServiceRepositoryInterface
 
             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-
 
     }
 
@@ -62,9 +60,12 @@ class ServiceRepository implements ServiceRepositoryInterface
         try {
 
             $service = Service::findOrFail($id);
-            $service->name = $request->name;
-            $service->services = json_encode($request->services);
-            $service->save();
+            $service->update([
+
+                'name' => $request->name,
+                'services' => json_encode($request->services)
+
+            ]);
 
             toastSuccess(__('services.update'));
             return redirect()->route('services.create');

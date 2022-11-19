@@ -8,14 +8,15 @@ use App\Models\RoomService;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoomServiceRepository implements RoomServiceRepositoryInterface
-{
+class RoomServiceRepository implements RoomServiceRepositoryInterface{
 
+
+    public const MAX_PAGE_RESERVATION = 1;
 
     public function index()
     {
 
-        $Services = RoomService::with('hotel:id,name_ar,name_en')->select('id','name','hotel_id')->where('hotel_id','=',hotel()->id)->simplePaginate(Max);
+        $Services = RoomService::with('hotel:id,name_ar,name_en')->select('id','name','hotel_id')->where('hotel_id','=',hotel()->id)->simplePaginate(self::MAX_PAGE_RESERVATION);
 
         return view('room_services.index',compact('Services'));
     }
@@ -33,10 +34,12 @@ class RoomServiceRepository implements RoomServiceRepositoryInterface
         try {
 
 
-                $room_service = new RoomService();
-                $room_service->name = $request->name;
-                $room_service->hotel_id = $request->hotel_id;
-                $room_service->save();
+                $room_service = RoomService::create([
+
+                    'name' => $request->name,
+                    'hotel_id' => $request->hotel_id
+
+                ]);
 
                 toastSuccess(__('hotels.service_room_create'));
                 return redirect()->back();
@@ -69,9 +72,12 @@ class RoomServiceRepository implements RoomServiceRepositoryInterface
 
 
               $room_service = RoomService::findOrFail($id);
-              $room_service->name = $request->name;
-              $room_service->hotel_id = $request->hotel_id;
-              $room_service->save();
+              $room_service->update([
+
+                  'name' => $request->name,
+                  'hotel_id' => $request->hotel_id
+
+              ]);
 
               toastSuccess(__('hotels.service_room_update'));
               return redirect()->route('room-services.index');

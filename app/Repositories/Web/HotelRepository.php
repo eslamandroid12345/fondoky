@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
@@ -401,6 +402,7 @@ class HotelRepository implements HotelRepositoryInterface
     }
 
 
+
     public function arrivalsPdf($id){
 
         $invoice =  Reservation::with(['user:id,name,phone','hotel','room' => function($room){
@@ -413,7 +415,8 @@ class HotelRepository implements HotelRepositoryInterface
             ->where('id','=',$id)->first();
 
 
-//        return $invoice;
+        Gate::authorize('invoice-arrivals',$invoice);
+
         $pdf = PDF::loadView('hotels.arrivals_pdf', compact('invoice'));
         return $pdf->stream('myHotel.pdf');
 

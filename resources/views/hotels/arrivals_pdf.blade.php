@@ -107,13 +107,13 @@
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
+                            <img src="{{asset('img/hot2.png')}}" style="width: 100px; height: 100px" />
                         </td>
 
                         <td>
-                            Invoice #: 123<br />
-                            Created: January 1, 2015<br />
-                            Due: February 1, 2015
+                            Booking number #: {{$invoice->id}}<br />
+                            Created: {{date('Y-m-d')}}<br />
+                            Check_in : {{$invoice->check_in}}
                         </td>
                     </tr>
                 </table>
@@ -125,15 +125,14 @@
                 <table>
                     <tr>
                         <td>
-                            Sparksuite, Inc.<br />
-                            12345 Sunny Road<br />
-                            Sunnyville, CA 12345
+                            {{lang() == 'ar' ? $invoice->hotel->name_ar : $invoice->hotel->name_en}}<br />
+                            location : {{ lang() == 'ar' ? $invoice->hotel->location_ar : $invoice->hotel->location_en}}<br />
                         </td>
 
                         <td>
-                            Acme Corp.<br />
-                            John Doe<br />
-                            john@example.com
+                            Currency : {{ lang() == 'ar' ? $invoice->hotel->currency_ar :  $invoice->hotel->currency_en}}<br />
+                            manger : {{$invoice->hotel->manger}}<br />
+                            {{$invoice->hotel->phone}}
                         </td>
                     </tr>
                 </table>
@@ -141,20 +140,20 @@
         </tr>
 
         <tr class="heading">
-            <td>Payment Method</td>
+            <td>{{__('book_hotel.total_all')}}</td>
 
-            <td>Check #</td>
+            <td>{{ lang() == 'ar' ? $invoice->hotel->currency_ar . $invoice->total_all : $invoice->total_all . $invoice->hotel->currency_en }}</td>
         </tr>
 
 
             <tr class="item">
-                <td>رقم الفاتوره</td>
+                <td>Invoice number</td>
 
                 <td>{{rand(1,20000)}}</td>
             </tr>
 
             <tr class="item">
-                <td>الوجهه</td>
+                <td>{{__('book_hotel.city_to')}}</td>
 
                 <td>{{ $invoice->destination}}</td>
             </tr>
@@ -162,49 +161,49 @@
 
 
              <tr class="item">
-                <td>الاطفال</td>
+                <td>{{__('book_hotel.children')}}</td>
 
             <td>{{ $invoice->children}}</td>
             </tr>
 
 
         <tr class="item">
-            <td>البالغين</td>
+            <td>{{__('book_hotel.adults')}}</td>
 
             <td>{{ $invoice->adults}}</td>
         </tr>
 
 
         <tr class="item">
-                <td>تاريخ الوصول</td>
+                <td>{{__('book_hotel.date_arrive')}}</td>
 
             <td>{{ $invoice->check_in}}</td>
             </tr>
 
 
         <tr class="item">
-                <td>تاريخ المغادره</td>
+                <td>{{__('book_hotel.date_leave')}}</td>
 
             <td>{{ $invoice->check_out}}</td>
             </tr>
 
 
             <tr class="item">
-                <td>عدد الليالي</td>
+                <td>{{__('book_hotel.num_of_nights')}}</td>
 
             <td>{{ $invoice->num_of_nights}}</td>
             </tr>
 
 
                <tr class="item">
-                <td>عدد الغرف</td>
+                <td>{{__('book_hotel.room_number')}}</td>
 
             <td>{{ $invoice->room_number}}</td>
             </tr>
 
 
                <tr class="item">
-                <td>ضريبه القيمه المضافه</td>
+                <td>{{__('book_hotel.vat_tax')}}</td>
 
             <td>{{ $invoice->vat_tax}}</td>
             </tr>
@@ -213,48 +212,37 @@
 
 
         <tr class="item">
-            <td>ضريبه السياحه</td>
+            <td>{{__('book_hotel.tourism_tax')}}</td>
 
             <td>{{ $invoice->tourism_tax}}</td>
         </tr>
 
      <tr class="item">
-            <td>ضريبه البلديه</td>
+            <td>{{__('book_hotel.municipal_tax')}}</td>
 
             <td>{{ $invoice->municipal_tax}}</td>
         </tr>
 
       <tr class="item">
-            <td>الاجمالي بدون قيمه الضرائب</td>
+            <td>{{__('book_hotel.total')}}</td>
 
             <td>{{ $invoice->total}}</td>
         </tr>
 
       <tr class="item">
-            <td>اسم النزيل</td>
+            <td>{{__('book_hotel.user')}}</td>
 
             <td>{{ $invoice->user->name}}</td>
         </tr>
 
 
    <tr class="item">
-            <td>نوع الغرفه</td>
+            <td>{{__('book_hotel.room_type')}}</td>
 
             <td>{{ $invoice->room->room_type}}</td>
         </tr>
 
-     <tr class="item">
-            <td>اسم الفندق</td>
 
-            <td>{{ $invoice->hotel->name_ar}}</td>
-        </tr>
-
-
-        <tr class="total">
-            <td></td>
-
-            <td>Total: {{ $invoice->hotel->currency_ar . $invoice->total_all}}</td>
-        </tr>
     </table>
 </div>
 </body>

@@ -61,5 +61,12 @@ class AuthServiceProvider extends ServiceProvider
                 : Response::deny('You must not allowed this page');
         });
 
+
+        Gate::define('invoice-arrivals', function ($user,$invoice) {
+            return $user->id == $invoice->hotel_id
+                ? Response::allow()
+                : Response::deny('You must not allowed this page');
+        });
+
     }
 }

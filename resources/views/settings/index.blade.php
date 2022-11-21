@@ -70,7 +70,7 @@
                                 <tr>
 
                                     <td>
-                                        <img style="width: 80px;height: 80px;border-radius: 4px" src="{{URL::to('setting/'.$setting->logo)}}">
+                                        <img style="width: 80px;height: 80px;border-radius: 4px" src="{{URL::to('setting/'. $setting->logo)}}">
                                     </td>
                                     <td>{{$setting->name_ar}}</td>
                                     <td>{{$setting->name_en}}</td>

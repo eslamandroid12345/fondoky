@@ -29,10 +29,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
     public const MAX_PAGE_RESERVATION = 1;
     public const MAX_PAGE_COMMENT = 6;
-    public const EVENT_SHOW_LENGTH = 1;
-    public const ROOM_SHOW_LENGTH = 10;
-    public const SEARCH_LENGTH = 8;
-    public const STAR_SHOW_RATE = 5;
 
 
     public function index(){
@@ -57,12 +53,13 @@ class HotelRepository implements HotelRepositoryInterface{
             },'room:id,room_type'])->where('hotel_id','=',auth('hotel')->id())
 
                 ->whereDate('check_in','=',$request->check_in)
-            ->whereDate('check_out','=',$request->check_out)->orderBy('id','DESC')->get();
+                ->whereDate('check_out','=',$request->check_out)->orderBy('id','DESC')->get();
 
         } else{
 
             $invoices =  Reservation::with(['hotel:id','user:id,name,phone','room:id,room_type'])
-                ->where('hotel_id','=',auth('hotel')->id())->orderBy('id','DESC')->simplePaginate(self::MAX_PAGE_RESERVATION);
+                ->where('hotel_id','=',auth('hotel')->id())->orderBy('id','DESC')
+                ->simplePaginate(self::MAX_PAGE_RESERVATION);
 
         }
 
@@ -311,7 +308,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
              $hotel->delete();
              toastr()->error(__('hotels.delete'));
-            return redirect()->route('hotels.all');
+             return redirect()->route('hotels.all');
 
         }catch (\Exception $exception){
 
@@ -421,8 +418,8 @@ class HotelRepository implements HotelRepositoryInterface{
 
         }])->where('hotel_id','=',auth('hotel')->id())->whereDay('check_in',Carbon::now()->format('d'))
             ->whereMonth('check_in', date('m'))
-            ->whereYear('check_in', date('Y'))->orderBy('id','DESC')
-            ->where('id','=',$id)->first();
+             ->whereYear('check_in', date('Y'))->orderBy('id','DESC')
+              ->where('id','=',$id)->first();
 
 
         Gate::authorize('invoice-arrivals',$invoice);

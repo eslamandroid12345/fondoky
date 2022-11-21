@@ -29,7 +29,7 @@ class UserRepository implements UserRepositoryInterface{
 
     public function index(){
 
-        $users = User::simplePaginate(Max);
+        $users = User::simplePaginate(1);
         return view('users.index',compact('users'));
 
     }

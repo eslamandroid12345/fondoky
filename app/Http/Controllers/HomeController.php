@@ -20,7 +20,7 @@ class HomeController extends Controller
         try {
 
             $reservations = Reservation::with(['hotel:id,name_ar,name_en,location_ar,location_en','user:id,name,phone','room:id,room_type'])
-                ->where('user_id','=',auth()->id())->latest()->simplePaginate(Max);
+                ->where('user_id','=',auth()->id())->latest()->simplePaginate(1);
 
             return view('users.home',compact('reservations'));
 

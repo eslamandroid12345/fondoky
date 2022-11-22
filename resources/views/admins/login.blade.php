@@ -31,10 +31,23 @@
 
 
             <div class="form-group">
-                <button type="submit" class="form-control btn btn-primary rounded submit px-3">{{ __('login.admin') }}</button>
+                <button type="submit" class="form-control btn btn-primary rounded submit px-3 submitted">{{ __('login.admin') }}</button>
             </div>
 
         </form>
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+        $('form').submit(function (event) {
+            if ($(this).hasClass('submitted')) {
+                event.preventDefault();
+            }
+            else {
+                $(this).find(':submit').html('<i class="fa fa-spinner fa-spin"></i>');
+                $(this).addClass('submitted');
+            }
+        });
+    </script>
 @endsection

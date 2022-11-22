@@ -393,7 +393,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
 
         $rates = Rate::with(['user:id,name','hotel:id'])
-            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(STAR);
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(self::MAX_PAGE_COMMENT);
 
         return view('rates-hotel.index',compact('rates'));
     }

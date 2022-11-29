@@ -21,7 +21,8 @@ class EventRepository implements EventRepositoryInterface {
         try {
 
             EventHotelJob::dispatch($request->check_in,$request->check_out,$request->room_id,$request->room_number,$request->room_price)->delay(now()->second(1));
-            return redirect()->back()->with('create',__('event.create'));
+            toastr()->success(__('event.create'));
+            return redirect()->back();
 
 
 
@@ -60,11 +61,15 @@ class EventRepository implements EventRepositoryInterface {
         try {
 
             $event = Event::findOrFail($id);
-            $event->room_number = $request->room_number;
-            $event->room_price = $request->room_price;
-            $event->save();
+            $event->update([
 
-            return redirect()->back()->with('update',__('event.update'));
+               'room_number' => $request->room_number,
+               'room_price' => $request->room_price
+            ]);
+
+            toastr()->success(__('event.update'));
+
+            return redirect()->back();
 
 
         }catch (\Exception $exception){
@@ -85,8 +90,9 @@ class EventRepository implements EventRepositoryInterface {
             $event = Event::findOrFail($id);
             $event->delete();
 
-            return redirect()->back()->with('delete',__('event.delete'));
+            toastr()->success(__('event.delete'));
 
+            return redirect()->back();
 
 
         }catch (\Exception $exception){

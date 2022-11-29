@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of language
 
 
@@ -24,13 +25,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 */
 
 
-//   //web application url
-//    define('Max',1);
-//    define('Search',8);
-//    define('EVENT',1);
-//    define('COMMENT',6);
-//    define('STAR',5);
-//   define('ROOM',10);
 
  Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function(){
 
@@ -333,3 +327,29 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //        $query->where('pitch_id', 'LIKE','%'.$request->pitch_id.'%');
 //      })],
 
+//$rules = [
+//    'phone_code' => 'required',
+//    'phone'      => 'required|exists:users,phone',
+//    'user_type'  => 'required',
+//];
+//$validator = Validator::make($request->all(), $rules, [
+//
+//    'phone.exists' => 406,
+//]);
+//
+//if ($validator->fails()) {
+//
+//    $errors = collect($validator->errors())->flatten(1)[0];
+//
+//    if (is_numeric($errors)) {
+//
+//        $errors_arr = [
+//
+//            406 => 'Failed,phone not found',
+//
+//        ];
+//        $code = collect($validator->errors())->flatten(1)[0];
+//        return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+//    }
+//    return response()->json(['data' => null, 'message' => $validator->errors(), 'code' => 422], 200);
+//}

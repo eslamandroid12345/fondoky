@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of translation
 
 /*
- * hotel routes of application and any data of hotel is  here ???????????? ----
+ * hotel routes of application
  */
 
 Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
@@ -19,29 +19,29 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'loca
     //hotel login and hotel register
     Route::group(['prefix' => 'hotels', 'middleware' => 'guest:hotel'], function (){
 
-        Route::get('show',[HotelController::class,'show'])->name('hotels.show');//return view hotel login
-        Route::post('login',[HotelController::class,'login'])->name('hotels.login');//check hotel when login
-        Route::get('show/register',[HotelController::class,'showRegister'])->name('hotels.show.register');//return view hotel register
-        Route::post('register',[HotelController::class,'register'])->name('hotels.register');//create new hotel
+        Route::get('show',[HotelController::class,'show'])->name('hotels.show');
+        Route::post('login',[HotelController::class,'login'])->name('hotels.login');
+        Route::get('show/register',[HotelController::class,'showRegister'])->name('hotels.show.register');
+        Route::post('register',[HotelController::class,'register'])->name('hotels.register');
 
     });
 
 Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], function (){
 
 
-    Route::get('reservations',[HotelController::class,'reservations'])->name('hotels.reservations');//return all reservations of hotel
-    Route::get('block/{id}',[HotelController::class,'block'])->name('hotels.block');//return block for reservation
-    Route::get('stay/{id}',[HotelController::class,'stay'])->name('hotels.stay');//return stay guest
-    Route::get('all',[HotelController::class,'index'])->name('hotels.all');//return data of hotel
-    Route::get('edit',[HotelController::class,'edit'])->name('hotels.edit');//return view of hotel edit data
-    Route::put('update/{id}',[HotelController::class,'update'])->name('hotels.update');//return update data of hotel who authenticated
-    Route::delete('delete/{id}',[HotelController::class,'delete'])->name('hotels.delete');//delete hotel
+    Route::get('reservations',[HotelController::class,'reservations'])->name('hotels.reservations');
+    Route::get('block/{id}',[HotelController::class,'block'])->name('hotels.block');
+    Route::get('stay/{id}',[HotelController::class,'stay'])->name('hotels.stay');
+    Route::get('all',[HotelController::class,'index'])->name('hotels.all');
+    Route::get('edit',[HotelController::class,'edit'])->name('hotels.edit');
+    Route::put('update/{id}',[HotelController::class,'update'])->name('hotels.update');
+    Route::delete('delete/{id}',[HotelController::class,'delete'])->name('hotels.delete');
     Route::get('arrivals/pdf/{id}',[HotelController::class,'arrivalsPdf'])->name('hotels.arrivals.pdf');
 
 
-    Route::get('invoices', [HotelController::class,'invoices'])->name('hotels.invoices');//invoices of hotel
-    Route::get('month/invoices', [HotelController::class,'monthOfInvoices'])->name('hotels.month.invoices');//show view of hotel before come to invoices
-    Route::get('arrivals', [HotelController::class,'arrivals'])->name('hotels.arrivals');//check arrivals daily of hotel
+    Route::get('invoices', [HotelController::class,'invoices'])->name('hotels.invoices');
+    Route::get('month/invoices', [HotelController::class,'monthOfInvoices'])->name('hotels.month.invoices');
+    Route::get('arrivals', [HotelController::class,'arrivals'])->name('hotels.arrivals');
     Route::get('rates', [HotelController::class,'rates'])->name('hotels.rates');
     Route::get('comments', [HotelController::class,'comments'])->name('hotels.comments');
 
@@ -49,19 +49,19 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
 
 });
 
-    Route::post('comments/create', [HotelController::class,'comment'])->name('hotels.comments.create');//create new comment
+    Route::post('comments/create', [HotelController::class,'comment'])->name('hotels.comments.create');
 
 
     Route::group(['prefix'=>'rooms','middleware'=> ['auth:hotel','status']], function (){
 
-        Route::get('index',[RoomController::class,'index'])->name('rooms.index');//show all rooms of hotel
-        Route::get('create',[RoomController::class,'create'])->name('rooms.create');//show view of create hotel
-        Route::post('store',[RoomController::class,'store'])->name('rooms.store');//store new room og hotel
-        Route::get('edit/{room}',[RoomController::class,'edit'])->name('rooms.edit');//show view of room
-        Route::get('show/{room}',[RoomController::class,'show'])->name('rooms.show');//return view of any room of hotel
-        Route::put('update/{id}',[RoomController::class,'update'])->name('rooms.update');//update any room of hotel
-        Route::delete('delete/{id}',[RoomController::class,'delete'])->name('rooms.delete');//delete room of hotel
-        Route::get('calendars/show/{id}', [RoomController::class,'calendarsShow'])->name('rooms.calendars.show');//show all calendars of room
+        Route::get('index',[RoomController::class,'index'])->name('rooms.index');
+        Route::get('create',[RoomController::class,'create'])->name('rooms.create');
+        Route::post('store',[RoomController::class,'store'])->name('rooms.store');
+        Route::get('edit/{room}',[RoomController::class,'edit'])->name('rooms.edit');
+        Route::get('show/{room}',[RoomController::class,'show'])->name('rooms.show');
+        Route::put('update/{id}',[RoomController::class,'update'])->name('rooms.update');
+        Route::delete('delete/{id}',[RoomController::class,'delete'])->name('rooms.delete');
+        Route::get('calendars/show/{id}', [RoomController::class,'calendarsShow'])->name('rooms.calendars.show');
 
 
     });
@@ -69,10 +69,10 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
 
     Route::group(['prefix'=>'services','middleware'=> ['auth:hotel','status']], function (){
 
-        Route::get('create',[ServiceController::class,'create'])->name('services.create');//create new service for hotel
-        Route::post('store',[ServiceController::class,'store'])->name('services.store');//store services of hotel
-        Route::get('edit/{id}',[ServiceController::class,'edit'])->name('services.edit');//update service of hotel
-        Route::put('update/{id}',[ServiceController::class,'update'])->name('services.update');//update service of hotel
+        Route::get('create',[ServiceController::class,'create'])->name('services.create');
+        Route::post('store',[ServiceController::class,'store'])->name('services.store');
+        Route::get('edit/{id}',[ServiceController::class,'edit'])->name('services.edit');
+        Route::put('update/{id}',[ServiceController::class,'update'])->name('services.update');
 
 
     });
@@ -117,3 +117,4 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
 
 });
 
+///usr/local/bin/php /home/myhotel/public_html/artisan schedule:run >> /dev/null 2>&1

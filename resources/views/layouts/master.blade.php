@@ -8,6 +8,8 @@
     <meta name="description" content="Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template" />
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    {{--start toastr--}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
     <style>
         @media print {
@@ -90,8 +92,9 @@
 
         var channel = Echo.private(`new-reservations.` + window.App.user);
         channel.listen('.new-reservations-event', function(data) {
-            alert('  تم حجز غرفه جديده بفندقك  ');
+            // alert('  تم حجز غرفه جديده بفندقك  ');
             // toastr.success('dd');
+            toastr.success("تم حجز غرفه جديده بفندقك");
 
         });
 
@@ -101,6 +104,9 @@
 
     @toastr_js
     @toastr_render
+    {{--satrt toastr--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
+
 </body>
 
 </html>

@@ -22,22 +22,22 @@ class ReservationRepository implements ReservationRepositoryInterface{
 
             $reservation = Reservation::create([
 
-            'destination' => $request->destination,
-            'children' => $request->children,
-            'adults' => $request->adults,
-            'check_in' => $request->check_in,
-            'check_out' => $request->check_out,
-            'room_number' => $request->room_number,
-            'num_of_nights' => $request->num_of_nights,
-            'room_id' => $request->room_id,
-            'user_id' => auth()->id(),
-            'hotel_id' => $request->hotel_id,
-            'vat_tax' =>$request->vat_tax,
-            'municipal_tax' => $request->municipal_tax,
-            'tourism_tax' => $request->tourism_tax,
-            'total_all' => $request->total_all,
-            'total' => $request->total,
-            'commission' => $request->commission,
+                'destination' => $request->destination,
+                'children' => $request->children,
+                'adults' => $request->adults,
+                'check_in' => $request->check_in,
+                'check_out' => $request->check_out,
+                'room_number' => $request->room_number,
+                'num_of_nights' => $request->num_of_nights,
+                'room_id' => $request->room_id,
+                'user_id' => auth()->id(),
+                'hotel_id' => $request->hotel_id,
+                'vat_tax' =>$request->vat_tax,
+                'municipal_tax' => $request->municipal_tax,
+                'tourism_tax' => $request->tourism_tax,
+                'total_all' => $request->total_all,
+                'total' => $request->total,
+                'commission' => $request->commission,
 
             ]);
 
@@ -78,14 +78,14 @@ class ReservationRepository implements ReservationRepositoryInterface{
             $reservation = Reservation::findOrFail($id);
             $reservation->update([
 
-            'status' => $reservation->status == 1 ? 0 : 1,
-            'vat_tax' => 0,
-            'municipal_tax' => 0,
-            'tourism_tax' => 0,
-            'total_all' => 0,
-            'total' => 0,
-            'commission' => 0,
-            'stayed' => 0,
+                'status' => $reservation->status == 1 ? 0 : 1,
+                'vat_tax' => 0,
+                'municipal_tax' => 0,
+                'tourism_tax' => 0,
+                'total_all' => 0,
+                'total' => 0,
+                'commission' => 0,
+                'stayed' => 0,
             ]);
 
         }catch (\Exception $exception){

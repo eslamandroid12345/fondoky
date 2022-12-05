@@ -17,7 +17,6 @@ class StoreReservationRequest extends FormRequest
         return [
 
 
-
             'destination' => 'required',
             'children' => 'required',
             'adults' => 'required',
@@ -40,6 +39,7 @@ class StoreReservationRequest extends FormRequest
 
     public function messages()
     {
+
 
         return [
 

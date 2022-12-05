@@ -20,7 +20,7 @@ class StoreAdminRequest extends FormRequest
             'email' => 'required|email|unique:admins,email',
             'password' => 'required',
             'phone' => 'required|numeric',
-            'image' => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg',
             'role_id' => 'required|exists:roles,id'
 
         ];
@@ -41,7 +41,6 @@ class StoreAdminRequest extends FormRequest
             'image.required' => __('admin.image'),
             'role_id.required' => __('admin.role_id'),
             'role_id.exists' => __('admin.exists')
-
 
         ];
 

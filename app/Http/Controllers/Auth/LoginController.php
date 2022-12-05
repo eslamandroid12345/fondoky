@@ -58,8 +58,7 @@ class LoginController extends Controller
      * @override of logout
      */
 
-    public function logout(Request $request)
-    {
+    public function logout(Request $request){
 
         $admin = 'admin';
         $hotel = 'hotel';

@@ -14,47 +14,63 @@ trait HelperTrait{
 
         if($request->has('location_ar') || $request->has('location_en') && $request->has('child_max') && $request->has('adults_max') && $request->has('date_start') && $request->has('date_expire')) {
 
-            $rooms = Room::whereDoesntHave('calendars', function ($query) {
 
-                $query->where('room_number', '=', 0);})
+            $hotels = Hotel::where('blocked', '=', true)
+                ->select('id', 'name_ar', 'name_en', 'location_ar', 'location_en', 'currency_ar', 'currency_en', 'hotel_photos')
+                ->whereHas('room', function ($room) use ($request) {
 
-                ->whereHas('calendars',function ($query) use($request) {
+                    $room->whereDoesntHave('calendars', function ($query) {
 
-                $query->whereBetween('check_in',[$request->date_start,$request->date_expire])
+                        $query->where('room_number', '=', 0);
 
-                    ->whereDate('check_in','!=',$request->date_expire);
+                    })->where('room_type', '=', 'Double Room')
+                        ->where('adults_max', '=', $request->adults_max)->where('child_max', '=', $request->child_max)
+                        ->whereHas('calendars', function ($calendars) use ($request) {
 
-            })->whereHas('hotel', function ($query) use($request){
+                        $calendars->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
 
-                $query->where('location_ar', 'like', '%' . $request->location_ar . '%')
+                    });
 
-                    ->orWhere('location_en', 'like', '%' . $request->location_en . '%');
+                })->where('location_ar', '=', $request->location_ar)->orWhere('location_en', '=', $request->location_en)
+                ->with(['room' => function ($room) use ($request) {
 
-            })->where('adults_max', '=', $request->adults_max)->where('child_max', '=', $request->child_max)
+                    $room->select('id','room_type','adults_max','child_max','hotel_id')->where('room_type', '=', 'Double Room')
+                        ->whereHas('calendars', function ($calendars) use ($request) {
 
-                ->with(['calendars' => function($query) use($request){
+                        $calendars->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
 
-                $query->whereBetween('check_in',[$request->date_start,$request->date_expire])
+                    })->with(['calendars' => function ($calendars) use ($request) {
 
-                    ->whereDate('check_in','!=',$request->date_expire)
+                        $calendars->select('id','room_id','room_number','room_price','check_in','check_out')
+                                ->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
 
-                    ->select('id','room_id','room_number','check_in','check_out','room_price');
+                        }]);
 
-                 },'hotel' => function($query){
-
-                $query->where('blocked','=',true)->select('id','name_ar','name_en','location_ar','location_en', 'currency_ar','currency_en','hotel_photos');
-
-            }])->select('id','adults_max','child_max','images','room_type','hotel_id')->get();
-
+                }])->get();
 
 
-        }else{
+//            return $hotels;
 
-            $rooms = [];
+
+//            foreach ($hotels as $hotel) {
+//
+//                foreach ($hotel->room as $room){
+//
+//                    echo $room->calendars->sum('room_price');
+//
+//
+//                }
+//
+//            }//end foreach
+
+        }
+        else{
+
+            $hotels = [];
 
         }
 
-        return view('users.welcome',compact('rooms'));
+        return view('users.welcome',compact('hotels'));
     }
 
 

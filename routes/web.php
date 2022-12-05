@@ -353,3 +353,76 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //    }
 //    return response()->json(['data' => null, 'message' => $validator->errors(), 'code' => 422], 200);
 //}
+
+
+
+//================================================================ Ajax ============================================================
+//<script>
+//$(document).ready(function () {
+//
+//    $('select[name="Grade_id"]').on('change', function () {
+//
+//        var Grade_id = $(this).val();
+//        if (Grade_id) {
+//            $.ajax({
+//                                url: "{{ URL::to('classes') }}/" + Grade_id,
+//                                type: "GET",
+//                                dataType: "json",
+//                                success: function (data) {
+//                $('select[name="Class_id"]').empty();
+//                $.each(data, function (key, value) {
+//                    $('select[name="Class_id"]').append('<option value="' + key + '">' + value + '</option>');
+//                });
+//            },
+//                            });
+//                        } else {
+//            console.log('AJAX load did not work');
+//        }
+//    });
+//});
+//
+//</script>
+//http://localhost/fondoky-master/ar?adults_max=2&child_max=1&date_expire=2022-12-03&date_start=2022-12-01&location_ar=%D8%AC%D8%A7%D9%85%D8%B9%D8%A9%20%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9%D8%8C%20%D8%B4%D8%A7%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AC%D8%A7%D9%85%D8%B9%D8%A9%D8%8C%20%D9%85%D8%B5%D8%B1
+
+
+/*
+ *
+ * //            $rooms = Room::whereDoesntHave('calendars', function ($query) {
+//
+//                $query->where('room_number', '=', 0);})
+//
+//                ->whereHas('calendars',function ($query) use($request) {
+//
+//                $query->whereBetween('check_in',[$request->date_start,$request->date_expire])
+//
+//                    ->whereDate('check_in','!=',$request->date_expire);
+//
+//            })->whereHas('hotel', function ($query) use($request){
+//
+//                $query->where('location_ar', 'like', '%' . $request->location_ar . '%')
+//
+//                    ->orWhere('location_en', 'like', '%' . $request->location_en . '%');
+//
+//            })->where('adults_max', '=', $request->adults_max)->where('child_max', '=', $request->child_max)
+//
+//                ->with(['calendars' => function($query) use($request){
+//
+//                $query->whereBetween('check_in',[$request->date_start,$request->date_expire])
+//
+//                    ->whereDate('check_in','!=',$request->date_expire)
+//
+//                    ->select('id','room_id','room_number','check_in','check_out','room_price');
+//
+//                 },'hotel' => function($query){
+//
+//                $query->where('blocked','=',true)->select('id','name_ar','name_en','location_ar','location_en', 'currency_ar','currency_en','hotel_photos');
+//
+//            }])->select('id','adults_max','child_max','images','room_type','hotel_id')->get();
+//
+ */
+
+
+//Route::get('re', function (){
+//
+//    return \App\Models\Reservation::all();
+//});

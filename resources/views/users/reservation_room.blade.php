@@ -1,320 +1,245 @@
 @extends('client_app.layout')
 
 @section('style')
-<style>
-    *{
+    <style>
+        *{
 
-        padding: 0px;
-        margin: 0px;
-        box-sizing: border-box;
-    }
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
 
-    a{
+        a{
 
-        text-decoration: none;
-    }
+            text-decoration: none;
+        }
 
-    body{
+        body{
 
-        font-family: 'Tajawal', sans-serif;
-        direction: rtl;
-
-    }
-
-
-    .navbar-light .navbar-toggler{
-
-        border: none;
-        outline: none;
-    }
-
-    .navbar-toggler{
-
-        font-size: 1.3rem;
-        display: none;
-
-    }
-
-    .navbar-toggler i{
-
-        color: #fff;
-    }
-
-    .navbar-toggler:focus{
-        text-decoration: none;
-        outline: 0;
-        box-shadow: 0 0 0 0rem;
-    }
-
-    .navbar .navbar-brand{
-
-        font-size: 23px;
-        color: #282828bd;
-    }
-
-    .navbar{
-
-        direction: rtl;
-        padding-top: 0.4rem;
-        padding-bottom: 0.2rem;
-    }
-
-
-    .navbar .data{
-
-        margin: 0px;
-    }
-
-    .navbar .data li{
-
-        list-style-type: none;
-        float: left;
-        padding: 15px 10px;
-        margin: 0px;
-
-    }
-
-    .navbar .data li a i{
-
-        padding-left: 8px;
-        font-size: 14px;
-        color: #ddd;
-    }
-
-    .navbar .data li a{
-
-        text-decoration: none;
-        color: #fff;
-        font-size: 14.5px;
-    }
-
-    .navbar img{
-
-        width: 70px;
-    }
-
-    .bg-light {
-        --bs-bg-opacity: 1;
-        background-color: #1a789b!important;
-    }
-
-    .navbar-nav a i{
-
-        padding-left: 8px;
-        font-size: 14px;
-        color: #999;
-
-    }
-
-    .navbar-nav .nav-item{
-
-        padding: 6px 0px;
-    }
-
-
-
-
-
-
-
-    @media(max-width:768px){
-
-
-
-
-        .navbar-toggler{
-
-            font-size: 1rem;
-            display: block;
+            font-family: 'Tajawal', sans-serif;
+            direction: rtl;
 
         }
 
 
-        .navbar .data{
+        .navbar-light .navbar-toggler{
 
-            list-style-type: none;
-            float: left;
-            padding: 15px 10px;
-            margin: 0px;
+            border: none;
+            outline: none;
+        }
+
+        .navbar-toggler{
+
+            font-size: 1.3rem;
             display: none;
 
+        }
+
+        .navbar-toggler i{
+
+            color: #fff;
+        }
+
+        .navbar-toggler:focus{
+            text-decoration: none;
+            outline: 0;
+            box-shadow: 0 0 0 0rem;
+        }
+
+        .navbar .navbar-brand{
+
+            font-size: 23px;
+            color: #282828bd;
         }
 
         .navbar{
 
             direction: rtl;
-            padding-top: 0.3rem;
-            padding-bottom: 0.3rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.2rem;
         }
 
-    }
+
+        .navbar .data{
+
+            margin: 0px;
+        }
+
+        .navbar .data li{
+
+            list-style-type: none;
+            float: left;
+            padding: 15px 10px;
+            margin: 0px;
+
+        }
+
+        .navbar .data li a i{
+
+            padding-left: 8px;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .navbar .data li a{
+
+            text-decoration: none;
+            color: #fff;
+            font-size: 14.5px;
+        }
+
+        .navbar img{
+
+            width: 70px;
+        }
+
+        .bg-light {
+            --bs-bg-opacity: 1;
+            background-color: #1a789b!important;
+        }
+
+        .navbar-nav a i{
+
+            padding-left: 8px;
+            font-size: 14px;
+            color: #999;
+
+        }
+
+        .navbar-nav .nav-item{
+
+            padding: 6px 0px;
+        }
 
 
 
 
-    /**Start Reservation**/
-
-    .reservation{
-
-        margin-top: 74px;
-        padding: 20px 0px;
-        margin-bottom: 10px;
-
-
-    }
-
-    .reservation .Reservation1{
-
-        padding: 10px 0px;
-
-    }
-
-    .reservation .Reservation1 img{
-
-        width: 80%;
-        margin-bottom: 7px;
-        height: 45px;
-
-    }
-
-    .reservation .Reservation2{
-
-        padding: 10px 0px;
-
-    }
-
-    .reservation .Reservation2 img{
-
-        width: 23%;
-        height: 150px;
-        margin-bottom: 10px;
-        margin-left: 2.5px;
-        margin-right: 2.5px;
-
-    }
-
-    .reservation .Reservation3{
-
-        padding: 15px 20px;
-        border-radius: 3px;
-
-    }
-
-    .reservation .Reservation3 form input[type="submit"]{
-
-        background-color: #48667c;
-        color: #fff;
-        border: none;
-
-    }
-
-    .reservation .Reservation3 label{
-
-        font-size: 14px;
-    }
-
-    .reservation .Reservation3 input{
-
-        display: block;
-        margin-bottom: 10px;
-        width: 100%;
-        outline: none;
-        padding: 4px 3px;
-        border-radius: 3px;
-        border: 1px solid #666;
-    }
-
-    .reservation .Reservation4 label{
-
-        font-size: 14px;
-    }
-
-    .reservation .Reservation5 table{
-
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .reservation .Reservation5 table tr th{
-
-        border: 1px solid #555;
-        padding: 12px 20px;
-        font-size: 12px;
-        background-color: #19637e;
-        color: #fff;
-    }
-
-    .reservation .Reservation5 table tr td{
-
-        border: 1px solid #555;
-        padding: 12px 20px;
-        font-size: 12px;
-
-    }
-
-    .reservation .Reservation5 input{
-
-        margin-bottom: 10px;
-        width: 17%;
-        border: none;
-        outline: none;
-        padding: 4px 3px;
-        border-radius: 3px;
-        border: 1px solid #666;
-        margin-left: 10px;
-    }
-
-    .reservation .Reservation5 input[type="submit"]{
-
-        background-color: #19637e;
-        color: #fff;
-        font-weight: bold;
-    }
 
 
 
-    .reservation .Reservation4 p{
+        @media(max-width:768px){
 
-        font-size: 14px;
-        text-align: justify;
-        line-height: 1.8em;
 
-    }
 
-    .reservation .Reservation1 img{
 
-        cursor: pointer;
+            .navbar-toggler{
 
-    }
+                font-size: 1rem;
+                display: block;
 
-    .reservation .Reservation4{
+            }
 
-        padding: 30px 0px;
-        width: 90%;
 
-    }
+            .navbar .data{
 
-    .reservation .Reservation4 ul li{
+                list-style-type: none;
+                float: left;
+                padding: 15px 10px;
+                margin: 0px;
+                display: none;
 
-        padding: 5px;
-        font-size: 14px;
-    }
+            }
 
-    @media(max-width:768px){
+            .navbar{
+
+                direction: rtl;
+                padding-top: 0.3rem;
+                padding-bottom: 0.3rem;
+            }
+
+        }
+
+
+
+
+        /**Start Reservation**/
+
+        .reservation{
+
+            margin-top: 74px;
+            padding: 20px 0px;
+            margin-bottom: 10px;
+
+
+        }
+
+        .reservation .Reservation1{
+
+            padding: 10px 0px;
+
+        }
 
         .reservation .Reservation1 img{
 
-            width: 10%;
+            width: 80%;
             margin-bottom: 7px;
             height: 45px;
 
+        }
+
+        .reservation .Reservation2{
+
+            padding: 10px 0px;
+
+        }
+
+        .reservation .Reservation2 img{
+
+            width: 23%;
+            height: 150px;
+            margin-bottom: 10px;
+            margin-left: 2.5px;
+            margin-right: 2.5px;
+
+        }
+
+        .reservation .Reservation3{
+
+            padding: 15px 20px;
+            border-radius: 3px;
+
+        }
+
+        .reservation .Reservation3 form input[type="submit"]{
+
+            background-color: #48667c;
+            color: #fff;
+            border: none;
+
+        }
+
+        .reservation .Reservation3 label{
+
+            font-size: 14px;
+        }
+
+        .reservation .Reservation3 input{
+
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            outline: none;
+            padding: 4px 3px;
+            border-radius: 3px;
+            border: 1px solid #666;
+        }
+
+        .reservation .Reservation4 label{
+
+            font-size: 14px;
+        }
+
+        .reservation .Reservation5 table{
+
+            width: 100%;
+            margin-top: 10px;
         }
 
         .reservation .Reservation5 table tr th{
 
             border: 1px solid #555;
             padding: 12px 20px;
-            font-size: 11px;
+            font-size: 12px;
             background-color: #19637e;
             color: #fff;
         }
@@ -323,237 +248,312 @@
 
             border: 1px solid #555;
             padding: 12px 20px;
-            font-size: 11px;
+            font-size: 12px;
 
         }
 
         .reservation .Reservation5 input{
 
             margin-bottom: 10px;
-            width: 100%;
+            width: 17%;
             border: none;
             outline: none;
             padding: 4px 3px;
             border-radius: 3px;
             border: 1px solid #666;
             margin-left: 10px;
-            display: block;
         }
 
-        .reservation .Reservation2 img{
+        .reservation .Reservation5 input[type="submit"]{
 
-            width: 100%;
-            height: 200px;
-            margin-left: 2.5px;
-            margin-right: 2.5px
+            background-color: #19637e;
+            color: #fff;
+            font-weight: bold;
+        }
+
+
+
+        .reservation .Reservation4 p{
+
+            font-size: 14px;
+            text-align: justify;
+            line-height: 1.8em;
 
         }
 
-    }
+        .reservation .Reservation1 img{
 
-    /**End Reservation**/
+            cursor: pointer;
 
-    /**Start Footer**/
-
-    .foot1{
-
-        display: flex;
-        align-items: flex-end;
-    }
-    .footer{
-
-        background-color: #196581!important;
-        direction: ltr;
-    }
-
-    .footer p{
-
-        padding: 0px;
-        margin: 0px;
-        color: #bbb;
-        font-size: 14px;
-    }
-
-    .footer p a i{
-
-        padding: 25px 10px;
-        color: #bbb;
-        font-size: 14px;
-    }
-
-    .footer .para2{
-
-        padding: 20px 0px;
-    }
-
-
-    .footer .para22{
-
-        text-align: right;
-
-    }
-
-    @media(max-width:768px)
-    {
-
-
-        .footer .para2{
-
-            padding: 10px 0px;
         }
 
-        .footer p a i {
-            padding: 15px 10px;
+        .reservation .Reservation4{
+
+            padding: 30px 0px;
+            width: 90%;
+
+        }
+
+        .reservation .Reservation4 ul li{
+
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        @media(max-width:768px){
+
+            .reservation .Reservation1 img{
+
+                width: 10%;
+                margin-bottom: 7px;
+                height: 45px;
+
+            }
+
+            .reservation .Reservation5 table tr th{
+
+                border: 1px solid #555;
+                padding: 12px 20px;
+                font-size: 11px;
+                background-color: #19637e;
+                color: #fff;
+            }
+
+            .reservation .Reservation5 table tr td{
+
+                border: 1px solid #555;
+                padding: 12px 20px;
+                font-size: 11px;
+
+            }
+
+            .reservation .Reservation5 input{
+
+                margin-bottom: 10px;
+                width: 100%;
+                border: none;
+                outline: none;
+                padding: 4px 3px;
+                border-radius: 3px;
+                border: 1px solid #666;
+                margin-left: 10px;
+                display: block;
+            }
+
+            .reservation .Reservation2 img{
+
+                width: 100%;
+                height: 200px;
+                margin-left: 2.5px;
+                margin-right: 2.5px
+
+            }
+
+        }
+
+        /**End Reservation**/
+
+        /**Start Footer**/
+
+        .foot1{
+
+            display: flex;
+            align-items: flex-end;
+        }
+        .footer{
+
+            background-color: #196581!important;
+            direction: ltr;
+        }
+
+        .footer p{
+
+            padding: 0px;
+            margin: 0px;
             color: #bbb;
             font-size: 14px;
         }
 
-    }
+        .footer p a i{
 
-    /**End Footer**/
-    *::before, *::after {
-        box-sizing: border-box;
-    }
-    *::-webkit-scrollbar {
-        width: 4px;
-        height: 4px;
-        transition: .3s;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #e1e6f1;
-    }
-
-    .container {
-        width: 98%;
-    }
-
-
-    /**Start download**/
-
-    .down{
-
-        padding: 20px 0px;
-
-    }
-
-    .down img{
-
-        padding: 3px 0px;
-        width: 100px;
-        height: 50px;
-
-    }
-
-    .down p{
-
-
-        font-size: 13px;
-        padding: 10px 0px;
-        color: #777;
-
-    }
-
-    .down h3{
-
-        font-size: 16px;
-        color: #666;
-
-    }
-
-    /**End download**/
-
-
-    /**Start head-location**/
-    .head-location{
-
-        padding: 40px 0px;
-        background-color: #1a789b;
-
-    }
-
-    .head-location .head-location1{
-
-        color: #fff;
-        width: 30%;
-        margin-left: 3%;
-
-    }
-
-    .head-location .head-location1 p,.head-location .head-location2 p,.head-location .head-location2 p a{
-
-        font-size: 13.5px;
-        text-align: justify;
-        color: #eee;
-
-    }
-
-    .head-location .head-location2 p a i{
-
-        font-size: 11px;
-        padding-left: 4px;
-
-    }
-
-    .head-location .head-location1 h3{
-
-        font-size: 16px;
-        padding-bottom: 15px;
-
-    }
-
-    .head-location .head-location2 h3{
-
-        color: #fff;
-        font-size: 16px;
-        padding-bottom: 15px;
-
-    }
-
-    @media(max-width:768px){
-
-        .head-location .head-location1{
-
-            width: 100%;
-
+            padding: 25px 10px;
+            color: #bbb;
+            font-size: 14px;
         }
 
-        .head-location .head-location2{
+        .footer .para2{
 
-            padding-top: 10px;
-
+            padding: 20px 0px;
         }
+
 
         .footer .para22{
 
-            text-align: left;
+            text-align: right;
 
         }
 
-    }
+        @media(max-width:768px)
+        {
 
-    input{
 
-        height: 40px;
-        border: 1px solid #ccc;
-        outline: none;
-        padding: 7px;
-    }
+            .footer .para2{
 
-    /**End head-location**/
-</style>
+                padding: 10px 0px;
+            }
 
-@if(LaravelLocalization::setLocale() == 'en')
-    <style>
-        table{
+            .footer p a i {
+                padding: 15px 10px;
+                color: #bbb;
+                font-size: 14px;
+            }
 
-            direction: ltr;
         }
-        .Reservation5,.Reservation2,.Reservation3,.row{
 
-            direction: ltr;
+        /**End Footer**/
+        *::before, *::after {
+            box-sizing: border-box;
         }
+        *::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+            transition: .3s;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e1e6f1;
+        }
+
+        .container {
+            width: 98%;
+        }
+
+
+        /**Start download**/
+
+        .down{
+
+            padding: 20px 0px;
+
+        }
+
+        .down img{
+
+            padding: 3px 0px;
+            width: 100px;
+            height: 50px;
+
+        }
+
+        .down p{
+
+
+            font-size: 13px;
+            padding: 10px 0px;
+            color: #777;
+
+        }
+
+        .down h3{
+
+            font-size: 16px;
+            color: #666;
+
+        }
+
+        /**End download**/
+
+
+        /**Start head-location**/
+        .head-location{
+
+            padding: 40px 0px;
+            background-color: #1a789b;
+
+        }
+
+        .head-location .head-location1{
+
+            color: #fff;
+            width: 30%;
+            margin-left: 3%;
+
+        }
+
+        .head-location .head-location1 p,.head-location .head-location2 p,.head-location .head-location2 p a{
+
+            font-size: 13.5px;
+            text-align: justify;
+            color: #eee;
+
+        }
+
+        .head-location .head-location2 p a i{
+
+            font-size: 11px;
+            padding-left: 4px;
+
+        }
+
+        .head-location .head-location1 h3{
+
+            font-size: 16px;
+            padding-bottom: 15px;
+
+        }
+
+        .head-location .head-location2 h3{
+
+            color: #fff;
+            font-size: 16px;
+            padding-bottom: 15px;
+
+        }
+
+        @media(max-width:768px){
+
+            .head-location .head-location1{
+
+                width: 100%;
+
+            }
+
+            .head-location .head-location2{
+
+                padding-top: 10px;
+
+            }
+
+            .footer .para22{
+
+                text-align: left;
+
+            }
+
+        }
+
+        input{
+
+            height: 40px;
+            border: 1px solid #ccc;
+            outline: none;
+            padding: 7px;
+        }
+
+        /**End head-location**/
     </style>
-@endif
+
+    @if(LaravelLocalization::setLocale() == 'en')
+        <style>
+            table{
+
+                direction: ltr;
+            }
+            .Reservation5,.Reservation2,.Reservation3,.row{
+
+                direction: ltr;
+            }
+        </style>
+    @endif
 @endsection
 
 
@@ -670,26 +670,26 @@
                         {{-- start calculate num of nigts --}}
 
 
-                       @php
-                           $begin = new DateTime(request()->query('date_start'));
-                           $end   = new DateTime(request()->query('date_expire'));
+                        @php
+                            $begin = new DateTime(request()->query('date_start'));
+                            $end   = new DateTime(request()->query('date_expire'));
 
 
-                           $different = $begin->diff($end);
-                           $days = $different->format('%a');//now do whatever you like with $days
+                            $different = $begin->diff($end);
+                            $days = $different->format('%a');//now do whatever you like with $days
 
-                       @endphp
+                        @endphp
                         <input type="hidden" name="num_of_nights"  value="{{$days}}" readonly>
 
 
-                        <?php
+                            <?php
 
 
-                        $price = 0;
-                        foreach($room_price as $total){
+                            $price = 0;
+                            foreach($room_price as $total){
 
-                            $price += $total->room_price;
-                        }
+                                $price += $total->room_price;
+                            }
 
                             ?>
 
@@ -766,7 +766,7 @@
 @section('scripts')
 
     <script>
-            function sum() {
+        function sum() {
 
             var room = document.getElementById('room').value;
             var price = document.getElementById('price').value;
@@ -776,8 +776,8 @@
 
             if (!isNaN(result)) {
 
-            document.getElementById('result').value = result;
-        }
+                document.getElementById('result').value = result;
+            }
 
 
             var tourism_tax = (( parseFloat(room) * parseFloat(price) * 4) / 100);
@@ -785,8 +785,8 @@
 
             if (!isNaN(tourism_tax)) {
 
-            document.getElementById('tourism_tax').value = tourism_tax;
-        }
+                document.getElementById('tourism_tax').value = tourism_tax;
+            }
 
 
             var municipal_tax = (( parseFloat(room) * parseFloat(price) * 5) / 100);
@@ -794,8 +794,8 @@
 
             if (!isNaN(municipal_tax)) {
 
-            document.getElementById('municipal_tax').value = municipal_tax;
-        }
+                document.getElementById('municipal_tax').value = municipal_tax;
+            }
 
 
 
@@ -804,8 +804,8 @@
 
             if (!isNaN(vat_tax)) {
 
-            document.getElementById('vat_tax').value = vat_tax;
-        }
+                document.getElementById('vat_tax').value = vat_tax;
+            }
 
 
 
@@ -814,27 +814,27 @@
 
             if (!isNaN(total_all)) {
 
-            document.getElementById('total_all').value = total_all;
+                document.getElementById('total_all').value = total_all;
 
-        }else{
+            }else{
 
 
-            document.getElementById('total_all').value = 0;
-            document.getElementById('result').value = 0;
-            document.getElementById('vat_tax').value = 0;
-            document.getElementById('tourism_tax').value = 0;
-            document.getElementById('municipal_tax').value = 0;
-            document.getElementById('commission').value = 0;
+                document.getElementById('total_all').value = 0;
+                document.getElementById('result').value = 0;
+                document.getElementById('vat_tax').value = 0;
+                document.getElementById('tourism_tax').value = 0;
+                document.getElementById('municipal_tax').value = 0;
+                document.getElementById('commission').value = 0;
 
-        }
+            }
 
             var commission = (( parseFloat(room) * parseFloat(price) * 5) / 100);
 
 
             if (!isNaN(commission)) {
 
-            document.getElementById('commission').value = commission;
-        }
+                document.getElementById('commission').value = commission;
+            }
 
         }
 

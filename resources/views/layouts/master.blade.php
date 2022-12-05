@@ -82,8 +82,21 @@
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
 
-    <script >
+    <script>
 
+        function playAudio() {
+            var x = new Audio('https://myhotel-eg.com/sound/eventually-590.ogg');
+            var playPromise = x.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    x.play();
+                })
+                    .catch(error => {
+                    });
+
+            }
+        }
         window.App = {!! json_encode([
 
                  'user' => auth()->check() ? hotel()->id : null,
@@ -94,7 +107,10 @@
         channel.listen('.new-reservations-event', function(data) {
             // alert('  تم حجز غرفه جديده بفندقك  ');
             // toastr.success('dd');
-            toastr.success("تم حجز غرفه جديده بفندقك");
+            // toastr.success("تم حجز غرفه جديده بفندقك");
+            toastr.success('حجز جديد لديك', 'تم حجز غرفه جديده بفندقك', { timeOut: 9500 });
+            playAudio();
+
 
         });
 

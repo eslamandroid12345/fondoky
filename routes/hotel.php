@@ -117,4 +117,4 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
 
 });
 
-///usr/local/bin/php /home/myhotel/public_html/artisan schedule:run >> /dev/null 2>&1
+//usr/local/bin/php /home/myhotel/public_html/artisan schedule:run >> /dev/null 2>&1

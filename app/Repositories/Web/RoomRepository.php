@@ -23,11 +23,9 @@ class RoomRepository implements RoomRepositoryInterface{
     public function index(){
 
 
-        $rooms = Room::with('hotel')->where('hotel_id','=',auth('hotel')->id())
-            ->latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
+        $rooms = Room::with('hotel')->where('hotel_id','=',auth('hotel')->id())->latest()->get();
 
         return view('rooms.index',compact('rooms'));
-
 
     }
 

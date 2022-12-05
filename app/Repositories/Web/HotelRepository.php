@@ -227,34 +227,33 @@ class HotelRepository implements HotelRepositoryInterface{
 
              }
 
-                $data = [];
-                if ($request->hasfile('hotel_photos')) {
+            $data = [];
+            if ($request->hasfile('hotel_photos')) {
 
-                     foreach ($request->file('hotel_photos') as $image) {
+                 foreach ($request->file('hotel_photos') as $image) {
 
-                        $name = time() . rand(1, 5000) . uniqid() . '.' . $image->getClientOriginalName();
-                        $image->move(public_path() . '/hotels/', $name);
-                        $data[] = $name;
+                    $name = time() . rand(1, 5000) . uniqid() . '.' . $image->getClientOriginalName();
+                    $image->move(public_path() . '/hotels/', $name);
+                    $data[] = $name;
 
-                         $images = json_decode($hotel->hotel_photos, true);
+                     $images = json_decode($hotel->hotel_photos, true);
 
-                         foreach ($images as $image) {
+                     foreach ($images as $image) {
 
-                             if(file_exists(public_path('hotels/' . $image) )){
+                         if(file_exists(public_path('hotels/' . $image) )){
 
-                                 unlink(public_path('hotels/') . $image);
+                             unlink(public_path('hotels/') . $image);
 
-                             }else{
+                         }else{
 
-                                 return returnMessageError("Error to remove hotels images",Response::HTTP_INTERNAL_SERVER_ERROR);
-                             }
-
+                             return returnMessageError("Error to remove hotels images",Response::HTTP_INTERNAL_SERVER_ERROR);
                          }
-                    }
+
+                     }
+                }
 
 
-               }//end if
-
+           }//end if
 
             $hotel->update([
 

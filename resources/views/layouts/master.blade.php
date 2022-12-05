@@ -108,8 +108,9 @@
             // alert('  تم حجز غرفه جديده بفندقك  ');
             // toastr.success('dd');
             // toastr.success("تم حجز غرفه جديده بفندقك");
-            toastr.success('حجز جديد لديك', 'تم حجز غرفه جديده بفندقك', { timeOut: 9500 });
             playAudio();
+            toastr.success('حجز جديد لديك', 'تم حجز غرفه جديده بفندقك', { timeOut: 9500 });
+
 
 
         });

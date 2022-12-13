@@ -105,11 +105,9 @@
 
         var channel = Echo.private(`new-reservations.` + window.App.user);
         channel.listen('.new-reservations-event', function(data) {
-            // alert('  تم حجز غرفه جديده بفندقك  ');
-            // toastr.success('dd');
-            // toastr.success("تم حجز غرفه جديده بفندقك");
+
             playAudio();
-            toastr.success('حجز جديد لديك', 'تم حجز غرفه جديده بفندقك', { timeOut: 9500 });
+            toastr.success('حجز جديد لديك', 'تم حجز غرفه جديده بفندقك', { timeOut: 20500 });
 
 
 

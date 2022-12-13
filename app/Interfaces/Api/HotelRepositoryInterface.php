@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 interface HotelRepositoryInterface
 {
 
-    public function hotelLogin(HotelLoginRequest $request);
-    public function hotelRegister(StoreHotelRequest $request);
+    public function hotelLogin(Request $request);
+    public function hotelRegister(Request $request);
     public function hotelLogout();
 
 }

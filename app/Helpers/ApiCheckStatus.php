@@ -106,7 +106,34 @@ if(!function_exists('langConfig')){
     }
 }
 
+//helper method responsible for Api mobile
+
+if(!function_exists('helperJson')){
+
+    function helperJson($key,$data=null,$message,$code = 200,$status = 200){
+
+        return response()->json([
+
+            $key => $data,
+            "message" => $message,
+            "code" => $code
+
+        ],$status);
+    }
+}
 
 
+if(!function_exists('messageWithJson')){
+
+    function messageWithJson($message,$code = 200,$status = 200){
+
+        return response()->json([
+
+            "message" => $message,
+            "code" => $code
+
+        ],$status);
+    }
+}
 
 

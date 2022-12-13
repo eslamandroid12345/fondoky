@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreHotelRequest;
 use App\Interfaces\Api\HotelRepositoryInterface;
+use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
@@ -19,7 +20,7 @@ class HotelController extends Controller
     }
 
     //method login of hotel-api
-    public function login(HotelLoginRequest $request){
+    public function login(Request $request){
 
 
         return $this->hotelInterface->hotelLogin($request);
@@ -27,7 +28,7 @@ class HotelController extends Controller
     }
 
 
-    public function register(StoreHotelRequest $request){
+    public function register(Request $request){
 
 
         return $this->hotelInterface->hotelRegister($request);

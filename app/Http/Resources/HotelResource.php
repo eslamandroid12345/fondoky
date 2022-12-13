@@ -22,6 +22,9 @@ class HotelResource extends JsonResource
             'phone_hotel' => $this->phone_hotel,
             'blocked' => $this->active(),
             'token' => $this->token,
+            'token_type' => 'Bearer',
+            'created_at' => $this->created_at->format('Y-m-d'),
+            'updated_at' => $this->updated_at->format('Y-m-d')
             
 
         ];

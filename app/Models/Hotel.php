@@ -12,8 +12,6 @@ class Hotel extends Authenticatable implements JWTSubject
 {
     use HasFactory;
     use SoftDeletes;
-
-
     protected $fillable = [
 
         'manger',
@@ -30,19 +28,26 @@ class Hotel extends Authenticatable implements JWTSubject
         'phone_hotel',
         'slug',
         'blocked',
+        'vat_tax',
+        'municipality_fee',
+        'tourism_fee',
+        'commercial_register',
+        'picture_tax'
 
     ];
 
-    protected $dates = ['deleted_at'];
+    /*
+     * commercial_register => رقم السجل التجاري,
+     * picture_tax => صوره البطاقه الضريبيه
+     */
 
+    protected $dates = ['deleted_at'];
 
 
     public function room(){
 
         return $this->hasMany(Room::class, 'hotel_id', 'id');
     }
-
-
 
     public function getJWTIdentifier(){
 
@@ -54,20 +59,16 @@ class Hotel extends Authenticatable implements JWTSubject
         return [];
     }
 
-
     public function service(){
 
         return $this->hasOne(Service::class, 'hotel_id', 'id');
 
     }
 
-
     public function active(){
 
         return $this->blocked == 1 ? __('data.status_one') : __('data.status_two');
     }
-
-
 
 
     public function rate(){
@@ -82,21 +83,21 @@ class Hotel extends Authenticatable implements JWTSubject
     }
 
 
-
-
-
     public function roomService(){
 
         return $this->hasMany(RoomService::class,'hotel_id','id');
     }
 
 
-
-
-
     public  function reservations(){
 
         return $this->hasMany(Reservation::class,'hotel_id','id');
+
+    }
+
+    public  function invoices(){
+
+        return $this->hasMany(Invoice::class,'hotel_id','id');
 
     }
 

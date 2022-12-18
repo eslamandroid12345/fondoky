@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http;
+namespace App\Http\Traits;
 
 use App\Models\Hotel;
-use App\Models\Room;
 use Illuminate\Http\Request;
 
 trait HelperTrait{
@@ -11,22 +10,18 @@ trait HelperTrait{
 
     public function search(Request $request){
 
-
         if($request->has('location_ar') || $request->has('location_en') && $request->has('child_max') && $request->has('adults_max') && $request->has('date_start') && $request->has('date_expire')) {
-
 
             $hotels = Hotel::where('blocked', '=', true)
                 ->select('id', 'name_ar', 'name_en', 'location_ar', 'location_en', 'currency_ar', 'currency_en', 'hotel_photos')
                 ->whereHas('room', function ($room) use ($request) {
 
                     $room->whereDoesntHave('calendars', function ($query) {
-
                         $query->where('room_number', '=', 0);
 
                     })->where('room_type', '=', 'Double Room')
                         ->where('adults_max', '=', $request->adults_max)->where('child_max', '=', $request->child_max)
                         ->whereHas('calendars', function ($calendars) use ($request) {
-
                         $calendars->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
 
                     });
@@ -43,31 +38,14 @@ trait HelperTrait{
 
                         $calendars->select('id','room_id','room_number','room_price','check_in','check_out')
                                 ->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
-
                         }]);
 
                 }])->get();
-
-
-//            return $hotels;
-
-
-//            foreach ($hotels as $hotel) {
-//
-//                foreach ($hotel->room as $room){
-//
-//                    echo $room->calendars->sum('room_price');
-//
-//
-//                }
-//
-//            }//end foreach
 
         }
         else{
 
             $hotels = [];
-
         }
 
         return view('users.welcome',compact('hotels'));

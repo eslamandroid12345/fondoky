@@ -24,8 +24,9 @@
 <script src="{{ URL::asset('assets_2/js/validation.js') }}"></script>
 <!-- lobilist -->
 <script src="{{ URL::asset('assets_2/js/lobilist.js') }}"></script>
-<!-- custom -->
+{{--<!-- custom -->--}}
 <script src="{{ URL::asset('assets_2/js/custom.js') }}"></script>
+
 
 
 <script>
@@ -33,147 +34,22 @@
         $('#datatable').DataTable();
     } );
 </script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 
 
-@if (App::getLocale() == 'en')
-    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/dataTables.bootstrap4.min.js') }}"></script>
-@else
-    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>
-@endif
+{{--@if (App::getLocale() == 'en')--}}
+{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/jquery.dataTables.min.js') }}"></script>--}}
+{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/dataTables.bootstrap4.min.js') }}"></script>--}}
+{{--<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>--}}
+
+{{--@else--}}
+{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/jquery.dataTables.min.js') }}"></script>--}}
+{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>--}}
 
 
 
-<script>
-    function CheckAll(className, elem) {
-        var elements = document.getElementsByClassName(className);
-        var l = elements.length;
+{{--@endif--}}
 
-        if (elem.checked) {
-            for (var i = 0; i < l; i++) {
-                elements[i].checked = true;
-            }
-        } else {
-            for (var i = 0; i < l; i++) {
-                elements[i].checked = false;
-            }
-        }
-    }
-</script>
-
-
-<script>
-    $(document).ready(function () {
-        $('select[name="Grade_id"]').on('change', function () {
-            var Grade_id = $(this).val();
-            if (Grade_id) {
-                $.ajax({
-                    url: "{{ URL::to('Get_classrooms') }}/" + Grade_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        $('select[name="Classroom_id"]').empty();
-                        $('select[name="Classroom_id"]').append('<option selected disabled >{{trans('Parent_trans.Choose')}}...</option>');
-                        $.each(data, function (key, value) {
-                            $('select[name="Classroom_id"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-
-                    },
-                });
-            }
-
-            else {
-                console.log('AJAX load did not work');
-            }
-        });
-    });
-</script>
-
-
-<script>
-    $(document).ready(function () {
-        $('select[name="Classroom_id"]').on('change', function () {
-            var Classroom_id = $(this).val();
-            if (Classroom_id) {
-                $.ajax({
-                    url: "{{ URL::to('Get_Sections') }}/" + Classroom_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        $('select[name="section_id"]').empty();
-                        $.each(data, function (key, value) {
-                            $('select[name="section_id"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-
-                    },
-                });
-            }
-
-            else {
-                console.log('AJAX load did not work');
-            }
-        });
-    });
-</script>
-
-
-
-
-
-<script>
-    $(document).ready(function () {
-        $('select[name="Grade_id_new"]').on('change', function () {
-            var Grade_id = $(this).val();
-            if (Grade_id) {
-                $.ajax({
-                    url: "{{ URL::to('Get_classrooms') }}/" + Grade_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        $('select[name="Classroom_id_new"]').empty();
-                        $('select[name="Classroom_id_new"]').append('<option selected disabled >{{trans('Parent_trans.Choose')}}...</option>');
-                        $.each(data, function (key, value) {
-                            $('select[name="Classroom_id_new"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-
-                    },
-                });
-            }
-
-            else {
-                console.log('AJAX load did not work');
-            }
-        });
-    });
-</script>
-
-
-<script>
-    $(document).ready(function () {
-        $('select[name="Classroom_id_new"]').on('change', function () {
-            var Classroom_id = $(this).val();
-            if (Classroom_id) {
-                $.ajax({
-                    url: "{{ URL::to('Get_Sections') }}/" + Classroom_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        $('select[name="section_id_new"]').empty();
-                        $.each(data, function (key, value) {
-                            $('select[name="section_id_new"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-
-                    },
-                });
-            }
-
-            else {
-                console.log('AJAX load did not work');
-            }
-        });
-    });
-</script>
 
 

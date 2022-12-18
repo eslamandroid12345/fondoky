@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEventsTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
 
     public function up()
     {
@@ -18,13 +23,15 @@ class CreateEventsTable extends Migration
             $table->date('check_in');
             $table->date('check_out');
             $table->timestamps();
-
             $table->foreign('room_id')->references('id')->on('rooms')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }
-
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('events');

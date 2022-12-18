@@ -178,22 +178,22 @@
                                                             @if($invoice->status == 1)
 
 
-                                                            <a class="dropdown-item" href="{{route('hotels.block',$invoice->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.block')}}</a>
+                                                                <a class="dropdown-item" href="{{route('hotels.block',$invoice->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.block')}}</a>
                                                             @else
                                                                 <a class="dropdown-item" href="#"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.block_now')}}</a>
 
 
                                                             @endif
 
-                                                                @if($invoice->stayed == 1)
-                                                                    <a class="dropdown-item" href="{{route('hotels.stay',$invoice->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.not_stayed')}}</a>
+                                                            @if($invoice->stayed == 1)
+                                                                <a class="dropdown-item" href="{{route('hotels.stay',$invoice->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.not_stayed')}}</a>
 
 
-                                                                @else
-                                                                    <a class="dropdown-item" href="#"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.leave')}}</a>
+                                                            @else
+                                                                <a class="dropdown-item" href="#"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.leave')}}</a>
 
 
-                                                                @endif
+                                                            @endif
 
                                                         </div>
                                                     </div>

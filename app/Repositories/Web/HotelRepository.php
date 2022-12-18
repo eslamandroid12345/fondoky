@@ -23,12 +23,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use PDF;
+use Yajra\DataTables\Facades\DataTables;
 
 class HotelRepository implements HotelRepositoryInterface{
 
-
-    public const MAX_PAGE_RESERVATION = 1;
-    public const MAX_PAGE_COMMENT = 6;
 
 
     public function index(){
@@ -38,10 +36,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
     }
 
-
-
     public function reservations(Request $request){
-
 
 
         if($request->has('check_in') && $request->has('check_out')){
@@ -59,50 +54,44 @@ class HotelRepository implements HotelRepositoryInterface{
 
             $invoices =  Reservation::with(['hotel:id','user:id,name,phone','room:id,room_type'])
                 ->where('hotel_id','=',auth('hotel')->id())->orderBy('id','DESC')
-                ->simplePaginate(self::MAX_PAGE_RESERVATION);
+                ->simplePaginate(6);
 
         }
 
 
         return view('hotels.reservations',compact('invoices'));
-
     }
-
-
 
     public function block($id){
 
+    try {
 
-        try {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update([
 
-            $reservation = Reservation::findOrFail($id);
-            $reservation->update([
+            'status' => $reservation->status = $reservation->status == 1 ? 0 : 1,
+            'vat_tax' => 0,
+            'municipal_tax' => 0,
+            'tourism_tax' => 0,
+            'total_all' => 0,
+            'total' => 0,
+            'commission' => 0,
+            'stayed' => 0,
 
-                'status' => $reservation->status = $reservation->status == 1 ? 0 : 1,
-                'vat_tax' => 0,
-                'municipal_tax' => 0,
-                'tourism_tax' => 0,
-                'total_all' => 0,
-                'total' => 0,
-                'commission' => 0,
-                'stayed' => 0,
+        ]);
 
-            ]);
+        }catch (\Exception $exception){
 
-            }catch (\Exception $exception){
+             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
-                 return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
-
-            }
-
-        toastr()->error(__('hotels.block'));
-        return redirect()->back();
+    toastr()->error(__('hotels.block'));
+    return redirect()->back();
 
     }
 
 
     public function stay($id){
-
 
         $invoice = Reservation::findOrFail($id);
         $invoice->update([
@@ -124,7 +113,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
 
     public function login(HotelLoginRequest $request){
-
 
         if(auth()->guard('hotel')->attempt(['email' => trim($request->email," "), 'password' => trim($request->password," "),'blocked' => 1])){
 
@@ -248,11 +236,8 @@ class HotelRepository implements HotelRepositoryInterface{
 
                              return returnMessageError("Error to remove hotels images",Response::HTTP_INTERNAL_SERVER_ERROR);
                          }
-
                      }
                 }
-
-
            }//end if
 
             $hotel->update([
@@ -280,9 +265,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-
-
     }
 
     public function delete($id){
@@ -323,7 +305,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
     }
 
-
     public function invoices(){
 
         $invoices = Reservation::with(['hotel','user:id,name,phone','room' => function($room){
@@ -349,7 +330,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
     public function arrivals(){
 
-
         $invoices =  Reservation::with(['user:id,name,phone','hotel','room' => function($room){
 
             $room->select('id','room_type');
@@ -365,7 +345,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
 
     public function comment(StoreCommentRequest $request){
-
 
         try {
 
@@ -390,18 +369,16 @@ class HotelRepository implements HotelRepositoryInterface{
 
     public function rates(){
 
-
         $rates = Rate::with(['user:id,name','hotel:id'])
-            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(self::MAX_PAGE_COMMENT);
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(6);
 
         return view('rates-hotel.index',compact('rates'));
     }
 
-
     public function comments(){
 
         $comments = Comment::with(['user:id,name','hotel:id'])
-            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(self::MAX_PAGE_COMMENT);
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(6);
 
         return view('comment-hotel.index',compact('comments'));
 
@@ -412,7 +389,6 @@ class HotelRepository implements HotelRepositoryInterface{
     public function arrivalsPdf($id){
 
         $invoice =  Reservation::with(['user:id,name,phone','hotel','room' => function($room){
-
             $room->select('id','room_type');
 
         }])->where('hotel_id','=',auth('hotel')->id())->whereDay('check_in',Carbon::now()->format('d'))

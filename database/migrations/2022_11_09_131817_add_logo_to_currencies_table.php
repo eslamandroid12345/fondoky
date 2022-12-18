@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 class AddLogoToCurrenciesTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+
 
     public function up()
     {
@@ -16,6 +22,11 @@ class AddLogoToCurrenciesTable extends Migration
     }
 
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::table('currencies', function (Blueprint $table) {

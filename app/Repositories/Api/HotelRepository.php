@@ -25,13 +25,10 @@ class HotelRepository implements HotelRepositoryInterface
         try {
 
             $rules = [
-
                 'email'        => 'required|email|exists:hotels,email',
                 'password'     => 'required',
-
             ];
             $validator = Validator::make($request->all(), $rules, [
-
                 'email.email'  => 403,
                 'email.exists'  => 404,
             ]);
@@ -43,10 +40,8 @@ class HotelRepository implements HotelRepositoryInterface
                 if (is_numeric($errors)) {
 
                     $errors_arr = [
-
                         403 => 'Failed,Email must be an email',
                         404 => 'Failed,Email not found',
-
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
@@ -58,22 +53,15 @@ class HotelRepository implements HotelRepositoryInterface
             $token = auth()->guard('hotel-api')->setTTL(100000)->attempt($request->only(['email','password']));
 
             if(!$token){
-
                 return helperJson("data",null,trans("admin.error"),500,500);
-
             }
-
             $hotel = auth()->guard('hotel-api')->user();
             $hotel['token'] = $token;
-
             return helperJson("hotel",new HotelResource($hotel), trans("hotels.message"));
-
 
         }catch (\Exception $exception){
 
             return helperJson("data",null, $exception->getMessage(),500,500);
-
-
         }
     }
 
@@ -81,7 +69,6 @@ class HotelRepository implements HotelRepositoryInterface
     public function hotelRegister(Request $request){
 
         try {
-
             $rules = [
 
                 'manger'       => 'required',
@@ -98,7 +85,6 @@ class HotelRepository implements HotelRepositoryInterface
                 'phone_hotel'  => 'required|numeric',
             ];
             $validator = Validator::make($request->all(), $rules, [
-
                 'email.unique'  => 406,
                 'phone.numeric' => 407,
             ]);
@@ -108,12 +94,9 @@ class HotelRepository implements HotelRepositoryInterface
                 $errors = collect($validator->errors())->flatten(1)[0];
 
                 if (is_numeric($errors)) {
-
                     $errors_arr = [
-
                         406 => 'Failed,Email already exists',
                         407 => 'Failed,Phone number must be an number',
-
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
@@ -137,7 +120,6 @@ class HotelRepository implements HotelRepositoryInterface
             $data = [];
             if($request->hasfile('hotel_photos'))
             {
-
                 foreach($request->file('hotel_photos') as $image)
                 {
                     $name= time() . '.' . $image->getClientOriginalName();
@@ -163,18 +145,14 @@ class HotelRepository implements HotelRepositoryInterface
             $hotel->save();
 
             $data = [
-
                 "name_ar" =>   lang() == 'ar' ? __("hotels.message_register") . $request->name_ar : __("hotels.message_register") .  $request->name_en,
                 'email' => $request->email,
-
             ];
 
            $hotel['token'] = auth()->guard('hotel-api')->setTTL(100000)->attempt($request->only(['email','password']));
 
             event(new NewHotelNotification($data));
-
             return helperJson("hotel",new HotelResource($hotel),trans('hotels.hotel'),201,201);
-
 
         }catch (\Exception $exception){
 
@@ -194,7 +172,6 @@ class HotelRepository implements HotelRepositoryInterface
              auth()->guard('hotel-api')->logout();
 
                return messageWithJson(trans('hotels.logout'),200,200);
-
 
             }catch (\Exception $exception){
 

@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateHotelServiceRoomsTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
 
     public function up()
     {
@@ -22,6 +27,11 @@ class CreateHotelServiceRoomsTable extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('hotel_service_rooms');

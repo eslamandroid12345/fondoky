@@ -3,6 +3,9 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
+use App\Models\Hotel;
+use App\Models\Invoice;
+use App\Models\Reservation;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -423,6 +426,56 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 
 //Route::get('re', function (){
+
+
+
+//    $commission = Reservation::where('hotel_id','=',4)->whereMonth('check_in','=',date('m'))->sum('commission');
 //
-//    return \App\Models\Reservation::all();
+//
+//    return $commission;
+//    return $commission->sum('commission');
+
+
+//    $date = Carbon::now()->addDays(2)->format('Y-m-d');
+
+//    echo $date;
+
+
+//
+//    $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->toDateString();
+//    $lastDayofPreviousMonth = Carbon::now()->endOfMonth()->toDateString();
+//
+//    echo $firstDayofPreviousMonth . '---' . $lastDayofPreviousMonth;
+
+//    $lastDayofPreviousMonth = now()->parse('2022-12-16')->addDays(1)->toDateString();
+
+//
+//    $invoices = Invoice::query()->whereMonth('created_at',date('m'))
+//        ->where('status','=','not_paid')->where('amount','>',0)->orderByDesc('amount')->get();
+//
+//    return $invoices;
+
+//    $lastDayofPreviousMonth = Carbon::now()->endOfMonth()->addDays(10)->toDateString();
+
+//    $hotels = Hotel::whereHas('invoices', function ($invoice){
+//
+//        $invoice->where('date_of_end','=', Carbon::now()->format('Y-m-d'))->where('status','=','not_paid')->where('amount','>',0);
+//
+//    })->where('blocked','=',1)->pluck('id');
+//
+//    foreach ($hotels as $id){
+//
+//        Hotel::where('id','=',$id)->update([
+//
+//            'blocked' => 0
+//        ]);
+//    }
+//
+////    return $hotels;
+////    return $lastDayofPreviousMonth;
+//    return "success";
+
+
 //});
+
+

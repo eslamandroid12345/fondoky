@@ -2,7 +2,7 @@
 
 
 namespace App\Repositories\Web;
-use App\Http\HelperTrait;
+use App\Http\Traits\HelperTrait;
 use App\Interfaces\Web\UserRepositoryInterface;
 use App\Models\Comment;
 use App\Models\Event;
@@ -11,7 +11,6 @@ use App\Models\Rate;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserRepository implements UserRepositoryInterface{
@@ -25,7 +24,6 @@ class UserRepository implements UserRepositoryInterface{
       return $this->search($request);
 
     }
-
 
     public function index(){
 

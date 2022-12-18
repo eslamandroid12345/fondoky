@@ -17,6 +17,7 @@
         "mcamara/laravel-localization": "^1.7",
         "pusher/pusher-php-server": "^7.0",
         "tymon/jwt-auth": "^1.0",
+        "yajra/laravel-datatables-oracle": "^9.21",
         "yoeunes/toastr": "^1.2"
     },
     "require-dev": {

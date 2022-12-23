@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Interfaces\Web;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreCommentRequest;

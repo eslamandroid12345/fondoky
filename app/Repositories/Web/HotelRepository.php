@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repositories\Web;
 use App\Events\NewHotelNotification;
 use App\Http\Requests\HotelLoginRequest;
@@ -27,8 +26,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class HotelRepository implements HotelRepositoryInterface{
 
-
-
     public function index(){
 
         $hotel = auth()->guard('hotel')->user();
@@ -47,8 +44,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
             },'room:id,room_type'])->where('hotel_id','=',auth('hotel')->id())
 
-                ->whereDate('check_in','=',$request->check_in)
-                ->whereDate('check_out','=',$request->check_out)->orderBy('id','DESC')->get();
+                ->whereDate('check_in','=',$request->check_in)->whereDate('check_out','=',$request->check_out)->orderBy('id','DESC')->get();
 
         } else{
 
@@ -82,8 +78,8 @@ class HotelRepository implements HotelRepositoryInterface{
 
         }catch (\Exception $exception){
 
-             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        return messageWithJson($exception->getMessage(),500,500);
+    }
 
     toastr()->error(__('hotels.block'));
     return redirect()->back();
@@ -129,10 +125,8 @@ class HotelRepository implements HotelRepositoryInterface{
 
     public function showRegister(){
 
-
         return view('hotels.register');
     }
-
 
     public function register(StoreHotelRequest $request){
 
@@ -169,7 +163,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
             ]);
 
-
             $data = [
 
                 "name_ar" =>   lang() == 'ar' ? __("hotels.message_register") . $request->name_ar : __("hotels.message_register") .  $request->name_en,
@@ -177,12 +170,10 @@ class HotelRepository implements HotelRepositoryInterface{
 
             ];
 
-
             event(new NewHotelNotification($data));
 
             toastr()->success(__('hotels.hotel'));
             return redirect()->route('hotels.show');
-
 
         }catch (\Exception $exception){
 
@@ -192,7 +183,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
     }
 
-
     public function edit(){
 
         $hotel = auth()->guard('hotel')->user();
@@ -200,15 +190,11 @@ class HotelRepository implements HotelRepositoryInterface{
         return view('hotels.edit',compact('hotel'));
     }
 
-
-
     public function update(UpdateHotelRequest $request){
 
         try {
 
             $hotel = auth()->guard('hotel')->user();
-
-
             if (!Hash::check($request->current_password, $hotel->password)) {
 
                 return redirect()->back()->with('current_password', __('hotels.current_password'));
@@ -234,7 +220,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
                          }else{
 
-                             return returnMessageError("Error to remove hotels images",Response::HTTP_INTERNAL_SERVER_ERROR);
+                             return messageWithJson("Error to delete message",500,500);
                          }
                      }
                 }
@@ -263,7 +249,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
         }catch (\Exception $exception){
 
-            return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
+            return messageWithJson($exception->getMessage(),500,500);
         }
     }
 
@@ -293,8 +279,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
         }catch (\Exception $exception){
 
-            return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
-
+            return messageWithJson($exception->getMessage(),500,500);
         }
     }
 
@@ -361,8 +346,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
         }catch (\Exception $exception){
 
-            return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
-
+            return messageWithJson($exception->getMessage(),500,500);
         }
     }
 

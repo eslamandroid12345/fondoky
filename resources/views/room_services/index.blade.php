@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('css')
     @section('title')
-
         تعديل الخدمه
     @stop
 @endsection

@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Repositories\Api;
 use App\Events\NewHotelNotification;
 use App\Http\Requests\HotelLoginRequest;
@@ -15,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
 
 class HotelRepository implements HotelRepositoryInterface
 {
@@ -36,7 +33,6 @@ class HotelRepository implements HotelRepositoryInterface
             if ($validator->fails()) {
 
                 $errors = collect($validator->errors())->flatten(1)[0];
-
                 if (is_numeric($errors)) {
 
                     $errors_arr = [
@@ -50,18 +46,19 @@ class HotelRepository implements HotelRepositoryInterface
                 return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
 
-            $token = auth()->guard('hotel-api')->setTTL(100000)->attempt($request->only(['email','password']));
+            $token = auth()->guard('hotel-api')->attempt($request->only(['email','password']));
 
             if(!$token){
-                return helperJson("data",null,trans("admin.error"),500,500);
+
+                return helperJson(null,trans("admin.error"),500,500);
             }
             $hotel = auth()->guard('hotel-api')->user();
             $hotel['token'] = $token;
-            return helperJson("hotel",new HotelResource($hotel), trans("hotels.message"));
+            return helperJson(new HotelResource($hotel), trans("hotels.message"));
 
         }catch (\Exception $exception){
 
-            return helperJson("data",null, $exception->getMessage(),500,500);
+            return helperJson(null,$exception->getMessage(),500,500);
         }
     }
 
@@ -107,11 +104,11 @@ class HotelRepository implements HotelRepositoryInterface
 
             if(!preg_match("/\p{Arabic}/u",$request->name_ar)){
 
-                return helperJson("data",null,"The name ar must be an Arabic Characters",422,500);
+                return helperJson(null,"The name ar must be an Arabic Characters",422,500);
 
             } elseif (!preg_match('^(?=.*[A-Za-z0-9].*[A-Za-z0-9])[$!@{}[\]A-Za-z0-9]*$^',$request->name_en)){
 
-                return helperJson("data",null,"The name en must be an English Characters",422,500);
+                return helperJson(null,"The name en must be an English Characters",422,500);
 
             }
 
@@ -149,33 +146,30 @@ class HotelRepository implements HotelRepositoryInterface
                 'email' => $request->email,
             ];
 
-           $hotel['token'] = auth()->guard('hotel-api')->setTTL(100000)->attempt($request->only(['email','password']));
+           $hotel['token'] = auth()->guard('hotel-api')->attempt($request->only(['email','password']));
 
             event(new NewHotelNotification($data));
-            return helperJson("hotel",new HotelResource($hotel),trans('hotels.hotel'),201,201);
+            return helperJson(new HotelResource($hotel),trans('hotels.hotel'),201,201);
 
         }catch (\Exception $exception){
 
-            return helperJson("data",null,$exception->getMessage(),500,500);
-
+            return helperJson(null,$exception->getMessage(),500,500);
 
         }
 
     }
 
-
     public function hotelLogout()
     {
 
         try {
-
              auth()->guard('hotel-api')->logout();
 
-               return messageWithJson(trans('hotels.logout'),200,200);
+               return helperJson(null,trans('hotels.logout'),200,200);
 
             }catch (\Exception $exception){
 
-            return messageWithJson($exception->getMessage(),500,500);
+            return helperJson(null,$exception->getMessage(),500,500);
 
         }
 

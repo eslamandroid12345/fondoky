@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Repositories\Web;
-use App\Http\Traits\HelperTrait;
 use App\Interfaces\Web\UserRepositoryInterface;
 use App\Models\Comment;
 use App\Models\Event;
@@ -15,23 +12,56 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserRepository implements UserRepositoryInterface{
 
-     use HelperTrait;
-     public const MAX_PAGE_COMMENT = 6;
-
 
     public function welcome(Request $request){
 
-      return $this->search($request);
+        if($request->has('location_ar') || $request->has('location_en') && $request->has('child_max') && $request->has('adults_max') && $request->has('date_start') && $request->has('date_expire')) {
+
+        $hotels = Hotel::where('blocked', '=', true)
+            ->select('id', 'name_ar', 'name_en', 'location_ar', 'location_en', 'currency_ar', 'currency_en', 'hotel_photos')
+            ->whereHas('room', function ($room) use ($request) {
+
+                $room->whereDoesntHave('calendars', function ($query) {
+                    $query->where('room_number', '=', 0);
+
+                })->where('room_type', '=', 'Double Room')
+                    ->where('adults_max', '=', $request->adults_max)->where('child_max', '=', $request->child_max)
+                    ->whereHas('calendars', function ($calendars) use ($request) {
+                        $calendars->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
+
+                    });
+            })->where('location_ar', '=', $request->location_ar)->orWhere('location_en', '=', $request->location_en)
+            ->with(['room' => function ($room) use ($request) {
+
+                $room->select('id','room_type','adults_max','child_max','hotel_id')->where('room_type', '=', 'Double Room')
+                    ->whereHas('calendars', function ($calendars) use ($request) {
+
+                        $calendars->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
+
+                    })->with(['calendars' => function ($calendars) use ($request) {
+
+                        $calendars->select('id','room_id','room_number','room_price','check_in','check_out')
+                            ->whereBetween('check_in', [$request->date_start, $request->date_expire])->whereDate('check_in', '!=', $request->date_expire);
+                    }]);
+
+                }])->get();
+
+        }
+        else{
+
+            $hotels = [];
+        }
+
+        return view('users.welcome',compact('hotels'));
 
     }
 
     public function index(){
 
-        $users = User::simplePaginate(1);
+        $users = User::simplePaginate(6);
         return view('users.index',compact('users'));
 
     }
-
 
     public function update($id){
 
@@ -59,7 +89,6 @@ class UserRepository implements UserRepositoryInterface{
         return view('users.rooms',compact('rooms'));
 
     }
-
 
     public function reservation(Request $request,$id){
 
@@ -94,27 +123,20 @@ class UserRepository implements UserRepositoryInterface{
         return redirect()->back();
     }
 
-    
 
-    public function ratesCreate($id)
-    {
+
+    public function ratesCreate($id){
 
         $hotel = Hotel::query()->where('id','=',$id)->first();
-
-        $rates = Rate::with(['user:id,name','hotel:id'])
-            ->where('user_id','=',auth()->id())->where('hotel_id','=',$hotel->id)->sum('rates_number');
-
+        $rates = Rate::with(['user:id,name','hotel:id'])->where('user_id','=',auth()->id())->where('hotel_id','=',$hotel->id)->sum('rates_number');
         $rates_count = Rate::with(['hotel:id'])->where('hotel_id','=',$hotel->id)->sum('rates_number');
-
-        $comments = Comment::with(['user:id,name','hotel:id'])->where('hotel_id','=',$hotel->id)
-            ->latest()->simplePaginate(self::MAX_PAGE_COMMENT);
+        $comments = Comment::with(['user:id,name','hotel:id'])->where('hotel_id','=',$hotel->id)->latest()->simplePaginate(6);
 
 
         return view('rates.create',compact('hotel','rates','rates_count','comments'));
     }
 
-    public function rates(Request $request)
-    {
+    public function rates(Request $request){
 
         try {
 

@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of language
 
-
 if(!function_exists('returnMessageError')){
-
 
      function returnMessageError($message,$code){
 
@@ -28,7 +26,6 @@ if(!function_exists('returnMessageSuccess')){
 
     function returnMessageSuccess($message,$code){
 
-
         return response()->json([
 
             "status" => true,
@@ -45,7 +42,6 @@ if(!function_exists('returnDataSuccess')){
 
 
     function returnDataSuccess($message,$code,$key,$value){
-
 
         return response()->json([
 
@@ -110,25 +106,11 @@ if(!function_exists('langConfig')){
 
 if(!function_exists('helperJson')){
 
-    function helperJson($key,$data=null,$message,$code = 200,$status = 200){
+    function helperJson($data=null,$message,$code = 200,$status = 200){
 
         return response()->json([
 
-            $key => $data,
-            "message" => $message,
-            "code" => $code
-
-        ],$status);
-    }
-}
-
-
-if(!function_exists('messageWithJson')){
-
-    function messageWithJson($message,$code = 200,$status = 200){
-
-        return response()->json([
-
+            'data' => $data,
             "message" => $message,
             "code" => $code
 

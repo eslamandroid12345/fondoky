@@ -34,22 +34,18 @@
         $('#datatable').DataTable();
     } );
 </script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 
 
-{{--@if (App::getLocale() == 'en')--}}
-{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/jquery.dataTables.min.js') }}"></script>--}}
-{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/dataTables.bootstrap4.min.js') }}"></script>--}}
-{{--<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>--}}
+@if (App::getLocale() == 'en')
+    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/en/dataTables.bootstrap4.min.js') }}"></script>
 
-{{--@else--}}
-{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/jquery.dataTables.min.js') }}"></script>--}}
-{{--    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>--}}
+@else
+    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets_2/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>
 
-
-
-{{--@endif--}}
+@endif
 
 
 

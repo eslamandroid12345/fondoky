@@ -11,7 +11,6 @@ class Reservation extends Model
 
     protected  $fillable = [
 
-
         'destination',
         'children',
         'adults',
@@ -31,9 +30,6 @@ class Reservation extends Model
         'commission',
         'stayed',
         'status'
-
-
-
     ];
 
 

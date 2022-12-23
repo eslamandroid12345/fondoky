@@ -24,28 +24,21 @@ class HotelController extends Controller
 
     }
 
-
     public function index(){
-
 
         return $this->hotelRepositoryInterface->index();
     }
 
 
-
     public function reservations(Request $request){
-
 
       return $this->hotelRepositoryInterface->reservations($request);
 
     }
 
-
-
     public function block($id){
 
         return $this->hotelRepositoryInterface->block($id);
-
 
     }
 
@@ -71,7 +64,6 @@ class HotelController extends Controller
     }
 
     public function showRegister(){
-
 
         return $this->hotelRepositoryInterface->showRegister();
     }

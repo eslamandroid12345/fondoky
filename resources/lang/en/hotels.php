@@ -160,6 +160,14 @@ return [
     "rates_department" => "Clients rates department",
     "user_comment" => "Client comment",
     "comment_department" => "Clients comments department",
+    "bank" => "Paying bank account number",
+
+    "status" => "Invoice status",
+    "paid" => "Paid",
+    "not_paid" => "Not Paid",
+    "invoices_all" => "All Invoices of Hotel",
+    "report_all" =>  "Department of all hotel bills",
+
 
 
 

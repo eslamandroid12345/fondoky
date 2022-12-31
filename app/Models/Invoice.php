@@ -25,19 +25,21 @@ class Invoice extends Model{
         'month',
         'year',
         'status',
-        'hotel_id'
+        'hotel_id',
+        'total'
 
     ];
 
     protected $dates = ['deleted_at'];
 
-
     public function hotel(){
-
-
         return $this->belongsTo(Hotel::class,'hotel_id','id');
     }
 
 
+    public function invoicesStatus(){
+
+        return $this->status == 'paid' ? trans('hotels.paid') : trans('hotels.not_paid');
+    }
 }
 

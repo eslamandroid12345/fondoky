@@ -11,6 +11,7 @@
     {{--start toastr--}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
+    @yield('main')
     <style>
         @media print {
             #print_Button {
@@ -108,8 +109,6 @@
 
             playAudio();
             toastr.success('حجز جديد لديك', 'تم حجز غرفه جديده بفندقك', { timeOut: 20500 });
-
-
 
         });
 

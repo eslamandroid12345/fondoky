@@ -105,10 +105,10 @@ class HotelController extends Controller
 
     }
 
-    public function invoices(){
+    public function invoices($month,$year){
 
 
-        return $this->hotelRepositoryInterface->invoices();
+        return $this->hotelRepositoryInterface->invoices($month,$year);
 
     }
 
@@ -146,6 +146,11 @@ class HotelController extends Controller
 
      return $this->hotelRepositoryInterface->arrivalsPdf($id);
 
+    }
+
+    public function invoicesAll(){
+
+        return $this->hotelRepositoryInterface->invoicesAll();
     }
 
 

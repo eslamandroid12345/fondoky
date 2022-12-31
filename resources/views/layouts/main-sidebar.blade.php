@@ -112,6 +112,7 @@
                         <ul id="sections-menu" class="collapse" data-parent="#sidebarnav">
 
                             <li><a href="{{route('hotels.month.invoices')}}">{{__('hotels.invoice_monthly')}}</a></li>
+                            <li><a href="{{route('hotels.invoices.all')}}">{{__('hotels.invoices_all')}}</a></li>
 
                         </ul>
                     </li>

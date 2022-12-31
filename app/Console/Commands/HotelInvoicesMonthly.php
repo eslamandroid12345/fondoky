@@ -46,7 +46,7 @@ class HotelInvoicesMonthly extends Command
 
         foreach ($hotels as $hotel){
 
-            $commission = Reservation::where('hotel_id','=',$hotel->id)->whereMonth('check_in','=',date('m'));
+            $reservation = Reservation::where('hotel_id','=',$hotel->id)->whereMonth('check_in','=',date('m'));
 
             $hotel->invoices()->create([
                 'invoice_number' => rand(15000,20000000) . uniqid(),
@@ -54,7 +54,8 @@ class HotelInvoicesMonthly extends Command
                 'to' => Carbon::now()->lastOfMonth()->translatedFormat('l j F Y'),
                 'date_of_start' => Carbon::now()->startOfMonth()->toDateString(),
                 'date_of_end' => Carbon::now()->endOfMonth()->addDays(14)->toDateString(),
-                'amount' => $commission->sum('commission') > 0 ? $commission->sum('commission') : 0,
+                'amount' => $reservation->sum('commission') > 0 ? $reservation->sum('commission') : 0,
+                'total' =>  $reservation->sum('total') > 0 ? $reservation->sum('total') : 0,
                 'month' => date('m'),
                 'year' => date('Y'),
 

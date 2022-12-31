@@ -64,8 +64,6 @@
                                 <th>{{__('data.phone_hotel')}}</th>
                                 <th>{{__('data.action')}}</th>
 
-
-
                             </tr>
                             </thead>
 
@@ -135,7 +133,6 @@
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-
 
 
 @endsection

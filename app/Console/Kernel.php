@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule){
 
         $schedule->command('hotels:expires')->weekly();
-        $schedule->command('hotels:invoices')->monthly();
+        $schedule->command('hotels:invoices')->everyMinute();
 
     }
 

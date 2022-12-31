@@ -56,7 +56,6 @@ if(!function_exists('returnDataSuccess')){
 
 }
 
-
 //end method of Api --------------------------------------------------------------------------------
 
 if(!function_exists('admin')){
@@ -78,8 +77,6 @@ if(!function_exists('hotel')){
         return auth()->guard('hotel')->user();
     }
 }
-
-
 
 
 //check current language

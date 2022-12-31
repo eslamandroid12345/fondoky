@@ -36,7 +36,8 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
     Route::put('update/{id}','HotelController@update')->name('hotels.update');
     Route::delete('delete/{id}','HotelController@delete')->name('hotels.delete');
     Route::get('arrivals/pdf/{id}','HotelController@arrivalsPdf')->name('hotels.arrivals.pdf');
-    Route::get('invoices', 'HotelController@invoices')->name('hotels.invoices');
+    Route::get('invoices/{month}/{year}', 'HotelController@invoices')->name('hotels.invoices');
+    Route::get('invoices/all', 'HotelController@invoicesAll')->name('hotels.invoices.all');//all invoices
     Route::get('month/invoices', 'HotelController@monthOfInvoices')->name('hotels.month.invoices');
     Route::get('arrivals', 'HotelController@arrivals')->name('hotels.arrivals');
     Route::get('rates', 'HotelController@rates')->name('hotels.rates');

@@ -22,10 +22,11 @@ interface  HotelRepositoryInterface{
     public function update(UpdateHotelRequest $request);
     public function delete($id);
     public function monthOfInvoices();
-    public function invoices();
+    public function invoices($month,$year);
     public function arrivals();
     public function comment(StoreCommentRequest $request);
     public function rates();
     public function comments();
     public function arrivalsPdf($id);
+    public function invoicesAll();
 }

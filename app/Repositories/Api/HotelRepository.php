@@ -97,7 +97,7 @@ class HotelRepository implements HotelRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return helperJson("hotel",null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                    return helperJson(null,isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
                 }
                 return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
@@ -112,8 +112,6 @@ class HotelRepository implements HotelRepositoryInterface
 
             }
 
-
-            //create images for hotel-api
             $data = [];
             if($request->hasfile('hotel_photos'))
             {

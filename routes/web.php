@@ -38,11 +38,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
         Route::get('all','UserController@index')->name('users.all');
         Route::get('delete/{id}','UserController@delete')->name('users.delete');
         Route::get('update/{id}','UserController@update')->name('users.update');
-
     });
 
     Route::group(['prefix'=>'users','middleware' => ['auth']], function (){
-
         Route::post('rates', 'UserController@rates')->name('users.rates');
         Route::get('rates/create/{id}', 'UserController@ratesCreate')->name('users.rates.create');
 
@@ -52,7 +50,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
         Route::get('room/reservation/{id}', 'UserController@reservation')->name('room.reservation')->middleware('auth');
 
     Route::group(["prefix" => "reservations","middleware" => "auth"], function (){
-
         Route::post('store/{id}', 'ReservationController@store')->name('reservations.store');
         Route::get('cancel/{id}', 'ReservationController@cancel')->name('reservations.cancel');
 
@@ -61,6 +58,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 });
 
+
+ /*
+  *  $ids = $request->ids;
+    DB::table("products")->whereIn('id',explode(",",$ids))->delete();
+    return response()->json(['success'=>"Products Deleted successfully."]);
+  */
 //start comments of query test ==================================================================================================================
 //Route::get('users', function (){
 
@@ -360,10 +363,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //        var Grade_id = $(this).val();
 //        if (Grade_id) {
 //            $.ajax({
-//                                url: "{{ URL::to('classes') }}/" + Grade_id,
-//                                type: "GET",
-//                                dataType: "json",
-//                                success: function (data) {
+//               url: "{{ URL::to('classes') }}/" + Grade_id,
+//               type: "GET",
+//               dataType: "json",
+//                success: function (data) {
 //                $('select[name="Class_id"]').empty();
 //                $.each(data, function (key, value) {
 //                    $('select[name="Class_id"]').append('<option value="' + key + '">' + value + '</option>');
@@ -462,7 +465,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //            'blocked' => 0
 //        ]);
 //    }
-//
 ////    return $hotels;
 ////    return $lastDayofPreviousMonth;
 //    return "success";

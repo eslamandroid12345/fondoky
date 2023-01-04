@@ -33,7 +33,6 @@ class StoreHotelRequest extends FormRequest{
         ];
     }
 
-
     public function messages()
     {
 

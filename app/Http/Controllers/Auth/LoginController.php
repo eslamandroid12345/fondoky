@@ -37,7 +37,6 @@ class LoginController extends Controller
         $value = request()->input('any');
         $key = filter_var($value,FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
         request()->merge([$key=>$value]);
-
         return $key;
     }
 
@@ -48,11 +47,9 @@ class LoginController extends Controller
             'email'  => $request->{$this->username()},
             'password' => $request->password,
             'blocked' => 1,
-
         ];
 
     }
-
 
      /*
      * @override of logout
@@ -60,36 +57,25 @@ class LoginController extends Controller
 
     public function logout(Request $request){
 
-        $admin = 'admin';
-        $hotel = 'hotel';
+        if(auth()->guard('admin')->check()){
 
-
-        if(auth()->guard($admin)->check()){
-
-            auth()->guard($admin)->logout();//logout admin
+            auth()->guard('admin')->logout();//logout admin
             $redirect = 'admins/show';
 
-        }elseif (auth()->guard($hotel)->check()){
+        }elseif (auth()->guard('hotel')->check()){
 
-            auth()->guard($hotel)->logout();//logout hotel
+            auth()->guard('hotel')->logout();//logout hotel
             $redirect = 'hotels/show';
-
         }else{
 
             auth()->logout();//logout user
             $redirect = '/';
-
         }
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect($redirect);
-    }
+    }//end of function login
 
-
-
-
-
-
-}
+}//end of class

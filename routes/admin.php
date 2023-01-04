@@ -64,9 +64,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(), 'middleware' => ['loca
 
     });
 
-
     Route::group(['prefix'=>'currencies','middleware' => ['auth:admin']], function (){
-
         Route::get('index','CurrencyController@getCurrencies')->name('currencies.index');
         Route::post('store','CurrencyController@store')->name('currencies.store');
         Route::put('update','CurrencyController@update')->name('currencies.update');

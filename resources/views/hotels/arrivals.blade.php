@@ -74,11 +74,11 @@
                                                 <td>{{$invoice->num_of_nights}}</td>
                                                 <td>{{$invoice->check_in}}</td>
                                                 <td>{{$invoice->check_out}}</td>
-                                                <td>{{ lang() == 'ar' ? $invoice->total_all  . hotel()->currency_ar : $invoice->total_all . hotel()->currency_en}}</td>
-                                                <td>{{ lang() == 'ar' ? $invoice->vat_tax . hotel()->currency_ar : $invoice->vat_tax . hotel()->currency_en}}</td>
-                                                <td>{{ lang() == 'ar' ? $invoice->municipal_tax . hotel()->currency_ar : $invoice->municipal_tax . hotel()->currency_en }}</td>
-                                                <td>{{  lang() == 'ar' ? $invoice->tourism_tax . hotel()->currency_ar : $invoice->tourism_tax . hotel()->currency_en }}</td>
-                                                <td>{{ lang() == 'ar' ? $invoice->total . hotel()->currency_ar : $invoice->total . hotel()->currency_en}}</td>
+                                                <td>{{ $invoice->total_all}}</td>
+                                                <td>{{  $invoice->vat_tax}}</td>
+                                                <td>{{  $invoice->municipal_tax }}</td>
+                                                <td>{{   $invoice->tourism_tax }}</td>
+                                                <td>{{ $invoice->total}}</td>
                                                 <td>{{$invoice->cancel()}}</td>
                                                 <td>{{$invoice->stay()}}</td>
                                                 <td>

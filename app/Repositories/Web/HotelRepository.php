@@ -36,20 +36,23 @@ class HotelRepository implements HotelRepositoryInterface{
 
     public function reservations(Request $request){
 
-        if($request->has('check_in') && $request->has('check_out')){
+        $reservations = Reservation::query()->with(['hotel:id','room:id,room_type','user:id,name,phone'])->where('hotel_id','=',auth('hotel')->id());
 
-            $invoices =  Reservation::with(['hotel:id','user' => function($user) use($request){
-                $user->select('id','name','phone')->where('name','LIKE','%'. $request->name .'%')->where('phone','LIKE','%'. $request->phone);
+        if($request->has('check_in') && $request->get('check_in') != '')
+           $reservations->whereDate('check_in', '=',$request->check_in);
 
-            },'room:id,room_type'])->where('hotel_id','=',auth('hotel')->id())->whereDate('check_in','=',$request->check_in)->whereDate('check_out','=',$request->check_out)->orderBy('id','DESC')->get();
-        } else{
+        if($request->has('check_out') && $request->get('check_out') != '')
+            $reservations->whereDate('check_out', '=',$request->check_out);
 
-            $invoices =  Reservation::with(['hotel:id','user:id,name,phone','room:id,room_type'])
-                ->where('hotel_id','=',auth('hotel')->id())->orderBy('id','DESC')
-                ->simplePaginate(2);
+        if($request->has('name') && $request->get('name') != '')
+            $reservations->whereHas('user', function ($user) use($request){
+                $user->where('name','LIKE','%'. $request->name .'%');});
 
-        }
+        if($request->has('phone') && $request->get('phone') != '')
+            $reservations->whereHas('user', function ($user) use($request){
+                $user->where('phone','LIKE','%'. $request->phone .'%');});
 
+        $invoices = $reservations->orderBy('id','DESC')->simplePaginate(2);
 
         return view('hotels.reservations',compact('invoices'));
     }
@@ -124,7 +127,6 @@ class HotelRepository implements HotelRepositoryInterface{
     }
 
     public function register(StoreHotelRequest $request){
-
 
         try {
 

@@ -27,7 +27,7 @@ class HotelRepository implements HotelRepositoryInterface
             ];
             $validator = Validator::make($request->all(), $rules, [
                 'email.email'  => 403,
-                'email.exists'  => 404,
+                'email.exists'  => 407,
             ]);
 
             if ($validator->fails()) {
@@ -37,7 +37,7 @@ class HotelRepository implements HotelRepositoryInterface
 
                     $errors_arr = [
                         403 => 'Failed,Email must be an email',
-                        404 => 'Failed,Email not found',
+                        407 => 'Failed,Email not found',
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
@@ -50,7 +50,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             if(!$token){
 
-                return helperJson(null,trans("admin.error"),500,500);
+                return helperJson(null,"كلمه المرور خطاء يرجي المحاوله مره اخري",422);
             }
             $hotel = auth()->guard('hotel-api')->user();
             $hotel['token'] = $token;
@@ -87,7 +87,6 @@ class HotelRepository implements HotelRepositoryInterface
             ]);
 
             if ($validator->fails()) {
-
                 $errors = collect($validator->errors())->flatten(1)[0];
 
                 if (is_numeric($errors)) {
@@ -159,7 +158,6 @@ class HotelRepository implements HotelRepositoryInterface
 
     public function hotelLogout()
     {
-
         try {
              auth()->guard('hotel-api')->logout();
 

@@ -58,7 +58,6 @@ class HotelInvoicesMonthly extends Command
                 'total' =>  $reservation->sum('total') > 0 ? $reservation->sum('total') : 0,
                 'month' => date('m'),
                 'year' => date('Y'),
-
             ]);
         }
     }

@@ -151,24 +151,16 @@ class HotelRepository implements HotelRepositoryInterface
         }catch (\Exception $exception){
 
             return helperJson(null,$exception->getMessage(),500,500);
-
         }
-
     }
 
-    public function hotelLogout()
-    {
+    public function hotelLogout(){
+
         try {
-             auth()->guard('hotel-api')->logout();
-
-               return helperJson(null,trans('hotels.logout'),200,200);
-
-            }catch (\Exception $exception){
-
-            return helperJson(null,$exception->getMessage(),500,500);
-
+            auth()->guard('hotel-api')->logout();
+            return helperJson(null,trans('hotels.logout'));
+        } catch (\Exception $e) {
+            return helperJson(null,$e->getMessage(),500,500);
         }
-
     }
-
 }

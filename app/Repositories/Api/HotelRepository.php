@@ -108,7 +108,6 @@ class HotelRepository implements HotelRepositoryInterface
             } elseif (!preg_match('^(?=.*[A-Za-z0-9].*[A-Za-z0-9])[$!@{}[\]A-Za-z0-9]*$^',$request->name_en)){
 
                 return helperJson(null,"The name en must be an English Characters",422,500);
-
             }
 
             $data = [];

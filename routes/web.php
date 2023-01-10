@@ -58,6 +58,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 });
 
+
  /*
   *  $ids = $request->ids;
     DB::table("products")->whereIn('id',explode(",",$ids))->delete();

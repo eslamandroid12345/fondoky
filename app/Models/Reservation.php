@@ -70,7 +70,7 @@ class Reservation extends Model
 
     public function scopeSumAmountOfCommissionEveryMonth($query,$month,$year){
 
-            return $query->with(['hotel','user:id,name,phone','room:id,room_type'])->where('hotel_id','=',auth('hotel')->id())->whereMonth('check_in',$month)
+        return $query->with(['hotel','user:id,name,phone','room:id,room_type'])->where('hotel_id','=',auth('hotel')->id())->whereMonth('check_in',$month)
                 ->whereYear('check_in', $year)->sum('total');
     }
 

@@ -31,7 +31,6 @@ class CreateHotelsTable extends Migration
             $table->longText('description');
             $table->longText('hotel_photos');
             $table->text('phone_hotel');
-            $table->text('slug');
             $table->boolean('blocked')->default(1)->comment('0 is expire and 1 is active');
             $table->timestamps();
             $table->softDeletes();

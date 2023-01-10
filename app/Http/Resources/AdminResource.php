@@ -4,11 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AdminResource extends JsonResource
-{
+class AdminResource extends JsonResource{
 
-    public function toArray($request)
-    {
+    public function toArray($request){
 
         return [
 
@@ -18,8 +16,6 @@ class AdminResource extends JsonResource
             'phone' => $this->phone,
             'permissions' => $this->role->permissions,
             'token' => $this->token,
-
-
         ];
 
     }

@@ -26,7 +26,6 @@ class Hotel extends Authenticatable implements JWTSubject
         'description',
         'hotel_photos',
         'phone_hotel',
-        'slug',
         'blocked',
         'vat_tax',
         'municipality_fee',

@@ -7,9 +7,7 @@ use App\Console\Commands\HotelInvoicesMonthly;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends ConsoleKernel
-{
-
+class Kernel extends ConsoleKernel{
 
     protected $commands = [ExpireHotels::class,HotelInvoicesMonthly::class];
 
@@ -19,7 +17,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('hotels:invoices')->everyMinute();
 
     }
-
 
     protected function commands(){
 

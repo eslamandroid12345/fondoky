@@ -77,7 +77,7 @@ class HotelRepository implements HotelRepositoryInterface
                 'currency_ar'  => 'required',
                 'currency_en'  => 'required',
                 'description'  => 'required',
-                'hotel_photos.*' => 'required|file|mimes:jpg,png,jpeg|max:2048',
+                'hotel_photos' => 'required|array|min:1|mimes:jpg,png,jpeg|max:2048',
                 'phone_hotel'  => 'required|numeric',
             ];
             $validator = Validator::make($request->all(), $rules, [
@@ -110,10 +110,9 @@ class HotelRepository implements HotelRepositoryInterface
             }
 
             $data = [];
-            if($request->hasfile('hotel_photos'))
-            {
-                foreach($request->file('hotel_photos') as $image)
-                {
+            if($request->hasfile('hotel_photos')) {
+
+                foreach($request->file('hotel_photos') as $image) {
                     $name= time() . '.' . $image->getClientOriginalName();
                     $image->move(public_path().'/hotels/', $name);
                     $data[] = $name;
@@ -133,7 +132,6 @@ class HotelRepository implements HotelRepositoryInterface
             $hotel->description = $request->description;
             $hotel->hotel_photos = json_encode($data);
             $hotel->phone_hotel = $request->phone_hotel;
-            $hotel->slug = Str::slug($request->description,"-","ar");
             $hotel->save();
 
             $data = [

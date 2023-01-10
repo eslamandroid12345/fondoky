@@ -89,11 +89,7 @@ class HotelRepository implements HotelRepositoryInterface{
     public function stay($id){
 
         $invoice = Reservation::findOrFail($id);
-        $invoice->update([
-
-            'stayed' => $invoice->stayed == 1 ? 0 : 1
-
-        ]);
+        $invoice->update(['stayed' => $invoice->stayed == 1 ? 0 : 1]);
 
         toastr()->success(__('hotels.stay'));
         return redirect()->back();
@@ -104,7 +100,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
         return view('hotels.login');
     }
-
 
     public function login(HotelLoginRequest $request){
 

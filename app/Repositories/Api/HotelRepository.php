@@ -67,11 +67,10 @@ class HotelRepository implements HotelRepositoryInterface
 
         try {
             $rules = [
-
-                'manger'       => 'required',
-                'name_ar'      => 'required',
-                'name_en'      => 'required',
-                'email'        => 'required|email|unique:hotels',
+                'manger'       => 'required|string|min:10|max:50',
+                'name_ar'      => 'required|string|min:10|max:50',
+                'name_en'      => 'required|string|min:10|max:50',
+                'email'        => 'required|email|unique:hotels,email',
                 'password'     => 'required|min:8',
                 'location_ar'  => 'required',
                 'location_en'  => 'required',

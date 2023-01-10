@@ -10,15 +10,11 @@ use App\Interfaces\Web\HotelRepositoryInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-
-class HotelController extends Controller
-{
+class HotelController extends Controller{
 
     public $hotelRepositoryInterface;
 
-
-    public function __construct(HotelRepositoryInterface $hotelRepositoryInterface)
-    {
+    public function __construct(HotelRepositoryInterface $hotelRepositoryInterface){
 
         $this->hotelRepositoryInterface = $hotelRepositoryInterface;
 
@@ -45,11 +41,9 @@ class HotelController extends Controller
 
     public function stay($id){
 
-
        return $this->hotelRepositoryInterface->stay($id);
 
     }
-
 
   public function show(){
 
@@ -71,22 +65,16 @@ class HotelController extends Controller
 
     public function register(StoreHotelRequest $request){
 
-
      return $this->hotelRepositoryInterface->register($request);
 
-
     }
-
 
     public function edit(){
 
        return $this->hotelRepositoryInterface->edit();
     }
 
-
-
     public function update(UpdateHotelRequest $request){
-
 
         return $this->hotelRepositoryInterface->update($request);
 
@@ -112,15 +100,11 @@ class HotelController extends Controller
 
     }
 
-
-
     public function arrivals(){
 
       return $this->hotelRepositoryInterface->arrivals();
 
     }
-
-
 
     public function comment(StoreCommentRequest $request){
 
@@ -130,7 +114,6 @@ class HotelController extends Controller
 
 
     public function rates(){
-
 
         return $this->hotelRepositoryInterface->rates();
     }

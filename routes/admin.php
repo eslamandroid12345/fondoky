@@ -57,10 +57,13 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(), 'middleware' => ['loca
 
     Route::group(['prefix'=>'settings','middleware' => ['auth:admin']], function (){
 
-        Route::get('index','SettingController@getSetting')->name('settings.index');
+        Route::get('index','SettingController@index')->name('settings.index');
+        Route::get('create','SettingController@create')->name('settings.create');
         Route::post('store','SettingController@store')->name('settings.store');
-        Route::put('update','SettingController@update')->name('settings.update');
-        Route::delete('delete','SettingController@delete')->name('settings.delete');
+        Route::get('edit/{id}','SettingController@edit')->name('settings.edit');
+        Route::get('show/{id}','SettingController@show')->name('settings.show');
+        Route::put('update/{id}','SettingController@update')->name('settings.update');
+        Route::get('delete/{id}','SettingController@delete')->name('settings.delete');
 
     });
 

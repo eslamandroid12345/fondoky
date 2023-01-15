@@ -34,25 +34,11 @@ class HotelRepository implements HotelRepositoryInterface{
 
     }
 
-    public function reservations(Request $request){
+    public function reservations(){
 
-        $reservations = Reservation::query()->with(['hotel:id','room:id,room_type','user:id,name,phone'])->where('hotel_id','=',auth('hotel')->id());
+        $invoices = Reservation::query()->with(['hotel:id','room:id,room_type','user:id,name,phone'])
+            ->where('hotel_id','=',auth('hotel')->id())->orderByDesc('id')->get();
 
-        if($request->has('check_in') && $request->get('check_in') != '')
-           $reservations->whereDate('check_in', '=',$request->check_in);
-
-        if($request->has('check_out') && $request->get('check_out') != '')
-            $reservations->whereDate('check_out', '=',$request->check_out);
-
-        if($request->has('name') && $request->get('name') != '')
-            $reservations->whereHas('user', function ($user) use($request){
-                $user->where('name','LIKE','%'. $request->name .'%');});
-
-        if($request->has('phone') && $request->get('phone') != '')
-            $reservations->whereHas('user', function ($user) use($request){
-                $user->where('phone','LIKE','%'. $request->phone .'%');});
-
-        $invoices = $reservations->orderBy('id','DESC')->simplePaginate(2);
 
         return view('hotels.reservations',compact('invoices'));
     }
@@ -329,7 +315,7 @@ class HotelRepository implements HotelRepositoryInterface{
     public function rates(){
 
         $rates = Rate::with(['user:id,name','hotel:id'])
-            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(6);
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->get();
 
         return view('rates-hotel.index',compact('rates'));
     }
@@ -337,7 +323,7 @@ class HotelRepository implements HotelRepositoryInterface{
     public function comments(){
 
         $comments = Comment::with(['user:id,name','hotel:id'])
-            ->where('hotel_id','=',auth('hotel')->id())->latest()->simplePaginate(6);
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->get();
 
         return view('comment-hotel.index',compact('comments'));
 

@@ -55,10 +55,10 @@
                                         </tr>
                                         </thead>
 
+                                        <tbody>
 
                                     @foreach($rooms as $room)
 
-                                            <tbody>
                                             <tr>
 
                                                 <td>{{$room->room_type}}</td>
@@ -72,11 +72,9 @@
                                                         </a>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-
                                                             <a class="dropdown-item" href="{{route('rooms.edit',$room->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('room_add.update')}}</a>
                                                             <a class="dropdown-item" href="{{route('calendars.create',$room->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('hotels.calendar_create')}}</a>
                                                             <a class="dropdown-item" href="{{route('rooms.calendars.show',$room->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('hotels.calendars')}}</a>
-
 
                                                         </div>
                                                     </div>
@@ -84,11 +82,11 @@
                                                 </td>
 
                                             </tr>
-                                            </tbody>
+
                                         @endforeach
-
-
+                                        </tbody>
                                     </table>
+
                                 </div>
                             </div>
                         </div>

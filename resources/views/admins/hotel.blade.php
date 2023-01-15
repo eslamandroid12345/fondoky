@@ -51,9 +51,9 @@
                                             <th>{{__('data.action')}}</th>
                                         </tr>
                                         </thead>
-
-                                        @foreach($hotels as $hotel)
                                         <tbody>
+                                        @foreach($hotels as $hotel)
+
                                             <tr>
                                                 <td>{{lang() == 'ar' ? $hotel->name_ar : $hotel->name_en}}</td>
                                                 <td>{{lang() == 'ar' ? $hotel->location_ar : $hotel->location_en}}</td>
@@ -82,13 +82,10 @@
                                                 </td>
 
                                             </tr>
-                                            </tbody>
+
 
                                         @endforeach
-
-
-
-
+                                        </tbody>
 
 
                                     </table>

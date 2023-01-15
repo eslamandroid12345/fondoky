@@ -20,7 +20,6 @@ class HotelRepository implements HotelRepositoryInterface
     public function hotelLogin(Request $request)
     {
         try {
-
             $rules = [
                 'email'        => 'required|email|exists:hotels,email',
                 'password'     => 'required',
@@ -153,9 +152,12 @@ class HotelRepository implements HotelRepositoryInterface
     public function hotelLogout(){
 
         try {
+
             auth()->guard('hotel-api')->logout();
             return helperJson(null,trans('hotels.logout'));
+
         } catch (\Exception $e) {
+
             return helperJson(null,$e->getMessage(),500,500);
         }
     }

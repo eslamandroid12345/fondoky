@@ -13,10 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class EventRepository implements EventRepositoryInterface {
 
 
-
-
     public function store(StoreEventRequest $request){
-
 
         try {
 
@@ -38,18 +35,15 @@ class EventRepository implements EventRepositoryInterface {
 
     public function create($id){
 
-
         $room = Room::findOrFail($id);
         return view('events.create',compact('room'));
 
 
     }
 
-
     public function edit($id){
 
         $event = Event::findOrFail($id);
-
         return view('events.edit',compact('event'));
 
 
@@ -74,16 +68,13 @@ class EventRepository implements EventRepositoryInterface {
 
         }catch (\Exception $exception){
 
-
             return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
 
     }
 
-
     public function destroy($id){
-
 
         try {
 

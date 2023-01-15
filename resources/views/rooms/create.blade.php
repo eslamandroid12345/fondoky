@@ -43,13 +43,8 @@
                         <form class="form" action="{{route('rooms.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
 
-
                             <h6 style="font-family: 'Cairo', sans-serif;color: blue"> {{__('hotels.rooms_control')}}</h6><br>
-
-
                         <div class="row">
-
-
 
                             <div class="col-md-12">
                                 <div class="form-group">

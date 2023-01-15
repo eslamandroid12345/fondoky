@@ -36,27 +36,18 @@
                                             <tr>
                                                 <th>{{__('hotels.user_rate')}}</th>
                                                 <th>{{__('hotels.user_comment')}}</th>
+                                                <th>{{__('hotels.created_at')}}</th>
                                             </tr>
                                             </thead>
-
+                                            <tbody>
                                             @foreach($comments as $comment)
-                                                <tbody>
                                                 <tr>
                                                     <td>{{$comment->user->name}}</td>
                                                     <td>{{$comment->comment}}</td>
-
-
-
+                                                    <td>{{$comment->created_at->format('Y-m-d')}}</td>
                                                 </tr>
-                                                </tbody>
-
                                             @endforeach
-
-
-
-
-
-
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

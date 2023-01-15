@@ -91,12 +91,7 @@
                     <div class="col-xl-12 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
-                                <a href="{{route('rooms.calendars.show',$id)}}" class="btn btn-success btn-sm" role="button"
-                                   aria-pressed="true">{{__('event.refresh')}}</a>
-
-                                <button class="sear btn btn-info btn-sm" role="button"
-                                   aria-pressed="true" data-toggle="modal" data-target="#exampleModal">{{__('book.search')}}</button><br><br>
-
+                               
                                 <div class="table-responsive">
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                            data-page-length="50"
@@ -114,13 +109,10 @@
                                         </thead>
 
 
-
+                                        <tbody>
                                         @foreach($calendars as $calendar)
 
-                                            <tbody>
                                             <tr>
-
-
                                                 <td>{{$calendar->room->room_type}}</td>
                                                 <td>{{$calendar->room_number}}</td>
                                                 <td>{{ lang() == 'ar' ? number_format($calendar->room_price,2) . '-'. $calendar->room->hotel->currency_ar : number_format($calendar->room_price,2) . '-'. $calendar->room->hotel->currency_en }}</td>
@@ -144,14 +136,11 @@
                                                     </div>
 
                                                 </td>
-
-
-
                                             </tr>
 
-                                            </tbody>
-                                        @endforeach
 
+                                        @endforeach
+                                        </tbody>
 
                                     </table>
                                 </div>

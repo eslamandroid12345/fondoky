@@ -8,8 +8,6 @@ class SettingRequest extends FormRequest{
 
 
     public function authorize(){
-
-
         return true;
     }
 
@@ -20,16 +18,15 @@ class SettingRequest extends FormRequest{
 
             'name_ar' => 'required',
             'name_en' => 'required',
-            'logo' => 'nullable',
+            'about_ar' => 'required',
+            'about_en' => 'required',
+            'logo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'privacy_ar' => 'required',
+            'privacy_en' => 'required',
             'location_ar' => 'required',
             'location_en' => 'required',
-            'vat_tax' => 'required|numeric',
-            'tourism_tax' => 'required|numeric',
-            'municipal_tax' => 'required|numeric'
-
         ];
     }
-
 
 
     public function messages()
@@ -37,15 +34,17 @@ class SettingRequest extends FormRequest{
       return [
 
           'name_ar.required' => trans('setting.name_ar_val'),
+          'name_en.required' => trans('setting.name_en_val'),
+          'about_ar.required' => trans('setting.about_ar_val'),
+          'about_en.required' => trans('setting.about_en_val'),
           'location_ar.required' => trans('setting.location_ar_val'),
           'location_en.required' => trans('setting.location_en_val'),
-          'name_en.required' => trans('setting.name_en_val'),
-          'vat_tax.required' => trans('setting.vat_tax_val'),
-          'vat_tax.numeric' => trans('setting.vat_tax_numeric'),
-          'tourism_tax.required' => trans('setting.tourism_tax_val'),
-          'tourism_tax.numeric' => trans('setting.tourism_tax_numeric'),
-          'municipal_tax.required' => trans('setting.municipal_tax_val'),
-          'municipal_tax.numeric' => trans('setting.municipal_tax_numeric'),
+          'privacy_ar.required' => trans('setting.privacy_ar_val'),
+          'privacy_en.required' => trans('setting.privacy_en_val'),
+          'logo.required' => trans('setting.logo_val'),
+          'logo.mimes' => trans('setting.logo_mimes_val'),
+          'logo.max' => trans('setting.logo_max_val'),
+          'logo.image' => trans('setting.logo_image_val'),
 
       ];
     }

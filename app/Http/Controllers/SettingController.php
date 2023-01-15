@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SettingRequest;
+use App\Http\Requests\UpdateSettingRequest;
 use App\Interfaces\Web\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,11 @@ class SettingController extends Controller
 
         $this->settingRepositoryInterface = $settingRepositoryInterface;
 
-
     }
 
-    public function getSetting(){
+    public function index(){
 
-        return $this->settingRepositoryInterface->getSetting();
+        return $this->settingRepositoryInterface->index();
 
     }
 
@@ -28,20 +28,39 @@ class SettingController extends Controller
 
         return $this->settingRepositoryInterface->store($request);
 
+    }
+
+
+    public function create(){
+
+        return $this->settingRepositoryInterface->create();
 
     }
 
-    public function delete(Request $request){
 
-        return $this->settingRepositoryInterface->delete($request);
+    public function edit($id){
 
+        return $this->settingRepositoryInterface->edit($id);
+
+    }
+
+    public function show($id){
+
+        return $this->settingRepositoryInterface->show($id);
 
     }
 
-    public function update(Request $request){
+    public function update(UpdateSettingRequest $request,$id){
 
-        return $this->settingRepositoryInterface->update($request);
-
+        return $this->settingRepositoryInterface->update($request,$id);
 
     }
+
+    public function delete($id){
+
+        return $this->settingRepositoryInterface->delete($id);
+
+    }
+
+
 }

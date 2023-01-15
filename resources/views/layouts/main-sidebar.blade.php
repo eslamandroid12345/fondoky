@@ -16,6 +16,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#booking">
                             <div class="pull-left"><i class="fas fa-school"></i><span
                                     class="right-nav-t">{{__('hotel_sidebar.booking')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -36,6 +38,8 @@
                                     <a href="javascript:void(0);" data-toggle="collapse" data-target="#profile">
                                         <div class="pull-left"><i class="fas fa-cogs"></i><span
                                                 class="right-nav-t">{{__('hotels.profile')}}</span></div>
+                                        <div class="pull-right"><i class="ti-plus"></i></div>
+
                                         <div class="pull-right"></div>
                                         <div class="clearfix"></div>
                                     </a>
@@ -55,6 +59,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#rooms">
                             <div class="pull-left"><i class="fas fa-school"></i><span
                                     class="right-nav-t">{{__('hotel_sidebar.room_department')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -74,6 +80,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#services">
                             <div class="pull-left"><i class="fa fa-building"></i><span
                                     class="right-nav-text">{{__('hotel_sidebar.hotel_services_show')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -89,6 +97,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#services_room">
                             <div class="pull-left"><i class="fa fa-hand-grab-o"></i><span
                                     class="right-nav-text">{{__('hotel_sidebar.room_services')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -106,6 +116,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#sections-menu">
                             <div class="pull-left"><i class="fas fa-book-open"></i><span
                                     class="right-nav-text">{{__('hotels.invoices')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -122,6 +134,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#rates">
                             <div class="pull-left"><i class="fa fa-star"></i><span
                                         class="right-nav-text">{{__('hotel_sidebar.rates')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -136,6 +150,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#comments">
                             <div class="pull-left"><i class="fas fa-user-tie"></i><span
                                         class="right-nav-text">{{__('hotel_sidebar.comments')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -149,6 +165,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#notifications">
                             <div class="pull-left"><i class="fa fa-bell"></i><span
                                         class="right-nav-text">{{__('sidebar_admin.notifications')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -162,6 +180,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#problems">
                             <div class="pull-left"><i class="fas fa-book"></i><span
                                         class="right-nav-text">{{__('sidebar_admin.problems')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>
@@ -176,6 +196,8 @@
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#problems">
                             <div class="pull-left"><i class="fas fa-phone"></i><span
                                         class="right-nav-text">{{ trans('sidebar_admin.contact_us')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+
                             <div class="pull-right"></div>
                             <div class="clearfix"></div>
                         </a>

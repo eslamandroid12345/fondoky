@@ -58,7 +58,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 });
 
-
+//cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
  /*
   *  $ids = $request->ids;
     DB::table("products")->whereIn('id',explode(",",$ids))->delete();

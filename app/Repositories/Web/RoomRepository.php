@@ -17,14 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoomRepository implements RoomRepositoryInterface{
 
-    public const MAX_PAGE_RESERVATION = 1;
-    public const EVENT_SHOW_LENGTH = 1;
-
     public function index(){
 
-
         $rooms = Room::with('hotel')->where('hotel_id','=',auth('hotel')->id())->latest()->get();
-
         return view('rooms.index',compact('rooms'));
 
     }
@@ -190,34 +185,13 @@ class RoomRepository implements RoomRepositoryInterface{
 
     public function calendarsShow(Request $request,$id){
 
-
-
             $room = Room::query()->where('id','=',$id)->first();
 
             Gate::authorize('show-room',$room);
 
-
-            if ($request->has('check_in') && $request->check_out == null){
-
-           $calendars = Event::with(['room'])->select('id','room_id','room_number','room_price','check_in','check_out')
-               ->whereDate('check_in','=',$request->check_in)
-               ->where('room_id','=',$id)
-               ->orderByDesc('id')->get();
-
-               }elseif ($request->has('check_in') && $request->has('check_out')){
-
-                   $calendars = Event::with(['room'])->select('id','room_id','room_number','room_price','check_in','check_out')
-                       ->whereBetween('check_in',[$request->check_in,$request->check_out])
-                        ->whereBetween('check_out',[$request->check_in,$request->check_out])
-                         ->where('room_id','=',$id)
-                           ->orderByDesc('id')->get();
-
-                   } else{
-
                 $calendars = Event::with(['room'])->select('id','room_id','room_number','room_price','check_in','check_out')
                    ->where('room_id','=',$id)
-                   ->orderByDesc('id')->simplePaginate(self::EVENT_SHOW_LENGTH);
-             }
+                   ->orderByDesc('id')->get();
 
             return view('rooms.calendars',compact('calendars','id'));
 

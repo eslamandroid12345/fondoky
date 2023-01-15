@@ -41,7 +41,7 @@
                                 <a href="{{url('/')}}" class="btn btn-success btn-sm" role="button"
                                    aria-pressed="true">{{__('hotel_sidebar.home')}}</a>
 
-                        <div class="table-responsive">
+{{--                        <div class="table-responsive">--}}
                             <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                    data-page-length="50"
                                    style="text-align: center">
@@ -63,9 +63,9 @@
                                     <th>{{__('site.control')}}</th>
                                 </tr>
                                 </thead>
-
+                                <tbody>
                                 @foreach($reservations as $reservation)
-                                    <tbody>
+
                                     <tr>
                                         <td>{{$reservation->id}}</td>
                                         @if(\Carbon\Carbon::now()->format('Y-m-d') == $reservation->check_out)
@@ -111,17 +111,13 @@
                                         </td>
 
                                     </tr>
-                                    </tbody>
 
                                 @endforeach
-
+                                </tbody>
                             </table>
-                            <div class="mt-3">
 
-                                {{$reservations->links()}}
-                            </div>
                         </div>
-                            </div>
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>

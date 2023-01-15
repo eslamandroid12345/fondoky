@@ -11,7 +11,7 @@ interface  HotelRepositoryInterface{
 
 
     public function index();
-    public function reservations(Request $request);
+    public function reservations();
     public function block($id);
     public function stay($id);
     public function show();

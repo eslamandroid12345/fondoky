@@ -35,38 +35,28 @@
                                             <tr>
                                                <th>{{__('hotels.user_rate')}}</th>
                                                <th>{{__('hotels.stars')}}</th>
+                                               <th>{{__('hotels.created_at_star')}}</th>
                                             </tr>
                                             </thead>
-
+                                            <tbody>
                                             @foreach($rates as $rate)
-                                                <tbody>
+
                                                 <tr>
                                                     <td>{{$rate->user->name}}</td>
-
                                                     <td>
-
                                                         @for($i = 1 ; $i <= $rate->rates_number ; $i++)
-                                                            <i style="color: #17a2b8" class="fa fa-star"></i>
+                                                            <i style="color: #FFA500" class="fa fa-star"></i>
                                                         @endfor
 
                                                         @for($j = $rate->rates_number + 1; $j <= 5 ; $j++)
-
                                                             <i class="fa fa-star"></i>
-
                                                         @endfor
                                                     </td>
-
-
-
+                                                    <td>{{$rate->created_at->format('Y-m-d')}}</td>
                                                 </tr>
-                                                </tbody>
 
                                             @endforeach
-
-
-
-
-
+                                            </tbody>
 
                                         </table>
                                     </div>

@@ -167,6 +167,8 @@ return [
     "not_paid" => "Not Paid",
     "invoices_all" => "All Invoices of Hotel",
     "report_all" =>  "Department of all hotel bills",
+    "created_at" => "Comment date",
+    "created_at_star" => "Rate date",
 
 
 

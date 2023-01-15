@@ -1,9 +1,6 @@
 <?php
 
-
 namespace App\Repositories\Web;
-
-
 use App\Http\Requests\LoginAdminRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Interfaces\Web\AdminRepositoryInterface;
@@ -18,11 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminRepository implements AdminRepositoryInterface{
 
-    public const MAX_PAGE_RESERVATION = 1;
 
     public function hotel(){
 
-        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','currency_ar','currency_en','blocked'])->latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
+        $hotels = Hotel::select(['id','name_ar','name_en','location_ar','location_en','currency_ar','currency_en','blocked'])->latest()->get();
         return view('admins.hotel',compact('hotels'));
 
 
@@ -30,7 +26,7 @@ class AdminRepository implements AdminRepositoryInterface{
 
     public function booking(){
 
-        $invoices = Reservation::latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
+        $invoices = Reservation::latest()->get();
         return view('admins.bookers',compact('invoices'));
 
     }
@@ -47,9 +43,7 @@ class AdminRepository implements AdminRepositoryInterface{
 
             if(auth()->guard('admin')->attempt(['email' => trim($request->email," "), 'password' => trim($request->password," ")])){
 
-
                 toastr()->success(__('admin.message'));return redirect()->intended('booking/all');
-
 
             }else{
 
@@ -111,21 +105,18 @@ class AdminRepository implements AdminRepositoryInterface{
 
     }
 
-
     public function index(){
 
-        $admins = Admin::query()->where('id','<>',admin()->id)->latest()->simplePaginate(self::MAX_PAGE_RESERVATION);
+        $admins = Admin::query()->where('id','<>',admin()->id)->latest()->get();
         return view('admins.index',compact('admins'));
 
     }
-
 
     public function active_hotels($id){
 
 
         $hotel = Hotel::findOrFail($id);
         $hotel->update([
-
             'blocked' => $hotel->blocked == 1 ? 0 : 1
 
         ]);

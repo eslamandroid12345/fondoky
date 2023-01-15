@@ -7,7 +7,6 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\StoreHotelRequest;
 use App\Http\Requests\UpdateHotelRequest;
 use App\Interfaces\Web\HotelRepositoryInterface;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller{
@@ -26,9 +25,9 @@ class HotelController extends Controller{
     }
 
 
-    public function reservations(Request $request){
+    public function reservations(){
 
-      return $this->hotelRepositoryInterface->reservations($request);
+      return $this->hotelRepositoryInterface->reservations();
 
     }
 

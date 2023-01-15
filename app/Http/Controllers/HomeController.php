@@ -16,11 +16,10 @@ class HomeController extends Controller
 
     public function index(){
 
-
         try {
 
             $reservations = Reservation::with(['hotel:id,name_ar,name_en,location_ar,location_en','user:id,name,phone','room:id,room_type'])
-                ->where('user_id','=',auth()->id())->latest()->simplePaginate(1);
+                ->where('user_id','=',auth()->id())->latest()->get();
 
             return view('users.home',compact('reservations'));
 

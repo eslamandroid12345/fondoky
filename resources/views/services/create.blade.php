@@ -119,10 +119,8 @@
                                                 <tbody>
                                                 <tr>
 
-
                                                     <td>{{$ser->name}}</td>
                                                     <td>
-
                                                         @foreach(json_decode($ser->services) as $serv)
                                                             {{$serv}}-
                                                         @endforeach

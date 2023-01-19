@@ -154,11 +154,12 @@ class HotelRepository implements HotelRepositoryInterface
         try {
 
             auth()->guard('hotel-api')->logout();
-            return helperJson(null,trans('hotels.logout'));
+            return response()->json(['message' => trans('hotels.logout'),'code' => 200],200);
 
         } catch (\Exception $e) {
 
-            return helperJson(null,$e->getMessage(),500,500);
+            return response()->json(['message' => $e->getMessage(),'code' => 200],500);
+
         }
     }
 }

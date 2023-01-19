@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response;
 use PDF;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -63,11 +62,10 @@ class HotelRepository implements HotelRepositoryInterface{
 
         }catch (\Exception $exception){
 
-        return helperJson(null,$exception->getMessage(),500,500);
+        return response()->json(['data' => null,'message' => $exception->getMessage(),'code' => 500]);
     }
 
-    toastr()->error(__('hotels.block'));
-    return redirect()->back();
+    return redirect()->back()->with('successReservationBlock',trans('hotels.block'));
 
     }
 
@@ -77,8 +75,7 @@ class HotelRepository implements HotelRepositoryInterface{
         $invoice = Reservation::findOrFail($id);
         $invoice->update(['stayed' => $invoice->stayed == 1 ? 0 : 1]);
 
-        toastr()->success(__('hotels.stay'));
-        return redirect()->back();
+        return redirect()->back()->with('successStay',trans('hotels.stay'));
 
     }
 
@@ -91,13 +88,10 @@ class HotelRepository implements HotelRepositoryInterface{
 
         if(auth()->guard('hotel')->attempt(['email' => trim($request->email," "), 'password' => trim($request->password," "),'blocked' => 1])){
 
-            toastr()->success(__('hotels.hello'));
-            return redirect()->to(RouteServiceProvider::HOTEL);
+            return redirect()->to(RouteServiceProvider::HOTEL)->with('successLogin',trans('hotels.hello'));
 
         }else{
-
-            toastr()->error(__('admin.error'));
-            return redirect()->back()->withInput($request->only('email'));
+            return redirect()->back()->withInput($request->only('email'))->with('loginFailed',trans('admin.error'));
         }
 
     }
@@ -141,19 +135,19 @@ class HotelRepository implements HotelRepositoryInterface{
 
             $data = [
 
-                "name_ar" =>   lang() == 'ar' ? __("hotels.message_register") . $request->name_ar : __("hotels.message_register") .  $request->name_en,
+                "name_ar" =>   lang() == 'ar' ? __("hotels.message_register") . $request->name_ar : trans("hotels.message_register") .  $request->name_en,
                 'email' => $request->email,
 
             ];
 
             event(new NewHotelNotification($data));
+            Auth::guard('hotel')->attempt($request->only('email','password'));
 
-            toastr()->success(__('hotels.hotel'));
-            return redirect()->route('hotels.show');
+            return redirect()->to('hotels/reservations')->with('successLogin',trans('hotels.hotel'));
 
         }catch (\Exception $exception){
 
-            return helperJson(null,$exception->getMessage(),500,500);
+            return response()->json(['data' => null,'message' => $exception->getMessage(),'code' => 500]);
 
         }
 
@@ -170,11 +164,10 @@ class HotelRepository implements HotelRepositoryInterface{
 
         try {
 
-            $hotel = auth()->guard('hotel')->user();
-            if (!Hash::check($request->current_password, $hotel->password)) {
+            $hotel = Auth::guard('hotel')->user();
+            if (!Hash::check($request->current_password,$hotel->password)) {
 
                 return redirect()->back()->with('current_password', __('hotels.current_password'));
-
              }
 
             $data = [];
@@ -193,10 +186,9 @@ class HotelRepository implements HotelRepositoryInterface{
                          if(file_exists(public_path('hotels/' . $image) )){
 
                              unlink(public_path('hotels/') . $image);
-
                          }else{
 
-                             return helperJson(null,"Error to delete old images",500,500);
+                             return response()->json(['data' => null,'message' => "Error the old images not delete please try again",'code' => 500]);
                          }
                      }
                 }
@@ -215,15 +207,15 @@ class HotelRepository implements HotelRepositoryInterface{
                 'phone_hotel' => $request->phone_hotel,
             ]);
 
-            auth()->guard('hotel')->logout();
-            toastr()->error(__('hotels.logout_message'));
+            Auth::guard('hotel')->logout();
 
-                return redirect()->route('hotels.show');
+            return redirect()->to('hotels/show')->with('successUpdated',trans('hotels.logout_message'));
 
 
         }catch (\Exception $exception){
 
-            return helperJson(null,$exception->getMessage(),500,500);
+            return response()->json(['data' => null,'message' => $exception->getMessage(),'code' => 500]);
+
         }
     }
 
@@ -236,24 +228,22 @@ class HotelRepository implements HotelRepositoryInterface{
             $images = json_decode($hotel->hotel_photos);
              foreach ($images as $image){
 
-                if(file_exists(public_path('hotels/' . $image) ) && $hotel->hotel_photos != NULL){
+                if(file_exists(public_path('hotels/' . $image) )){
 
                     unlink(public_path('hotels/') . $image);
 
                 }else{
-
-                    return returnMessageError("Error to remove rooms images",500);
-
+                    return response()->json(['data' => null,'message' => "Error the old images not delete please try again",'code' => 500]);
                 }
             }
 
              $hotel->delete();
-             toastr()->error(__('hotels.delete'));
-             return redirect()->route('hotels.all');
+             return redirect()->to('hotels/all')->with('successDelete',__('hotels.delete'));
 
         }catch (\Exception $exception){
 
-            return helperJson(null,$exception->getMessage(),500,500);
+            return response()->json(['data' => null,'message' => $exception->getMessage(),'code' => 500]);
+
         }
     }
 
@@ -262,7 +252,6 @@ class HotelRepository implements HotelRepositoryInterface{
     public function monthOfInvoices(){
 
         $invoice = Invoice::with('hotel')->where('hotel_id','=',auth('hotel')->id())->whereMonth('date_of_start','=',date('m'))->first();
-
         return view('hotels.month_invoices',compact('invoice'));
 
     }
@@ -302,12 +291,11 @@ class HotelRepository implements HotelRepositoryInterface{
              'user_id' => auth()->id(),
             ]);
 
-            toastr()->success(__('welcome.comment'));
-            return redirect()->back();
+            return redirect()->back()->with('successComment', __('welcome.comment'));
 
         }catch (\Exception $exception){
 
-            return helperJson(null,$exception->getMessage(),500,500);
+            return response()->json(['data' => null,'message' => $exception->getMessage(),'code' => 500]);
         }
     }
 

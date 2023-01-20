@@ -10,6 +10,9 @@ interface HotelRepositoryInterface
 
     public function hotelLogin(Request $request);
     public function hotelRegister(Request $request);
+    public function getProfile(Request $request);
+    public function updateProfile(Request $request);
+    public function reservations();
     public function hotelLogout();
 
 }

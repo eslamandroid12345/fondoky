@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Interfaces\Api\RoleRepositoryInterface;
-
+use Illuminate\Http\Request;
 class RoleController extends Controller
 {
 
@@ -30,7 +30,7 @@ class RoleController extends Controller
     }
 
 
-    public function store(StoreRoleRequest $request){
+    public function store(Request $request){
 
         return $this->roleRepositoryInterface->store($request);
 
@@ -39,7 +39,7 @@ class RoleController extends Controller
 
 
 
-    public function update(UpdateRoleRequest $request,$id){
+    public function update(Request $request,$id){
 
         return $this->roleRepositoryInterface->update($request,$id);
 

@@ -3,7 +3,6 @@
     @section('title')
         اضافه صلاحيه جديده
 
-
     @stop
 @endsection
 
@@ -41,22 +40,21 @@
                     @endif
 
 
-                        <form action="{{route('roles.store')}}" method="post" autocomplete="off">
+                    <form action="{{route('roles.store')}}" method="post" autocomplete="off">
 
-                            @csrf
+                        @csrf
 
 
-                            <h6 style="font-family: 'Cairo', sans-serif;color: blue"> {{__('roles_content.new_role')}}</h6><br>
+                        <h6 style="font-family: 'Cairo', sans-serif;color: blue"> {{__('roles_content.new_role')}}</h6>
+                        <br>
 
 
                         <div class="row">
 
-
-
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>{{__('roles_content.role_name')}}</label>
-                                    <input  type="text"  class="form-control" name="name" value="{{old('name')}}">
+                                    <input type="text" class="form-control" name="name" value="{{old('name')}}">
                                 </div>
                             </div>
 
@@ -66,7 +64,8 @@
                                     <div class="form-group">
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{$name}}" id="defaultCheck1">
+                                            <input class="form-check-input" type="checkbox" name="permissions[]"
+                                                   value="{{$name}}" id="defaultCheck1">
                                             <label class="form-check-label" for="defaultCheck1">{{$value}}</label>
                                         </div>
 
@@ -79,9 +78,8 @@
                         </div>
 
 
-
-
-                        <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">{{__('admin_create.save')}}</button>
+                        <button class="btn btn-success btn-sm nextBtn btn-lg pull-right"
+                                type="submit">{{__('admin_create.save')}}</button>
                     </form>
 
                 </div>

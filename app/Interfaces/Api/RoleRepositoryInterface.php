@@ -2,9 +2,7 @@
 
 
 namespace App\Interfaces\Api;
-
-
-use App\Http\Requests\StoreRoleRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateRoleRequest;
 
 interface RoleRepositoryInterface
@@ -12,6 +10,6 @@ interface RoleRepositoryInterface
 
 
     public function index();
-    public function store(StoreRoleRequest $request);
-    public function update(UpdateRoleRequest $request,$id);
+    public function store(Request $request);
+    public function update(Request $request,$id);
 }

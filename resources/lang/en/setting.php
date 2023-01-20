@@ -11,8 +11,8 @@ return [
     "privacy_en" => "Rights and privacy in English",
     "location_ar" => "The company's location is in Arabic",
     "location_en" => "The company's location is in English",
-   "add_setting" => "Add app settings",
-   "add_setting_modal" => "App settings add",
+    "add_setting" => "Add app settings",
+    "add_setting_modal" => "App settings add",
 
     //form
     "save" => "Save",
@@ -21,7 +21,6 @@ return [
     "delete" => "Delete",
     "confirm_delete" => "Confirm delete",
     "do_you_like_delete" => "Do you like to delete",
-
 
 
     //start validation
@@ -42,10 +41,6 @@ return [
     "message_add" => "Setting data save successfully",
     "message_update" => "Setting data updated successfully",
     "message_delete" => "Setting data delete successfully",
-
-
-
-
 
 
 ];

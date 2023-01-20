@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Validator;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of language
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+//use package of language
 
 
 /*
@@ -27,29 +29,29 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 |
 */
 
- Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function(){
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
 
     Route::get('/', 'UserController@welcome');
     Route::get('/home', 'HomeController@index')->name('home');
     Auth::routes();
 
-    Route::group(['prefix'=>'users','middleware' => ['auth:admin','can:users']], function (){
+    Route::group(['prefix' => 'users', 'middleware' => ['auth:admin', 'can:users']], function () {
 
-        Route::get('all','UserController@index')->name('users.all');
-        Route::get('delete/{id}','UserController@delete')->name('users.delete');
-        Route::get('update/{id}','UserController@update')->name('users.update');
+        Route::get('all', 'UserController@index')->name('users.all');
+        Route::get('delete/{id}', 'UserController@delete')->name('users.delete');
+        Route::get('update/{id}', 'UserController@update')->name('users.update');
     });
 
-    Route::group(['prefix'=>'users','middleware' => ['auth']], function (){
+    Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
         Route::post('rates', 'UserController@rates')->name('users.rates');
         Route::get('rates/create/{id}', 'UserController@ratesCreate')->name('users.rates.create');
 
     });
 
-        Route::get('hotel/room/{id}', 'UserController@rooms')->name('hotel.room');
-        Route::get('room/reservation/{id}', 'UserController@reservation')->name('room.reservation')->middleware('auth');
+    Route::get('hotel/room/{id}', 'UserController@rooms')->name('hotel.room');
+    Route::get('room/reservation/{id}', 'UserController@reservation')->name('room.reservation')->middleware('auth');
 
-    Route::group(["prefix" => "reservations","middleware" => "auth"], function (){
+    Route::group(["prefix" => "reservations", "middleware" => "auth"], function () {
         Route::post('store/{id}', 'ReservationController@store')->name('reservations.store');
         Route::get('cancel/{id}', 'ReservationController@cancel')->name('reservations.cancel');
 
@@ -59,17 +61,17 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 });
 
 //cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
- /*
-  *  $ids = $request->ids;
-    DB::table("products")->whereIn('id',explode(",",$ids))->delete();
-    return response()->json(['success'=>"Products Deleted successfully."]);
-  */
+/*
+ *  $ids = $request->ids;
+   DB::table("products")->whereIn('id',explode(",",$ids))->delete();
+   return response()->json(['success'=>"Products Deleted successfully."]);
+ */
 //start comments of query test ==================================================================================================================
 //Route::get('users', function (){
 
-    //test code of users
+//test code of users
 
-   //$users = DB::table('users')->get(); // query builder
+//$users = DB::table('users')->get(); // query builder
 
 //    $users = \App\Models\User::query()->chunkMap(function ($user){
 //
@@ -98,7 +100,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //});
 
 
-
 //Route::get('ro/{id}' , function ($id){
 //
 //
@@ -111,7 +112,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //    return $calendar_room;
 //
 //});
-
 
 
 //Carbon::parse($request->date_start)->format('Y-m-d');
@@ -152,8 +152,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //
 
 
-
-    //find hotel booking in this month -------------------------------------------------------------------------
+//find hotel booking in this month -------------------------------------------------------------------------
 //    $booking = \App\Models\Hotel::find($id)->booker()->whereMonth('created_at', date('m'))->sum('commission');
 //    $booking2 = \App\Models\Booker::where('hotel_id', $id)->whereYear('created_at', date('Y'))
 //        ->select(DB::raw('sum(commission) as `commission`'))
@@ -169,7 +168,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //
 //      return $booking2;
 
-  //===============================================================================================================
+//===============================================================================================================
 
 //    foreach ($booking2 as $booker){
 //
@@ -177,7 +176,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //    }
 
 //});
-
 
 
 //$to =     \Carbon\Carbon::createFromFormat('Y-m-d', $room->date_start);
@@ -353,7 +351,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 //}
 
 
-
 //================================================================ Ajax ============================================================
 //<script>
 //$(document).ready(function () {
@@ -421,7 +418,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 
 
 //Route::get('re', function (){
-
 
 
 //    $commission = Reservation::where('hotel_id','=',4)->whereMonth('check_in','=',date('m'))->sum('commission');

@@ -16,6 +16,8 @@ class AdminResource extends JsonResource{
             'phone' => $this->phone,
             'permissions' => $this->role->permissions,
             'token' => $this->token,
+            'created_at' => $this->created_at->format('Y-m-d'),
+            'updated_at' => $this->created_at->format('Y-m-d'),
         ];
 
     }

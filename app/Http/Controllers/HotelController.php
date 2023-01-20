@@ -9,128 +9,149 @@ use App\Http\Requests\UpdateHotelRequest;
 use App\Interfaces\Web\HotelRepositoryInterface;
 use Illuminate\Http\Request;
 
-class HotelController extends Controller{
+class HotelController extends Controller
+{
 
     public $hotelRepositoryInterface;
 
-    public function __construct(HotelRepositoryInterface $hotelRepositoryInterface){
+    public function __construct(HotelRepositoryInterface $hotelRepositoryInterface)
+    {
 
         $this->hotelRepositoryInterface = $hotelRepositoryInterface;
 
     }
 
-    public function index(){
+    public function index()
+    {
 
         return $this->hotelRepositoryInterface->index();
     }
 
 
-    public function reservations(){
+    public function reservations()
+    {
 
-      return $this->hotelRepositoryInterface->reservations();
+        return $this->hotelRepositoryInterface->reservations();
 
     }
 
-    public function block($id){
+    public function block($id)
+    {
 
         return $this->hotelRepositoryInterface->block($id);
 
     }
 
 
-    public function stay($id){
+    public function stay($id)
+    {
 
-       return $this->hotelRepositoryInterface->stay($id);
+        return $this->hotelRepositoryInterface->stay($id);
 
     }
 
-  public function show(){
+    public function show()
+    {
 
         return $this->hotelRepositoryInterface->show();
-  }
+    }
 
 
-    public function login(HotelLoginRequest $request){
+    public function login(HotelLoginRequest $request)
+    {
 
         return $this->hotelRepositoryInterface->login($request);
 
     }
 
-    public function showRegister(){
+    public function showRegister()
+    {
 
         return $this->hotelRepositoryInterface->showRegister();
     }
 
 
-    public function register(StoreHotelRequest $request){
+    public function register(StoreHotelRequest $request)
+    {
 
-     return $this->hotelRepositoryInterface->register($request);
+        return $this->hotelRepositoryInterface->register($request);
 
     }
 
-    public function edit(){
+    public function edit()
+    {
 
-       return $this->hotelRepositoryInterface->edit();
+        return $this->hotelRepositoryInterface->edit();
     }
 
-    public function update(UpdateHotelRequest $request){
+    public function update(UpdateHotelRequest $request)
+    {
 
         return $this->hotelRepositoryInterface->update($request);
 
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
 
-       return $this->hotelRepositoryInterface->delete($id);
+        return $this->hotelRepositoryInterface->delete($id);
 
     }
 
 
-    public function monthOfInvoices(){
+    public function monthOfInvoices()
+    {
 
         return $this->hotelRepositoryInterface->monthOfInvoices();
 
     }
 
-    public function invoices($month,$year){
+    public function invoices($month, $year)
+    {
 
 
-        return $this->hotelRepositoryInterface->invoices($month,$year);
-
-    }
-
-    public function arrivals(){
-
-      return $this->hotelRepositoryInterface->arrivals();
+        return $this->hotelRepositoryInterface->invoices($month, $year);
 
     }
 
-    public function comment(StoreCommentRequest $request){
+    public function arrivals()
+    {
+
+        return $this->hotelRepositoryInterface->arrivals();
+
+    }
+
+    public function comment(StoreCommentRequest $request)
+    {
 
 
         return $this->hotelRepositoryInterface->comment($request);
     }
 
 
-    public function rates(){
+    public function rates()
+    {
 
         return $this->hotelRepositoryInterface->rates();
     }
 
 
-    public function comments(){
+    public function comments()
+    {
 
         return $this->hotelRepositoryInterface->comments();
 
     }
 
-    public function arrivalsPdf($id){
+    public function arrivalsPdf($id)
+    {
 
-     return $this->hotelRepositoryInterface->arrivalsPdf($id);
+        return $this->hotelRepositoryInterface->arrivalsPdf($id);
 
     }
 
-    public function invoicesAll(){
+    public function invoicesAll()
+    {
 
         return $this->hotelRepositoryInterface->invoicesAll();
     }

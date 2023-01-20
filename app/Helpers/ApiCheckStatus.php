@@ -103,7 +103,7 @@ if(!function_exists('langConfig')){
 
 if(!function_exists('helperJson')){
 
-    function helperJson($data=null,$message,$code = 200,$status = 200){
+    function helperJson($data=null,$message,$code,$status = 200){
 
         return response()->json([
 

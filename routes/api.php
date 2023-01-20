@@ -38,6 +38,9 @@ Route::group(['middleware' => 'lang'], function (){
         Route::post('login',[HotelController::class,'login']);
         Route::post('register',[HotelController::class,'register']);
         Route::post('logout',[HotelController::class,'logout']);
+        Route::get('getProfile',[HotelController::class,'getProfile']);
+        Route::post('updateProfile',[HotelController::class,'updateProfile']);
+        Route::get('reservations',[HotelController::class,'reservations']);
 
     });
 

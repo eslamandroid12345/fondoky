@@ -40,23 +40,24 @@ class HotelInvoicesMonthly extends Command
      *
      * @return int
      */
-    public function handle(){
+    public function handle()
+    {
 
         $hotels = Hotel::get();
-        foreach ($hotels as $hotel){
-        $reservation = Reservation::where('hotel_id','=',$hotel->id)->whereMonth('check_in','=',date('m'));
-        Invoice::create([
-            'invoice_number' => rand(15000,20000000) . uniqid(),
-            'from' => Carbon::now()->firstOfMonth()->translatedFormat('l j F Y'),
-            'to' => Carbon::now()->lastOfMonth()->translatedFormat('l j F Y'),
-            'date_of_start' => Carbon::now()->startOfMonth()->toDateString(),
-            'date_of_end' => Carbon::now()->endOfMonth()->addDays(14)->toDateString(),
-            'amount' => $reservation->sum('commission') > 0 ? $reservation->sum('commission') : 0,
-            'total' =>  $reservation->sum('total') > 0 ? $reservation->sum('total') : 0,
-            'hotel_id' => $hotel->id,
-            'month' => date('m'),
-            'year' => date('Y'),
-        ]);
+        foreach ($hotels as $hotel) {
+            $reservation = Reservation::where('hotel_id', '=', $hotel->id)->whereMonth('check_in', '=', date('m'));
+            Invoice::create([
+                'invoice_number' => rand(15000, 20000000) . uniqid(),
+                'from' => Carbon::now()->firstOfMonth()->translatedFormat('l j F Y'),
+                'to' => Carbon::now()->lastOfMonth()->translatedFormat('l j F Y'),
+                'date_of_start' => Carbon::now()->startOfMonth()->toDateString(),
+                'date_of_end' => Carbon::now()->endOfMonth()->addDays(14)->toDateString(),
+                'amount' => $reservation->sum('commission') > 0 ? $reservation->sum('commission') : 0,
+                'total' => $reservation->sum('total') > 0 ? $reservation->sum('total') : 0,
+                'hotel_id' => $hotel->id,
+                'month' => date('m'),
+                'year' => date('Y'),
+            ]);
         }
 
     }

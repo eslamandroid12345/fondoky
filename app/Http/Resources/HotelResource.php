@@ -4,9 +4,11 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class HotelResource extends JsonResource{
+class HotelResource extends JsonResource
+{
 
-    public function toArray($request){
+    public function toArray($request)
+    {
         return [
 
             'id' => $this->id,
@@ -19,7 +21,7 @@ class HotelResource extends JsonResource{
             'hotel_photos' => asset('hotels/' . $this->hotel_photos),
             'phone_hotel' => $this->phone_hotel,
             'blocked' => $this->active(),
-            'token' => $this->token,
+            'token' => 'Bearer ' . $this->token,
             'token_type' => 'Bearer',
             'created_at' => $this->created_at->format('Y-m-d'),
             'updated_at' => $this->updated_at->format('Y-m-d')

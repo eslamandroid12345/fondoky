@@ -17,7 +17,7 @@ class StoreRoleRequest extends FormRequest
         return [
 
 
-            'name'  => 'required|unique:roles,name',
+            'name' => 'required|unique:roles,name',
             'permissions' => 'required|array|min:1',
 
         ];
@@ -30,10 +30,10 @@ class StoreRoleRequest extends FormRequest
         return [
 
 
-                'name.required' => __('admin_role.name_role'),
-                'name.unique' => __('admin_role.unique'),
-                'permissions.required' => __('admin_role.permissions'),
-                'permissions.min' => __('admin_role.min'),
+            'name.required' => __('admin_role.name_role'),
+            'name.unique' => __('admin_role.unique'),
+            'permissions.required' => __('admin_role.permissions'),
+            'permissions.min' => __('admin_role.min'),
 
 
         ];

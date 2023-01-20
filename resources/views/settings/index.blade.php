@@ -65,7 +65,6 @@
 {{--                            <tbody>--}}
 
 
-
 {{--                            @foreach ($settings as $setting)--}}
 {{--                                <tr>--}}
 
@@ -92,7 +91,6 @@
 {{--                                                    class="fa fa-trash"></i></button>--}}
 {{--                                    </td>--}}
 {{--                                </tr>--}}
-
 
 
 {{--                                <!-- edit_modal_Grade -->--}}
@@ -273,8 +271,6 @@
 {{--        </div>--}}
 
 
-
-
 {{--        <!-- add_modal_class -->--}}
 {{--        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"--}}
 {{--             aria-hidden="true">--}}
@@ -410,7 +406,6 @@
 {{--    </div>--}}
 
 
-
 {{--    </div>--}}
 
 {{--    </div>--}}
@@ -420,7 +415,7 @@
 @extends('layouts_admin.master')
 @section('css')
     @section('title')
-    قسم الاعدادات
+        قسم الاعدادات
     @stop
 @endsection
 
@@ -448,10 +443,10 @@
                             <div class="card-body">
 
                                 @if($settings->count() == 0)
-                                <a href="{{route('settings.create')}}" class="btn btn-success btn-sm" role="button"
-                                   aria-pressed="true"> {{trans('setting.add_setting_modal')}}</a><br><br>
+                                    <a href="{{route('settings.create')}}" class="btn btn-success btn-sm" role="button"
+                                       aria-pressed="true"> {{trans('setting.add_setting_modal')}}</a><br><br>
                                 @endif
-                                    <div class="table-responsive">
+                                <div class="table-responsive">
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                            data-page-length="50"
                                            style="text-align: center">
@@ -476,25 +471,36 @@
 
                                             <tr>
                                                 <td>
-                                                <img style="width: 80px;height: 80px;border-radius: 4px" src="{{URL::to('setting/'. $setting->logo)}}">
-                                            </td>
+                                                    <img style="width: 80px;height: 80px;border-radius: 4px"
+                                                         src="{{URL::to('setting/'. $setting->logo)}}">
+                                                </td>
                                                 <td>{{$setting->name_ar}}</td>
                                                 <td>{{$setting->name_en}}</td>
-                                                <td>{{substr($setting->about_ar,0,100) . '......'}}</td>
-                                                <td>{{substr($setting->about_en,0,100) . '......'}}</td>
-                                                <td>{{substr($setting->privacy_ar,0,100) . '...'}}</td>
-                                                <td>{{substr($setting->privacy_en,0,100) . '....'}}</td>
+                                                <td>{{substr($setting->about_ar,0,100)}}</td>
+                                                <td>{{substr($setting->about_en,0,100)}}</td>
+                                                <td>{{substr($setting->privacy_ar,0,100)}}</td>
+                                                <td>{{substr($setting->privacy_en,0,100)}}</td>
                                                 <td>{{$setting->location_ar}}</td>
                                                 <td>{{$setting->location_en}}</td>
                                                 <td>
                                                     <div class="dropdown show">
-                                                        <a class="btn btn-success btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <a class="btn btn-success btn-sm dropdown-toggle" href="#"
+                                                           role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                                           aria-haspopup="true" aria-expanded="false">
                                                             {{__('content.operations')}}
                                                         </a>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-                                                            <a class="dropdown-item" href="{{route('settings.edit',$setting->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('room_add.update')}}</a>
-                                                            <a class="dropdown-item" href="{{route('settings.delete',$setting->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('setting.delete')}}</a>
+                                                            <a class="dropdown-item"
+                                                               href="{{route('settings.edit',$setting->id)}}"><i
+                                                                    style="color:green"
+                                                                    class="fa fa-edit"></i>&nbsp;{{__('room_add.update')}}
+                                                            </a>
+                                                            <a class="dropdown-item"
+                                                               href="{{route('settings.delete',$setting->id)}}"><i
+                                                                    style="color:green"
+                                                                    class="fa fa-edit"></i>&nbsp;{{__('setting.delete')}}
+                                                            </a>
 
                                                         </div>
                                                     </div>

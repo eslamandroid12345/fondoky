@@ -112,7 +112,7 @@ class RoleRepository implements RoleRepositoryInterface
 
             if (!$role) {
 
-                return helperJson(null, 'هذه الصلاحيه غير موجوده يرجي ادخال رقم صلاحيه اخر');
+                return helperJson(null, 200,'هذه الصلاحيه غير موجوده يرجي ادخال رقم صلاحيه اخر');
             }
 
             $role->update([

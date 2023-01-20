@@ -45,7 +45,7 @@ class HotelRepository implements HotelRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return helperJson("hotel", null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
                 }
                 return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
@@ -54,15 +54,15 @@ class HotelRepository implements HotelRepositoryInterface
 
             if (!$token) {
 
-                return helperJson(null ,"كلمه المرور خطاء يرجي المحاوله مره اخري", 200,422);
+                return helperJson(null, "كلمه المرور خطاء يرجي المحاوله مره اخري", 200, 422);
             }
             $hotel = auth()->guard('hotel-api')->user();
             $hotel['token'] = $token;
-            return helperJson(new HotelResource($hotel), trans("hotels.message"),200);
+            return helperJson(new HotelResource($hotel), trans("hotels.message"), 200);
 
         } catch (\Exception $exception) {
 
-            return helperJson(null, $exception->getMessage(), 500, 500);
+            return response()->json(['message' => $exception->getMessage(), 'code' => 500], 500);
         }
     }
 
@@ -272,28 +272,28 @@ class HotelRepository implements HotelRepositoryInterface
         }
     }
 
-    public function reservations(){
+    public function reservations()
+    {
 
         $hotelId = Auth::guard('hotel-api')->id();
 
         try {
 
-            $reservations = Reservation::with(['user','hotel','room'])->where('hotel_id', $hotelId)->orderByDesc('id')->get();
+            $reservations = Reservation::with(['user', 'hotel', 'room'])->where('hotel_id', $hotelId)->orderByDesc('id')->get();
 
-            if($reservations->count() > 0){
+            if ($reservations->count() > 0) {
 
-                return helperJson(ReservationResource::collection($reservations),"تم الحصول علي بيانات حجوزات الفندق بنجاح",200);
-            }else{
+                return helperJson(ReservationResource::collection($reservations), "تم الحصول علي بيانات حجوزات الفندق بنجاح", 200);
+            } else {
 
-                return helperJson(null,"لا يوجد حجوزات الي الان يرجي الانتظار حين وجود حجوزات جديده",200);
+                return helperJson(null, "لا يوجد حجوزات الي الان يرجي الانتظار حين وجود حجوزات جديده", 200);
 
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return response()->json(['message' => $e->getMessage(), 'code' => 500], 500);
 
         }
-
 
     }
 

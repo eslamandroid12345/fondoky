@@ -48,13 +48,13 @@ Route::group(['middleware' => 'lang'], function (){
     Route::group(['prefix' => 'admin','namespace' => 'Api'], function (){
 
         Route::post('login',[AdminController::class,'login']);
-        Route::post('register',[AdminController::class,'register'])->middleware(['check:admin-api','can:admins']);
-        Route::post('logout',[AdminController::class,'logout'])->middleware(['check:admin-api']);
+        Route::post('register',[AdminController::class,'register']);
+        Route::post('logout',[AdminController::class,'logout']);
 
     });
 
 
-    Route::group(['prefix' => 'roles','namespace' => 'Api','middleware' => ['check:admin-api','can:roles']], function (){
+    Route::group(['prefix' => 'roles','namespace' => 'Api','middleware' => ['check:admin-api']], function (){
 
         Route::get('index',[RoleController::class,'index']);
         Route::post('store',[RoleController::class,'store']);

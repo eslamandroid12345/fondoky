@@ -1,104 +1,149 @@
 <?php
 
-
 namespace App\Repositories\Api;
-
-
+use App\Events\NewHotelNotification;
 use App\Http\Requests\LoginAdminRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Resources\AdminResource;
+use App\Http\Resources\HotelResource;
 use App\Interfaces\Api\AdminRepositoryInterface;
 use App\Models\Admin;
+use App\Models\Hotel;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 
 class AdminRepository implements AdminRepositoryInterface
 {
 
 
-    public function login(LoginAdminRequest $request){
-
+    public function login(Request $request)
+    {
 
         try {
+            $rules = [
+                'email' => 'required|email|exists:admins,email',
+                'password' => 'required',
+            ];
+            $validator = Validator::make($request->all(), $rules, [
+                'email.email' => 403,
+                'email.exists' => 407,
+            ]);
 
-            $token = auth()->guard('admin-api')->attempt($request->only(['email','password']));
+            if ($validator->fails()) {
 
+                $errors = collect($validator->errors())->flatten(1)[0];
+                if (is_numeric($errors)) {
 
-            if(!$token){
+                    $errors_arr = [
+                        403 => 'Failed,Email must be an email',
+                        407 => 'Failed,Email not found',
+                    ];
 
-
-                return returnMessageError(trans('api_user.failed'),Response::HTTP_NOT_FOUND);
+                    $code = collect($validator->errors())->flatten(1)[0];
+                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                }
+                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
 
+            $token = auth()->guard('admin-api')->attempt($request->only(['email', 'password']));
 
-            $admin = new AdminResource(auth()->guard('admin-api')->user());
-            $admin->token = $token;
+            if (!$token) {
 
-            return returnDataSuccess(trans('api_user.login'),Response::HTTP_OK,"admin",$admin);
+                return helperJson(null, "كلمه المرور خطاء يرجي المحاوله مره اخري", 200, 422);
+            }
+            $admin = auth()->guard('admin-api')->user();
+            $admin['token'] = $token;
+            return helperJson(new AdminResource($admin), "تم تسجيل الادمن بنجاح", 200);
 
+        } catch (\Exception $exception) {
 
-        }catch (\Exception $exception){
-
-
-            return returnMessageError($exception->getMessage(),"500");
+            return response()->json(['message' => $exception->getMessage(), 'code' => 500], 500);
         }
 
 
     }
 
-
-
-    public function register(StoreAdminRequest $request){
-
-
+    public function register(Request $request)
+    {
 
         try {
+            $rules = [
+                'name' => 'required|min:3|max:100',
+                'email' => 'required|email|unique:admins,email',
+                'password' => 'required',
+                'phone' => 'required|numeric',
+                'image' => 'required|mimes:jpg,png,jpeg',
+                'role_id' => 'required|exists:roles,id'
+            ];
+            $validator = Validator::make($request->all(), $rules, [
 
-                //create image for admin
-                if ($image = $request->file('image')) {
+                'email.unique' => 406,
+                'phone.unique' => 407,
+                'role_id.exists' => 408,
+                'phone.numeric' => 409
+            ]);
 
-                    $destinationPath = 'admins/';
-                    $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-                    $image->move($destinationPath, $profileImage);
-                    $request['image'] = "$profileImage";
+            if ($validator->fails()) {
+                $errors = collect($validator->errors())->flatten(1)[0];
+
+                if (is_numeric($errors)) {
+                    $errors_arr = [
+                        406 => 'Failed,Email already exists',
+                        407 => 'Failed,Phone number already exists',
+                        408 => 'Failed,This role not exists',
+                        409 => 'Failed,Phone number must be an number',
+                    ];
+
+                    $code = collect($validator->errors())->flatten(1)[0];
+                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
                 }
-
-
-                $admin = new Admin();
-                $admin->name = $request->name;
-                $admin->email = $request->email;
-                $admin->password = Hash::make($request->password);
-                $admin->phone = $request->phone;
-                $admin->image = $profileImage;
-                $admin->role_id = $request->role_id;
-                $admin->save();
-
-
-                return returnDataSuccess(__('admin.create'), Response::HTTP_OK, "admin", new AdminResource($admin));
-
-            } catch (\Exception $exception) {
-
-                return returnMessageError($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
-
+                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
 
-      }
+            if ($image = $request->file('image')) {
+
+                $destinationPath = 'admins/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $request['image'] = "$profileImage";
+            }
+
+            $storeNewAdmin = Admin::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'image' => $profileImage,
+                'role_id' => $request->role_id
+            ]);
+
+            if (isset($storeNewAdmin)) {
+
+                $storeNewAdmin['token'] = auth()->guard('admin-api')->attempt($request->only(['email', 'password']));
+                return helperJson(new AdminResource($storeNewAdmin), "تم تسجيل بيانات الادمن بنجاح", 201, 201);
+
+            }
+        } catch (\Exception $exception) {
+
+            return response()->json(['message' => $exception->getMessage(), 'code' => 500], 500);
+        }
+
+    }
 
 
-    public function logout(){
-
-
+    public function logout()
+    {
         try {
 
             auth()->guard('admin-api')->logout();
+            return response()->json(['message' => "تم تسجيل خروج الادمن بنجاح", 'code' => 200], 200);
 
-            return returnMessageSuccess(trans('api_user.logout_admin'),Response::HTTP_OK);
+        } catch (\Exception $e) {
 
-        }catch (\Exception $exception){
-
-
-            return returnMessageError($exception->getMessage(),Response::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json(['message' => $e->getMessage(), 'code' => 500], 500);
 
         }
 

@@ -15,7 +15,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'blocked' => $this->blocked,
+            'blocked' => (int)$this->blocked,
             'token' => 'Bearer ' . $this->token,
             'created_at' => $this->created_at->format('Y-m-d'),
             'updated_at' => $this->created_at->format('Y-m-d'),

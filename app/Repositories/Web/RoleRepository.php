@@ -2,8 +2,6 @@
 
 
 namespace App\Repositories\Web;
-
-
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Interfaces\Web\RoleRepositoryInterface;

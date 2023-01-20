@@ -56,7 +56,7 @@ class AdminRepository implements AdminRepositoryInterface
             }
             $admin = auth()->guard('admin-api')->user();
             $admin['token'] = $token;
-            return helperJson(new AdminResource($admin), "تم تسجيل الادمن بنجاح", 200);
+            return helperJson(new AdminResource($admin), "تم تسجيل  دخول الادمن بنجاح", 200);
 
         } catch (\Exception $exception) {
 

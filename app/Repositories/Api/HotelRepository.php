@@ -88,7 +88,7 @@ class HotelRepository implements HotelRepositoryInterface
             $validator = Validator::make($request->all(), $rules, [
                 'email.unique' => 406,
                 'phone.numeric' => 407,
-                'phone.confirmed' => 408,
+                'password.confirmed' => 408,
             ]);
 
             if ($validator->fails()) {

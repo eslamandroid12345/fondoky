@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Interfaces\Api\UserRepositoryInterface;
+use Illuminate\Http\Request;
 
 
 class UserController extends Controller
@@ -29,7 +30,7 @@ class UserController extends Controller
 
     }
 
-    public function register(StoreUserRequest $request){
+    public function register(Request $request){
 
 
         return $this->userRepositoryInterface->register($request);
@@ -37,7 +38,7 @@ class UserController extends Controller
     }
 
 
-    public function login(LoginUserRequest $request){
+    public function login(Request $request){
 
 
       return $this->userRepositoryInterface->login($request);

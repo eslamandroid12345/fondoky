@@ -85,7 +85,7 @@ class RoleRepository implements RoleRepositoryInterface
         try {
 
             $rules = [
-                'name' => 'required|unique:roles,name,'. $id,
+                'name' => 'required|unique:roles,name,' . $id,
                 'permissions.*' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules, [
@@ -112,7 +112,7 @@ class RoleRepository implements RoleRepositoryInterface
 
             if (!$role) {
 
-                return helperJson(null, 200,'هذه الصلاحيه غير موجوده يرجي ادخال رقم صلاحيه اخر');
+                return helperJson(null, 200, 'هذه الصلاحيه غير موجوده يرجي ادخال رقم صلاحيه اخر');
             }
 
             $role->update([

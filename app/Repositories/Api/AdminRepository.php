@@ -33,7 +33,6 @@ class AdminRepository implements AdminRepositoryInterface
             ]);
 
             if ($validator->fails()) {
-
                 $errors = collect($validator->errors())->flatten(1)[0];
                 if (is_numeric($errors)) {
 

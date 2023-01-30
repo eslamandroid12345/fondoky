@@ -1,7 +1,7 @@
 @extends('layouts_admin.master')
 @section('css')
     @section('title')
-       جميع المستخدمين
+        {{ GoogleTranslate::trans('جميع المستخدمين',\App::getLocale()) }}
     @stop
 @endsection
 

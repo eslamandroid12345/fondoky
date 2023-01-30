@@ -30,7 +30,7 @@ class HotelRepository implements HotelRepositoryInterface
                 'password' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules, [
-                'email.email' => 403,
+                'email.email' => 409,
                 'email.exists' => 407,
             ]);
 
@@ -40,7 +40,7 @@ class HotelRepository implements HotelRepositoryInterface
                 if (is_numeric($errors)) {
 
                     $errors_arr = [
-                        403 => 'Failed,Email must be an email',
+                        409 => 'Failed,Email must be an email',
                         407 => 'Failed,Email not found',
                     ];
 
@@ -50,13 +50,13 @@ class HotelRepository implements HotelRepositoryInterface
                 return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
 
-            $token = auth()->guard('hotel-api')->attempt($request->only(['email', 'password']));
+            $token = Auth::guard('hotel-api')->attempt($request->only(['email', 'password']));
 
             if (!$token) {
 
                 return helperJson(null, "كلمه المرور خطاء يرجي المحاوله مره اخري", 200, 422);
             }
-            $hotel = auth()->guard('hotel-api')->user();
+            $hotel = Auth::guard('hotel-api')->user();
             $hotel['token'] = $token;
             return helperJson(new HotelResource($hotel), trans("hotels.message"), 200);
 
@@ -86,7 +86,7 @@ class HotelRepository implements HotelRepositoryInterface
                 'phone_hotel' => 'required|numeric',
             ];
             $validator = Validator::make($request->all(), $rules, [
-                'email.unique' => 406,
+                'email.unique' => 420,
                 'phone.numeric' => 407,
                 'password.confirmed' => 408,
             ]);
@@ -95,24 +95,22 @@ class HotelRepository implements HotelRepositoryInterface
                 $errors = collect($validator->errors())->flatten(1)[0];
 
                 if (is_numeric($errors)) {
-                    $errors_arr = [
-                        406 => 'Failed,Email already exists',
+                    $errors_array = [
+                        420 => 'Failed,Email already exists',
                         407 => 'Failed,Phone number must be an number',
                         408 => 'Failed,Password must be confirmed',
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                    return helperJson(null, isset($errors_array[$errors]) ? $errors_array[$errors] : 500, $code);
                 }
                 return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
 
             if (!preg_match("/\p{Arabic}/u", $request->name_ar)) {
-
                 return helperJson(null, "The name ar must be an Arabic Characters", 422, 500);
 
             } elseif (!preg_match('^(?=.*[A-Za-z0-9].*[A-Za-z0-9])[$!@{}[\]A-Za-z0-9]*$^', $request->name_en)) {
-
                 return helperJson(null, "The name en must be an English Characters", 422, 500);
             }
 
@@ -147,9 +145,9 @@ class HotelRepository implements HotelRepositoryInterface
                     'email' => $request->email,
                 ];
 
-                $hotel['token'] = auth()->guard('hotel-api')->attempt($request->only(['email', 'password']));
+                $storeNewHotel['token'] = Auth::guard('hotel-api')->attempt($request->only(['email', 'password']));
                 event(new NewHotelNotification($data));
-                return helperJson(new HotelResource($hotel), trans('hotels.hotel'), 201, 201);
+                return helperJson(new HotelResource($storeNewHotel), trans('hotels.hotel'), 201, 201);
 
             }
         } catch (\Exception $exception) {
@@ -262,7 +260,7 @@ class HotelRepository implements HotelRepositoryInterface
 
             if (isset($checkHotel)) {
 
-                $checkHotel['token'] = auth()->guard('hotel-api')->attempt($request->only(['email', 'password']));
+                $checkHotel['token'] = Auth::guard('hotel-api')->attempt($request->only(['email', 'password']));
                 return helperJson(new HotelResource($checkHotel), "تم تحديث بيانات الفندق بنجاح", 200, 200);
 
             }
@@ -301,8 +299,7 @@ class HotelRepository implements HotelRepositoryInterface
     {
 
         try {
-
-            auth()->guard('hotel-api')->logout();
+            Auth::guard('hotel-api')->logout();
             return response()->json(['message' => trans('hotels.logout'), 'code' => 200], 200);
 
         } catch (\Exception $e) {

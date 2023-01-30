@@ -91,7 +91,7 @@
                     <div class="col-xl-12 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
-                               
+
                                 <div class="table-responsive">
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                            data-page-length="50"
@@ -110,7 +110,8 @@
 
 
                                         <tbody>
-                                        @foreach($calendars as $calendar)
+                                        @foreach($calendars->chunk(20) as $events)
+                                        @foreach($events as $calendar)
 
                                             <tr>
                                                 <td>{{$calendar->room->room_type}}</td>
@@ -139,6 +140,7 @@
                                             </tr>
 
 
+                                        @endforeach
                                         @endforeach
                                         </tbody>
 

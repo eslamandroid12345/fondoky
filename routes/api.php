@@ -29,8 +29,6 @@ Route::group(['middleware' => 'lang'], function (){
         Route::post('login',[UserController::class,'login']);
         Route::post('register',[UserController::class,'register']);
         Route::post('logout',[UserController::class,'logout']);
-
-
     });
 
     Route::group(['prefix' => 'hotel','namespace' => 'Api'], function (){
@@ -50,7 +48,6 @@ Route::group(['middleware' => 'lang'], function (){
         Route::post('login',[AdminController::class,'login']);
         Route::post('register',[AdminController::class,'register']);
         Route::post('logout',[AdminController::class,'logout']);
-
     });
 
 

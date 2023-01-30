@@ -779,7 +779,6 @@
                 document.getElementById('result').value = result;
             }
 
-
             var tourism_tax = (( parseFloat(room) * parseFloat(price) * 4) / 100);
 
 
@@ -788,16 +787,12 @@
                 document.getElementById('tourism_tax').value = tourism_tax;
             }
 
-
             var municipal_tax = (( parseFloat(room) * parseFloat(price) * 5) / 100);
-
 
             if (!isNaN(municipal_tax)) {
 
                 document.getElementById('municipal_tax').value = municipal_tax;
             }
-
-
 
             var vat_tax = ((parseFloat(room) * parseFloat(price) * 5) / 100);
 
@@ -807,18 +802,13 @@
                 document.getElementById('vat_tax').value = vat_tax;
             }
 
-
-
             var total_all = (parseFloat(room) * parseFloat(price) + vat_tax + municipal_tax + tourism_tax);
-
 
             if (!isNaN(total_all)) {
 
                 document.getElementById('total_all').value = total_all;
 
             }else{
-
-
                 document.getElementById('total_all').value = 0;
                 document.getElementById('result').value = 0;
                 document.getElementById('vat_tax').value = 0;

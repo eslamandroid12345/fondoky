@@ -16,6 +16,7 @@
         "laravel/ui": "^3.4",
         "mcamara/laravel-localization": "^1.7",
         "pusher/pusher-php-server": "^7.0",
+        "stichoza/google-translate-php": "^4.1",
         "tymon/jwt-auth": "^1.0",
         "yajra/laravel-datatables-oracle": "^9.21",
         "yoeunes/toastr": "^1.2"

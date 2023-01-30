@@ -241,7 +241,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
         'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
-        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class
+        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+        'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class,
 
 
     ],

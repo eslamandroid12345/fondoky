@@ -484,14 +484,14 @@ height: 100%;padding: 0px ">
                 <form action="{{url('/')}}" class="form1" method="GET" autocomplete="off">
 
                     <div class="col-lg-4 col-md-4 col-12">
-                        <input style="width: 100%" id="search3" type="text" name="location_{{lang()}}" placeholder="{{__('welcome.country')}}" value="{{request()->query('location_ar')}}">
+                        <input style="width: 100%" id="search3" type="text" name="location_{{lang()}}" placeholder="{{__('welcome.country')}}" value="{{request()->query('location_ar')}}" required="required">
 
                         <div style="display: none" id="map3"></div>
 
                     </div>
 
                     <div class="col-lg-2 col-md-2 col-12">
-                        <input  type="text" placeholder="{{\Carbon\Carbon::now()->format('Y-m-d')}}" class="textbox-n" id="start" name="date_start" value="{{request()->query('date_start')}}" readonly="readonly" />
+                        <input  type="text" placeholder="{{\Carbon\Carbon::now()->format('Y-m-d')}}" class="textbox-n" id="start" name="date_start" value="{{request()->query('date_start')}}" readonly="readonly" required="required" />
 
                     </div>
 
@@ -499,14 +499,14 @@ height: 100%;padding: 0px ">
 
                     <div class="col-lg-2 col-md-2 col-12">
 
-                        <input  type="text" placeholder="{{\Carbon\Carbon::now()->addDays(1)->format('Y-m-d')}}" class="textbox-n" id="end" name="date_expire" value="{{request()->query('date_expire')}}" readonly="readonly" />
+                        <input  type="text" placeholder="{{\Carbon\Carbon::now()->addDays(1)->format('Y-m-d')}}" class="textbox-n" id="end" name="date_expire" value="{{request()->query('date_expire')}}" readonly="readonly" required="required"/>
 
                     </div>
 
 
                     <div class="col-lg-2 col-md-2 col-12 child">
-                        <input type="number" placeholder="{{__('welcome.adults_max')}}" name="adults_max" value="{{request()->query('adults_max')}}">
-                        <input type="number"  name="child_max" value="{{request()->query('child_max')}}" placeholder="{{__('welcome.child_max')}}">
+                        <input type="number" placeholder="{{__('welcome.adults_max')}}" name="adults_max" value="{{request()->query('adults_max')}}" required="required">
+                        <input type="number"  name="child_max" value="{{request()->query('child_max')}}" placeholder="{{__('welcome.child_max')}}" required="required">
                     </div>
 
                     <div class="col-lg-2 col-md-2 col-12 sub">
@@ -643,7 +643,6 @@ height: 100%;padding: 0px ">
                     @endforeach
                     @endforeach
                 @endif
-
 
                 {{--start pagination of rooms and hotels--}}
 

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use PDF;
+//use PDF;
 use Yajra\DataTables\Facades\DataTables;
 
 class HotelRepository implements HotelRepositoryInterface{
@@ -35,9 +35,8 @@ class HotelRepository implements HotelRepositoryInterface{
 
     public function reservations(){
 
-        $invoices = Reservation::query()->with(['hotel:id','room:id,room_type','user:id,name,phone'])
-            ->where('hotel_id','=',auth('hotel')->id())->orderByDesc('id')->get();
-
+        $invoices = Reservation::with(['hotel:id','room:id,room_type','user:id,name,phone'])
+            ->where('hotel_id','=',auth('hotel')->id())->latest()->get();
 
         return view('hotels.reservations',compact('invoices'));
     }

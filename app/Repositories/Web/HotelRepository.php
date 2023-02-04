@@ -321,19 +321,19 @@ class HotelRepository implements HotelRepositoryInterface{
 
     public function arrivalsPdf($id){
 
-        $invoice =  Reservation::with(['user:id,name,phone','hotel','room' => function($room){
-            $room->select('id','room_type');
-
-        }])->where('hotel_id','=',auth('hotel')->id())->whereDay('check_in',Carbon::now()->format('d'))
-            ->whereMonth('check_in', date('m'))
-             ->whereYear('check_in', date('Y'))->orderBy('id','DESC')
-              ->where('id','=',$id)->first();
-
-
-        Gate::authorize('invoice-arrivals',$invoice);
-
-        $pdf = PDF::loadView('hotels.arrivals_pdf', compact('invoice'));
-        return $pdf->stream('myHotel.pdf');
+//        $invoice =  Reservation::with(['user:id,name,phone','hotel','room' => function($room){
+//            $room->select('id','room_type');
+//
+//        }])->where('hotel_id','=',auth('hotel')->id())->whereDay('check_in',Carbon::now()->format('d'))
+//            ->whereMonth('check_in', date('m'))
+//             ->whereYear('check_in', date('Y'))->orderBy('id','DESC')
+//              ->where('id','=',$id)->first();
+//
+//
+//        Gate::authorize('invoice-arrivals',$invoice);
+//
+//        $pdf = PDF::loadView('hotels.arrivals_pdf', compact('invoice'));
+//        return $pdf->stream('myHotel.pdf');
 
     }
 

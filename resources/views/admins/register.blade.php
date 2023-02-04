@@ -45,15 +45,9 @@
                               autocomplete="off">
 
                             @csrf
-
-
                         <h6 style="font-family: 'Cairo', sans-serif;color: blue">{{__('admin_create.home')}}</h6><br>
 
-
                         <div class="row">
-
-
-
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>{{__('admin_create.employee_name')}}</label>
@@ -99,8 +93,6 @@
 
                         </div>
 
-
-
                         <h6 style="font-family: 'Cairo', sans-serif;color: blue">{{__('admin_create.image')}}</h6><br>
 
                         <div class="col-md-3">
@@ -109,8 +101,6 @@
                                 <input type="file" name="image" />
                             </div>
                         </div>
-
-
 
                         <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">{{__('admin_create.save')}}</button>
                     </form>

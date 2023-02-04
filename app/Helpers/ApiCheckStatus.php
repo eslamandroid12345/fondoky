@@ -8,8 +8,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of lan
 if(!function_exists('returnMessageError')){
 
      function returnMessageError($message,$code){
-
-
          return response()->json([
 
              "status" => false,
@@ -22,8 +20,6 @@ if(!function_exists('returnMessageError')){
 
 
 if(!function_exists('returnMessageSuccess')){
-
-
     function returnMessageSuccess($message,$code){
 
         return response()->json([
@@ -60,9 +56,7 @@ if(!function_exists('returnDataSuccess')){
 
 if(!function_exists('admin')){
 
-    function admin()
-    {
-
+    function admin(){
         return auth()->guard('admin')->user();
 
     }
@@ -71,8 +65,7 @@ if(!function_exists('admin')){
 
 if(!function_exists('hotel')){
 
-    function hotel()
-    {
+    function hotel(){
 
         return auth()->guard('hotel')->user();
     }
@@ -83,7 +76,6 @@ if(!function_exists('hotel')){
 if(!function_exists('lang')){
 
     function lang(){
-
         return Config::get('app.locale');
 
     }
@@ -93,8 +85,6 @@ if(!function_exists('lang')){
 if(!function_exists('langConfig')){
 
     function langConfig(){
-
-
         return  LaravelLocalization::getCurrentLocale();
     }
 }
@@ -102,7 +92,6 @@ if(!function_exists('langConfig')){
 //helper method responsible for Api mobile
 
 if(!function_exists('helperJson')){
-
     function helperJson($data=null,$message,$code,$status = 200){
 
         return response()->json([

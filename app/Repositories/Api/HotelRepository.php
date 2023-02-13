@@ -45,9 +45,9 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,true,200);
+                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
                 }
-                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
+                return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             $token = Auth::guard('hotel-api')->attempt($request->only(['email', 'password']));
@@ -101,17 +101,17 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,true,200);
+                    return self::returnResponseError( isset($errors_array[$errors]) ? $errors_array[$errors] : 500, $code,false,200);
 
                 }
-                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
+                return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             if (!preg_match("/\p{Arabic}/u", $request->name_ar)){
-                return helperJson(null, "The name ar must be an Arabic Characters", 422, 500);
+                return self::returnResponseError( "The name ar must be an Arabic Characters", 422, false,422);
 
             } elseif (!preg_match('^(?=.*[A-Za-z0-9].*[A-Za-z0-9])[$!@{}[\]A-Za-z0-9]*$^', $request->name_en)) {
-                return helperJson(null, "The name en must be an English Characters", 422, 500);
+                return self::returnResponseError("The name en must be an English Characters", 422 ,false,422);
             }
 
             $data = [];
@@ -209,10 +209,10 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return self::returnResponseError(isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,true,200);
+                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
 
                 }
-                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
+                return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             if(!preg_match("/\p{Arabic}/u", $request->name_ar)) {
@@ -274,13 +274,14 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
         $hotelId = Auth::guard('hotel-api')->id();
         try {
 
-            $reservations = Reservation::with(['user', 'hotel', 'room'])->where('hotel_id', $hotelId)->orderByDesc('id')->get();
+            $reservations = Reservation::with(['user','hotel','room'])->where('hotel_id', $hotelId)->orderByDesc('id')->get();
             if ($reservations->count() > 0) {
 
-                return helperJson(ReservationResource::collection($reservations), "تم الحصول علي بيانات حجوزات الفندق بنجاح", 200);
+                return self::returnResponseDataApi(ReservationResource::collection($reservations), "تم الحصول علي بيانات حجوزات الفندق بنجاح", 200,true,200);
+
             } else {
 
-                return helperJson(null, "لا يوجد حجوزات الي الان يرجي الانتظار حين وجود حجوزات جديده", 200);
+                return self::returnResponseError( "لا يوجد حجوزات الي الان يرجي الانتظار حين وجود حجوزات جديده", 200,false,404);
             }
         } catch (\Exception $exception) {
 
@@ -294,7 +295,8 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
         try {
             Auth::guard('hotel-api')->logout();
-            return response()->json(['message' => trans('hotels.logout'), 'code' => 200], 200);
+
+           return self::returnResponseSuccess(trans('hotels.logout'),200,true,200);
 
         } catch (\Exception $exception) {
 

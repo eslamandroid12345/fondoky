@@ -20,19 +20,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository extends ResponseApi implements UserRepositoryInterface
 {
 
 
     public function users(){
 
-        $users = User::orderBy('name', 'ASC')->get();
+        $users = User::query()->orderByDesc("name")->get();
         if ($users->count() > 0) {
-            return helperJson(UserResource::collection($users), 'تم ارسال جميع المستخدمين بنجاح', 200, 200);
+            return self::returnResponseDataApi(UserResource::collection($users), 'تم ارسال جميع المستخدمين بنجاح', 200,true, 200);
 
         } else {
 
-            return response()->json(['data' => null, 'message' => 'لا يوجد مستخدمين الي الان يرجي الانتظار لحين تسجيل عملاء جدد', 'code' => 407], 200);
+            return self::returnResponseSuccess("لا يوجد مستخدمين الي الان يرجي الانتظار لحين تسجيل عملاء جدد",200,true,200);
         }
     }
 
@@ -62,9 +62,9 @@ class UserRepository implements UserRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
                 }
-                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
+                return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             $storeNewUser = User::create([
@@ -77,12 +77,12 @@ class UserRepository implements UserRepositoryInterface
             if (isset($storeNewUser)) {
 
                 $storeNewUser['token'] = auth()->guard('user-api')->attempt($request->only(['email', 'password']));
-                return helperJson(new UserResource($storeNewUser), "تم تسجيل بيانات المستخدم بنجاح", 201, 201);
+                return self::returnResponseDataApi(new UserResource($storeNewUser), "تم تسجيل بيانات المستخدم بنجاح",200, true, 200);
 
             }
         } catch (\Exception $exception) {
 
-            return response()->json(['message' => $exception->getMessage(), 'code' => 500], 500);
+            return self::returnResponseError($exception->getMessage(),500,false,500);
         }
 
 
@@ -112,24 +112,24 @@ class UserRepository implements UserRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
                 }
-                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
+                return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             $token = auth()->guard('user-api')->attempt($request->only(['email', 'password']));
 
             if (!$token) {
 
-                return helperJson(null, "كلمه المرور خطاء يرجي المحاوله مره اخري", 200, 422);
+                return self::returnResponseError( "كلمه المرور خطاء يرجي المحاوله مره اخري", 404,false, 404);
             }
             $user = auth()->guard('user-api')->user();
             $user['token'] = $token;
-            return helperJson(new UserResource($user), "تم تسجيل دخول المستخدم بنجاح", 200);
+            return self::returnResponseDataApi(new UserResource($user), "تم تسجيل دخول المستخدم بنجاح", 200,true,200);
 
         } catch (\Exception $exception) {
 
-            return response()->json(['message' => $exception->getMessage(), 'code' => 500], 500);
+            return self::returnResponseError($exception->getMessage(),500,false,500);
         }
 
     }
@@ -141,11 +141,11 @@ class UserRepository implements UserRepositoryInterface
         try {
 
             auth()->guard('user-api')->logout();
-            return response()->json(['message' => "تم تسجيل خروج المستخدم بنجاح", 'code' => 200], 200);
+            return self::returnResponseSuccess("تم تسجيل خروج المستخدم بنجاح",200,true,200);
 
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
 
-            return response()->json(['message' => $e->getMessage(), 'code' => 500], 500);
+            return self::returnResponseError($exception->getMessage(),500,false,500);
 
         }
 

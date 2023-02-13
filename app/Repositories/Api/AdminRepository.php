@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 
 
-class AdminRepository implements AdminRepositoryInterface
+class AdminRepository extends ResponseApi implements AdminRepositoryInterface
 {
 
 
@@ -42,7 +42,7 @@ class AdminRepository implements AdminRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
                 }
                 return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
             }
@@ -51,15 +51,15 @@ class AdminRepository implements AdminRepositoryInterface
 
             if (!$token) {
 
-                return helperJson(null, "كلمه المرور خطاء يرجي المحاوله مره اخري", 200, 422);
+                return self::returnResponseError("كلمه المرور خطاء يرجي المحاوله مره اخري", 404,false, 404);
             }
             $admin = auth()->guard('admin-api')->user();
             $admin['token'] = $token;
-            return helperJson(new AdminResource($admin), "تم تسجيل  دخول الادمن بنجاح", 200);
+            return self::returnResponseDataApi(new AdminResource($admin), "تم تسجيل  دخول الادمن بنجاح", 200,true,200);
 
         } catch (\Exception $exception) {
 
-            return response()->json(['message' => $exception->getMessage(), 'code' => 500], 500);
+            return self::returnResponseError($exception->getMessage(),500,false,500);
         }
 
 
@@ -97,9 +97,9 @@ class AdminRepository implements AdminRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return helperJson(null, isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code);
+                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
                 }
-                return response()->json(['data' => null, 'message' => $validator->errors()->first(), 'code' => 422], 200);
+                return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             if ($image = $request->file('image')) {
@@ -122,12 +122,12 @@ class AdminRepository implements AdminRepositoryInterface
             if (isset($storeNewAdmin)) {
 
                 $storeNewAdmin['token'] = auth()->guard('admin-api')->attempt($request->only(['email', 'password']));
-                return helperJson(new AdminResource($storeNewAdmin), "تم تسجيل بيانات الادمن بنجاح", 201, 201);
+                return self::returnResponseDataApi(new AdminResource($storeNewAdmin), "تم تسجيل بيانات الادمن بنجاح", 201,true, 201);
 
             }
         } catch (\Exception $exception) {
 
-            return response()->json(['message' => $exception->getMessage(), 'code' => 500], 500);
+            return self::returnResponseError($exception->getMessage(),500,false,500);
         }
 
     }
@@ -138,11 +138,12 @@ class AdminRepository implements AdminRepositoryInterface
         try {
 
             auth()->guard('admin-api')->logout();
-            return response()->json(['message' => "تم تسجيل خروج الادمن بنجاح", 'code' => 200], 200);
 
-        } catch (\Exception $e) {
+            return self::returnResponseSuccess("تم تسجيل خروج الادمن بنجاح",200,true,200);
 
-            return response()->json(['message' => $e->getMessage(), 'code' => 500], 500);
+        } catch (\Exception $exception) {
+
+            return self::returnResponseError($exception->getMessage(),500,false,500);
 
         }
 

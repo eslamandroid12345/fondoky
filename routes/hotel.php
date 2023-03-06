@@ -9,60 +9,59 @@ use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of translation
 
-/*
+ /*
  * hotel routes of application
  */
 
-Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
+Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => ['localeSessionRedirect','localizationRedirect','localeViewPath']], function(){
 
 
     //hotel login and hotel register
 Route::group(['prefix' => 'hotels', 'middleware' => 'guest:hotel'], function (){
 
-    Route::get('show','HotelController@show')->name('hotels.show');
-    Route::post('login','HotelController@login')->name('hotels.login');
-    Route::get('show/register','HotelController@showRegister')->name('hotels.show.register');
-    Route::post('register','HotelController@register')->name('hotels.register');
-
+    Route::get('show',[HotelController::class,'show'])->name('hotels.show');
+    Route::post('login',[HotelController::class,'login'])->name('hotels.login');
+    Route::get('show/register',[HotelController::class,'showRegister'])->name('hotels.show.register');
+    Route::post('register',[HotelController::class,'register'])->name('hotels.register');
 });
 
 Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], function (){
 
-    Route::get('reservations','HotelController@reservations')->name('hotels.reservations');
-    Route::get('block/{id}','HotelController@block')->name('hotels.block');
-    Route::get('stay/{id}','HotelController@stay')->name('hotels.stay');
-    Route::get('all','HotelController@index')->name('hotels.all');
-    Route::get('edit','HotelController@edit')->name('hotels.edit');
-    Route::put('update/{id}','HotelController@update')->name('hotels.update');
-    Route::delete('delete/{id}','HotelController@delete')->name('hotels.delete');
-    Route::get('arrivals/pdf/{id}','HotelController@arrivalsPdf')->name('hotels.arrivals.pdf');
-    Route::get('invoices/{month}/{year}', 'HotelController@invoices')->name('hotels.invoices');
-    Route::get('invoices/all', 'HotelController@invoicesAll')->name('hotels.invoices.all');//all invoices
-    Route::get('month/invoices', 'HotelController@monthOfInvoices')->name('hotels.month.invoices');
-    Route::get('arrivals', 'HotelController@arrivals')->name('hotels.arrivals');
-    Route::get('rates', 'HotelController@rates')->name('hotels.rates');
-    Route::get('comments', 'HotelController@comments')->name('hotels.comments');
+    Route::get('reservations',[HotelController::class,'reservations'])->name('hotels.reservations');
+    Route::get('block/{id}',[HotelController::class,'block'])->name('hotels.block');
+    Route::get('stay/{id}',[HotelController::class,'stay'])->name('hotels.stay');
+    Route::get('all',[HotelController::class,'index'])->name('hotels.all');
+    Route::get('edit',[HotelController::class,'edit'])->name('hotels.edit');
+    Route::put('update/{id}',[HotelController::class,'update'])->name('hotels.update');
+    Route::delete('delete/{id}',[HotelController::class,'delete'])->name('hotels.delete');
+    Route::get('arrivals/pdf/{id}',[HotelController::class,'arrivalsPdf'])->name('hotels.arrivals.pdf');
+    Route::get('invoices/{month}/{year}', [HotelController::class,'invoices'])->name('hotels.invoices');
+    Route::get('invoices/all', [HotelController::class,'invoicesAll'])->name('hotels.invoices.all');//all invoices
+    Route::get('month/invoices', [HotelController::class,'monthOfInvoices'])->name('hotels.month.invoices');
+    Route::get('arrivals', [HotelController::class,'arrivals'])->name('hotels.arrivals');
+    Route::get('rates', [HotelController::class,'rates'])->name('hotels.rates');
+    Route::get('comments', [HotelController::class,'comments'])->name('hotels.comments');
 });
 
-    Route::post('comments/create', 'HotelController@comment')->name('hotels.comments.create');
+    Route::post('comments/create', [HotelController::class,'comment'])->name('hotels.comments.create');
     Route::group(['prefix'=>'rooms','middleware'=> ['auth:hotel','status']], function (){
 
-        Route::get('index','RoomController@index')->name('rooms.index');
-        Route::get('create','RoomController@create')->name('rooms.create');
-        Route::post('store','RoomController@store')->name('rooms.store');
-        Route::get('edit/{room}','RoomController@edit')->name('rooms.edit');
-        Route::get('show/{room}','RoomController@show')->name('rooms.show');
-        Route::put('update/{id}','RoomController@update')->name('rooms.update');
-        Route::delete('delete/{id}','RoomController@delete')->name('rooms.delete');
-        Route::get('calendars/show/{id}', 'RoomController@calendarsShow')->name('rooms.calendars.show');
+        Route::get('index',[RoomController::class,'index'])->name('rooms.index');
+        Route::get('create',[RoomController::class,'create'])->name('rooms.create');
+        Route::post('store',[RoomController::class,'store'])->name('rooms.store');
+        Route::get('edit/{room}',[RoomController::class,'edit'])->name('rooms.edit');
+        Route::get('show/{room}',[RoomController::class,'show'])->name('rooms.show');
+        Route::put('update/{id}',[RoomController::class,'update'])->name('rooms.update');
+        Route::delete('delete/{id}',[RoomController::class,'delete'])->name('rooms.delete');
+        Route::get('calendars/show/{id}', [RoomController::class,'calendarsShow'])->name('rooms.calendars.show');
     });
 
     Route::group(['prefix'=>'services','middleware'=> ['auth:hotel','status']], function (){
 
-        Route::get('create','ServiceController@create')->name('services.create');
-        Route::post('store','ServiceController@store')->name('services.store');
-        Route::get('edit/{id}','ServiceController@edit')->name('services.edit');
-        Route::put('update/{id}','ServiceController@update')->name('services.update');
+        Route::get('create',[ServiceController::class,'create'])->name('services.create');
+        Route::post('store',[ServiceController::class,'store'])->name('services.store');
+        Route::get('edit/{id}',[ServiceController::class,'edit'])->name('services.edit');
+        Route::put('update/{id}',[ServiceController::class,'update'])->name('services.update');
 
 
     });

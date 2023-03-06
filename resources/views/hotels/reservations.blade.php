@@ -20,10 +20,7 @@
 @endsection
 @section('content')
 
-
     {{--start model body--}}
-
-
     <!-- row -->
     <div class="row">
         <div class="col-md-12 mb-30">
@@ -100,7 +97,6 @@
                                                             @else
                                                                 <a class="dropdown-item" href="#"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.block_now')}}</a>
 
-
                                                             @endif
 
                                                             @if($invoice->stayed == 1)
@@ -110,16 +106,11 @@
                                                             @else
                                                                 <a class="dropdown-item" href="#"><i style="color:green" class="fa fa-edit"></i>&nbsp;{{__('book_hotel.leave')}}</a>
 
-
                                                             @endif
-
                                                         </div>
                                                     </div>
-
                                                 </td>
-
                                             </tr>
-
                                         @endforeach
                                         </tbody>
                                     </table>

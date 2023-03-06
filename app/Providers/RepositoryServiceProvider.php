@@ -40,16 +40,12 @@ use App\Repositories\Web\UserRepository as UserRepositoryWeb;
 //design pattern
 class RepositoryServiceProvider extends ServiceProvider{
 
-
     public function register(){
-
-
         //Api repositories
         $this->app->bind(HotelRepositoryInterface::class,HotelRepository::class);
         $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
         $this->app->bind(RoleRepositoryInterfaceApi::class,RoleRepositoryApi::class);
         $this->app->bind(AdminRepositoryInterfaceApi::class,AdminRepositoryApi::class);
-
 
         //web repositories
         $this->app->bind(HotelRepositoryInterfaceWeb::class,HotelRepositoryWeb::class);
@@ -67,8 +63,6 @@ class RepositoryServiceProvider extends ServiceProvider{
         $this->app->bind(RoomServiceRepositoryInterface::class,RoomServiceRepository::class);
         $this->app->bind(HotelServiceRoomRepositoryInterface::class,HotelServiceRoomRepository::class);
         $this->app->bind(ReservationRepositoryInterface::class,ReservationRepository::class);
-
-
     }
 
 

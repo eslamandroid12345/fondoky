@@ -81,7 +81,6 @@ class AdminRepository implements AdminRepositoryInterface{
                 $request['image'] = "$profileImage";
             }
 
-
             $admin = Admin::create([
 
             'name' =>  $request->name,

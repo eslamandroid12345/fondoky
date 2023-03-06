@@ -72,9 +72,9 @@
 
         window.App = {!! json_encode([
 
-                 'user' => auth()->check() ? hotel()->id : null,
+         'user' => auth()->check() ? hotel()->id : null,
 
-                 ]) !!};
+         ]) !!};
 
         var channel = Echo.private(`new-reservations.` + window.App.user);
         channel.listen('.new-reservations-event', function(data) {
@@ -96,7 +96,6 @@
 
         //start delete message
         $( document ).ready(function() {
-
             setTimeout(function() {
                 $('.alert').fadeOut('slow');
             }, 1400);

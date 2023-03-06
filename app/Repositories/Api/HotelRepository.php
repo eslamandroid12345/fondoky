@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories\Api;
-
 use App\Events\NewHotelNotification;
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreHotelRequest;
@@ -45,19 +44,18 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
+                    return self::returnResponseError(isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
                 }
                 return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             $token = Auth::guard('hotel-api')->attempt($request->only(['email', 'password']));
-
             if (!$token) {
                 return self::returnResponseError( "كلمه المرور خطاء يرجي المحاوله مره اخري", 200, false,422);
             }
             $hotel = Auth::guard('hotel-api')->user();
             $hotel['token'] = $token;
-            return self::returnResponseDataApi(new HotelResource($hotel), trans("hotels.message"), 200,true,200);
+            return self::returnResponseDataApi(new HotelResource($hotel),trans("hotels.message"),200,true,200);
 
         } catch (\Exception $exception) {
 
@@ -84,6 +82,7 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 'hotel_photos' => 'required|array|min:1|mimes:jpg,png,jpeg|max:2048',
                 'phone_hotel' => 'required|numeric',
             ];
+
             $validator = Validator::make($request->all(), $rules, [
                 'email.unique' => 420,
                 'phone.numeric' => 407,
@@ -101,7 +100,7 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return self::returnResponseError( isset($errors_array[$errors]) ? $errors_array[$errors] : 500, $code,false,200);
+                    return self::returnResponseError(isset($errors_array[$errors]) ? $errors_array[$errors] : 500, $code,false,200);
 
                 }
                 return self::returnResponseError($validator->errors()->first(),422,false,422);
@@ -192,14 +191,14 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 'hotel_photos' => 'nullable|array|min:1|mimes:jpg,png,jpeg|max:2048',
                 'phone_hotel' => 'required|numeric',
             ];
-            $validator = Validator::make($request->all(), $rules, [
+            $validate = Validator::make($request->all(), $rules, [
                 'email.unique' => 406,
                 'phone.numeric' => 407,
                 'phone.confirmed' => 408,
             ]);
 
-            if ($validator->fails()){
-                $errors = collect($validator->errors())->flatten(1)[0];
+            if ($validate->fails()){
+                $errors = collect($validate->errors())->flatten(1)[0];
 
                 if (is_numeric($errors)) {
                     $errors_arr = [
@@ -207,20 +206,16 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                         407 => 'Failed,Phone number must be an number',
                         408 => 'Failed,Password must be confirmed',
                     ];
-
-                    $code = collect($validator->errors())->flatten(1)[0];
+                    $code = collect($validate->errors())->flatten(1)[0];
                     return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
-
                 }
-                return self::returnResponseError($validator->errors()->first(),422,false,422);
+                return self::returnResponseError($validate->errors()->first(),422,false,422);
             }
 
             if(!preg_match("/\p{Arabic}/u", $request->name_ar)) {
-
                 return self::returnResponseError( "The name ar must be an Arabic Characters", 422,false, 500);
 
             } elseif (!preg_match('^(?=.*[A-Za-z0-9].*[A-Za-z0-9])[$!@{}[\]A-Za-z0-9]*$^', $request->name_en)) {
-
                 return self::returnResponseError("The name en must be an English Characters", 422,false, 500);
             }
 
@@ -236,7 +231,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
             $hotelId = Auth::guard('hotel-api')->id();
             $checkHotel = Hotel::where('id', $hotelId)->first();
-
             if (!$checkHotel) {
                 return self::returnResponseError("Hotel not found with id", 404, false,404);
             }
@@ -257,19 +251,16 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
             ]);
 
             if (isset($checkHotel)) {
-
                 $checkHotel['token'] = Auth::guard('hotel-api')->attempt($request->only(['email', 'password']));
                 return self::returnResponseDataApi(new HotelResource($checkHotel), "تم تحديث بيانات الفندق بنجاح", 200, true,200);
 
             }
         } catch (\Exception $exception) {
-
             return self::returnResponseError($exception->getMessage(),500,false,500);
         }
     }
 
-    public function reservations()
-    {
+    public function reservations(){
 
         $hotelId = Auth::guard('hotel-api')->id();
         try {
@@ -287,7 +278,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
             return self::returnResponseError($exception->getMessage(),500,false,500);
         }
-
     }
 
     public function hotelLogout()

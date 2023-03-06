@@ -179,10 +179,9 @@ class HotelRepository implements HotelRepositoryInterface{
                     $data[] = $name;
 
                      $images = json_decode($hotel->hotel_photos, true);
-
                      foreach ($images as $image) {
 
-                         if(file_exists(public_path('hotels/' . $image) )){
+                         if(file_exists(public_path('hotels/' . $image))){
 
                              unlink(public_path('hotels/') . $image);
                          }else{
@@ -226,7 +225,6 @@ class HotelRepository implements HotelRepositoryInterface{
 
             $images = json_decode($hotel->hotel_photos);
              foreach ($images as $image){
-
                 if(file_exists(public_path('hotels/' . $image) )){
 
                     unlink(public_path('hotels/') . $image);

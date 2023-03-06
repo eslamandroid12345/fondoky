@@ -14,8 +14,7 @@ class HotelController extends Controller
 
     public $hotelRepositoryInterface;
 
-    public function __construct(HotelRepositoryInterface $hotelRepositoryInterface)
-    {
+    public function __construct(HotelRepositoryInterface $hotelRepositoryInterface){
 
         $this->hotelRepositoryInterface = $hotelRepositoryInterface;
 

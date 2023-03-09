@@ -62,7 +62,7 @@ class RoomRepository implements RoomRepositoryInterface{
                 foreach($request->file('images') as $image)
                 {
                     $name= time() . rand(1,2000) . uniqid() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path().'/rooms/', $name);
+                    $image->move('rooms/', $name);
                     $data[] = $name;
                 }
             }
@@ -108,7 +108,7 @@ class RoomRepository implements RoomRepositoryInterface{
                 foreach($request->file('images') as $image)
                 {
                     $name= time() . rand(1,2000) . uniqid() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path().'/rooms/',$name);
+                    $image->move('rooms/',$name);
                     $data[] = $name;
                 }
 
@@ -116,12 +116,11 @@ class RoomRepository implements RoomRepositoryInterface{
                 $images = json_decode($room->images);
                 foreach ($images as $image){
 
-                    if(file_exists(public_path('rooms/' . $image))) {
+                    if(file_exists('rooms/' . $image)) {
 
-                        unlink(public_path('rooms/') . $image);
+                        unlink('rooms/'. $image);
 
                     }else{
-
                         return returnMessageError("Error to remove rooms images",Response::HTTP_INTERNAL_SERVER_ERROR);
 
                     }
@@ -161,9 +160,9 @@ class RoomRepository implements RoomRepositoryInterface{
             $images = json_decode($room->images);
             foreach ($images as $image){
 
-              if(file_exists(public_path('rooms/' . $image))){
+              if(file_exists('rooms/' . $image)){
 
-                  unlink(public_path('rooms/') . $image);
+                  unlink('rooms/'. $image);
               }else{
 
                   return returnMessageError("Error to remove rooms images",Response::HTTP_INTERNAL_SERVER_ERROR);

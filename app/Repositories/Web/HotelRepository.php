@@ -111,7 +111,7 @@ class HotelRepository implements HotelRepositoryInterface{
                 foreach($request->file('hotel_photos') as $image) {
 
                     $name= time() . rand(1,2000) . uniqid() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path().'/hotels/', $name);
+                    $image->move('hotels/', $name);
                     $data[] = $name;
                 }
             }
@@ -175,7 +175,7 @@ class HotelRepository implements HotelRepositoryInterface{
                  foreach ($request->file('hotel_photos') as $image) {
 
                     $name = time() . rand(1, 5000) . uniqid() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path() . '/hotels/', $name);
+                    $image->move('hotels/', $name);
                     $data[] = $name;
 
                      $images = json_decode($hotel->hotel_photos, true);
@@ -183,7 +183,7 @@ class HotelRepository implements HotelRepositoryInterface{
 
                          if(file_exists(public_path('hotels/' . $image))){
 
-                             unlink(public_path('hotels/') . $image);
+                             unlink('hotels/' . $image);
                          }else{
 
                              return response()->json(['data' => null,'message' => "Error the old images not delete please try again",'code' => 500]);
@@ -225,9 +225,9 @@ class HotelRepository implements HotelRepositoryInterface{
 
             $images = json_decode($hotel->hotel_photos);
              foreach ($images as $image){
-                if(file_exists(public_path('hotels/' . $image) )){
+                if(file_exists('hotels/' . $image)){
 
-                    unlink(public_path('hotels/') . $image);
+                    unlink('hotels/' . $image);
 
                 }else{
                     return response()->json(['data' => null,'message' => "Error the old images not delete please try again",'code' => 500]);

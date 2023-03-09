@@ -31,29 +31,29 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
 
-    Route::get('/', 'UserController@welcome');
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', [UserController::class,'welcome']);
+    Route::get('/home', [HomeController::class,'index'])->name('home');
     Auth::routes();
 
     Route::group(['prefix' => 'users', 'middleware' => ['auth:admin', 'can:users']], function () {
 
-        Route::get('all', 'UserController@index')->name('users.all');
-        Route::get('delete/{id}', 'UserController@delete')->name('users.delete');
-        Route::get('update/{id}', 'UserController@update')->name('users.update');
+        Route::get('all', [UserController::class,'index'])->name('users.all');
+        Route::get('delete/{id}', [UserController::class,'delete'])->name('users.delete');
+        Route::get('update/{id}', [UserController::class,'update'])->name('users.update');
     });
 
     Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
-        Route::post('rates', 'UserController@rates')->name('users.rates');
-        Route::get('rates/create/{id}', 'UserController@ratesCreate')->name('users.rates.create');
+        Route::post('rates', [UserController::class,'rates'])->name('users.rates');
+        Route::get('rates/create/{id}', [UserController::class,'ratesCreate'])->name('users.rates.create');
 
     });
 
-    Route::get('hotel/room/{id}', 'UserController@rooms')->name('hotel.room');
-    Route::get('room/reservation/{id}', 'UserController@reservation')->name('room.reservation')->middleware('auth');
+    Route::get('hotel/room/{id}', [UserController::class,'rooms'])->name('hotel.room');
+    Route::get('room/reservation/{id}', [UserController::class,'reservation'])->name('room.reservation')->middleware('auth');
 
     Route::group(["prefix" => "reservations", "middleware" => "auth"], function () {
-        Route::post('store/{id}', 'ReservationController@store')->name('reservations.store');
-        Route::get('cancel/{id}', 'ReservationController@cancel')->name('reservations.cancel');
+        Route::post('store/{id}', [ReservationController::class,'store'])->name('reservations.store');
+        Route::get('cancel/{id}', [ReservationController::class,'cancel'])->name('reservations.cancel');
 
     });
 

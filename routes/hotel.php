@@ -69,29 +69,29 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
     //create and store new room services
     Route::group(['prefix'=>'room-services','middleware'=> ['auth:hotel','status']], function (){
 
-        Route::get('index','RoomServiceController@index')->name('room-services.index');
-        Route::get('create','RoomServiceController@create')->name('room-services.create');
-        Route::post('store','RoomServiceController@store')->name('room-services.store');
-        Route::get('edit/{id}','RoomServiceController@edit')->name('room-services.edit');
-        Route::put('update/{id}','RoomServiceController@update')->name('room-services.update');
-        Route::get('delete/{id}','RoomServiceController@delete')->name('room-services.delete');
+        Route::get('index',[RoomServiceController::class,'index'])->name('room-services.index');
+        Route::get('create',[RoomServiceController::class,'create'])->name('room-services.create');
+        Route::post('store',[RoomServiceController::class,'store'])->name('room-services.store');
+        Route::get('edit/{id}',[RoomServiceController::class,'edit'])->name('room-services.edit');
+        Route::put('update/{id}',[RoomServiceController::class,'update'])->name('room-services.update');
+        Route::get('delete/{id}',[RoomServiceController::class,'delete'])->name('room-services.delete');
 
     });
 
     Route::group(['prefix'=>'hotel-room-services','middleware'=> ['auth:hotel','status']], function (){
-        Route::get('create','HotelServiceRoomController@create')->name('hotel-room-services.create');
-        Route::post('store','HotelServiceRoomController@store')->name('hotel-room-services.store');
+        Route::get('create',[HotelServiceRoomController::class,'create'])->name('hotel-room-services.create');
+        Route::post('store',[HotelServiceRoomController::class,'store'])->name('hotel-room-services.store');
 
     });
 
     //start events of rooms in hotel
    Route::group(['prefix'=>'calendars','middleware'=> ['auth:hotel','status']], function (){
 
-       Route::get('create/{id}', 'EventController@create')->name('calendars.create');
-       Route::post('store', 'EventController@store')->name('calendars.store');
-       Route::get('edit/{id}', 'EventController@edit')->name('calendars.edit');
-       Route::put('update/{id}', 'EventController@update')->name('calendars.update');
-       Route::get('destroy/{id}', 'EventController@destroy')->name('calendars.destroy');
+       Route::get('create/{id}', [EventController::class,'create'])->name('calendars.create');
+       Route::post('store', [EventController::class,'store'])->name('calendars.store');
+       Route::get('edit/{id}', [EventController::class,'edit'])->name('calendars.edit');
+       Route::put('update/{id}', [EventController::class,'update'])->name('calendars.update');
+       Route::get('destroy/{id}', [EventController::class,'destroy'])->name('calendars.destroy');
 
     });
 });

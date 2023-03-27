@@ -178,17 +178,17 @@ class HotelRepository implements HotelRepositoryInterface{
                     $image->move('hotels/', $name);
                     $data[] = $name;
 
-                     $images = json_decode($hotel->hotel_photos, true);
-                     foreach ($images as $image) {
+                }
 
-                         if(file_exists(public_path('hotels/' . $image))){
+                $images = json_decode($hotel->hotel_photos, true);
+                foreach ($images as $image) {
 
-                             unlink('hotels/' . $image);
-                         }else{
+                    if(file_exists('hotels/' . $image)){
+                        unlink('hotels/' . $image);
+                    }else{
 
-                             return response()->json(['data' => null,'message' => "Error the old images not delete please try again",'code' => 500]);
-                         }
-                     }
+                        return response()->json(['data' => null,'message' => "Error the old images not delete please try again",'code' => 500]);
+                    }
                 }
            }//end if
 

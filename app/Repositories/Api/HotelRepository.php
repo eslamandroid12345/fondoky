@@ -91,7 +91,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
             if ($validator->fails()) {
                 $errors = collect($validator->errors())->flatten(1)[0];
-
                 if (is_numeric($errors)) {
                     $errors_array = [
                         420 => 'Failed,Email already exists',
@@ -106,19 +105,18 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
-            if (!preg_match("/\p{Arabic}/u", $request->name_ar)){
-                return self::returnResponseError( "The name ar must be an Arabic Characters", 422, false,422);
+            if(!preg_match("/\p{Arabic}/u", $request->name_ar)) {
+                return self::returnResponseError( "اسم الفندق باللغه العربيه يجب ان يتضمن احرف بالعربي", 422,false, 500);
 
             } elseif (!preg_match('^(?=.*[A-Za-z0-9].*[A-Za-z0-9])[$!@{}[\]A-Za-z0-9]*$^', $request->name_en)) {
-                return self::returnResponseError("The name en must be an English Characters", 422 ,false,422);
+                return self::returnResponseError("اسم الفندق باللغه الانجليزيه يجب ان يتضمن احرف بالانجليزي", 422,false, 500);
             }
-
             $data = [];
             if ($request->hasfile('hotel_photos')) {
 
                 foreach ($request->file('hotel_photos') as $image) {
                     $name = time() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path() . '/hotels/', $name);
+                    $image->move('hotels/', $name);
                     $data[] = $name;
                 }
             }
@@ -157,7 +155,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
     public function getProfile(Request $request)
     {
-
         try {
 
             $getHotelAuth = Auth::guard('hotel-api')->user();
@@ -197,9 +194,8 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 'phone.confirmed' => 408,
             ]);
 
-            if ($validate->fails()){
+            if($validate->fails()){
                 $errors = collect($validate->errors())->flatten(1)[0];
-
                 if (is_numeric($errors)) {
                     $errors_arr = [
                         406 => 'Failed,Email already exists',
@@ -213,10 +209,17 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
             }
 
             if(!preg_match("/\p{Arabic}/u", $request->name_ar)) {
-                return self::returnResponseError( "The name ar must be an Arabic Characters", 422,false, 500);
+                return self::returnResponseError( "اسم الفندق باللغه العربيه يجب ان يتضمن احرف بالعربي", 422,false, 500);
 
             } elseif (!preg_match('^(?=.*[A-Za-z0-9].*[A-Za-z0-9])[$!@{}[\]A-Za-z0-9]*$^', $request->name_en)) {
-                return self::returnResponseError("The name en must be an English Characters", 422,false, 500);
+                return self::returnResponseError("اسم الفندق باللغه الانجليزيه يجب ان يتضمن احرف بالانجليزي", 422,false, 500);
+            }
+
+            $hotelId = Auth::guard('hotel-api')->id();
+            $checkHotel = Hotel::where('id', $hotelId)->first();
+
+            if (!$checkHotel) {
+                return self::returnResponseError("الفندق غير موجود!", 404, false,404);
             }
 
             $data = [];
@@ -224,15 +227,19 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
                 foreach ($request->file('hotel_photos') as $image) {
                     $name = time() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path() . '/hotels/', $name);
+                    $image->move( 'hotels/', $name);
                     $data[] = $name;
                 }
-            }
+                $images = json_decode($checkHotel->hotel_photos, true);
+                foreach ($images as $image) {
 
-            $hotelId = Auth::guard('hotel-api')->id();
-            $checkHotel = Hotel::where('id', $hotelId)->first();
-            if (!$checkHotel) {
-                return self::returnResponseError("Hotel not found with id", 404, false,404);
+                    if(file_exists('hotels/' . $image)){
+                        unlink('hotels/' . $image);
+                    }else{
+
+                        return self::returnResponseError("يوجد خطاء ما الصور القديمه للفندق غير محذوفه!", 417,false, 200);
+                    }
+                }
             }
 
             $checkHotel->update([
@@ -285,7 +292,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
         try {
             Auth::guard('hotel-api')->logout();
-
            return self::returnResponseSuccess(trans('hotels.logout'),200,true,200);
 
         } catch (\Exception $exception) {

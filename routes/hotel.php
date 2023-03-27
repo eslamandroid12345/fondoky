@@ -13,12 +13,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;//use package of tra
  * hotel routes of application
  */
 
-Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => ['localeSessionRedirect','localizationRedirect','localeViewPath']], function(){
-
+Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function(){
 
     //hotel login and hotel register
 Route::group(['prefix' => 'hotels', 'middleware' => 'guest:hotel'], function (){
-
     Route::get('show',[HotelController::class,'show'])->name('hotels.show');
     Route::post('login',[HotelController::class,'login'])->name('hotels.login');
     Route::get('show/register',[HotelController::class,'showRegister'])->name('hotels.show.register');
@@ -26,7 +24,6 @@ Route::group(['prefix' => 'hotels', 'middleware' => 'guest:hotel'], function (){
 });
 
 Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], function (){
-
     Route::get('reservations',[HotelController::class,'reservations'])->name('hotels.reservations');
     Route::get('block/{id}',[HotelController::class,'block'])->name('hotels.block');
     Route::get('stay/{id}',[HotelController::class,'stay'])->name('hotels.stay');

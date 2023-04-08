@@ -26,6 +26,7 @@ class RouteServiceProvider extends ServiceProvider
 
         //start route of api for android applications
         $this->routes(function () {
+
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)

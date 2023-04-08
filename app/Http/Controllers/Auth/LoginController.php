@@ -43,7 +43,6 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         return [
-
             'email' => $request->{$this->username()},
             'password' => $request->password,
             'blocked' => 1,
@@ -51,22 +50,6 @@ class LoginController extends Controller
 
     }
 
-
-    public function loginUser(Request $request){
-
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required'
-        ]);
-
-        if(auth()->attempt(['email' => trim($request->email," "), 'password' => trim($request->password," "),'blocked' => 1])){
-
-            return redirect()->route('home')->with('success_login','user login successfully');
-
-        }else{
-            return redirect()->back()->withInput($request->only('email'))->with('loginFailed',trans('admin.error'));
-        }
-    }
     /*
     * @override of logout
     */

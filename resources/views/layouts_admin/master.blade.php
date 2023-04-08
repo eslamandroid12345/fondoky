@@ -15,9 +15,13 @@
             }
         }
 
+
     </style>
     @include('layouts_admin.head')
     @toastr_css
+
+    @yield('css')
+
 
 </head>
 

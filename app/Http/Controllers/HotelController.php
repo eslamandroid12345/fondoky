@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\HotelLoginRequest;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\StoreHotelRequest;
@@ -25,6 +24,7 @@ class HotelController extends Controller
 
         return $this->hotelRepositoryInterface->index();
     }
+
 
 
     public function reservations()

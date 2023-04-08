@@ -185,7 +185,7 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 'currency_ar' => 'required',
                 'currency_en' => 'required',
                 'description' => 'nullable',
-                'hotel_photos' => 'nullable|array|min:1|mimes:jpg,png,jpeg|max:2048',
+                'hotel_photos' => 'nullable|array|min:1|mimes:jpg,png,jpeg',
                 'phone_hotel' => 'required|numeric',
             ];
             $validate = Validator::make($request->all(), $rules, [
@@ -232,7 +232,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 }
                 $images = json_decode($checkHotel->hotel_photos, true);
                 foreach ($images as $image) {
-
                     if(file_exists('hotels/' . $image)){
                         unlink('hotels/' . $image);
                     }else{
@@ -274,7 +273,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
             $reservations = Reservation::with(['user','hotel','room'])->where('hotel_id', $hotelId)->orderByDesc('id')->get();
             if ($reservations->count() > 0) {
-
                 return self::returnResponseDataApi(ReservationResource::collection($reservations), "تم الحصول علي بيانات حجوزات الفندق بنجاح", 200,true,200);
 
             } else {

@@ -27,7 +27,7 @@
 
                             @can('reservations')
                             <li><a  href="{{route('booking.all')}}">{{__('sidebar_admin.bookers')}}</a></li>
-                                @endcan
+                            @endcan
 
 
                         </ul>
@@ -185,8 +185,56 @@
                         </ul>
                     </li>
 
-                    <!-- sections-->
 
+                    {{--start tourism places--}}
+{{--                    "countries_sidebar" => "المدن",--}}
+{{--                    "cities_sidebar" => "المحافاظات",--}}
+{{--                    "tourism_places_sidebar" => "الاماكن السياحيه",--}}
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#countries">
+                            <div class="pull-left"><i class="fa fa-flag"></i><span
+                                        class="right-nav-text">{{trans('tourism_place.countries_sidebar')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="countries" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="{{route('tourism-places.countries')}}">{{trans('tourism_place.countries_sidebar')}}</a></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#cities">
+                            <div class="pull-left"><i class="fa fa-tree"></i><span
+                                        class="right-nav-text">{{trans('tourism_place.cities_sidebar')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="cities" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="{{route('tourism-places.cities')}}">{{trans('tourism_place.cities_sidebar')}}</a></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#places">
+                            <div class="pull-left"><i class="fa fa-location-arrow"></i><span
+                                        class="right-nav-text">{{trans('tourism_place.tourism_places_sidebar')}}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="places" class="collapse" data-parent="#sidebarnav">
+                            <li><a  href="{{route('tourism-places.all')}}">{{trans('tourism_place.tourism_places_sidebar')}}</a></li>
+
+                        </ul>
+                    </li>
+
+                    {{--end tourism places--}}
+
+                    <!-- sections-->
 
 
                 </ul>

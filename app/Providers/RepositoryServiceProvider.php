@@ -3,8 +3,10 @@
 namespace App\Providers;
 use App\Interfaces\Web\Currencies\CurrencyRepositoryInterface;
 use App\Interfaces\Web\SettingRepositoryInterface;
+use App\Interfaces\Web\TourismPlaceRepositoryInterface;
 use App\Repositories\Web\Currencies\CurrencyRepository;
 use App\Repositories\Web\SettingRepository;
+use App\Repositories\Web\TourismPlaceRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\Api\HotelRepositoryInterface;
 use App\Interfaces\Api\UserRepositoryInterface;
@@ -37,17 +39,16 @@ use App\Repositories\Web\HotelRepository as HotelRepositoryWeb;
 use App\Interfaces\Web\UserRepositoryInterface as UserRepositoryInterfaceWeb;
 use App\Repositories\Web\UserRepository as UserRepositoryWeb;
 
+
 //design pattern
 class RepositoryServiceProvider extends ServiceProvider{
 
     public function register(){
-        //Api repositories
+
         $this->app->bind(HotelRepositoryInterface::class,HotelRepository::class);
         $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
         $this->app->bind(RoleRepositoryInterfaceApi::class,RoleRepositoryApi::class);
         $this->app->bind(AdminRepositoryInterfaceApi::class,AdminRepositoryApi::class);
-
-        //web repositories
         $this->app->bind(HotelRepositoryInterfaceWeb::class,HotelRepositoryWeb::class);
         $this->app->bind(AdminRepositoryInterface::class,AdminRepository::class);
         $this->app->bind(RoleRepositoryInterface::class,RoleRepository::class);
@@ -58,11 +59,10 @@ class RepositoryServiceProvider extends ServiceProvider{
         $this->app->bind(EventRepositoryInterface::class,EventRepository::class);
         $this->app->bind(SettingRepositoryInterface::class,SettingRepository::class);
         $this->app->bind(CurrencyRepositoryInterface::class,CurrencyRepository::class);
-
-        //Repository pattern of room service
         $this->app->bind(RoomServiceRepositoryInterface::class,RoomServiceRepository::class);
         $this->app->bind(HotelServiceRoomRepositoryInterface::class,HotelServiceRoomRepository::class);
         $this->app->bind(ReservationRepositoryInterface::class,ReservationRepository::class);
+        $this->app->bind(TourismPlaceRepositoryInterface::class,TourismPlaceRepository::class);
     }
 
 

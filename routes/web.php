@@ -57,12 +57,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
     });
 
-
-    Route::post('loginUser', [\App\Http\Controllers\Auth\LoginController::class,'loginUser'])->name('auth.login');
-    Route::post('registerUser', [\App\Http\Controllers\Auth\RegisterController::class,'registerUser'])->name('register.user');
-
-
-
 });
 
 //cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1

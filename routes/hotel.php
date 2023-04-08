@@ -94,3 +94,43 @@ Route::group(['prefix'=>'hotels','middleware' => ['auth:hotel','status']], funct
 });
 
 //usr/local/bin/php /home/myhotel/public_html/artisan schedule:run >> /dev/null 2>&1
+/*
+ * return [
+            'first_name'  => $this->faker->firstName,
+            'last_name'   => $this->faker->lastName,
+            'email'       => $this->faker->unique()->safeEmail,
+            'phone'       => $this->faker->phoneNumber,
+            'image'       => $this->faker->image('public/assets/images/uploaded/clients', 400, 300, null, false),
+            'address'     => $this->faker->streetAddress,
+            'city'        => $this->faker->city,
+            'state'       => $this->faker->stateAbbr,
+            'zip'         => $this->faker->postcode,
+            'country'     => $this->faker->country,
+            'description' => $this->faker->paragraph
+        ];
+
+
+            private $num = 0;
+            private $imagePath = 'images/posts';
+            private $imageWidth = 1280;
+            private $imageHeight = 720;
+
+            public function definition()
+            {
+                $this->num++;
+
+                Storage::makeDirectory($this->imagePath);
+
+                $uniqueWord = $this->faker->unique()->word;
+
+                return [
+                    'position' => $this->num,
+                    'status' => $this->faker->boolean,
+                    'slug' => _slugify($uniqueWord),
+                    'category_id' => 1,
+                    'image' => $this->faker->unique()->image(storage_path('app/public/' . $this->imagePath), $this->imageWidth, $this->imageHeight, null, false),
+                    'title' => $uniqueWord,
+                    'text' => $this->faker->paragraph,
+                ];
+}
+ */

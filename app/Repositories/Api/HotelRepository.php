@@ -21,14 +21,14 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 {
 
-    public function hotelLogin(Request $request)
+    public function hotelLogin(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
             $rules = [
                 'email' => 'required|email|exists:hotels,email',
                 'password' => 'required',
             ];
-            $validator = Validator::make($request->all(), $rules, [
+            $validator = Validator::make($request->only(['email','password']), $rules, [
                 'email.email' => 409,
                 'email.exists' => 407,
             ]);
@@ -39,12 +39,12 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 if (is_numeric($errors)) {
 
                     $errors_arr = [
-                        409 => 'Failed,Email must be an email',
-                        407 => 'Failed,Email not found',
+                        409 => 'البريد الالكتروني يجب ان يكون ايميل',
+                        407 => 'البريد الالكتروني غير مسجل من قبل',
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return self::returnResponseError(isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
+                    return self::returnResponseError($errors_arr[$errors] ?? 500, $code,false,200);
                 }
                 return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
@@ -69,23 +69,23 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
 
         try {
             $rules = [
-                'manger' => 'required|string|min:5|max:50',
-                'name_ar' => 'required|string|min:5|max:50',
-                'name_en' => 'required|string|min:10|max:50',
-                'email' => 'required|email|unique:hotels,email',
-                'password' => 'required|min:8|confirmed',
-                'location_ar' => 'required',
-                'location_en' => 'required',
-                'currency_ar' => 'required',
-                'currency_en' => 'required',
-                'description' => 'required',
+                'manger'       => 'required|string|min:5|max:50',
+                'name_ar'      => 'required|string|min:5|max:50',
+                'name_en'      => 'required|string|min:10|max:50',
+                'email'        => 'required|email|unique:hotels,email',
+                'password'     => 'required|min:8|confirmed',
+                'location_ar'  => 'required',
+                'location_en'  => 'required',
+                'currency_ar'  => 'required',
+                'currency_en'  => 'required',
+                'description'  => 'required',
                 'hotel_photos' => 'required|array|min:1|mimes:jpg,png,jpeg|max:2048',
-                'phone_hotel' => 'required|numeric',
+                'phone_hotel'  => 'required|numeric',
             ];
 
             $validator = Validator::make($request->all(), $rules, [
-                'email.unique' => 420,
-                'phone.numeric' => 407,
+                'email.unique'       => 406,
+                'phone.numeric'      => 407,
                 'password.confirmed' => 408,
             ]);
 
@@ -93,13 +93,13 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 $errors = collect($validator->errors())->flatten(1)[0];
                 if (is_numeric($errors)) {
                     $errors_array = [
-                        420 => 'Failed,Email already exists',
-                        407 => 'Failed,Phone number must be an number',
-                        408 => 'Failed,Password must be confirmed',
+                        406    => 'هذا البريد الالكتروني موجود من قبل',
+                        407    => 'الهاتف يجب ان يكون رقم',
+                        408    => 'كلمه المرور يجب ان تكون مؤكده',
                     ];
 
                     $code = collect($validator->errors())->flatten(1)[0];
-                    return self::returnResponseError(isset($errors_array[$errors]) ? $errors_array[$errors] : 500, $code,false,200);
+                    return self::returnResponseError($errors_array[$errors] ?? 500, $code,false,200);
 
                 }
                 return self::returnResponseError($validator->errors()->first(),422,false,422);
@@ -122,18 +122,19 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
             }
 
             $storeNewHotel = Hotel::create([
-                'manger' => $request->manger,
-                'name_ar' => $request->name_ar,
-                'name_en' => $request->name_en,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'location_ar' => $request->location_ar,
-                'location_en' => $request->location_en,
-                'currency_ar' => $request->currency_ar,
-                'currency_en' => $request->currency_en,
-                'description' => $request->description,
-                'hotel_photos' => json_encode($data),
-                'phone_hotel' => $request->phone_hotel,
+
+                'manger'        => $request->manger,
+                'name_ar'       => $request->name_ar,
+                'name_en'       => $request->name_en,
+                'email'         => $request->email,
+                'password'      => Hash::make($request->password),
+                'location_ar'   => $request->location_ar,
+                'location_en'   => $request->location_en,
+                'currency_ar'   => $request->currency_ar,
+                'currency_en'   => $request->currency_en,
+                'description'   => $request->description,
+                'hotel_photos'  => json_encode($data),
+                'phone_hotel'   => $request->phone_hotel,
             ]);
 
             if (isset($storeNewHotel)) {
@@ -161,7 +162,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
             $getHotelAuth->token = $request->bearerToken();
             if (isset($getHotelAuth)) {
                 return self::returnResponseDataApi(new HotelResource($getHotelAuth), 'تم الحصول علي بيانات بروفايل الفندق بنجاح', 200,true,200);
-
             }
 
         } catch (\Exception $exception) {
@@ -171,41 +171,41 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
     }
 
 
-    public function updateProfile(Request $request)
+    public function updateProfile(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
             $rules = [
-                'manger' => 'required|string|min:5|max:50',
-                'name_ar' => 'required|string|min:5|max:50',
-                'name_en' => 'required|string|min:10|max:50',
-                'email' => 'required|email|unique:hotels,email,' . Auth::guard('hotel-api')->id(),
-                'password' => 'required|min:8|confirmed',
-                'location_ar' => 'required',
-                'location_en' => 'required',
-                'currency_ar' => 'required',
-                'currency_en' => 'required',
-                'description' => 'nullable',
-                'hotel_photos' => 'nullable|array|min:1|mimes:jpg,png,jpeg',
-                'phone_hotel' => 'required|numeric',
+                'manger'        => 'required|string|min:5|max:50',
+                'name_ar'       => 'required|string|min:5|max:50',
+                'name_en'       => 'required|string|min:10|max:50',
+                'email'         => 'required|email|unique:hotels,email,' . Auth::guard('hotel-api')->id(),
+                'password'      => 'required|min:8|confirmed',
+                'location_ar'   => 'required',
+                'location_en'   => 'required',
+                'currency_ar'   => 'required',
+                'currency_en'   => 'required',
+                'description'   => 'nullable',
+                'hotel_photos'  => 'nullable|array|min:1|mimes:jpg,png,jpeg',
+                'phone_hotel'   => 'required|numeric',
             ];
-            $validate = Validator::make($request->all(), $rules, [
-                'email.unique' => 406,
-                'phone.numeric' => 407,
-                'phone.confirmed' => 408,
+            $validator = Validator::make($request->all(), $rules, [
+                'email.unique'       => 406,
+                'phone.numeric'      => 407,
+                'password.confirmed' => 408,
             ]);
 
-            if($validate->fails()){
-                $errors = collect($validate->errors())->flatten(1)[0];
+            if($validator->fails()){
+                $errors = collect($validator->errors())->flatten(1)[0];
                 if (is_numeric($errors)) {
                     $errors_arr = [
-                        406 => 'Failed,Email already exists',
-                        407 => 'Failed,Phone number must be an number',
-                        408 => 'Failed,Password must be confirmed',
+                        406    => 'هذا البريد الالكتروني موجود من قبل',
+                        407    => 'الهاتف يجب ان يكون رقم',
+                        408    => 'كلمه المرور يجب ان تكون مؤكده',
                     ];
-                    $code = collect($validate->errors())->flatten(1)[0];
-                    return self::returnResponseError( isset($errors_arr[$errors]) ? $errors_arr[$errors] : 500, $code,false,200);
+                    $code = collect($validator->errors())->flatten(1)[0];
+                    return self::returnResponseError( $errors_arr[$errors] ?? 500, $code,false,200);
                 }
-                return self::returnResponseError($validate->errors()->first(),422,false,422);
+                return self::returnResponseError($validator->errors()->first(),422,false,422);
             }
 
             if(!preg_match("/\p{Arabic}/u", $request->name_ar)) {
@@ -242,31 +242,33 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
             }
 
             $checkHotel->update([
-                'manger' => $request->manger,
-                'name_ar' => $request->name_ar,
-                'name_en' => $request->name_en,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'location_ar' => $request->location_ar,
-                'location_en' => $request->location_en,
-                'currency_ar' => $request->currency_ar,
-                'currency_en' => $request->currency_en,
-                'description' => $request->description,
-                'hotel_photos' => $request->hotel_photos != null ? json_encode($data) : $checkHotel->hotel_photos,
-                'phone_hotel' => $request->phone_hotel,
+                'manger'         => $request->manger,
+                'name_ar'        => $request->name_ar,
+                'name_en'        => $request->name_en,
+                'email'          => $request->email,
+                'password'       => Hash::make($request->password),
+                'location_ar'    => $request->location_ar,
+                'location_en'    => $request->location_en,
+                'currency_ar'    => $request->currency_ar,
+                'currency_en'    => $request->currency_en,
+                'description'    => $request->description,
+                'hotel_photos'   => $request->hotel_photos != null ? json_encode($data) : $checkHotel->hotel_photos,
+                'phone_hotel'    => $request->phone_hotel,
             ]);
 
             if (isset($checkHotel)) {
                 $checkHotel['token'] = Auth::guard('hotel-api')->attempt($request->only(['email', 'password']));
                 return self::returnResponseDataApi(new HotelResource($checkHotel), "تم تحديث بيانات الفندق بنجاح", 200, true,200);
-
+            }else{
+                return self::returnResponseError("يوجد خطاء اثناء تعديل بيانات الفندق",500,false,500);
             }
         } catch (\Exception $exception) {
             return self::returnResponseError($exception->getMessage(),500,false,500);
         }
     }
 
-    public function reservations(){
+    public function reservations(): \Illuminate\Http\JsonResponse
+    {
 
         $hotelId = Auth::guard('hotel-api')->id();
         try {
@@ -276,7 +278,6 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
                 return self::returnResponseDataApi(ReservationResource::collection($reservations), "تم الحصول علي بيانات حجوزات الفندق بنجاح", 200,true,200);
 
             } else {
-
                 return self::returnResponseError( "لا يوجد حجوزات الي الان يرجي الانتظار حين وجود حجوزات جديده", 200,false,404);
             }
         } catch (\Exception $exception) {
@@ -285,7 +286,7 @@ class HotelRepository extends ResponseApi implements HotelRepositoryInterface
         }
     }
 
-    public function hotelLogout()
+    public function hotelLogout(): \Illuminate\Http\JsonResponse
     {
 
         try {

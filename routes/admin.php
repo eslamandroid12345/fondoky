@@ -121,7 +121,6 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(), 'middleware' => ['loca
         Route::get('tourism-places-by-city/{id}',[TourismPlaceController::class,'tourism_places_by_city'])->name('tourism-places-by-city');
         Route::get('all-cities-by-country/{id}',[TourismPlaceController::class,'all_cities_by_country'])->name('all-cities-by-country');
 
-
     });
 
 });

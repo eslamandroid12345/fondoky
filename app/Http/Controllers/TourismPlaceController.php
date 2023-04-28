@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 
 class TourismPlaceController extends Controller{
 
-
-
     public $tourismPlaceRepositoryInterface;
 
     public function __construct(TourismPlaceRepositoryInterface $tourismPlaceRepositoryInterface){

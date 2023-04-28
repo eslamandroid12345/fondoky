@@ -191,6 +191,7 @@
 {{--                    "cities_sidebar" => "المحافاظات",--}}
 {{--                    "tourism_places_sidebar" => "الاماكن السياحيه",--}}
 
+                    @can('countries')
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#countries">
                             <div class="pull-left"><i class="fa fa-flag"></i><span
@@ -203,8 +204,10 @@
 
                         </ul>
                     </li>
+                    @endcan
 
 
+                    @can('cities')
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#cities">
                             <div class="pull-left"><i class="fa fa-tree"></i><span
@@ -218,7 +221,9 @@
                         </ul>
                     </li>
 
+                    @endcan
 
+                    @can('tourism_places')
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#places">
                             <div class="pull-left"><i class="fa fa-location-arrow"></i><span
@@ -231,6 +236,7 @@
 
                         </ul>
                     </li>
+                    @endcan
 
                     {{--end tourism places--}}
 

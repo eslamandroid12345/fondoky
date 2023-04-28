@@ -77,36 +77,39 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(), 'middleware' => ['loca
     });
 
 
+
+
     Route::group(['middleware' => 'auth:admin','prefix' => 'tourism-places'], function (){
 
-        Route::get('countries',[TourismPlaceController::class,'countries'])->name('tourism-places.countries');
-        Route::get('cities',[TourismPlaceController::class,'cities'])->name('tourism-places.cities');
-        Route::get('all',[TourismPlaceController::class,'tourism_places_all'])->name('tourism-places.all');
-        Route::get('details/{id}',[TourismPlaceController::class,'tourism_places_details'])->name('tourism-places.details');
-
-        Route::get('country-create',[TourismPlaceController::class,'country_create'])->name('tourism-places.country-create');
-        Route::get('city-create',[TourismPlaceController::class,'city_create'])->name('tourism-places.city-create');
-        Route::get('create',[TourismPlaceController::class,'tourism_places_create'])->name('tourism-places.create');
-
-
-        Route::post('country-store',[TourismPlaceController::class,'country_store'])->name('tourism-places.country-store');
-        Route::post('city-store',[TourismPlaceController::class,'city_store'])->name('tourism-places.city-store');
-        Route::post('store',[TourismPlaceController::class,'tourism_place_store'])->name('tourism-places.store');
+        Route::middleware('can:countries')->group(function (){
+            Route::get('countries',[TourismPlaceController::class,'countries'])->name('tourism-places.countries');
+            Route::get('country-create',[TourismPlaceController::class,'country_create'])->name('tourism-places.country-create');
+            Route::post('country-store',[TourismPlaceController::class,'country_store'])->name('tourism-places.country-store');
+            Route::get('country-edit/{id}',[TourismPlaceController::class,'country_edit'])->name('tourism-places.country-edit');
+            Route::put('country-update/{id}',[TourismPlaceController::class,'country_update'])->name('tourism-places.country-update');
+            Route::get('country-delete/{id}',[TourismPlaceController::class,'country_delete'])->name('tourism-places.country-delete');
+        });
 
 
-        Route::get('country-edit/{id}',[TourismPlaceController::class,'country_edit'])->name('tourism-places.country-edit');
-        Route::get('city-edit/{id}',[TourismPlaceController::class,'city_edit'])->name('tourism-places.city-edit');
-        Route::get('edit/{id}',[TourismPlaceController::class,'tourism_places_edit'])->name('tourism-places.edit');
-
-        Route::put('country-update/{id}',[TourismPlaceController::class,'country_update'])->name('tourism-places.country-update');
-        Route::put('city-update/{id}',[TourismPlaceController::class,'city_update'])->name('tourism-places.city-update');
-        Route::put('update/{id}',[TourismPlaceController::class,'tourism_place_update'])->name('tourism-places.update');
-
-        Route::get('country-delete/{id}',[TourismPlaceController::class,'country_delete'])->name('tourism-places.country-delete');
-        Route::get('city-delete/{id}',[TourismPlaceController::class,'city_delete'])->name('tourism-places.city-delete');
-        Route::get('delete/{id}',[TourismPlaceController::class,'tourism_place_delete'])->name('tourism-places.delete');
+        Route::middleware('can:cities')->group(function (){
+            Route::get('cities',[TourismPlaceController::class,'cities'])->name('tourism-places.cities');
+            Route::get('city-create',[TourismPlaceController::class,'city_create'])->name('tourism-places.city-create');
+            Route::post('city-store',[TourismPlaceController::class,'city_store'])->name('tourism-places.city-store');
+            Route::get('city-edit/{id}',[TourismPlaceController::class,'city_edit'])->name('tourism-places.city-edit');
+            Route::put('city-update/{id}',[TourismPlaceController::class,'city_update'])->name('tourism-places.city-update');
+            Route::get('city-delete/{id}',[TourismPlaceController::class,'city_delete'])->name('tourism-places.city-delete');
+        });
 
 
+            Route::middleware('can:tourism_places')->group(function (){
+            Route::get('all',[TourismPlaceController::class,'tourism_places_all'])->name('tourism-places.all');
+            Route::get('details/{id}',[TourismPlaceController::class,'tourism_places_details'])->name('tourism-places.details');
+            Route::get('create',[TourismPlaceController::class,'tourism_places_create'])->name('tourism-places.create');
+            Route::post('store',[TourismPlaceController::class,'tourism_place_store'])->name('tourism-places.store');
+            Route::get('edit/{id}',[TourismPlaceController::class,'tourism_places_edit'])->name('tourism-places.edit');
+            Route::put('update/{id}',[TourismPlaceController::class,'tourism_place_update'])->name('tourism-places.update');
+            Route::get('delete/{id}',[TourismPlaceController::class,'tourism_place_delete'])->name('tourism-places.delete');
+        });
 
     });
 
@@ -120,7 +123,6 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(), 'middleware' => ['loca
         Route::get('cities-by-country/{id}',[TourismPlaceController::class,'cities_by_country'])->name('cities-by-country');
         Route::get('tourism-places-by-city/{id}',[TourismPlaceController::class,'tourism_places_by_city'])->name('tourism-places-by-city');
         Route::get('all-cities-by-country/{id}',[TourismPlaceController::class,'all_cities_by_country'])->name('all-cities-by-country');
-
     });
 
 });
